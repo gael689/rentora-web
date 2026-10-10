@@ -79,6 +79,14 @@
 .heroCaptura {
   position: relative;
 }
+.heroImagen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra-alta);
+}
 .heroCaptura::before {
   /* Un halo del color de marca detrás de la captura, para que no flote sobre blanco plano. */
   content: '';
@@ -416,6 +424,15 @@
 }
 .recorteInterior {
   width: 150%;
+}
+.recorteImagen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px 0 0 0;
+  border: 1px solid var(--borde);
+  border-width: 1px 0 0 1px;
+  box-shadow: var(--sombra-alta);
 }
 .telefonoFrente,
 .telefonoAtras {

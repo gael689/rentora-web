@@ -1,14 +1,13 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { HOME } from '@/lib/contenido';
 import { pantalla } from '@/lib/sistema/pantallas';
-import Pantalla from '@/components/sistema/Pantalla';
 import Icono from '@/components/sistema/Icono';
-import Ajustado from './Ajustado';
 import { Rotulo, Flotante, Telefono } from './Piezas';
 import s from './home.module.css';
 
 /* Secciones alternadas imagen / texto. Cada una: rótulo, H2 corto, una oración, hasta cuatro
- * viñetas con tilde y un link. La imagen es la pantalla real, recortada sobre un panel teñido del
+ * viñetas con tilde y un link. La imagen es la captura del sistema real (web-capturas-reales.mjs), recortada sobre un panel teñido del
  * tono de la sección, con un chip apoyado en el borde; la de la web va en dos celulares. */
 export default function Funciones() {
   return (
@@ -45,9 +44,14 @@ export default function Funciones() {
                 {meta ? (
                   <div className={s.recorte}>
                     <div className={s.recorteInterior}>
-                      <Ajustado ruta={meta.ruta} inicial={0.6}>
-                        <Pantalla slug={meta.slug} conVisor={false} />
-                      </Ajustado>
+                      <Image
+                        src={`/sistema-real/${meta.slug}.webp`}
+                        alt={`${HOME.capturaRealAlt} ${f.rotulo}`}
+                        width={1400}
+                        height={881}
+                        sizes="(min-width: 980px) 760px, 140vw"
+                        className={s.recorteImagen}
+                      />
                     </div>
                   </div>
                 ) : (

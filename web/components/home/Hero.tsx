@@ -1,10 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { HOME } from '@/lib/contenido';
 import { linkWhatsapp } from '@/lib/sitio';
-import { pantalla } from '@/lib/sistema/pantallas';
-import Pantalla from '@/components/sistema/Pantalla';
 import Icono from '@/components/sistema/Icono';
-import Ajustado from './Ajustado';
 import { Rotulo, Flotante, Telefono } from './Piezas';
 import s from './home.module.css';
 
@@ -44,10 +42,17 @@ export default function Hero() {
         </div>
 
         <div className={s.heroVisual}>
+          {/* La captura del sistema real (capturas-reales.mjs), con su marco de navegador. */}
           <div className={s.heroCaptura}>
-            <Ajustado ruta={pantalla('ocupacion')?.ruta} inicial={0.5}>
-              <Pantalla slug="ocupacion" conVisor={false} />
-            </Ajustado>
+            <Image
+              src="/v4/ocupacion.webp"
+              alt={h.capturaAlt}
+              width={1760}
+              height={1242}
+              sizes="(min-width: 980px) 560px, 100vw"
+              priority
+              className={s.heroImagen}
+            />
           </div>
           <Flotante {...c1} className={s.f1} />
           <Flotante {...c2} className={s.f2} />

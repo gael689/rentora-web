@@ -828,7 +828,10 @@ export const HOME = {
     /** Para la imagen de Open Graph. */
     puntos: ['Hecho en Argentina', 'Con tu web, si la querés', 'En producción desde 2026'],
     telefonoAlt: 'La web de reservas de una rentadora de ejemplo, en el celular',
+    capturaAlt: 'Ocupación en el sistema real: la flota de una rentadora de ejemplo, auto por auto y día por día',
   },
+  /** El alt de las capturas reales de las funciones: se le suma el nombre de la función. */
+  capturaRealAlt: 'Pantalla real del sistema, con datos de ejemplo:',
   /** La fila de confianza bajo el hero. Cifras de `CIFRAS`, como chips cortos. */
   confianza: {
     etiqueta: 'Rentora en números',
