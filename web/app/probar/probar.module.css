@@ -1,0 +1,112 @@
+/* Lo propio del formulario de la demo. Los campos, el panel y los avisos son los de
+   `contacto.module.css`, para que los dos formularios del sitio se vean iguales. */
+
+.tipos {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tipos legend {
+  padding: 0;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.ayuda {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--suave);
+}
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* Cada tipo es un chip: el checkbox de verdad queda adentro, visible para el lector de pantalla
+   y para el teclado, y el chip entero es el área de toque (44 px de alto). */
+.opcion {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 2.75rem;
+  padding: 0 16px 0 12px;
+  border: 2px solid var(--borde);
+  border-radius: var(--radio-chico);
+  background: var(--fondo);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.opcion input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--turq-strong);
+}
+.opcion:has(input:checked) {
+  border-color: var(--turq);
+  background: var(--turq-soft);
+}
+.opcion:has(input:focus-visible) {
+  outline: 2px solid var(--turq-strong);
+  outline-offset: 2px;
+}
+.tiposMal .opcion {
+  border-color: #b91c1c;
+}
+
+/* El widget de Turnstile mide 300 px de ancho fijo: en 390 entra justo, con el gutter de 16 y el
+   relleno del panel no. `flexible` lo deja ocupar el ancho del contenedor. */
+.verificacion {
+  min-height: 65px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.lista {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 8px;
+  color: var(--texto);
+  line-height: 1.5;
+}
+.lateralTitulo {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Sin JavaScript no hay Turnstile ni envío: el formulario se esconde y queda el aviso con la
+   salida por WhatsApp. El aviso va en <noscript>, así que con JS ni existe. */
+@media (scripting: none) {
+  .conJs {
+    display: none;
+  }
+}
+
+/* /demo/confirmar y /demo/lista */
+.estado {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+.estado form {
+  margin: 0;
+}
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.estado button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}

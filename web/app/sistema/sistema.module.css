@@ -1,0 +1,55 @@
+.indice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.pagina {
+  padding-bottom: clamp(16px, 3vw, 32px);
+}
+.seccion {
+  padding-block: clamp(28px, 4vw, 52px);
+}
+.cabezaSeccion {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+.frase {
+  margin: 4px 0 0;
+  color: var(--suave);
+}
+.pantalla {
+  margin-top: clamp(24px, 4vw, 40px);
+}
+.cabezaPantalla {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin-bottom: 14px;
+}
+.pendiente {
+  margin: 0;
+  padding: 18px 22px;
+  border-radius: var(--radio);
+  background: var(--tf, var(--superficie));
+  color: var(--texto);
+}
+.ruta {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  color: var(--suave);
+}
+.sueltas {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}

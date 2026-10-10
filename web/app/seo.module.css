@@ -1,0 +1,513 @@
+/* Páginas de captación (v4b): cómo elegir, glosario, preguntas, plazas, para, guías, contrato,
+   planes y términos. El cuerpo SEO se queda entero (verificar-seo mide palabras propias), pero se
+   lee en pedazos: subtítulo a la izquierda y texto a la derecha, recuadros teñidos, tarjetas de
+   radio 20, preguntas en acordeón de dos columnas. */
+
+.pagina {
+  padding-block: 0 clamp(8px, 2vw, 24px);
+}
+.bloque {
+  padding-block: clamp(28px, 4vw, 52px);
+}
+.rotulo {
+  margin: 0 0 clamp(18px, 2.5vw, 28px);
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-bloque);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--texto);
+  text-wrap: balance;
+}
+
+/* Prosa en dos columnas: el subtítulo a la izquierda (fijo al bajar), el texto a la derecha. */
+.subtitulo {
+  margin: 0 0 14px;
+  max-width: 30ch;
+}
+@media (min-width: 960px) {
+  .bloque:has(> .subtitulo + .prosa) {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    column-gap: 56px;
+    align-items: start;
+  }
+  .bloque:has(> .subtitulo + .prosa) > .subtitulo {
+    position: sticky;
+    top: calc(var(--alto-barra) + 32px);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+}
+.prosa {
+  display: grid;
+  gap: 16px;
+  max-width: 66ch;
+  line-height: 1.75;
+  color: #2a4746;
+}
+.prosa p {
+  margin: 0;
+}
+.prosa p:first-child::first-line {
+  color: var(--texto);
+  font-weight: 500;
+}
+
+/* El párrafo citable: va solo, en un recuadro teñido con una baldosa de ícono. */
+.citable {
+  position: relative;
+  margin: clamp(8px, 2vw, 16px) 0 clamp(8px, 2vw, 16px);
+  padding: clamp(24px, 3.4vw, 40px) clamp(24px, 3.4vw, 40px) clamp(24px, 3.4vw, 40px) clamp(24px, 3.4vw, 40px);
+  max-width: 880px;
+  border-radius: 24px;
+  background:
+    radial-gradient(60% 80% at 100% 0%, rgb(255 255 255 / 0.75), transparent 70%),
+    linear-gradient(150deg, var(--tf, var(--turq-soft)) 0%, color-mix(in srgb, var(--tf, var(--turq-soft)) 45%, #fff) 100%);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts, var(--turq-strong)) 12%, transparent);
+  font-size: clamp(1.08rem, 1rem + 0.35vw, 1.22rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--texto);
+}
+
+/* Índice de términos (en la portada) */
+.indice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.indice a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde);
+  color: var(--texto);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: box-shadow var(--rapido), background var(--rapido);
+}
+.indice a:hover {
+  background: var(--acento-sup);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--texto);
+}
+
+/* Lista de criterios (cómo elegir): tarjetas apiladas con su número en una baldosa. */
+.lista {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde), 0 1px 2px rgb(15 46 49 / 0.04);
+  scroll-margin-top: calc(var(--alto-barra) + 24px);
+}
+.itemCuerpo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 72ch;
+}
+.itemQ {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.12rem, 1rem + 0.4vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+.itemPorque {
+  margin: 0;
+  color: var(--suave);
+}
+.itemRentora,
+.enRentora {
+  margin: 4px 0 0;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: var(--acento-sup);
+  font-size: 0.975rem;
+  max-width: 72ch;
+}
+.itemRentoraRotulo {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--turq-strong);
+}
+.itemRentoraTexto {
+  margin: 0;
+  font-weight: 500;
+}
+.enRentora b {
+  font-weight: 700;
+  color: var(--turq-strong);
+}
+
+/* Grilla de entradas (glosario, adicionales): tarjetas blancas de radio 20 en dos columnas. */
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(20px, 2.6vw, 28px);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde), 0 1px 2px rgb(15 46 49 / 0.04);
+  scroll-margin-top: calc(var(--alto-barra) + 24px);
+}
+.tarjeta[data-tono] {
+  background: color-mix(in srgb, var(--tf) 45%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 10%, transparent);
+}
+.palabra {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+.definicion {
+  margin: 0;
+  color: var(--suave);
+  line-height: 1.65;
+}
+.ver {
+  display: inline-flex;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--primario);
+}
+
+/* Plazas: tres datos como tarjetas teñidas. */
+.datos {
+  display: grid;
+  gap: 14px;
+  margin-block: clamp(16px, 3vw, 32px);
+}
+@media (min-width: 860px) {
+  .datos {
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  }
+}
+.dato {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 22px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--azul-soft) 70%, #fff);
+}
+.dato:nth-child(2) {
+  background: color-mix(in srgb, var(--menta-soft) 70%, #fff);
+}
+.dato:nth-child(3) {
+  background: color-mix(in srgb, var(--arena-soft) 70%, #fff);
+}
+.datoRotulo {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+.datoTexto {
+  margin: 0;
+  color: #2a4746;
+}
+
+/* Enlaces entre páginas: píldoras, en bloques compactos. */
+.bloqueEnlaces {
+  padding-block: clamp(14px, 2vw, 22px);
+}
+.bloqueEnlaces .rotulo {
+  margin-bottom: 12px;
+  font-size: var(--t-fila);
+}
+.otras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.otra {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde);
+  color: var(--texto);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: box-shadow var(--rapido), background var(--rapido);
+}
+.otra:hover {
+  background: var(--acento-sup);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--texto);
+}
+
+/* Necesidades y partes del contrato: tarjetas teñidas en dos columnas con el número en baldosa. */
+.necesidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: necesidad;
+}
+.necesidad {
+  counter-increment: necesidad;
+  position: relative;
+  padding: 22px 22px 22px 74px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--tf, var(--turq-soft)) 50%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts, var(--turq-strong)) 10%, transparent);
+}
+.necesidad::before {
+  content: counter(necesidad);
+  position: absolute;
+  left: 22px;
+  top: 20px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ts, var(--turq-strong));
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+.necesidad h3 {
+  margin: 0 0 6px;
+  font-family: var(--fuente-titulo);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.necesidad p {
+  margin: 0;
+  color: #2a4746;
+}
+
+/* La lista para revisar de las guías: casillas teñidas. */
+.pasos {
+  display: grid;
+  gap: 10px;
+  max-width: 76ch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pasos li {
+  position: relative;
+  padding: 14px 18px 14px 54px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde);
+}
+.pasos li::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 15px;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317734a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 13px no-repeat,
+    var(--menta-soft);
+}
+
+/* Índices de familia: tarjetas de enlace en dos columnas. */
+.indiceFamilia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  align-items: stretch;
+  gap: 16px;
+}
+
+/* Preguntas: acordeón de dos columnas (las respuestas están en el HTML aunque estén cerradas). */
+.faq {
+  display: grid;
+  gap: 12px;
+  align-items: start;
+}
+@media (min-width: 860px) {
+  .faq {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+.faqColumna {
+  display: grid;
+  gap: 12px;
+}
+.pregunta {
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde), 0 1px 2px rgb(15 46 49 / 0.04);
+}
+.pregunta[open] {
+  box-shadow: inset 0 0 0 1px var(--borde-fuerte), var(--sombra-suave);
+}
+.pregunta summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 18px 18px 22px;
+  list-style: none;
+  cursor: pointer;
+}
+.pregunta summary::-webkit-details-marker {
+  display: none;
+}
+.pregunta h3 {
+  margin: 0;
+  font-family: var(--fuente-cuerpo), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.pregunta p {
+  margin: 0;
+  padding: 0 22px 20px;
+  color: var(--suave);
+  line-height: 1.65;
+}
+.mas {
+  position: relative;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--acento-sup);
+  transition: transform var(--rapido);
+}
+.mas::before,
+.mas::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  margin: -1px 0 0 -6px;
+  border-radius: 1px;
+  background: var(--turq-strong);
+}
+.mas::after {
+  transform: rotate(90deg);
+}
+.pregunta[open] .mas {
+  transform: rotate(45deg);
+}
+
+/* Planes: tarjetas lado a lado (son dos o tres, nunca tres iguales: la recomendada se distingue). */
+.planes {
+  display: grid;
+  gap: 18px;
+  align-items: stretch;
+}
+@media (min-width: 860px) {
+  .planes {
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  }
+}
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(24px, 3vw, 34px);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde), var(--sombra-suave);
+}
+.plan[data-recomendado='true'] {
+  background:
+    radial-gradient(70% 50% at 100% 0%, rgb(59 130 196 / 0.14), transparent 70%),
+    linear-gradient(160deg, var(--turq-soft) 0%, #fff 60%);
+  box-shadow: inset 0 0 0 2px var(--acento), 0 30px 60px -36px rgb(14 127 133 / 0.55);
+}
+.planAcciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: auto;
+  padding-top: 22px;
+}
+.planMarca {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--arena-soft);
+  color: var(--arena-strong);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+.plan h2 {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.plan ul {
+  display: grid;
+  gap: 10px;
+  margin: 8px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--borde);
+  list-style: none;
+}
+.plan li {
+  position: relative;
+  padding-left: 32px;
+  line-height: 1.5;
+}
+.plan li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6e73' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 12px no-repeat,
+    var(--turq-soft);
+}

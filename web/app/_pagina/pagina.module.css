@@ -1,0 +1,132 @@
+/* Piezas compartidas de las páginas internas (v4b): portada, migas. El cierre es la banda global
+   `banda-cierre` de globals.css. */
+
+.portada {
+  position: relative;
+}
+.portadaInterna {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+  padding-block: clamp(28px, 5vw, 64px) clamp(32px, 5vw, 56px);
+}
+.h1 {
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2.05rem, 1.35rem + 2.5vw, 3.35rem);
+  font-weight: 700;
+  line-height: 1.07;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.bajada {
+  max-width: 58ch;
+}
+/* La frase clave no se pinta: el titular se lee entero. */
+.acento {
+  color: inherit;
+}
+
+.migas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: var(--suave);
+}
+.miga {
+  display: inline-flex;
+  gap: 6px;
+}
+.migas a {
+  color: var(--suave);
+  font-weight: 500;
+}
+.migas a:hover {
+  color: var(--texto);
+}
+.migas [aria-current] {
+  color: var(--texto);
+  font-weight: 500;
+}
+
+.seccion {
+  padding-block: clamp(32px, 5vw, 64px);
+}
+.rotulo {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--suave);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bloqueLegal {
+  margin-top: 2rem;
+}
+.bloqueLegal p {
+  margin: 0.5rem 0 0;
+  color: var(--suave);
+}
+
+/* La tabla de cookies de /privacidad. En mobile cada fila se apila como una ficha. */
+.tablaCookies {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.tablaCookies th,
+.tablaCookies td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  border-bottom: 1px solid var(--borde);
+}
+.tablaCookies th {
+  font-weight: 600;
+  color: var(--texto);
+}
+.tablaCookies td {
+  color: var(--suave);
+}
+.tablaCookies td:first-child {
+  color: var(--texto);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .tablaCookies thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .tablaCookies tr {
+    display: block;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--borde);
+  }
+  .tablaCookies td {
+    display: block;
+    padding: 0.15rem 0;
+    border: 0;
+  }
+  .tablaCookies td[data-rotulo]::before {
+    content: attr(data-rotulo) ': ';
+    font-weight: 600;
+    color: var(--texto);
+  }
+}
+

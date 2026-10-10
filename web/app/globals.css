@@ -1,0 +1,639 @@
+/* Rentora — sistema de diseño v4b "SaaS moderno" (09/10/2026).
+ *
+ * La v4 primera se leyó vieja: un solo color, líneas de 1 px, mucho texto. Gael pidió el registro
+ * de naaloo.com: base blanca, resplandores suaves del color de marca detrás del hero, el producto
+ * al frente con chips flotantes, tarjetas teñidas con radios de 16 a 24 px, botones píldora y
+ * sombras suaves. Corporativo pero moderno, y quieto: nada se mueve salvo hover y foco.
+ *
+ * Paleta: la identidad de Rentora (petróleo para el texto, turquesa como primario) más cuatro
+ * tintes de apoyo, cada uno con su significado fijo, que vuelve de la v3:
+ *   turq  = operación   (turquesa suave)
+ *   azul  = vender      (cielo)
+ *   menta = plata       (menta)
+ *   petro = control     (arena: el amarillo suave de los chips destacados)
+ * Nada de naranja, coral ni terracota. Todo texto pasa 4,5:1 sobre su fondo: el turquesa de marca
+ * (#12959B) no llega con blanco encima, así que los botones van en #0E7F85 (4,78:1).
+ *
+ * Tipografía: Inter Tight (600/700, tracking cerrado) para títulos, Inter para el cuerpo. Nunca
+ * Geist (identidad personal de Gael), nunca Poppins (la v3). Espeja impresos/marca/tokens.css en
+ * la paleta base. Sin Tailwind, sin librería de animación, sin librería de iconos. */
+
+:root {
+  --fondo: #ffffff;
+  --superficie: #f4f8f8;
+  --superficie-2: #eaf1f1;
+  --texto: #0f2e31;
+  --suave: #4a6766;
+  --borde: #e1e9e9;
+  --borde-fuerte: #c3d2d2;
+
+  /* Marca */
+  --acento: #12959b;
+  --primario: #0e7f85;
+  --primario-hover: #0b6a6f;
+  --acento-osc: #0b5d62;
+  --acento-sup: #e2f1f1;
+  --claro: #7fd4d8;
+
+  /* Tintes de apoyo: fondo suave + color de ícono/texto que pasa 4,5:1 sobre ese fondo. */
+  --turq-soft: #e2f1f1;
+  --turq-strong: #0b6e73;
+  --azul-soft: #e6f0fb;
+  --azul-strong: #1f5e9e;
+  --menta-soft: #e3f5ea;
+  --menta-strong: #17734a;
+  --arena-soft: #fcf1d2;
+  --arena-strong: #7a5600;
+  /* Compatibilidad con los nombres de la v3. */
+  --turq: var(--acento);
+  --azul: #3b82c4;
+  --menta: #2fa36b;
+  --petro: var(--texto);
+  --petro-soft: var(--arena-soft);
+  --petro-strong: var(--arena-strong);
+
+  /* Sombras suaves, siempre con desplazamiento y difuminado. */
+  --sombra-suave: 0 1px 2px rgb(15 46 49 / 0.04), 0 8px 24px -12px rgb(15 46 49 / 0.14);
+  --sombra-alta: 0 2px 6px rgb(15 46 49 / 0.05), 0 30px 60px -28px rgb(15 46 49 / 0.32);
+
+  --radio: 20px;
+  --radio-medio: 16px;
+  --radio-chico: 12px;
+  --radio-pildora: 999px;
+
+  --ancho: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --alto-barra: 72px;
+
+  --t-hero: clamp(2.35rem, 1.5rem + 3.1vw, 4rem);
+  --t-seccion: clamp(1.85rem, 1.3rem + 1.9vw, 2.75rem);
+  --t-bloque: clamp(1.35rem, 1.15rem + 0.8vw, 1.75rem);
+  --t-fila: clamp(1.1rem, 1.02rem + 0.3vw, 1.25rem);
+
+  --rapido: 140ms ease;
+  --fuente-titulo: var(--fuente-tight), var(--fuente-cuerpo), system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--alto-barra) + 24px);
+}
+html.scroll-bloqueado {
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente-cuerpo), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* El resplandor de arriba: dos manchas muy suaves del color de marca detrás del hero de cada
+ * página. Va detrás de todo, no se mueve, y no tapa nada. */
+.resplandor {
+  position: absolute;
+  inset: 0 0 auto;
+  height: min(1100px, 130vh);
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(48% 52% at 88% 8%, rgb(18 149 155 / 0.2), transparent 70%),
+    radial-gradient(38% 46% at 72% 40%, rgb(59 130 196 / 0.12), transparent 72%),
+    radial-gradient(34% 40% at 6% 30%, rgb(47 163 107 / 0.08), transparent 70%),
+    linear-gradient(180deg, #f3f9f9 0%, rgb(255 255 255 / 0) 100%);
+}
+
+main {
+  padding-top: var(--alto-barra);
+}
+
+a {
+  color: var(--primario);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--texto);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primario);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+::selection {
+  background: var(--acento-sup);
+  color: var(--texto);
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.saltar {
+  /* Fuera de pantalla sin left:-9999px, que ensancha el documento y rompe el ancho en mobile. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  background: var(--texto);
+  color: #fff;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.saltar:focus {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  color: #fff;
+}
+
+/* ── Estructura ──────────────────────────────────────────────────────────── */
+
+.envoltorio {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.sangre {
+  position: relative;
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+}
+
+.g12 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 48px);
+}
+@media (min-width: 900px) {
+  .g12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+}
+
+.campo-claro {
+  background: var(--superficie);
+}
+.campo-oscuro {
+  background: var(--texto);
+  color: #fff;
+}
+.campo-oscuro a {
+  color: var(--claro);
+}
+
+.seccion {
+  padding-block: clamp(72px, 9vw, 120px);
+}
+.seccion-compacta {
+  padding-block: clamp(40px, 5vw, 72px);
+}
+
+/* ── Tipografía ──────────────────────────────────────────────────────────── */
+
+.titular-hero,
+.titular-seccion,
+.titular-bloque,
+.titular-fila {
+  font-family: var(--fuente-titulo);
+  margin: 0;
+  text-wrap: balance;
+  color: var(--texto);
+}
+.titular-hero {
+  font-weight: 700;
+  font-size: var(--t-hero);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.titular-seccion {
+  font-weight: 700;
+  font-size: var(--t-seccion);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.titular-bloque {
+  font-weight: 600;
+  font-size: var(--t-bloque);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.titular-fila {
+  font-weight: 600;
+  font-size: var(--t-fila);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.remate {
+  color: var(--primario);
+}
+
+/* Rótulo píldora sobre un titular de sección (pedido explícito de Gael, estilo naaloo). */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 5px 12px 5px 6px;
+  border-radius: var(--radio-pildora);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde), var(--sombra-suave);
+  color: var(--texto);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.eyebrow-icono {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--tf, var(--arena-soft));
+  color: var(--ts, var(--arena-strong));
+}
+.eyebrow-icono svg {
+  width: 13px;
+  height: 13px;
+}
+
+.bajada {
+  margin: 0;
+  font-size: clamp(1.06rem, 1rem + 0.3vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--suave);
+  max-width: 58ch;
+}
+
+.nota {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--suave);
+}
+
+.micro {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--suave);
+}
+
+/* ── Superficies ─────────────────────────────────────────────────────────── */
+
+.panel,
+.tarjeta {
+  background: var(--fondo);
+  border-radius: var(--radio);
+  box-shadow: inset 0 0 0 1px var(--borde);
+}
+.panel {
+  overflow: hidden;
+}
+
+/* ── Botones: píldoras ───────────────────────────────────────────────────── */
+
+.cta,
+.btn-linea,
+.btn-blanco {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: var(--radio-pildora);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  transition: background var(--rapido), box-shadow var(--rapido), color var(--rapido);
+}
+.cta {
+  background: var(--primario);
+  color: #fff;
+  border: 0;
+  box-shadow: 0 8px 20px -10px rgb(14 127 133 / 0.7);
+}
+.cta:hover {
+  background: var(--primario-hover);
+  color: #fff;
+}
+.cta-chico {
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 0.9375rem;
+}
+.btn-linea {
+  background: #fff;
+  color: var(--texto);
+  border: 0;
+  box-shadow: inset 0 0 0 1.5px var(--borde-fuerte);
+}
+.btn-linea:hover {
+  color: var(--texto);
+  box-shadow: inset 0 0 0 1.5px var(--texto);
+}
+.btn-blanco {
+  background: #fff;
+  color: var(--texto);
+  border: 0;
+}
+.btn-blanco:hover {
+  background: var(--acento-sup);
+  color: var(--texto);
+}
+.btn-vidrio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: var(--radio-pildora);
+  background: rgb(255 255 255 / 0.12);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.4);
+  color: #fff;
+  font-weight: 600;
+  transition: background var(--rapido);
+}
+.btn-vidrio:hover {
+  background: rgb(255 255 255 / 0.2);
+  color: #fff;
+}
+.cta svg,
+.btn-linea svg,
+.btn-blanco svg,
+.btn-vidrio svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+.flecha {
+  font-weight: 500;
+}
+
+/* Link de texto con flecha dibujada. */
+.cta-sec {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primario);
+  transition: color var(--rapido), gap var(--rapido);
+}
+.cta-sec:hover {
+  color: var(--texto);
+  gap: 9px;
+}
+
+.pildora {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  background: #fff;
+  color: var(--texto);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--borde);
+  border-radius: var(--radio-pildora);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow var(--rapido), background var(--rapido);
+}
+.pildora:hover {
+  box-shadow: inset 0 0 0 1px var(--borde-fuerte);
+}
+.pildora[aria-pressed='true'] {
+  background: var(--texto);
+  color: #fff;
+  box-shadow: none;
+}
+
+.punto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--acento);
+  flex: 0 0 auto;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radio-pildora);
+  padding: 3px 10px;
+  background: var(--tf, var(--superficie-2));
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ts, var(--suave));
+}
+
+/* ── Tonos ───────────────────────────────────────────────────────────────── */
+
+/* Cada tono trae su fondo suave (--tf), su color fuerte (--ts) y su color vivo (--t). */
+[data-tono] {
+  --t: var(--acento);
+  --ts: var(--turq-strong);
+  --tf: var(--turq-soft);
+}
+[data-tono='azul'] {
+  --t: var(--azul);
+  --ts: var(--azul-strong);
+  --tf: var(--azul-soft);
+}
+[data-tono='menta'] {
+  --t: var(--menta);
+  --ts: var(--menta-strong);
+  --tf: var(--menta-soft);
+}
+[data-tono='petro'],
+[data-tono='arena'] {
+  --t: #c99a1e;
+  --ts: var(--arena-strong);
+  --tf: var(--arena-soft);
+}
+
+/* Ícono en una baldosa teñida. */
+.orbe {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--tf, var(--turq-soft));
+  color: var(--ts, var(--turq-strong));
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+.orbe svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* Rótulo chico: píldora teñida. */
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 4px 11px;
+  border-radius: var(--radio-pildora);
+  background: var(--tf, var(--turq-soft));
+  color: var(--ts, var(--turq-strong));
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+/* Tarjeta de enlace: teñida suave, radio 20, sombra al pasar. */
+.beneficio {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(22px, 2.6vw, 30px);
+  background: linear-gradient(160deg, var(--tf, var(--turq-soft)) 0%, #fff 75%);
+  border-radius: var(--radio);
+  box-shadow: inset 0 0 0 1px var(--borde);
+  color: var(--texto);
+  transition: box-shadow var(--rapido), transform var(--rapido);
+}
+.beneficio:hover {
+  color: var(--texto);
+  box-shadow: inset 0 0 0 1px var(--borde-fuerte), var(--sombra-suave);
+}
+.beneficio .orbe {
+  background: #fff;
+}
+.beneficio .dolor {
+  margin: 0;
+  color: var(--suave);
+  font-size: 0.975rem;
+}
+.beneficio .gana {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+.beneficio .ver {
+  margin-top: auto;
+  padding-top: 6px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--primario);
+}
+
+/* ── Cierre común: banda con el degradé de marca (home y páginas internas) ── */
+.banda-cierre {
+  padding-block: clamp(24px, 4vw, 48px) clamp(64px, 8vw, 104px);
+}
+.banda-cierre-cuerpo {
+  display: grid;
+  gap: 28px 48px;
+  align-items: center;
+  padding: clamp(32px, 5vw, 64px);
+  border-radius: 32px;
+  color: #fff;
+  background:
+    radial-gradient(55% 90% at 100% 0%, rgb(59 130 196 / 0.55), transparent 70%),
+    radial-gradient(45% 80% at 0% 100%, rgb(47 163 107 / 0.35), transparent 70%),
+    linear-gradient(120deg, #0b4f54 0%, #0d6c72 55%, #0f7d84 100%);
+  box-shadow: 0 40px 80px -40px rgb(11 79 84 / 0.7);
+}
+@media (min-width: 900px) {
+  .banda-cierre-cuerpo {
+    grid-template-columns: minmax(0, 1.2fr) auto;
+  }
+}
+.banda-cierre-texto {
+  display: grid;
+  gap: 14px;
+}
+.banda-cierre-texto .titular-seccion,
+.banda-cierre-texto .titular-bloque {
+  color: #fff;
+  max-width: 20ch;
+}
+.banda-cierre-acciones .cta-sec {
+  justify-self: center;
+  color: #d6eeee;
+}
+.banda-cierre-acciones .cta-sec:hover {
+  color: #fff;
+}
+.banda-cierre-texto p {
+  margin: 0;
+  max-width: 46ch;
+  color: #d6eeee;
+  font-size: 1.1rem;
+}
+.banda-cierre-acciones {
+  display: grid;
+  gap: 12px;
+}
+.banda-cierre-texto .banda-cierre-acciones {
+  justify-items: start;
+  margin-top: 10px;
+}
+.banda-cierre-texto .banda-cierre-acciones .cta-sec {
+  justify-self: start;
+}
+.banda-cierre-demo {
+  justify-self: center;
+  color: #d6eeee;
+  font-weight: 600;
+}
+.banda-cierre-demo:hover {
+  color: #fff;
+}
+
+/* Lo único que se mueve: hover y foco. Igual se apaga si el visitante lo pide. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

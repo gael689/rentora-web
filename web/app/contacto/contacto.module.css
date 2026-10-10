@@ -1,0 +1,137 @@
+.pagina {
+  padding-block: clamp(8px, 2vw, 24px) clamp(48px, 7vw, 96px);
+}
+.cuerpo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: flex-start;
+}
+.form {
+  flex: 1 1 440px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(20px, 3vw, 32px);
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 0 0 1px rgb(15 46 49 / 0.06), var(--sombra-alta);
+}
+.grupo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 18px;
+}
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+.campo label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.campo input,
+.campo textarea {
+  font: inherit;
+  font-size: 16px; /* 16px o iOS hace zoom al enfocar. */
+  color: var(--texto);
+  background: var(--fondo);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 14px;
+  padding: 12px 16px;
+  min-height: 3rem;
+  transition: border-color 0.12s ease;
+  width: 100%;
+}
+.campo textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: color-mix(in srgb, var(--suave) 70%, transparent);
+}
+.campo input:focus,
+.campo textarea:focus {
+  border-color: var(--acento-osc);
+  outline: 2px solid var(--acento-sup);
+  outline-offset: 0;
+}
+.campo input[aria-invalid='true'] {
+  border-color: #b91c1c;
+}
+.error {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #b91c1c;
+}
+.mas {
+  border-top: 1px solid var(--borde);
+  padding-top: 14px;
+}
+.mas summary {
+  cursor: pointer;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--turq-strong);
+}
+.mas[open] summary {
+  margin-bottom: 14px;
+}
+.envio {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+.envio button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.aviso {
+  margin: 0;
+  padding: 13px 16px;
+  border-radius: var(--radio);
+  background: var(--turq-soft);
+  color: var(--texto);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 56ch;
+}
+.avisoError {
+  background: #fdecec;
+}
+.avisoError a {
+  color: #b91c1c;
+  font-weight: 700;
+}
+.lateral {
+  flex: 1 1 240px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+.pie {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--suave);
+}
+
+/* El campo trampa contra bots. Fuera de pantalla sin `left: -9999px`, que ensancha el documento
+   y mete scroll horizontal en mobile. `clip-path` lo saca del flujo visual sin agregar ancho. */
+.trampa {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

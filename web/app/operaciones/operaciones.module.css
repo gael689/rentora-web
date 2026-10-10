@@ -1,0 +1,119 @@
+/* Operaciones (v4b): índice en dos columnas y detalle paso a paso como línea de tiempo vertical. */
+.pagina {
+  padding-block: clamp(16px, 3vw, 32px) 0;
+}
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 16px;
+}
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.numero {
+  font-size: 1rem;
+}
+
+/* Detalle de una operación */
+.bloque {
+  padding-block: clamp(32px, 4vw, 56px);
+}
+.rotulo {
+  margin: 0 0 22px;
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-bloque);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--texto);
+}
+.pasos {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 80ch;
+}
+.paso {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding-bottom: 28px;
+}
+/* El hilo que une los pasos. */
+.paso::before {
+  content: '';
+  position: absolute;
+  left: 19.5px;
+  top: 44px;
+  bottom: 4px;
+  width: 2px;
+  background: linear-gradient(var(--turq-soft), var(--azul-soft));
+}
+.paso:last-child::before {
+  display: none;
+}
+.pasoCuerpo {
+  min-width: 0;
+  padding-top: 8px;
+}
+.pasoTitulo {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+.pasoDetalle {
+  margin: 6px 0 0;
+  color: var(--suave);
+}
+.pasoDato {
+  display: inline-block;
+  margin: 12px 0 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--azul-soft);
+  color: var(--azul-strong);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.porque {
+  padding: clamp(24px, 3.4vw, 40px);
+  border-radius: 24px;
+  background: linear-gradient(150deg, var(--menta-soft) 0%, color-mix(in srgb, var(--menta-soft) 40%, #fff) 100%);
+}
+.porque p {
+  margin: 0;
+}
+.porqueTexto {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: 68ch;
+}
+.otras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.otra {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--borde);
+  color: var(--texto);
+  font-weight: 500;
+  transition: background var(--rapido);
+}
+.otra:hover {
+  background: var(--acento-sup);
+  color: var(--texto);
+}

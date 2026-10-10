@@ -1,0 +1,14 @@
+.pagina {
+  padding-block: clamp(8px, 2vw, 24px) 0;
+}
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 16px;
+}
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}

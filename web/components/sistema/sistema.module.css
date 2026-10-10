@@ -1,0 +1,1618 @@
+/* El lenguaje visual del sistema, traducido.
+ *
+ * El sistema es Tailwind + shadcn. Acá no entra Tailwind: el repo lo prohíbe y además no hace
+ * falta, porque la réplica es estática —sin estado, sin fetch, sin router— así que lo único
+ * que hay que traducir es el layout y la tipografía, no el comportamiento.
+ *
+ * **Este archivo no es el sistema de diseño de la marca.** `globals.css` es la voz de Rentora
+ * —Archivo expandida, petróleo, el turquesa que aparece poco— y esto es la voz del producto:
+ * Inter a 14px, superficies blancas, líneas finas y radio 8. Los dos conviven porque el marco
+ * de la aplicación se lee como una aplicación adentro de la página, que es exactamente lo que
+ * es.
+ *
+ * Las variables viven en `.marco` y no en `:root` porque un CSS Module no tiene `:root` propio
+ * y porque así la réplica no se derrama sobre el resto del sitio. */
+
+.marco {
+  --sis-primary: #12959b;
+  --sis-primary-sup: rgba(18, 149, 155, 0.1);
+  --sis-fondo: #ffffff;
+  --sis-superficie: #f1f5f5;
+  --sis-borde: #dbe6e6;
+  --sis-texto: #0f2e31;
+  --sis-suave: #52706f;
+  --sis-radio: 8px;
+
+  display: flex;
+  /* 1280 × 820. La barra de herramientas se pliega en dos renglones cuando no entra, que es
+     lo que hace la de verdad (`flex flex-wrap` en el original). El alto sale de que entren las
+     doce unidades más la fila "Por asignar" sin cortar ninguna por la mitad: una captura con
+     la última fila cortada se lee como un error, aunque la aplicación scrollee igual. */
+  /* Ancho FIJO, no mínimo. Con `min-width` el marco se estiraba hasta donde llegara el
+     contenedor, así que la misma pantalla salía de 1306 px en una captura y de 1486 en otra:
+     adiós al "mismo zoom en todas". Fijo, la captura siempre da 1280 × 820 y a escala 2 cae
+     justo en los 2560 px que pide el formato. */
+  position: relative;
+  width: 1280px;
+  flex-shrink: 0;
+  height: 864px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--sis-fondo);
+  color: var(--sis-texto);
+  font-family: var(--fuente-cuerpo), system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* El visor. La réplica es una aplicación de escritorio de tamaño fijo: se achica con
+   `transform` en vez de reflowear, porque una aplicación que se reacomoda para entrar en una
+   columna ya no es la aplicación. El scroll horizontal queda de red, y es propio del visor:
+   nunca del documento. */
+.figura {
+  margin: 0;
+}
+
+/* La ventana (v4b): un cromo de navegador mínimo, radio 16 y sombra suave; la réplica de adentro
+   conserva su propio estilo de producto. */
+.ventana {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgb(15 46 49 / 0.08),
+    0 2px 6px rgb(15 46 49 / 0.05),
+    0 30px 60px -30px rgb(15 46 49 / 0.35);
+}
+.cromo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 36px;
+  padding: 0 14px;
+  background: #f7fafa;
+  border-bottom: 1px solid var(--borde);
+}
+.cromoPuntos {
+  display: flex;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.cromoPuntos i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--borde-fuerte, #b9c8c8);
+}
+.cromoDireccion {
+  flex: 0 1 360px;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 3px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--suave);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.visor {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  background: #fff;
+}
+
+/* La caja ocupa el tamaño ya escalado; el marco de adentro sigue midiendo 1280 × 864 y se
+   encoge con `scale`. Así el texto queda vectorial y no se pixela como una captura. */
+.encuadre {
+  width: calc(var(--ancho-marco) * var(--escala));
+  height: calc(var(--alto-marco) * var(--escala));
+  overflow: hidden;
+}
+
+.encuadre > * {
+  transform: scale(var(--escala));
+  transform-origin: top left;
+}
+
+.visor::-webkit-scrollbar {
+  height: 6px;
+}
+.visor::-webkit-scrollbar-thumb {
+  background: var(--borde);
+  border-radius: 3px;
+}
+
+/* ── Barra lateral ────────────────────────────────────────────────────────── */
+
+/* Fondo de superficie clara tintada, como el original (`surface` sobre borde propio). Un solo
+   acento: el ítem activo. */
+.lateral {
+  display: flex;
+  width: 208px;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid #cfe3e3;
+  background: #eef6f6;
+}
+
+.marca {
+  display: flex;
+  height: 56px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #cfe3e3;
+  background: #fff;
+  padding: 0 16px;
+}
+
+.marcaNombre {
+  font-family: var(--fuente-titulo), system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.marcaPunto {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--sis-primary);
+}
+
+.nav {
+  flex: 1;
+  overflow: hidden;
+  padding: 6px 8px;
+}
+
+.seccion {
+  margin-bottom: 4px;
+}
+
+.seccionTitulo {
+  padding: 6px 10px 2px;
+  color: rgba(11, 93, 98, 0.72);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 9px;
+  border-radius: var(--sis-radio);
+  padding: 4px 10px;
+  color: #1a3a3d;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Los íconos inactivos van en el color de marca; el activo, todo blanco. */
+.item svg {
+  color: var(--sis-primary);
+  flex-shrink: 0;
+}
+
+.itemActivo {
+  background: var(--sis-primary);
+  box-shadow: 0 1px 2px rgba(15, 46, 49, 0.18);
+  color: #fff;
+  font-weight: 600;
+}
+
+.itemActivo svg {
+  color: #fff;
+}
+
+.alertas {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--sis-borde);
+  padding: 10px 12px;
+  color: var(--sis-suave);
+  font-size: 11px;
+}
+
+.alertasPunto {
+  display: inline-flex;
+  min-width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #b91c1c;
+  padding: 0 4px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* ── Área principal ──────────────────────────────────────────────────────── */
+
+.principal {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.encabezado {
+  display: flex;
+  height: 56px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--sis-borde);
+  padding: 0 16px;
+}
+
+.encabezadoTitulo {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.buscador {
+  display: flex;
+  max-width: 300px;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--sis-borde);
+  border-radius: var(--sis-radio);
+  background: var(--sis-superficie);
+  padding: 6px 10px;
+  color: var(--sis-suave);
+  font-size: 12px;
+}
+
+.tecla {
+  margin-left: auto;
+  border: 1px solid var(--sis-borde);
+  border-radius: 4px;
+  background: #fff;
+  padding: 1px 4px;
+  font-size: 9.5px;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sis-suave);
+  font-size: 11.5px;
+}
+
+.avatar {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sis-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cuerpo {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  background: var(--sis-superficie);
+  padding: 14px;
+}
+
+.cuerpoCompleto {
+  padding: 12px;
+}
+
+/* ── Piezas comunes ──────────────────────────────────────────────────────── */
+
+.titulo {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.barraTitulo {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--sis-borde);
+  border-radius: var(--sis-radio);
+  background: #fff;
+  padding: 6px 10px;
+  color: var(--sis-suave);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.botonPrimario {
+  border-color: var(--sis-primary);
+  background: var(--sis-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.grupoBotones {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--sis-borde);
+  border-radius: var(--sis-radio);
+  background: #fff;
+}
+
+.grupoBotones > * {
+  border: 0;
+  border-radius: 0;
+  padding: 6px 10px;
+}
+
+.grupoBotonActivo {
+  background: var(--sis-primary-sup);
+  color: var(--sis-primary);
+  font-weight: 600;
+}
+
+.selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--sis-borde);
+  border-radius: var(--sis-radio);
+  background: #fff;
+  padding: 6px 10px;
+  color: var(--sis-suave);
+  font-size: 12px;
+}
+
+.tarjeta {
+  min-height: 0;
+  border: 1px solid var(--sis-borde);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.tarjetaCabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--sis-borde);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.tarjetaCuerpo {
+  padding: 12px 14px;
+}
+
+/* Badges. Tenues por defecto: el color clasifica, no advierte. Los sólidos son para lo que
+   requiere que alguien haga algo. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badgeSolido {
+  border-color: transparent;
+  color: #fff;
+}
+
+/* La única animación del sistema que se replica: una devolución que ya venció no puede
+   quedarse quieta. Se apaga con reduced-motion como todo el resto del sitio. */
+.late {
+  animation: latir 1.6s ease-in-out infinite;
+}
+
+@keyframes latir {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .late {
+    animation: none;
+  }
+}
+
+/* ── Tablas ──────────────────────────────────────────────────────────────── */
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.tabla th {
+  border-bottom: 1px solid var(--sis-borde);
+  padding: 8px 12px;
+  color: var(--sis-suave);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tabla td {
+  border-bottom: 1px solid var(--sis-borde);
+  padding: 8px 12px;
+  vertical-align: middle;
+}
+
+.tabla tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.fuerte {
+  font-weight: 600;
+}
+
+.secundario {
+  color: var(--sis-suave);
+  font-size: 11px;
+}
+
+.numero {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.apilado {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.3;
+}
+
+/* ── Cifras ──────────────────────────────────────────────────────────────── */
+
+.cifras {
+  display: grid;
+  flex-shrink: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cifra {
+  border: 1px solid var(--sis-borde);
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px 12px;
+}
+
+.cifraRotulo {
+  color: var(--sis-suave);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cifraValor {
+  font-size: 19px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.cifraPie {
+  color: var(--sis-suave);
+  font-size: 10.5px;
+}
+
+/* ── Leyenda ─────────────────────────────────────────────────────────────── */
+
+.leyenda {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  color: var(--sis-suave);
+  font-size: 11px;
+}
+
+.leyendaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.muestra {
+  display: grid;
+  width: 17px;
+  height: 17px;
+  place-items: center;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.derecha {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* El rayado diagonal de los bloqueos. El color sólido lo pone el estilo de al lado; esto le
+   superpone las rayas, que es lo que hace que un auto en el taller no se lea como una
+   reserva. */
+.rayado {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(255, 255, 255, 0.22) 5px,
+    rgba(255, 255, 255, 0.22) 10px
+  );
+}
+
+/* ── El calendario de ocupación ──────────────────────────────────────────── */
+
+.calendario {
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+  border: 1px solid var(--sis-borde);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.calendarioScroll {
+  height: 100%;
+  overflow: auto;
+}
+
+/* Cada fila es su propia grilla con el mismo molde: la columna de la unidad más una columna
+   por día. Todos los hijos se colocan explícitamente —incluidas las celdas vacías— porque si
+   se dejaran a la colocación automática, el bloque de una reserva empujaría las celdas del día
+   en vez de superponerse a ellas. */
+.filaCal {
+  display: grid;
+  grid-template-columns: 168px repeat(var(--dias), 62px);
+  min-height: 40px;
+  width: max-content;
+  min-width: 100%;
+  /* La columna pegajosa de la unidad hereda este fondo: sin un color propio en la fila, el
+     contenido de los días se vería pasar por debajo. */
+  background: #fff;
+}
+
+.filaCabeza {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #fff;
+}
+
+.celdaUnidad {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  border-right: 1px solid var(--sis-borde);
+  border-bottom: 1px solid var(--sis-borde);
+  background: inherit;
+  padding: 4px 10px;
+}
+
+.cabezaDia {
+  display: grid;
+  place-items: center;
+  border-right: 1px solid #eef3f3;
+  border-bottom: 1px solid var(--sis-borde);
+  padding: 7px 0;
+  color: var(--sis-suave);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.cabezaFinde {
+  background: var(--sis-superficie);
+  color: var(--sis-texto);
+}
+
+.celdaDia {
+  border-right: 1px solid #eef3f3;
+  border-bottom: 1px solid var(--sis-borde);
+}
+
+.celdaFinde {
+  background: rgba(241, 245, 245, 0.55);
+}
+
+/* El bloque de una reserva. Ocupa tantas columnas como días: así seis días son un bloque de
+   seis días y no seis celdas pintadas una al lado de la otra. */
+.evento {
+  z-index: 1;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  margin: 4px 3px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.eventoPunteado {
+  border-style: dashed;
+}
+
+.eventoTachado {
+  text-decoration: line-through;
+}
+
+.filaPorAsignar {
+  background: var(--sis-primary-sup);
+}
+
+.porAsignarRotulo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  color: var(--sis-primary);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ── Grillas de dos y tres columnas ──────────────────────────────────────── */
+
+.dos {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.dosAncha {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+/* Dos bandas apiladas: la de arriba pesa más. Lo usa Finanzas, donde los movimientos del día
+   son el bloque principal y la antigüedad y los echeqs van abajo, uno al lado del otro. */
+.filas {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-rows: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.tres {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.scroll {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* ── Pestañas ────────────────────────────────────────────────────────────── */
+
+.pestanas {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2px;
+  border-bottom: 1px solid var(--sis-borde);
+}
+
+.pestana {
+  border-bottom: 2px solid transparent;
+  padding: 7px 12px;
+  color: var(--sis-suave);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pestanaActiva {
+  border-bottom-color: var(--sis-primary);
+  color: var(--sis-primary);
+}
+
+/* ── Formularios (para las operaciones y el cotizador) ───────────────────── */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.etiqueta {
+  color: var(--sis-suave);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.control {
+  display: flex;
+  min-height: 30px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 6px;
+  background: #fff;
+  padding: 5px 9px;
+  font-size: 12px;
+}
+
+.controlVacio {
+  color: var(--sis-suave);
+}
+
+.filaCampos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ayuda {
+  color: var(--sis-suave);
+  font-size: 10.5px;
+}
+
+/* ── El semáforo ─────────────────────────────────────────────────────────── */
+
+.semaforo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 8px;
+  background: var(--sis-superficie);
+  padding: 10px 12px;
+}
+
+.semaforoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+}
+
+.semaforoPunto {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+/* ── Pasos ───────────────────────────────────────────────────────────────── */
+
+.pasos {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.paso {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 6px;
+  border-top: 2px solid var(--sis-borde);
+  padding-top: 7px;
+  color: var(--sis-suave);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.pasoActivo {
+  border-top-color: var(--sis-primary);
+  color: var(--sis-primary);
+}
+
+.pasoHecho {
+  border-top-color: var(--sis-primary);
+}
+
+.pasoN {
+  display: grid;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sis-superficie);
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.pasoNActivo {
+  background: var(--sis-primary);
+  color: #fff;
+}
+
+/* ── Barras de proporción (reportes, ocupación) ──────────────────────────── */
+
+.barra {
+  height: 6px;
+  min-width: 40px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--sis-superficie);
+}
+
+.barraRelleno {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--sis-primary);
+}
+
+/* ── Avisos ──────────────────────────────────────────────────────────────── */
+
+.aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  border-left: 3px solid;
+  border-radius: 0 6px 6px 0;
+  padding: 7px 10px;
+  font-size: 11.5px;
+}
+
+.avisoLista {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Pie del marco, fuera de la aplicación ───────────────────────────────── */
+
+.pieVisor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 2px 0;
+}
+
+.pieRuta {
+  color: var(--suave);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+
+/* ── Modales ─────────────────────────────────────────────────────────────────
+   Las operaciones no son pantallas del menú: son modales sobre la pantalla donde arrancan. Se
+   replica eso —el fondo atenuado y desenfocado, la hoja encima— porque mostrar el modal solo,
+   recortado, haría perder de vista desde dónde se llega. */
+
+.escena {
+  position: relative;
+  overflow: hidden;
+}
+
+.telon {
+  position: absolute;
+  z-index: 10;
+  display: grid;
+  backdrop-filter: blur(2px);
+  background: rgba(15, 46, 49, 0.45);
+  inset: 0;
+  padding: 20px;
+  place-items: center;
+}
+
+.hoja {
+  display: flex;
+  width: min(720px, 100%);
+  max-height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(15, 46, 49, 0.28);
+}
+
+.hojaAncha {
+  width: min(880px, 100%);
+}
+
+.hojaCabeza {
+  display: flex;
+  flex-shrink: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--sis-borde);
+  padding: 14px 18px;
+}
+
+.hojaTitulo {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.hojaCuerpo {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 16px 18px;
+}
+
+.hojaPie {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--sis-borde);
+  background: var(--sis-superficie);
+  padding: 12px 18px;
+}
+
+/* El renglón destacado de un modal: el cargo que el sistema propone, el total, el monto a
+   devolver. Es el número por el que se abrió la pantalla. */
+.destacado {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.destacadoCifra {
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sumario {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-top: 1px solid var(--sis-borde);
+  padding-top: 8px;
+}
+
+.sumarioFila {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.sumarioTotal {
+  border-top: 1px solid var(--sis-borde);
+  padding-top: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.opcion {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 8px;
+  padding: 9px 11px;
+  font-size: 12px;
+}
+
+.opcionElegida {
+  border-color: var(--sis-primary);
+  background: var(--sis-primary-sup);
+}
+
+.casilla {
+  display: grid;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid var(--sis-borde);
+  border-radius: 3px;
+  margin-top: 1px;
+  background: #fff;
+  color: #fff;
+}
+
+.casillaMarcada {
+  border-color: var(--sis-primary);
+  background: var(--sis-primary);
+}
+
+.redondel {
+  border-radius: 50%;
+}
+
+/* ── Piezas de octubre: caja, prospectos, flota, reportes ────────────────────── */
+
+/* La cifra destacada: fondo de superficie y borde del color de marca a media fuerza. */
+.cifraDestacada {
+  border-color: rgba(18, 149, 155, 0.4);
+  background: #eaf5f5;
+}
+
+.cifraFlecha {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.filtros {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px 10px;
+}
+
+.campoBusca {
+  display: inline-flex;
+  min-width: 200px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 6px;
+  background: #fff;
+  padding: 5px 9px;
+  color: var(--sis-suave);
+  font-size: 12px;
+}
+
+.casillaTexto {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sis-texto);
+  font-size: 12px;
+}
+
+/* La barra de pestañas de la Caja: dos grupos (planilla y diario) separados por una línea. */
+.cajaTabs {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  gap: 2px;
+  margin: -14px -14px 0;
+  border-bottom: 1px solid var(--sis-borde);
+  background: #fff;
+  padding: 0 14px;
+}
+
+.cajaTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 2px solid transparent;
+  padding: 11px 12px 9px;
+  color: var(--sis-suave);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.cajaTabActiva {
+  border-bottom-color: var(--sis-primary);
+  color: var(--sis-primary);
+}
+
+.cajaTabSep {
+  width: 1px;
+  align-self: center;
+  height: 20px;
+  margin: 0 6px;
+  background: var(--sis-borde);
+}
+
+/* Tabla de 15 columnas: la planilla tiene que entrar sin scroll horizontal. */
+.tablaApretada {
+  font-size: 10.5px;
+}
+
+.tablaApretada th {
+  padding: 7px 6px;
+  font-size: 9.5px;
+  letter-spacing: 0.03em;
+}
+
+.tablaApretada td {
+  padding: 6px 6px;
+  white-space: nowrap;
+}
+
+.chipSi,
+.chipNo {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.chipSi {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.chipNo {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.subrayadoPunteado {
+  border-bottom: 1px dashed var(--sis-suave);
+}
+
+.azulOscuro {
+  color: #0b5d62;
+  font-weight: 700;
+}
+
+.etiquetaMini {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.etiquetaLargoPlazo {
+  background: var(--sis-primary-sup);
+  color: #0b5d62;
+}
+
+.avisoAmbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  background: #fef3c7;
+  padding: 7px 11px;
+  color: #78350f;
+  font-size: 11.5px;
+}
+
+.avisoCandado {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px 11px;
+  color: var(--sis-suave);
+  font-size: 11.5px;
+}
+
+/* Segmentado de dos vistas: el activo lleva el color de marca pleno. */
+.segmentado {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--sis-borde);
+  border-radius: var(--sis-radio);
+  background: #fff;
+}
+
+.segmento {
+  padding: 6px 14px;
+  color: var(--sis-suave);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.segmentoActivo {
+  background: var(--sis-primary);
+  color: #fff;
+}
+
+.barraSeleccion {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(18, 149, 155, 0.4);
+  border-radius: 10px;
+  background: #eaf5f5;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.enlace {
+  color: var(--sis-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.casillaTabla {
+  display: inline-grid;
+  width: 13px;
+  height: 13px;
+  place-items: center;
+  border: 1px solid #9fb5b5;
+  border-radius: 3px;
+  background: #fff;
+  color: #fff;
+}
+
+.casillaTablaMarcada {
+  border-color: var(--sis-primary);
+  background: var(--sis-primary);
+}
+
+.pieTabla {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--sis-borde);
+  padding: 8px 14px;
+  color: var(--sis-suave);
+  font-size: 11.5px;
+}
+
+.etiquetasEmpresa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.etVerde,
+.etAmbar,
+.etRojo {
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.etVerde {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.etAmbar {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.etRojo {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Flota: los tres botones grandes de arriba. */
+.botonesGrandes {
+  display: grid;
+  flex-shrink: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.botonGrande {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid var(--sis-borde);
+  border-radius: 12px;
+  background: #fff;
+  padding: 11px 14px;
+}
+
+.botonGrandeActivo {
+  border-color: var(--sis-primary);
+  background: #e6f3f3;
+  box-shadow: 0 1px 3px rgba(15, 46, 49, 0.12);
+}
+
+.botonGrandeIcono {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--sis-superficie);
+  color: var(--sis-suave);
+}
+
+.botonGrandeActivo .botonGrandeIcono {
+  background: var(--sis-primary);
+  color: #fff;
+}
+
+.botonGrandeTitulo {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* La patente como chapa: recuadro de borde oscuro, mono, grande. */
+.chapa {
+  display: inline-block;
+  border: 2px solid #1e293b;
+  border-radius: 5px;
+  background: #fff;
+  padding: 1px 8px;
+  color: #0f172a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.foto {
+  display: grid;
+  width: 84px;
+  height: 46px;
+  place-items: center;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #e3eeee, #f4f8f8);
+  color: #9fb5b5;
+}
+
+.tablaGrande td {
+  padding: 7px 10px;
+}
+
+.papel {
+  display: block;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.rojo {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.ambar {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.separadorBloque {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-top: 1px solid var(--sis-borde);
+  background: var(--sis-superficie);
+  padding: 7px 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+/* Reportes: el gráfico de áreas en SVG. */
+.svgGrafico {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ejeTexto {
+  fill: #52706f;
+  font-size: 10px;
+}
+
+.barraH {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.barraHCaja {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--sis-superficie);
+}
+
+.barraHRelleno {
+  height: 100%;
+  border-radius: 3px;
+}
+
+/* Ocupación: la barra superior única y el panel Hoy. */
+.botonHoy {
+  border-color: rgba(18, 149, 155, 0.5);
+  background: var(--sis-primary-sup);
+  color: #0b5d62;
+  font-weight: 700;
+}
+
+.cabezaHoy {
+  background: var(--sis-primary-sup);
+  color: #0b5d62;
+}
+
+.celdaHoy {
+  background: rgba(18, 149, 155, 0.07);
+}
+
+.panelHoy {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+/* El menú "Nueva operación", desplegado sobre su botón. */
+.menuOp {
+  position: absolute;
+  top: 110px;
+  right: 22px;
+  z-index: 10;
+  width: 288px;
+  overflow: hidden;
+  border: 1px solid var(--sis-borde);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(15, 46, 49, 0.22);
+}
+
+.menuOpItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.menuOpItem + .menuOpItem {
+  border-top: 1px solid var(--sis-borde);
+}
+
+.menuOpIcono {
+  color: var(--sis-primary);
+}
+
+/* Limpieza al entregar: tres botones grandes, el elegido crece y se pinta de su color. */
+.limpieza {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 8px;
+}
+
+.limpiezaBoton {
+  display: grid;
+  min-height: 40px;
+  place-items: center;
+  border: 2px solid var(--sis-borde);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--sis-suave);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.limpiezaElegido {
+  min-height: 48px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.combustible {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.combustibleBoton {
+  display: grid;
+  min-height: 30px;
+  place-items: center;
+  border: 1px solid var(--sis-borde);
+  border-radius: 7px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.lienzo {
+  display: grid;
+  height: 84px;
+  place-items: center;
+  border: 1px dashed #9fb5b5;
+  border-radius: 8px;
+  background: #fafcfc;
+  color: var(--sis-suave);
+  font-size: 11.5px;
+}
+
+.conductorChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--sis-borde);
+  border-radius: 999px;
+  background: #fff;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+}

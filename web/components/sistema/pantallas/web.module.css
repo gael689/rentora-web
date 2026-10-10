@@ -1,0 +1,283 @@
+/* La web pública de la rentadora.
+ *
+ * Lenguaje propio, distinto del panel: esto no lo mira un operador entrenado, lo mira alguien
+ * que entró a las once de la noche a ver si hay un auto. Más aire, tipografía más grande y una
+ * sola acción por pantalla.
+ *
+ * **La marca es la de la rentadora, no la de Rentora.** Cada instancia se entrega con la
+ * identidad de su dueño: el sitio es del cliente, no del proveedor. */
+
+.sitio {
+  display: flex;
+  width: 1280px;
+  height: 864px;
+  flex-shrink: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  color: #0f2e31;
+  font-family: var(--fuente-cuerpo), system-ui, sans-serif;
+  font-size: 14px;
+  text-align: left;
+}
+
+.cabecera {
+  display: flex;
+  height: 68px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e6eded;
+  padding: 0 32px;
+}
+
+.logo {
+  font-family: var(--fuente-titulo), system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  font-stretch: 108%;
+  letter-spacing: -0.01em;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: #52706f;
+  font-size: 13.5px;
+}
+
+.telefono {
+  border-radius: 999px;
+  background: #12959b;
+  padding: 8px 18px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.cuerpo {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 22px;
+  background: #f7fafa;
+  padding: 26px 32px;
+}
+
+/* Los cuatro pasos del checkout. */
+.pasosWeb {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 26px;
+  color: #52706f;
+  font-size: 13px;
+}
+
+.pasoWeb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.pasoWebActivo {
+  color: #0f2e31;
+  font-weight: 650;
+}
+
+.pasoWebN {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 1px solid #dbe6e6;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.pasoWebActivo .pasoWebN {
+  border-color: #12959b;
+  background: #12959b;
+  color: #fff;
+}
+
+.columnas {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 22px;
+}
+
+.principal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #e6eded;
+  border-radius: 14px;
+  background: #fff;
+  padding: 26px 28px;
+}
+
+.titulo {
+  font-family: var(--fuente-titulo), system-ui, sans-serif;
+  font-size: 25px;
+  font-weight: 750;
+  font-stretch: 106%;
+  letter-spacing: -0.015em;
+}
+
+/* La retención de cupo. Es el argumento del bloque: el auto queda guardado mientras paga. */
+.retencion {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid #bfe3e4;
+  border-radius: 10px;
+  background: #e2f1f1;
+  padding: 12px 14px;
+  color: #0b5d62;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.medios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.medio {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  border: 1px solid #dbe6e6;
+  border-radius: 10px;
+  padding: 13px 15px;
+  font-size: 13.5px;
+}
+
+.medioElegido {
+  border-color: #12959b;
+  background: #f4fbfb;
+}
+
+.radio {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  border: 5px solid #dbe6e6;
+  border-radius: 50%;
+  margin-top: 2px;
+  background: #fff;
+}
+
+.medioElegido .radio {
+  border-color: #12959b;
+}
+
+.chico {
+  color: #52706f;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.totales {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-top: 1px solid #e6eded;
+  padding-top: 14px;
+}
+
+.totalFila {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.totalChico {
+  color: #52706f;
+  font-size: 12.5px;
+}
+
+.cta {
+  margin-top: auto;
+  border-radius: 999px;
+  background: #12959b;
+  padding: 15px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 650;
+  text-align: center;
+}
+
+.resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid #e6eded;
+  border-radius: 14px;
+  background: #fff;
+  padding: 22px;
+}
+
+.resumenTitulo {
+  color: #52706f;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.auto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* El lugar de la foto del auto. Va como bloque de color y no como imagen inventada: poner una
+   foto de stock de un auto que la rentadora no tiene es exactamente lo que la pieza critica. */
+.autoFoto {
+  width: 74px;
+  height: 50px;
+  flex-shrink: 0;
+  border: 1px solid #dbe6e6;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #eef5f5, #dbe6e6);
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  border-top: 1px solid #e6eded;
+  padding-top: 14px;
+  margin: 0;
+}
+
+.datos div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.datos dt {
+  color: #52706f;
+  font-size: 12.5px;
+}
+
+.datos dd {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: right;
+}
