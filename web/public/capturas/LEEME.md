@@ -22,15 +22,15 @@ Salen de la propia web, con el sitio andando:
 ```bash
 npx next build web
 npx next start web -p 3311          # en otra terminal
-node impresos/scripts/capturas-sistema.mjs
+node marketing/impresos/scripts/capturas-sistema.mjs
 ```
 
 Deja los archivos afuera del repo:
 
 | Dónde | Qué |
 |---|---|
-| `capturas/sistema/<slug>.webp` | 2560 px — brochure, propuestas, posteos |
-| `capturas/revision/<slug>.jpg` | 1400 px — para mirarlas de a una y aprobarlas |
+| `marketing/capturas/sistema/<slug>.webp` | 2560 px — brochure, propuestas, posteos |
+| `marketing/capturas/revision/<slug>.jpg` | 1400 px — para mirarlas de a una y aprobarlas |
 
 El script verifica y se planta con `exit(1)` si el catálogo dejó de tener 19 pantallas, si un
 marco salió recortado, o si aparece la marca o el azul del cliente en la página. **La revisión

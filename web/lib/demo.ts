@@ -2,7 +2,7 @@
  *
  * **Apagada por defecto.** Sin `NEXT_PUBLIC_DEMO_ACTIVA=1` no se pinta nada: ni el CTA, ni la
  * respuesta nueva de la FAQ, ni la línea de llms.txt, y las tres rutas (`/probar`,
- * `/demo/confirmar`, `/demo/lista`) dan 404. La regla de AUDITORIA-CONVERSION.md §10: nada de
+ * `/demo/confirmar`, `/demo/lista`) dan 404. La regla de marketing/copy-y-seo/AUDITORIA-CONVERSION.md §10: nada de
  * esto se publica antes de que la función ande en producción y se haya probado de punta a punta.
  *
  * El circuito, del lado del sitio:
@@ -13,7 +13,7 @@
  * 3. La API redirige a `/demo/lista?estado=creada|en_cola|vencido|invalido`.
  *
  * BORRADOR: todo el copy de este archivo lo decide Gael. Los CTA, la FAQ y la línea de llms.txt
- * son las opciones (a) de AUDITORIA-CONVERSION.md §10.1. */
+ * son las opciones (a) de marketing/copy-y-seo/AUDITORIA-CONVERSION.md §10.1. */
 
 /** El interruptor. Se lee en build: cambiarlo pide un build nuevo. */
 export const DEMO_ACTIVA = process.env.NEXT_PUBLIC_DEMO_ACTIVA === '1';

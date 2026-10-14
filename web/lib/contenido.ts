@@ -810,7 +810,7 @@ export type Titular = { antes: string; clave: string; despues: string };
 export const HOME = {
   /* v4b (09/10/2026): dieta de texto. H1 ≤ 8 palabras, bajada ≤ 20, cada sección con rótulo +
    * H2 ≤ 8 palabras + una oración ≤ 25 + hasta 4 viñetas de ≤ 6 palabras. Lo largo vive en las
-   * páginas internas. Antes → después y alternativas en COPY-V4.md. */
+   * páginas internas. Antes → después y alternativas en marketing/copy-y-seo/COPY-V4.md. */
   hero: {
     tag: 'Software para rent a car, hecho en Argentina',
     titular: { antes: 'Tu flota bajo control. ', clave: 'Tu rentadora, mejor gestionada.', despues: '' } as Titular,

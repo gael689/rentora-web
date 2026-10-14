@@ -2,7 +2,7 @@
  *
  * Con `src` en null no se dibuja nada ni se declara el VideoObject: un dato estructurado de un video
  * que no existe es peor que ninguno. Para encenderlo: subir el mp4 (R2 o /public), el poster y los
- * subtítulos .vtt, y completar estos campos. Guion en `video/guion.md`. */
+ * subtítulos .vtt, y completar estos campos. Guion en `marketing/video/guion.md`. */
 
 export const VIDEO = {
   src: null as string | null,

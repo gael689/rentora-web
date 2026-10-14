@@ -15,7 +15,7 @@
  * (#12959B) no llega con blanco encima, así que los botones van en #0E7F85 (4,78:1).
  *
  * Tipografía: Inter Tight (600/700, tracking cerrado) para títulos, Inter para el cuerpo. Nunca
- * Geist (identidad personal de Gael), nunca Poppins (la v3). Espeja impresos/marca/tokens.css en
+ * Geist (identidad personal de Gael), nunca Poppins (la v3). Espeja marketing/impresos/marca/tokens.css en
  * la paleta base. Sin Tailwind, sin librería de animación, sin librería de iconos. */
 
 :root {

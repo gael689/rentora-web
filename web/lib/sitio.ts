@@ -46,7 +46,7 @@ export const AUTOR = 'Gael González';
  *
  * Vacíos a propósito: un `sameAs` que apunta a un perfil que no existe (o a uno de Gael en vez
  * del de Rentora) le dice a Google y a los motores generativos que la entidad es otra. Se
- * completan el día que cada perfil existe y dice lo mismo que la web — ver SEO-GEO.md, "Entidad".
+ * completan el día que cada perfil existe y dice lo mismo que la web — ver marketing/copy-y-seo/SEO-GEO.md, "Entidad".
  * Los vacíos se omiten solos. */
 export const PERFILES: Record<'linkedin' | 'instagram' | 'facebook' | 'youtube' | 'googleBusiness' | 'capterra', string> = {
   linkedin: '', // https://www.linkedin.com/company/rentora-…
