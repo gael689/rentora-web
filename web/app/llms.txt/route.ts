@@ -1,7 +1,7 @@
 import { MODULOS, NOVEDADES } from '@/lib/contenido';
 import { OPERACIONES } from '@/lib/sistema/operaciones';
 import { PANTALLAS } from '@/lib/sistema/pantallas';
-import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG } from '@/lib/seo';
+import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG, QUE_INCLUYE_PAG, WEB_A_MEDIDA_PAG } from '@/lib/seo';
 import { SITIO } from '@/lib/sitio';
 import { LLMS_TITULO, LLMS_RESUMEN, LLMS_QUE_ES, LLMS_NO_HACE, LLMS_CITAR, llmsCifras } from '@/lib/llms';
 
@@ -62,6 +62,14 @@ ${PLANES_PAG.planes.map((p) => `- **${p.nombre}**: ${p.para}`).join('\n')}
 
 ${PLANES_PAG.comoSeCotiza}
 
+## Qué incluye
+
+[${QUE_INCLUYE_PAG.nombre}](${SITIO}/${QUE_INCLUYE_PAG.slug}): ${QUE_INCLUYE_PAG.citable}
+
+## Web a medida
+
+[${WEB_A_MEDIDA_PAG.nombre}](${SITIO}/${WEB_A_MEDIDA_PAG.slug}): ${WEB_A_MEDIDA_PAG.citable}
+
 ## Para cada tipo de operación
 
 ${PARA.map((p) => `- [${p.nombre}](${SITIO}/para/${p.slug}): ${p.citable}`).join('\n')}
@@ -89,6 +97,8 @@ ${PLAZAS.map((p) => `- [${p.ciudad}, ${p.provincia}](${SITIO}/software-rent-a-ca
 - [Cómo se hace cada cosa](${SITIO}/operaciones)
 - [Los módulos](${SITIO}/modulos)
 - [Planes](${SITIO}/planes)
+- [Qué incluye](${SITIO}/que-incluye)
+- [Web de reservas a medida](${SITIO}/web-a-medida)
 - [Para cada tipo de operación](${SITIO}/para)
 - [Guías](${SITIO}/guias)
 - [Software para rent a car por ciudad](${SITIO}/software-rent-a-car)

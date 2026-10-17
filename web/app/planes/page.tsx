@@ -88,6 +88,10 @@ export default function Planes() {
           <div className={s.prosa}>
             <p>{P.comoSeCotiza}</p>
           </div>
+          <Link href="/que-incluye" className="cta-sec" data-cta="planes-que-incluye">
+            {PLANES_PAG_UI.verIncluye}
+            <Icono nombre="flecha" tam={16} />
+          </Link>
         </section>
 
         <FaqLista titulo={PLANES_PAG_UI.preguntas} preguntas={P.preguntas} id={`${SITIO}${RUTA}`} />

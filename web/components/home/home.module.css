@@ -467,6 +467,11 @@
   }
 }
 
+/* ── A medida (v4c) ── */
+.aMedida {
+  padding-block: 0 clamp(24px, 4vw, 48px);
+}
+
 /* ── Seguridad ── */
 .seguridad {
   background: linear-gradient(180deg, #fff 0%, var(--superficie) 40%, var(--superficie) 70%, #fff 100%);

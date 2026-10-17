@@ -10,7 +10,7 @@ import { SITIO } from '@/lib/sitio';
  * **`lastModified` es una fecha fija, no `new Date()`.** Con la fecha del build, cada deploy
  * declara que todas las páginas cambiaron hoy, y Google deja de creerle al lastmod (patrón de
  * Palazzo). Se actualiza a mano cuando el contenido cambia de verdad. */
-const ULTIMA_EDICION = new Date('2026-10-08');
+const ULTIMA_EDICION = new Date('2026-10-16');
 
 type Entrada = MetadataRoute.Sitemap[number];
 const url = (ruta: string, priority: number, changeFrequency: Entrada['changeFrequency'] = 'monthly'): Entrada => ({
@@ -27,6 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url('/operaciones', 0.9),
     url('/modulos', 0.8),
     url('/planes', 0.8),
+    url('/que-incluye', 0.8),
+    url('/web-a-medida', 0.8),
     ...OPERACIONES.map((o) => url(`/operaciones/${o.slug}`, 0.8)),
     url('/para', 0.8),
     ...PARA.map((p) => url(`/para/${p.slug}`, 0.8)),

@@ -214,10 +214,10 @@ export const MODULOS: Modulo[] = [
     nombre: 'Tu web',
     termino: 'cobrar reservas online con Mercado Pago alquiler de autos',
     texto:
-      'Sitio propio con motor de reservas y checkout de 4 pasos, cupo retenido 20 minutos, cobro por Mercado Pago o transferencia.',
+      'Sitio propio con motor de reservas y checkout de 4 pasos, cupo retenido 20 minutos, cobro por Mercado Pago o transferencia. Lo que no se cierra solo cae en el Seguimiento del panel.',
     problema:
-      'Perder la reserva del que entra a las once de la noche. Tu propia web toma la reserva sobre el mismo cupo que ve el mostrador y cobra sola.',
-    chips: ['Checkout de 4 pasos', 'Cupo retenido 20 min', 'Mercado Pago'],
+      'Perder la reserva del que entra a las once de la noche. Tu propia web toma la reserva sobre el mismo cupo que ve el mostrador y cobra sola, con tu cuenta de Mercado Pago. Y si alguien pide que lo llames o no termina de pagar, queda en el Seguimiento con su contacto.',
+    chips: ['Checkout de 4 pasos', 'Cupo retenido 20 min', 'Mercado Pago', 'Seguimiento'],
     tono: 'azul',
     dolor: '“Me escribe a las once de la noche y nadie atiende.”',
     gana: 'Tu web toma la reserva y cobra sola, sobre el mismo cupo del mostrador.',
@@ -422,6 +422,14 @@ export const NOVEDADES: Novedad[] = [
     tono: 'turq',
     tipo: 'modulo',
     slug: 'flota',
+  },
+  {
+    titulo: 'Seguimiento de lo que entra por la web',
+    linea: 'Quien pide que lo llames, no termina de pagar o tiene el pago rechazado queda con su estado, su responsable y su próximo paso.',
+    icono: 'personas',
+    tono: 'azul',
+    tipo: 'modulo',
+    slug: 'tu-web',
   },
   {
     titulo: 'Echeqs por secciones',
@@ -980,7 +988,9 @@ export const HOME = {
       tono: 'turq' as TonoMarca,
       titulo: 'Tu propia web, que reserva y cobra',
       frase: 'El cliente elige fechas, ve el precio final y paga, sobre el mismo cupo que ve tu mostrador.',
-      puntos: ['Con tu marca y tus colores', 'Cupo retenido 20 minutos', 'Mercado Pago o transferencia', 'Entra directo al calendario'],
+      // v4c: "Cupo retenido 20 minutos" ya está en el chip de la captura; su lugar lo toma el
+      // seguimiento (rentora-system 0010). Alternativas en COPY-V4.md.
+      puntos: ['Con tu marca y tus colores', 'Mercado Pago o transferencia', 'Entra directo al calendario', 'Quien no paga, al seguimiento'],
       link: { texto: 'Ver Tu web', href: '/modulos/tu-web' },
       pantalla: '',
       telefonos: [
@@ -990,6 +1000,19 @@ export const HOME = {
       chips: [{ icono: 'reloj', texto: 'Cupo retenido 20 min' }],
     },
   ],
+  /** "A medida de tu rentadora" (v4c, 16/10): la misma web de reservas con dos marcas inventadas
+   *  (`MARCAS_DEMO`). Rótulo + H2 ≤ 8 + una oración ≤ 25 + cuatro viñetas ≤ 6. El detalle vive
+   *  en /web-a-medida. Lo que se afirma sale de rentora-system/web-reservas: marca, tipografía,
+   *  logo y "Hecho con Rentora" son configuración por tenant. */
+  aMedida: {
+    rotulo: 'A medida',
+    icono: 'chispa',
+    tono: 'azul' as TonoMarca,
+    titulo: 'La misma web, con tu marca',
+    frase: 'Tu web de reservas lleva tu logo, tus colores, tu tipografía y tu dominio. Partimos de un diseño probado y lo adaptamos.',
+    puntos: ['Tu logo y tus colores', 'Tu tipografía', 'Tu dominio, a tu nombre', 'Rentora no aparece'],
+    link: { texto: 'Ver cómo se adapta', href: '/web-a-medida' },
+  },
   /** La sección de confianza: cómo se arranca y quién responde. Sin testimonios ni logos: no hay
    *  clientes citables. Cada punto sale de datos ya verificados (`IMPLEMENTACION`, la FAQ del
    *  Excel y el CLAUDE.md del sistema). Backups no se afirman. */
@@ -1059,6 +1082,112 @@ export const HOME = {
     linea: 'Flota, reservas, contratos y caja, en un solo sistema. Hecho en Argentina.',
   },
 } as const;
+
+/* ── Dos marcas de ejemplo ────────────────────────────────────────────────────
+ *
+ * La misma web de reservas con dos rentadoras INVENTADAS: son los dos fixtures de
+ * rentora-system/web-reservas (`lib/tenant-fixtures.ts`), con sus colores, su ciudad, su flota y
+ * su dominio. Ninguna es un cliente. La réplica es CSS (components/home/DosMarcas.tsx): cambia
+ * solo lo que en el producto es configuración del tenant. Una con logo y "Hecho con Rentora",
+ * la otra sin ninguno de los dos, igual que en los fixtures. */
+export type MarcaDemo = {
+  clave: 'valle' | 'combis';
+  nombre: string;
+  nombre2: string;
+  dominio: string;
+  eyebrow: string;
+  titulo: string;
+  bajada: string;
+  retiro: string;
+  fechaRetiro: string;
+  devolucion: string;
+  fechaDevolucion: string;
+  boton: string;
+  flotaTitulo: string;
+  flota: string[];
+  /** Vacío: la marca no muestra "Hecho con Rentora". */
+  firma: string;
+  /** Lo que se lee debajo de la réplica: qué cambió en esta marca. */
+  pie: string;
+};
+
+export const MARCAS_DEMO: MarcaDemo[] = [
+  {
+    clave: 'valle',
+    nombre: 'Rentadora',
+    nombre2: 'del Valle',
+    dominio: 'rentadoradelvalle.com.ar',
+    eyebrow: 'Reservá online',
+    titulo: 'Alquiler de autos en Mendoza',
+    bajada: 'Retirás en el centro o en el aeropuerto.',
+    retiro: 'Retiro',
+    fechaRetiro: 'Vie 12/06',
+    devolucion: 'Devolución',
+    fechaDevolucion: 'Lun 15/06',
+    boton: 'Ver autos',
+    flotaTitulo: 'Elegí tu vehículo',
+    flota: ['Compacto', 'Sedán', 'Pick-up 4x4'],
+    firma: 'Hecho con Rentora',
+    pie: 'Turquesa, logo propio y "Hecho con Rentora" al pie',
+  },
+  {
+    clave: 'combis',
+    nombre: 'Combis',
+    nombre2: 'del Sur',
+    dominio: 'combisdelsur.com.ar',
+    eyebrow: 'Reservá online',
+    titulo: 'Alquiler de combis en Neuquén',
+    bajada: 'Combis y utilitarios para tu grupo o tu obra.',
+    retiro: 'Retiro',
+    fechaRetiro: 'Lun 15/06',
+    devolucion: 'Devolución',
+    fechaDevolucion: 'Vie 19/06',
+    boton: 'Ver combis',
+    flotaTitulo: 'Elegí tu vehículo',
+    flota: ['Combi 15 asientos', 'Combi 19 asientos', 'Utilitario'],
+    firma: '',
+    pie: 'Verde y ámbar, otra tipografía y sin mención de Rentora',
+  },
+];
+
+export const DOS_MARCAS = {
+  etiqueta: 'La misma web de reservas con dos marcas de ejemplo',
+  nota: 'Dos rentadoras inventadas. Mismo motor, misma estructura; cambian la marca, la flota y el dominio.',
+} as const;
+
+/* ── El caso: dónde corre hoy ─────────────────────────────────────────────────
+ *
+ * El sistema nació en una rentadora real y corre ahí en producción. **No se la nombra** hasta que
+ * autorice (regla del CLAUDE.md del repo privado), ni datos que la identifiquen: ni
+ * ciudad, ni patentes, ni cifras de su negocio. Solo se cuenta lo verificable desde el código
+ * (`CIFRAS`). Sin testimonio: no hay uno firmado.
+ *
+ * La versión con nombre está lista y apagada: cuando haya autorización por escrito se completan
+ * `nombre` y `ciudad` y se prende `conNombre`. Con la bandera apagada, los campos vacíos no se
+ * leen. Nunca se escribe el nombre real en este repo antes de esa autorización. */
+export const CASO = {
+  conNombre: false,
+  nombre: '',
+  ciudad: '',
+  rotulo: 'En producción',
+  titulo: 'Nació en una rentadora *real*',
+  texto:
+    'Rentora no se diseñó en una pizarra: se construyó para una rentadora argentina, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.',
+  textoConNombre: (nombre: string, ciudad: string) =>
+    `Rentora no se diseñó en una pizarra: se construyó para ${nombre}, en ${ciudad}, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.`,
+  cifras: [
+    { cifra: String(PANTALLAS.length), texto: 'pantallas en el panel' },
+    { cifra: String(MODULOS.length), texto: 'módulos que comparten los datos' },
+    { cifra: String(CIFRAS.reglas), texto: 'reglas de aviso, cada 30 minutos' },
+    { cifra: String(CIFRAS.tablas), texto: 'tablas en la base de datos' },
+  ],
+  nota: 'Las cifras están contadas sobre el código del sistema, no estimadas.',
+} as const;
+
+/** El texto del caso según la bandera. */
+export function textoCaso(): string {
+  return CASO.conNombre && CASO.nombre ? CASO.textoConNombre(CASO.nombre, CASO.ciudad) : CASO.texto;
+}
 
 /* ── Textos sueltos ─────────────────────────────────────────────────────────── */
 

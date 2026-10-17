@@ -62,6 +62,12 @@ export default function Pie() {
               <li>
                 <Link href="/planes">{P.planes}</Link>
               </li>
+              <li>
+                <Link href="/que-incluye">{P.queIncluye}</Link>
+              </li>
+              <li>
+                <Link href="/web-a-medida">{P.webAMedida}</Link>
+              </li>
             </ul>
           </div>
           <div>

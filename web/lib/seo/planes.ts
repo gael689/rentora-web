@@ -43,7 +43,7 @@ export const PLANES_PAG: PaginaPlanes = {
       para: 'Para vender también cuando el mostrador está cerrado.',
       incluye: [
         'Todo lo de Gestión',
-        'Tu propia web con motor de reservas',
+        'Tu propia web, con tu logo, tus colores y tu dominio',
         'Checkout de 4 pasos y cupo retenido 20 minutos',
         'Cobro por Mercado Pago o transferencia',
         'El mismo cupo y el mismo precio que el mostrador',
@@ -93,7 +93,7 @@ export const PLANES_PAG: PaginaPlanes = {
     },
   ],
   comoSeCotiza:
-    'El precio depende de cuántos autos tenés, cuántas sucursales y si querés la web de reservas. No hay un precio de lista: lo hablamos antes de empezar, con una demo del sistema si querés verlo, y queda por escrito antes de arrancar.',
+    'Se paga en dos partes: un pago único por la web a medida, la implementación, la capacitación y la puesta en marcha del dominio y el hosting, y después un mantenimiento mensual. Cuánto es cada parte depende de cuántos autos tenés, cuántas sucursales y si querés la web de reservas. No hay un precio de lista: lo hablamos antes de empezar, con una demo del sistema si querés verlo, y queda por escrito antes de arrancar.',
   preguntas: [
     {
       p: '¿Por qué no está el precio en la web?',
@@ -101,7 +101,7 @@ export const PLANES_PAG: PaginaPlanes = {
     },
     {
       p: '¿Qué incluye la implementación?',
-      r: 'Cuatro etapas: relevamiento, carga de flota, tarifas y clausulado, tu web si la elegiste, y marcha blanca con capacitación. Vos ponés la información y elegís fotos y textos; la carga la hago yo.',
+      r: 'Es la parte del pago único: relevamiento, carga de flota, tarifas y clausulado, tu web con tu marca si la elegiste, el dominio y el hosting en marcha, y capacitación con marcha blanca. Vos ponés la información y elegís fotos y textos; la carga la hago yo. Después sigue el mantenimiento mensual: hosting, actualizaciones, soporte y uso del sistema.',
     },
     {
       p: '¿Puedo empezar sin la web y sumarla después?',

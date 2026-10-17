@@ -7,3 +7,4 @@ export * from './para';
 export * from './guias';
 export * from './contrato';
 export * from './planes';
+export * from './incluye';

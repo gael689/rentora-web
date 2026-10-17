@@ -1,7 +1,7 @@
 import { MODULOS, FAQS, ARGENTINA, IMPLEMENTACION, ETAPAS, PROBLEMAS } from '@/lib/contenido';
 import { OPERACIONES } from '@/lib/sistema/operaciones';
 import { PANTALLAS } from '@/lib/sistema/pantallas';
-import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG, CHECKLIST, type PreguntaFaq, type Seccion } from '@/lib/seo';
+import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG, CHECKLIST, QUE_INCLUYE_PAG, WEB_A_MEDIDA_PAG, type PreguntaFaq, type Seccion, type ItemConIcono } from '@/lib/seo';
 import { SITIO } from '@/lib/sitio';
 import { LLMS_TITULO, LLMS_RESUMEN, LLMS_QUE_ES, LLMS_NO_HACE, LLMS_CITAR, llmsCifras, plano } from '@/lib/llms';
 
@@ -117,6 +117,57 @@ ${PLANES_PAG.comoSeCotiza}
 ### Preguntas
 
 ${faq(PLANES_PAG.preguntas)}`);
+
+  const items = (xs: ItemConIcono[]) => xs.map((x) => `- **${x.titulo}**: ${x.texto}`).join('\n');
+  const QI = QUE_INCLUYE_PAG;
+  h(`## ${plano(QI.h1)}
+
+URL: ${SITIO}/${QI.slug}
+
+${cita(QI.citable)}
+
+### ${QI.pagoUnico.nombre}
+
+${QI.pagoUnico.para}
+
+${items(QI.pagoUnico.items)}
+
+### ${QI.mensual.nombre}
+
+${QI.mensual.para}
+
+${items(QI.mensual.items)}
+
+### ${QI.tuyoTitulo}
+
+${items(QI.tuyo)}
+
+${prosa(QI.secciones)}
+
+### Preguntas
+
+${faq(QI.preguntas)}`);
+
+  const WM = WEB_A_MEDIDA_PAG;
+  h(`## ${plano(WM.h1)}
+
+URL: ${SITIO}/${WM.slug}
+
+${cita(WM.citable)}
+
+### ${WM.cambiaTitulo}
+
+${items(WM.cambia)}
+
+### ${WM.vieneTitulo}
+
+${items(WM.viene)}
+
+${prosa(WM.secciones)}
+
+### Preguntas
+
+${faq(WM.preguntas)}`);
 
   h(`## Para cada tipo de operación
 

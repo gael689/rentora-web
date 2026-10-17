@@ -7,6 +7,8 @@ import Icono from '@/components/sistema/Icono';
 import Pantalla, { hayReplica } from '@/components/sistema/Pantalla';
 import Portada from '../_pagina/Portada';
 import Cierre from '../_pagina/Cierre';
+import Caso from '../_pagina/Caso';
+import { CASO_UI } from '@/lib/paginas';
 import s from './sistema.module.css';
 import { alternos } from '../_pagina/meta';
 
@@ -103,6 +105,8 @@ export default function Sistema() {
             </ul>
           </section>
         )}
+
+        <Caso link={{ href: '/que-incluye', texto: CASO_UI.verIncluye }} />
       </div>
 
       <Cierre

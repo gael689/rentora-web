@@ -55,6 +55,7 @@ export const MENU_MOVIL = [
   { href: '/operaciones', texto: 'Cómo se hace' },
   { href: '/modulos/tu-web', texto: 'Tu web' },
   { href: '/planes', texto: 'Planes' },
+  { href: '/que-incluye', texto: 'Qué incluye' },
   { href: '/guias', texto: 'Guías' },
   { href: '/preguntas', texto: 'Preguntas' },
 ] as const;

@@ -50,8 +50,10 @@ export const LLMS_NO_HACE = `- **No emite factura electrónica.** Registra factu
   numerados.
 - Prospectos es un módulo opcional: la campaña se arma y queda lista, pero el envío automático todavía no está activado.
 - El reparto entre socios no viene de serie: es un adicional.
-- No tiene precio público. El modelo es un pago de implementación más un abono mensual, cotizado
-  sobre la operación de cada rentadora.`;
+- No tiene precio público. El modelo es un pago único (web a medida, implementación,
+  capacitación, dominio y hosting en marcha) más un mantenimiento mensual (hosting,
+  actualizaciones, soporte y uso del sistema), cotizado sobre la operación de
+  cada rentadora.`;
 
 export const LLMS_CITAR = `Rentora — Software para rent a car. ${SITIO}`;
 

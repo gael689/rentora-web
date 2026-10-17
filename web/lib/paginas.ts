@@ -272,6 +272,7 @@ export const PLANES_PAG_UI = {
   preguntas: 'Preguntas sobre los planes',
   cierreTitulo: '¿Cuál es *el tuyo*?',
   cierreBajada: 'Contame cuántos autos tenés y si querés la web, y lo armamos sobre tu operación.',
+  verIncluye: 'Ver qué incluye cada parte',
   cta: 'Hablar por WhatsApp',
   /** CTAs de cada plan. El mensaje de WhatsApp lleva el nombre del plan para saber de dónde viene. */
   planWhatsapp: 'Consultar este plan',
@@ -312,6 +313,8 @@ export const PIE = {
   producto: 'Producto',
   modulosTodos: 'Todos los módulos',
   planes: 'Planes',
+  queIncluye: 'Qué incluye',
+  webAMedida: 'Tu web a medida',
   para: 'Para tu operación',
   ciudades: 'Ciudades',
   recursos: 'Recursos',
@@ -328,3 +331,41 @@ export function partirAcento(texto: string): { t: string; acento: boolean }[] {
     .map((t, i) => ({ t, acento: i % 2 === 1 }))
     .filter((p) => p.t !== '');
 }
+
+/* ── /que-incluye y /web-a-medida (v4c, 16/10) ────────────────────────────── */
+
+export const QUE_INCLUYE_UI = {
+  tag: 'Qué incluye',
+  preguntas: 'Preguntas sobre qué incluye',
+  enlaces: 'Seguí por acá',
+  enlacesItems: [
+    { href: '/planes', texto: 'Los planes' },
+    { href: '/web-a-medida', texto: 'Tu web a medida' },
+    { href: '/sistema', texto: 'Las pantallas del sistema' },
+    { href: '/preguntas', texto: 'Todas las preguntas' },
+  ],
+  cierreTitulo: 'Armemos *lo tuyo*',
+  cierreBajada: 'Contame cuántos autos tenés y si querés la web, y te digo qué lleva cada parte.',
+  verPlanes: 'Ver los planes',
+};
+
+export const WEB_A_MEDIDA_UI = {
+  tag: 'Web a medida',
+  preguntas: 'Preguntas sobre la web a medida',
+  enlaces: 'Seguí por acá',
+  enlacesItems: [
+    { href: '/modulos/tu-web', texto: 'Cómo reserva y cobra' },
+    { href: '/que-incluye', texto: 'Qué incluye' },
+    { href: '/planes', texto: 'Los planes' },
+    { href: '/operaciones', texto: 'Cómo se hace cada cosa' },
+  ],
+  cierreTitulo: 'Veamos tu web *con tu marca*',
+  cierreBajada: 'Mandame tu logo y contame cómo trabajás, y lo vemos sobre tu marca.',
+  verIncluye: 'Ver qué incluye',
+};
+
+/** El link que acompaña al caso en /sistema y /que-incluye. */
+export const CASO_UI = {
+  verIncluye: 'Ver qué incluye',
+  verSistema: 'Ver las pantallas',
+};

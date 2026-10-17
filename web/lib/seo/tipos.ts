@@ -92,6 +92,30 @@ export type PaginaPlanes = PaginaSeo & {
   planes: Plan[];
   /** Lo que se suma a cualquier plan. */
   adicionales: { nombre: string; texto: string }[];
-  /** Cómo se calcula el precio (sin números): implementación + abono, sobre qué datos. */
+  /** Cómo se calcula el precio (sin números): pago único + mantenimiento mensual, sobre qué datos. */
   comoSeCotiza: string;
+};
+
+/** Un ítem con ícono (de `components/sistema/Icono.tsx`), título y una línea. */
+export type ItemConIcono = { icono: string; titulo: string; texto: string };
+
+/** `/que-incluye`: qué se paga una vez, qué se paga por mes y qué es del cliente. Sin números. */
+export type PaginaIncluye = PaginaSeo & {
+  pagoUnico: { nombre: string; para: string; items: ItemConIcono[] };
+  mensual: { nombre: string; para: string; items: ItemConIcono[] };
+  tuyoTitulo: string;
+  tuyo: ItemConIcono[];
+  secciones: Seccion[];
+};
+
+/** `/web-a-medida`: la web de reservas con la marca de cada rentadora. */
+export type PaginaAMedida = PaginaSeo & {
+  cambiaTitulo: string;
+  cambia: ItemConIcono[];
+  vieneTitulo: string;
+  viene: ItemConIcono[];
+  /** v4c: lo que la web le pasa al panel (reservas, cobros, seguimiento). */
+  conectaTitulo: string;
+  conecta: ItemConIcono[];
+  secciones: Seccion[];
 };

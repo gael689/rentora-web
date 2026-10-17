@@ -6,6 +6,7 @@ import Problemas from '@/components/home/Problemas';
 import Modulos from '@/components/home/Modulos';
 import Funciones from '@/components/home/Funciones';
 import Video from '@/components/home/Video';
+import AMedida from '@/components/home/AMedida';
 import Seguridad from '@/components/home/Seguridad';
 import Faq from '@/components/home/Faq';
 import Cierre from '@/components/home/Cierre';
@@ -64,6 +65,7 @@ export default function Home() {
       <Problemas />
       <Video />
       <Funciones />
+      <AMedida />
       <Modulos />
       <Seguridad />
       <Faq />
