@@ -337,7 +337,7 @@ export const GUIAS: Guia[] = [
       'Cuando renovás un documento, cargá la nueva fecha el mismo día.',
     ],
     enRentora:
-      'Cada auto tiene su ficha con la VTV y la póliza con fecha, y los kilómetros que faltan para el service. Los documentos se cargan con vigencia y 29 reglas de aviso corren cada 30 minutos, con un aviso por asunto en la campana del panel. Antes de cada entrega, un semáforo revisa licencia, garantía y documentación.',
+      'Cada auto tiene su ficha con la VTV y la póliza con fecha, y los kilómetros que faltan para el service. Los documentos se cargan con vigencia y 31 reglas de aviso corren cada 30 minutos, con un aviso por asunto en la campana del panel. Antes de cada entrega, un semáforo revisa licencia, garantía y documentación.',
     terminos: ['check-out', 'conductor-adicional'],
     preguntas: [
       {

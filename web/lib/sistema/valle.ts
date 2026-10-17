@@ -434,7 +434,7 @@ export const REGLAS_CALENDARIO = [
 
 // ─── Avisos ──────────────────────────────────────────────────────────────────
 
-/* Las 29 reglas corren cada 30 minutos y todo queda en la campana del panel: el equipo no recibe
+/* Las 31 reglas corren cada 30 minutos y todo queda en la campana del panel: el equipo no recibe
  * mails ni resumen de las 8 (se sacaron el 27/09). Los mails a los clientes siguen. Estas son las
  * que dispararon hoy. `canal` queda por compatibilidad con la réplica de Notificaciones. */
 export const AVISOS = [

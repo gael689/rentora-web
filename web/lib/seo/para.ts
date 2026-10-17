@@ -205,7 +205,7 @@ export const PARA: PaginaPara[] = [
         titulo: 'Lo que cuesta mantenerla',
         parrafos: [
           'Una pick-up parada en el taller es la unidad más cara de la flota sin facturar. La ficha de cada unidad guarda los gastos cargados, el service por kilómetro y por fecha, y el historial de daños, así que se ve cuánto costó mantenerla en el año.',
-          'Cuando una unidad no da más, se da de baja con su motivo. Y los vencimientos de la VTV y la póliza los miran 29 reglas cada 30 minutos, con el aviso en la campana del panel.',
+          'Cuando una unidad no da más, se da de baja con su motivo. Y los vencimientos de la VTV y la póliza los miran 31 reglas cada 30 minutos, con el aviso en la campana del panel.',
         ],
       },
     ],

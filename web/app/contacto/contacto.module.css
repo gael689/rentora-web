@@ -135,3 +135,11 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* El widget de Turnstile (`components/Verificacion.tsx`): `flexible` ocupa el ancho del contenedor;
+   el alto mínimo evita que el botón salte cuando aparece. */
+.verificacion {
+  min-height: 65px;
+  max-width: 100%;
+  overflow: hidden;
+}

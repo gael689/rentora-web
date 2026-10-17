@@ -10,6 +10,13 @@ import { CAMPOS } from '@/lib/contenido';
  * no asumir que el mail anda porque la variable está cargada — ya mordió una vez. Con
  * `RESEND_API_KEY` sin definir, el endpoint contesta 503 y el formulario muestra el WhatsApp:
  * es preferible a tragarse el mensaje y decir que salió.
+ *
+ * **Además, el prospecto en el CRM de la plataforma** (consola de `rentora-system`, `docs/BACKOFFICE.md`).
+ * Sólo si `RENTORA_API_URL` está definida: el servidor (nunca el navegador) hace
+ * `POST {RENTORA_API_URL}/api/v1/public/prospectos`. Si la API no está, contesta 503 (sin
+ * `TURNSTILE_SECRET` en producción), 429, 400 o se cae, **el formulario sigue como siempre** y queda
+ * una línea en el log. Con el CRM conectado y Resend apagado, el envío cuenta como recibido: el
+ * prospecto ya está en la consola, que es donde se lo mira.
  */
 
 export const runtime = 'nodejs';
@@ -33,6 +40,85 @@ function pasaElLimite(ip: string): boolean {
   previos.push(ahora);
   vistos.set(ip, previos);
   return true;
+}
+
+const MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type ResultadoCrm = 'apagado' | 'creado' | 'salteado' | 'fallo';
+
+/** La API de la plataforma, sin barra final y sin `/api/v1` (si alguien lo pegó con el sufijo). */
+function apiPlataforma(): string {
+  return (process.env.RENTORA_API_URL ?? '').trim().replace(/\/+$/, '').replace(/\/api\/v1$/, '');
+}
+
+/** Crea el prospecto en la consola. Nunca tira: devuelve qué pasó y lo deja en el log. */
+async function aCrm(
+  datos: Record<string, string>,
+  extras: [string, string][],
+  cuerpo: Record<string, unknown>,
+  ip: string,
+  corto: boolean,
+): Promise<ResultadoCrm> {
+  const base = apiPlataforma();
+  if (!base) return 'apagado';
+
+  const real = (v: string | undefined) => (v && v !== '—' ? v : '');
+  const extra = (e: string) => extras.find(([k]) => k === e)?.[1] ?? '';
+  const contacto = real(datos.contacto);
+  const mail = [extra('Mail'), contacto].find((m) => MAIL.test(m)) ?? '';
+
+  /* La API pide un mail (es con lo que junta los envíos repetidos). Si el visitante dejó sólo un
+     WhatsApp, el mail de aviso sale igual y el prospecto se carga a mano desde la consola. */
+  if (!mail) {
+    console.info('[contacto→crm] sin mail en el formulario: no se crea el prospecto (sale sólo el aviso).');
+    return 'salteado';
+  }
+
+  const nombre = extra('Nombre') || real(datos.empresa) || 'Sin nombre';
+  const empresa = real(datos.empresa) || extra('Nombre') || (corto ? 'Sin empresa (formulario de la home)' : 'Sin empresa');
+  const autos = Number.parseInt(real(datos.autos), 10);
+  const mensaje = [
+    extra('Qué quiere resolver'),
+    extra('Sucursales') && `Sucursales: ${extra('Sucursales')}`,
+    extra('Web de reservas') && `Web de reservas: ${extra('Web de reservas')}`,
+    `Formulario: ${corto ? 'home' : 'contacto'}`,
+  ]
+    .filter(Boolean)
+    .join('\n')
+    .slice(0, 4000);
+  const campana = typeof cuerpo.campana === 'string' && cuerpo.campana.trim() ? cuerpo.campana.trim().slice(0, 160) : null;
+  const token = typeof cuerpo.turnstileToken === 'string' ? cuerpo.turnstileToken.slice(0, 4096) : '';
+
+  try {
+    const r = await fetch(`${base}/api/v1/public/prospectos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // El límite de la API es por IP: se le pasa la del visitante.
+        ...(ip !== 'desconocida' ? { 'X-Forwarded-For': ip } : {}),
+      },
+      body: JSON.stringify({
+        empresa: empresa.slice(0, 160),
+        nombre: nombre.slice(0, 160),
+        email: mail.slice(0, 255),
+        whatsapp: contacto && !MAIL.test(contacto) ? contacto.slice(0, 40) : null,
+        ciudad: real(datos.ciudad) || null,
+        flota_estimada: Number.isFinite(autos) && autos >= 0 && autos <= 100_000 ? autos : null,
+        mensaje,
+        campana,
+        turnstile_token: token,
+        sitio_web: '',
+      }),
+      signal: AbortSignal.timeout(6000),
+    });
+    if (r.ok) return 'creado';
+    const detalle = (await r.text().catch(() => '')).slice(0, 200);
+    console.warn(`[contacto→crm] la API contestó ${r.status}: ${detalle}`);
+    return 'fallo';
+  } catch (e) {
+    console.warn(`[contacto→crm] no pude llegar a la API: ${e instanceof Error ? e.message : String(e)}`);
+    return 'fallo';
+  }
 }
 
 function escapar(texto: string): string {
@@ -99,11 +185,14 @@ export async function POST(pedido: Request) {
     }
   }
 
+  const crm = await aCrm(datos, extras, cuerpo, ip, corto);
+
   const clave = process.env.RESEND_API_KEY;
   const destino = process.env.CONTACTO_DESTINO;
   const remitente = process.env.CONTACTO_REMITENTE ?? 'Rentora <hola@rentora.com.ar>';
 
   if (!clave || !destino) {
+    if (crm === 'creado') return NextResponse.json({ ok: true });
     return NextResponse.json(
       {
         error:
@@ -133,6 +222,10 @@ export async function POST(pedido: Request) {
   });
 
   if (!respuesta.ok) {
+    if (crm === 'creado') {
+      console.warn(`[contacto] Resend contestó ${respuesta.status}; el prospecto quedó en la consola.`);
+      return NextResponse.json({ ok: true });
+    }
     /* No se dice "sin conexión" a secas: la mitad de las veces el pedido llegó y lo que se
        perdió fue la respuesta. Y el que entró tiene que poder salir por otro lado. */
     return NextResponse.json(

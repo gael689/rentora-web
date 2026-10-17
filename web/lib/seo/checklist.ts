@@ -56,7 +56,7 @@ export const CHECKLIST: Pregunta[] = [
     q: '¿Me avisa antes de que venza la VTV o la póliza, o tengo que mirarlo yo?',
     porque:
       'Un listado de vencimientos que hay que ir a mirar es un listado que nadie mira. El aviso tiene que llegar solo, a un lugar donde ya estés.',
-    rentora: '29 reglas que corren cada 30 minutos y dejan el aviso en la campana del sistema.',
+    rentora: '31 reglas que corren cada 30 minutos y dejan el aviso en la campana del sistema.',
   },
   {
     q: 'Cuando llega un acta de hace tres meses, ¿el sistema sabe quién manejaba?',

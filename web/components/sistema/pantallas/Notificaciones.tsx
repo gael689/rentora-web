@@ -2,7 +2,7 @@
  *
  * Réplica de `pages/notificaciones/NotificacionesPage.tsx`.
  *
- * Las 29 reglas corren cada 30 minutos y **todo queda en la plataforma**, en la campana: el
+ * Las 31 reglas corren cada 30 minutos y **todo queda en la plataforma**, en la campana: el
  * equipo no recibe mails ni un resumen a las 8. Lo que sí sale por mail son los mensajes a los
  * clientes, y esos se ven en la pestaña "Mails enviados".
  *

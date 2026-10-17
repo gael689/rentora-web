@@ -8,7 +8,7 @@ export const PRIVACIDAD = {
   tag: 'Privacidad',
   titulo: 'Tus datos, *en pocas líneas*',
   bajada: 'Qué pedimos, para qué lo usamos y cómo pedir que lo borremos.',
-  actualizada: 'Actualizada el 8 de octubre de 2026',
+  actualizada: 'Actualizada el 17 de octubre de 2026',
   bloques: [
     {
       titulo: 'Quién responde',
@@ -23,7 +23,7 @@ export const PRIVACIDAD = {
     {
       titulo: 'Para qué los usamos',
       texto:
-        'Para contestarte y armar la propuesta. No los vendemos ni los cedemos a nadie. El mensaje llega a mi casilla a través de Resend, el servicio que envía el mail.',
+        'Para contestarte y armar la propuesta. No los vendemos ni los cedemos a nadie. El mensaje llega a mi casilla a través de Resend, el servicio que envía el mail, y queda guardado en el sistema de seguimiento de Rentora para no perder la conversación. Esos servicios tienen sus servidores fuera de Argentina. Para frenar a los robots, el formulario usa Cloudflare Turnstile, que revisa el navegador sin pedirte nada.',
     },
     {
       titulo: 'Cookies y seguimiento',

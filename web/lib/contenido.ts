@@ -4,11 +4,11 @@
  * edita sin tocar una línea de JSX y sin riesgo de romper el marcado. Los componentes no
  * llevan texto literal: si aparece uno, es un bug.
  *
- * Las cifras están contadas sobre el código del sistema (recontado el 06/10/2026), no
- * estimadas. Si alguien las cuestiona en una reunión, se abre el sistema y se cuentan.
+ * Las cifras están contadas sobre el código del sistema (recontado el 17/10/2026 sobre
+ * `rentora-system`, método junto a `CIFRAS`), no estimadas. Si alguien las cuestiona en una reunión, se abre el sistema y se cuentan.
  *
  * Qué NO se dice, porque ya no es verdad: mail de las 8 (el equipo no recibe mails, todo queda
- * en la campana), 42 reglas (son 29), 19 pantallas (son 20), 8 reportes con CSV (son 4
+ * en la campana), 42 reglas o 29 (son 31), 19 o 20 pantallas (el panel tiene 24; la réplica muestra 20), 8 reportes con CSV (son 4
  * pestañas y solo dos exportan), precios distintos para web y mostrador (hoy hay un solo
  * precio), extensión como "no es un alquiler nuevo" (hoy sí lo es), la campaña de Prospectos
  * como si enviara (el envío está apagado), medios de cobro que el producto base no trae, la tarjeta guardada en la ficha del cliente, la
@@ -25,15 +25,43 @@ import { DEMO_ACTIVA, FAQ_DEMO } from './demo';
 
 /* ── Las cifras ───────────────────────────────────────────────────────────────── */
 
-/** Contadas sobre el código. `pantallas` sale del catálogo, no está escrita a mano. */
+/** Contadas sobre `rentora-system` el 17/10/2026 (`main` en 591dbcf), no estimadas. Cómo se
+ *  cuenta cada una, para recontarlas igual la próxima vez:
+ *
+ *  - `pantallas`: rutas de `panel/src/App.tsx` que renderizan `<AppLayout>`, sin las de detalle
+ *    (`/flota/:id`, `/clientes/:id`) ni las que redirigen (`Navigate`, `RedirigirConQuery`).
+ *    Son 24. La réplica de la web muestra 20 (`PANTALLAS.length`): por eso lo que habla de la
+ *    réplica ("Ver las 20 pantallas") usa `PANTALLAS.length` y lo que habla del panel usa esto.
+ *  - `modulosSistema`: `CATALOGO` de `backend/app/core/modulos.py` (17: incluye Auditoría y
+ *    Configuración, que no se apagan, y Caja con socios, adicional). La web los agrupa en los 13
+ *    de `MODULOS`, que es cómo se vende; ese número sale de `MODULOS.length`.
+ *  - `tablas`: `len(Base.metadata.tables)` con todos los `app.models.*` importados (78).
+ *  - `endpoints`: operaciones del `app.openapi()` de FastAPI en desarrollo (388; incluye la
+ *    consola de la plataforma y los públicos). Coincide con contar los `@router.get/post/…`.
+ *  - `migraciones`: archivos `.py` de `backend/alembic/versions` (10: la base se consolidó en
+ *    `0001_base` al separar el producto del sistema de origen).
+ *  - `tests`: `pytest --collect-only -q` en `backend/tests` (1.776) y `backend/tests_pg` (230),
+ *    más los `it(`/`test(` de los `*.test.*` de `panel` (310) y `consola` (23) = 2.339. Todos
+ *    corren en el CI.
+ *  - `reglas`: la lista `REGLAS` de `backend/app/domain/notificaciones_reglas.py` (31, prendidas
+ *    por defecto, cada 30 minutos). `reglasConfigurables`: `REGLAS_NUEVAS` de
+ *    `avisos_reglas_nuevas.py` (4, apagadas hasta que la rentadora las prende).
+ *  - `paginasWeb`: archivos `page.tsx` de `web-reservas/app` (9, con la firma remota del
+ *    contrato y las páginas por categoría).
+ *
+ *  Si cambia un número, cambian también los textos que lo repiten literal (buscar "31 reglas"
+ *  en `web/lib`, `marketing/video/src` y `marketing/campanas`) y la sección de cifras del
+ *  `CLAUDE.md`. El brochure y la propuesta lo leen de acá. */
 export const CIFRAS = {
-  pantallas: PANTALLAS.length,
-  paginasWeb: 8,
-  tablas: 50,
-  endpoints: 265,
-  migraciones: 102,
-  tests: 'más de 1.100',
-  reglas: 29,
+  pantallas: 24,
+  modulosSistema: 17,
+  paginasWeb: 9,
+  tablas: 78,
+  endpoints: 388,
+  migraciones: 10,
+  tests: 'más de 2.300',
+  reglas: 31,
+  reglasConfigurables: 4,
   reportes: 4,
   capas: 3,
   pasosAlta: 6,
@@ -228,13 +256,13 @@ export const MODULOS: Modulo[] = [
     nombre: 'Avisos y reportes',
     termino: 'avisos de vencimiento VTV y póliza flota',
     texto:
-      '29 reglas que corren cada 30 minutos y avisan en la campana. Reportes de resumen, ingresos, flota y demanda no atendida. Auditoría de quién hizo qué.',
+      '31 reglas que corren cada 30 minutos y avisan en la campana. Reportes de resumen, ingresos, flota y demanda no atendida. Auditoría de quién hizo qué.',
     problema:
-      'Que se venza la VTV o la póliza y te enteres cuando te para la policía. Los documentos se cargan con vigencia y 29 reglas los miran cada media hora, con un aviso por asunto en la campana del panel.',
-    chips: ['29 reglas cada 30 min', 'Aviso en la campana', '4 reportes', 'Auditoría'],
+      'Que se venza la VTV o la póliza y te enteres cuando te para la policía. Los documentos se cargan con vigencia y 31 reglas los miran cada media hora, con un aviso por asunto en la campana del panel.',
+    chips: ['31 reglas cada 30 min', 'Aviso en la campana', '4 reportes', 'Auditoría'],
     tono: 'petro',
     dolor: '“Me enteré del vencimiento cuando ya había vencido.”',
-    gana: '29 reglas miran todo cada 30 minutos y avisan en la campana.',
+    gana: '31 reglas miran todo cada 30 minutos y avisan en la campana.',
   },
   {
     n: '13',
@@ -303,7 +331,7 @@ export const PROBLEMAS: Problema[] = [
   {
     n: '05',
     dolor: '“Me enteré de la VTV cuando ya estaba vencida.”',
-    gana: '29 reglas miran los vencimientos cada 30 minutos y te avisan en la campana.',
+    gana: '31 reglas miran los vencimientos cada 30 minutos y te avisan en la campana.',
     tono: 'petro',
     modulo: 'avisos-reportes',
     icono: 'campana',
@@ -661,7 +689,7 @@ export const FAQS = [
   },
   {
     q: '¿Me avisa antes de que se venza la VTV o la póliza?',
-    a: 'Los documentos de cada auto se cargan con vigencia, y hay 29 reglas de aviso que corren cada 30 minutos. Los avisos quedan en la campana del panel, uno por asunto, para que no te llene de ruido. Los mails a tus clientes siguen funcionando aparte.',
+    a: 'Los documentos de cada auto se cargan con vigencia, y hay 31 reglas de aviso que corren cada 30 minutos. Los avisos quedan en la campana del panel, uno por asunto, para que no te llene de ruido. Los mails a tus clientes siguen funcionando aparte.',
   },
   {
     q: '¿Sirve para repartir la plata entre socios?',
@@ -1176,7 +1204,7 @@ export const CASO = {
   textoConNombre: (nombre: string, ciudad: string) =>
     `Rentora no se diseñó en una pizarra: se construyó para ${nombre}, en ${ciudad}, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.`,
   cifras: [
-    { cifra: String(PANTALLAS.length), texto: 'pantallas en el panel' },
+    { cifra: String(CIFRAS.pantallas), texto: 'pantallas en el panel' },
     { cifra: String(MODULOS.length), texto: 'módulos que comparten los datos' },
     { cifra: String(CIFRAS.reglas), texto: 'reglas de aviso, cada 30 minutos' },
     { cifra: String(CIFRAS.tablas), texto: 'tablas en la base de datos' },

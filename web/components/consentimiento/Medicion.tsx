@@ -12,10 +12,16 @@ import { medir, pageviewPixel } from '@/lib/medicion';
  * `data-cta="hero"`; si no lo lleva, se usa el `id` de la sección o "pie".
  *
  * - `click_whatsapp`: todo link a wa.me (y además cuenta como `click_saliente`).
- * - `click_ver_sistema`: los links con `data-evento="ver_sistema"`.
+ * - `click_ver_sistema`: los links con `data-evento="ver_sistema"` y, aunque no lo lleven, todo link
+ *   interno a `/sistema` o a `/sistema/*` (los cierres, los mega-menús y las páginas de captación
+ *   enlazan ahí sin marcar). El hero sigue marcado para tener su `data-cta`.
  * - `click_saliente`: cualquier link a otro dominio.
  * - `scroll_75`: una vez por visita a /planes y a cada /para/*.
- * - El envío del formulario se mide en `Formulario.tsx`, que es donde se sabe si salió bien. */
+ * - El envío del formulario se mide en `Formulario.tsx` y en `CierreForm.tsx` (`formulario_enviado`,
+ *   con `origen`), que es donde se sabe si salió bien; el pedido de demo, en `FormularioDemo.tsx`.
+ *
+ * Nada de esto agrega cookies: Vercel Web Analytics no usa, y GA4 y Meta solo reciben el evento si
+ * el visitante ya los aceptó (`medir` lo chequea). Lo declarado en `/privacidad` sigue siendo todo. */
 
 /** El primer pageview del Pixel lo manda su `init`; este flag evita contarlo dos veces. */
 let primera = true;
@@ -43,15 +49,17 @@ export default function Medicion() {
         cta: (a.textContent ?? '').replace(/\s+/g, ' ').replace('→', '').trim().slice(0, 60),
       };
 
-      if (a.getAttribute('data-evento') === 'ver_sistema') medir('click_ver_sistema', datos);
-
       let destino: URL;
       try {
         destino = new URL(a.href, location.href);
       } catch {
         return;
       }
-      if (destino.host === location.host || !destino.protocol.startsWith('http')) return;
+      const interno = destino.host === location.host;
+      const aSistema = interno && (destino.pathname === '/sistema' || destino.pathname.startsWith('/sistema/'));
+      if (a.getAttribute('data-evento') === 'ver_sistema' || aSistema) medir('click_ver_sistema', datos);
+
+      if (interno || !destino.protocol.startsWith('http')) return;
       if (destino.host === 'wa.me' || destino.host.endsWith('whatsapp.com')) medir('click_whatsapp', datos);
       medir('click_saliente', { ...datos, destino: destino.host });
     };

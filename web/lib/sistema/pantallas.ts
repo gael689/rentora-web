@@ -119,7 +119,7 @@ export const PANTALLAS: Pantalla[] = [
     ruta: '/notificaciones',
     titulo: 'Notificaciones',
     resuelve:
-      '29 reglas de aviso revisan todo cada 30 minutos. Todo queda en la campana: un aviso por asunto.',
+      '31 reglas de aviso revisan todo cada 30 minutos. Todo queda en la campana: un aviso por asunto.',
     modulo: 'avisos-reportes',
     lista: true,
   },

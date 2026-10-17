@@ -5,6 +5,7 @@ import { CAMPOS, T } from '@/lib/contenido';
 import { CONTACTO } from '@/lib/paginas';
 import { linkWhatsapp } from '@/lib/sitio';
 import { medir } from '@/lib/medicion';
+import Verificacion from '@/components/Verificacion';
 import s from './contacto.module.css';
 
 /* Los cuatro datos de CAMPOS se piden a la vista, más "qué querés resolver". El mail y el
@@ -12,7 +13,10 @@ import s from './contacto.module.css';
  *
  * El envío va contra `/api/contacto`. Con el entorno sin Resend el endpoint contesta 503 y acá
  * se muestra la salida por WhatsApp. El contrato del endpoint no cambió: los cuatro campos de
- * CAMPOS siguen siendo obligatorios; `resolver`, `nombre` y `mail` son opcionales. */
+ * CAMPOS siguen siendo obligatorios; `resolver`, `nombre` y `mail` son opcionales.
+ *
+ * El widget de Turnstile (`Verificacion`) se monta al primer foco en el formulario y su token viaja
+ * con el envío: lo usa el servidor para crear el prospecto en la consola. No bloquea el envío. */
 
 const MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,6 +26,9 @@ export default function Formulario() {
   const [estado, setEstado] = useState<'quieto' | 'enviando' | 'listo'>('quieto');
   const [error, setError] = useState('');
   const [faltan, setFaltan] = useState<string[]>([]);
+  const [tocado, setTocado] = useState(false);
+  const [token, setToken] = useState('');
+  const [reinicio, setReinicio] = useState(0);
 
   const poner = (id: string, valor: string) => setDatos((p) => ({ ...p, [id]: valor }));
 
@@ -49,8 +56,16 @@ export default function Formulario() {
       const r = await fetch('/api/contacto', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...datos, sitioWeb: trampa }),
+        body: JSON.stringify({
+          ...datos,
+          sitioWeb: trampa,
+          turnstileToken: token,
+          campana: new URLSearchParams(location.search).get('utm_campaign'),
+        }),
       });
+      // El token sirve una sola vez: el próximo envío pide otro.
+      setToken('');
+      setReinicio((n) => n + 1);
       const cuerpo = await r.json().catch(() => ({}));
       if (!r.ok) {
         setError(cuerpo.error ?? CONTACTO.errorGenerico);
@@ -59,7 +74,7 @@ export default function Formulario() {
         return;
       }
       setEstado('listo');
-      medir('formulario_enviado', { autos: datos.autos ?? null });
+      medir('formulario_enviado', { autos: datos.autos ?? null, origen: 'contacto' });
     } catch {
       medir('formulario_error', { motivo: 'red' });
       setError(CONTACTO.errorRed);
@@ -105,7 +120,7 @@ export default function Formulario() {
   };
 
   return (
-    <form className={s.form} onSubmit={enviar} noValidate>
+    <form className={s.form} onSubmit={enviar} onFocus={() => setTocado(true)} noValidate>
       <div className={s.grupo}>
         {entrada('empresa')}
         {entrada('contacto')}
@@ -170,6 +185,8 @@ export default function Formulario() {
           onChange={(e) => setTrampa(e.target.value)}
         />
       </div>
+
+      {tocado && <Verificacion alResolver={setToken} reinicio={reinicio} className={s.verificacion} />}
 
       <div className={s.envio}>
         <button type="submit" className="cta" disabled={estado === 'enviando'}>

@@ -99,7 +99,7 @@ export const PLAZAS: Plaza[] = [
       },
       {
         p: '¿Me avisa cuándo le toca el service a una pick-up que hace muchos kilómetros?',
-        r: 'Sí. Cada unidad tiene su próximo service por kilómetro o por fecha, lo que llegue primero, y el aviso queda en la campana del panel. Las 29 reglas de aviso corren cada 30 minutos.',
+        r: 'Sí. Cada unidad tiene su próximo service por kilómetro o por fecha, lo que llegue primero, y el aviso queda en la campana del panel. Las 31 reglas de aviso corren cada 30 minutos.',
       },
     ],
     para: 'alquiler-de-camionetas-y-utilitarios',
@@ -231,7 +231,7 @@ export const PLAZAS: Plaza[] = [
       },
       {
         p: '¿Cómo sé cuándo vence la VTV de un auto que no puedo reemplazar rápido?',
-        r: 'Cada documento del auto se carga con su vigencia, y 29 reglas de aviso corren cada 30 minutos. El aviso queda en la campana del panel con tiempo para hacer el trámite sin sacar el auto de temporada.',
+        r: 'Cada documento del auto se carga con su vigencia, y 31 reglas de aviso corren cada 30 minutos. El aviso queda en la campana del panel con tiempo para hacer el trámite sin sacar el auto de temporada.',
       },
       {
         p: '¿Puedo cobrar distinto la temporada de cruceros y la de nieve?',

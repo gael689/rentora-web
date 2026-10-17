@@ -31,10 +31,10 @@ y devolución y su caja, y los reportes se ven por sucursal o consolidados.${
 export function llmsCifras() {
   return `Contadas sobre el código, no estimadas:
 
-- ${PANTALLAS.length} pantallas en el panel de administración (${SECCIONES.length} secciones de menú, ${ITEMS_NAV.length} ítems).
+- ${CIFRAS.pantallas} pantallas en el panel de administración. La web muestra ${PANTALLAS.length}, con la misma barra lateral (${SECCIONES.length} secciones de menú, ${ITEMS_NAV.length} ítems).
 - ${CIFRAS.paginasWeb} páginas en la web pública de la rentadora.
 - ${MODULOS.length} módulos comerciales.
-- ${CIFRAS.tablas} tablas, ${CIFRAS.endpoints} endpoints, ${CIFRAS.migraciones} migraciones y ${CIFRAS.tests} tests en el backend.
+- ${CIFRAS.tablas} tablas, ${CIFRAS.endpoints} endpoints y ${CIFRAS.migraciones} migraciones en el backend, y ${CIFRAS.tests} tests automáticos que corren en cada cambio.
 - ${CIFRAS.reglas} reglas de aviso que corren cada 30 minutos. Los avisos quedan en la campana del panel: el equipo no recibe mails.
 - ${CIFRAS.reportes} reportes en pantalla: Resumen, Ingresos, Flota y Demanda no atendida. Ingresos y Flota se exportan a CSV.
 - ${CIFRAS.capas} capas en el motor de precios: temporada, feriado y duración. Un solo precio para web y mostrador.
