@@ -1,4 +1,4 @@
-/* "Probalo 14 días": la demo por autoservicio (F5 de rentora-system, `docs/DEMOS.md`).
+/* "Probalo 14 días": la demo por autoservicio (F5 de rentago-system, `docs/DEMOS.md`).
  *
  * **Apagada por defecto.** Sin `NEXT_PUBLIC_DEMO_ACTIVA=1` no se pinta nada: ni el CTA, ni la
  * respuesta nueva de la FAQ, ni la línea de llms.txt, y las tres rutas (`/probar`,
@@ -18,10 +18,10 @@
 /** El interruptor. Se lee en build: cambiarlo pide un build nuevo. */
 export const DEMO_ACTIVA = process.env.NEXT_PUBLIC_DEMO_ACTIVA === '1';
 
-/** La API de rentora-system, sin la barra final. */
+/** La API de rentago-system, sin la barra final. */
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? '').replace(/\/+$/, '');
 
-/** La site key del widget de Turnstile para rentora.com.ar. La secret va en la API. */
+/** La site key del widget de Turnstile para rentago.com.ar. La secret va en la API. */
 export const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
 export const RUTA_PROBAR = '/probar';
@@ -62,7 +62,7 @@ export const LLMS_DEMO = 'Se puede probar 14 días con una demo propia, con dato
 export const PROBAR = {
   title: 'Probá el sistema 14 días',
   description:
-    'Pedí tu demo de Rentora: el sistema andando con el nombre de tu rentadora y una flota de ejemplo, durante 14 días.',
+    'Pedí tu demo de RentaGo: el sistema andando con el nombre de tu rentadora y una flota de ejemplo, durante 14 días.',
   tag: 'Demo de 14 días',
   titulo: 'Probalo 14 días con *el nombre de tu rentadora*',
   bajada: 'Dejás tus datos, confirmás el mail y entrás. Con una flota de ejemplo y sin tarjeta.',
@@ -91,7 +91,7 @@ export const PROBAR = {
   colaTexto: 'Ahora hay muchas demos andando a la vez. Te escribo apenas se libere un lugar.',
   sinJs:
     'Para pedir la demo hace falta JavaScript, que este navegador tiene apagado. Escribime por WhatsApp y te la armo yo.',
-  whatsappMensaje: 'Hola Gael, quiero probar Rentora 14 días.',
+  whatsappMensaje: 'Hola Gael, quiero probar RentaGo 14 días.',
   queTrae: 'Qué trae la demo',
   trae: [
     'El sistema entero con el nombre y la ciudad de tu rentadora.',
@@ -107,7 +107,7 @@ export const PROBAR = {
 
 export const CONFIRMAR = {
   title: 'Confirmar tu demo',
-  description: 'Confirmá tu mail para abrir la demo de Rentora.',
+  description: 'Confirmá tu mail para abrir la demo de RentaGo.',
   tag: 'Demo de 14 días',
   titulo: 'Un clic y *armamos tu demo*',
   bajada: 'Preparamos el sistema con datos de ejemplo y el nombre de tu rentadora. Tarda unos segundos.',
@@ -120,7 +120,7 @@ export const CONFIRMAR = {
 
 export const LISTA = {
   title: 'Tu demo',
-  description: 'El estado de tu demo de Rentora.',
+  description: 'El estado de tu demo de RentaGo.',
   tag: 'Demo de 14 días',
   estados: {
     creada: {

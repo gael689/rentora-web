@@ -172,7 +172,7 @@ export const COMO_ELEGIR_PAG = {
   tag: 'Antes de firmar',
   titulo: '¿Cómo elegir un software *para rent a car*?',
   bajada: 'Doce preguntas para hacerle a cualquier proveedor, incluido este.',
-  rentora: 'En Rentora',
+  rentago: 'En RentaGo',
   cierreTitulo: 'Las respuestas se *pueden verificar*',
   cierreBajada: 'Las pantallas del sistema están a la vista, una por una.',
   cierreCta: 'Ver el sistema por dentro',
@@ -182,7 +182,7 @@ export const GLOSARIO_PAG = {
   tag: 'Glosario',
   titulo: 'Las palabras del *mostrador*',
   bajada: 'Cada término, explicado en una oración. Sirve igual si no comprás nada.',
-  enRentora: 'En Rentora',
+  enRentaGo: 'En RentaGo',
   verComo: 'Ver cómo se hace',
   indice: 'Términos',
   cierreTitulo: '¿Tenés *otra duda*?',
@@ -243,7 +243,7 @@ export const GUIAS_PAG = {
   indiceDescription:
     'Cómo armar tarifas de temporada, explicar la franquicia, cobrar la seña online, pasar del Excel a un sistema y no perder un vencimiento de la flota.',
   pasos: 'Para revisar',
-  enRentora: 'En Rentora',
+  enRentaGo: 'En RentaGo',
   modulo: 'El módulo',
   terminos: 'Términos de esta guía',
   preguntas: 'Preguntas',
@@ -256,7 +256,7 @@ export const GUIAS_PAG = {
 export const CONTRATO_PAG_UI = {
   tag: 'Contrato',
   partes: 'Lo que tiene que tener',
-  enRentora: 'En Rentora',
+  enRentaGo: 'En RentaGo',
   preguntas: 'Preguntas sobre el contrato',
   aviso: 'Esto es información general, no asesoramiento legal. El clausulado final revisalo con tu abogado.',
   relacionados: 'Para seguir leyendo',
@@ -277,13 +277,13 @@ export const PLANES_PAG_UI = {
   /** CTAs de cada plan. El mensaje de WhatsApp lleva el nombre del plan para saber de dónde viene. */
   planWhatsapp: 'Consultar este plan',
   planDemo: 'Pedir una demo',
-  planMensaje: (plan: string) => `Hola Gael, tengo una rentadora y quiero consultar el plan ${plan} de Rentora.`,
-  demoMensaje: 'Hola Gael, tengo una rentadora y quiero ver una demo de Rentora.',
+  planMensaje: (plan: string) => `Hola Gael, tengo una rentadora y quiero consultar el plan ${plan} de RentaGo.`,
+  demoMensaje: 'Hola Gael, tengo una rentadora y quiero ver una demo de RentaGo.',
 };
 
 export const TERMINO_PAG = {
   glosario: 'Glosario',
-  enRentora: 'En Rentora',
+  enRentaGo: 'En RentaGo',
   verComo: 'Ver cómo se hace',
   preguntas: 'Preguntas',
   relacionados: 'Términos relacionados',

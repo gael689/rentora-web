@@ -202,9 +202,9 @@ ${prosa(g.secciones, '####')}
 
 ${g.pasos.map((x) => `- ${x}`).join('\n')}
 
-#### En Rentora
+#### En RentaGo
 
-${g.enRentora}
+${g.enRentaGo}
 
 #### Preguntas
 
@@ -225,9 +225,9 @@ ${prosa(CONTRATO_PAG.secciones)}
 
 ${CONTRATO_PAG.modelo.texto}
 
-### En Rentora
+### En RentaGo
 
-${CONTRATO_PAG.enRentora}
+${CONTRATO_PAG.enRentaGo}
 
 ### Preguntas
 
@@ -237,7 +237,7 @@ ${faq(CONTRATO_PAG.preguntas)}`);
 
 URL: ${SITIO}/como-elegir
 
-${CHECKLIST.map((c, i) => `${i + 1}. **${c.q}** ${c.porque} En Rentora: ${c.rentora}`).join('\n')}`);
+${CHECKLIST.map((c, i) => `${i + 1}. **${c.q}** ${c.porque} En RentaGo: ${c.rentago}`).join('\n')}`);
 
   h(`## Software para rent a car por ciudad
 
@@ -267,7 +267,7 @@ URL: ${SITIO}/glosario/${t.slug}
 
 ${cita(t.definicion)}
 
-${t.ampliacion}${t.enRentora ? `\n\nEn Rentora: ${t.enRentora}` : ''}
+${t.ampliacion}${t.enRentaGo ? `\n\nEn RentaGo: ${t.enRentaGo}` : ''}
 
 ${faq(t.preguntas)}`,
 ).join('\n\n')}`);

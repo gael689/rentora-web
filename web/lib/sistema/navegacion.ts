@@ -1,9 +1,9 @@
 /* La barra lateral del sistema, tal cual.
  *
- * Copiado de `NAV_SECTIONS` en `rentora-system/panel/src/lib/constants.ts` (recontado el
+ * Copiado de `NAV_SECTIONS` en `rentago-system/panel/src/lib/constants.ts` (recontado el
  * 06/10/2026): **cinco secciones con título y 23 ítems, todos siempre a la vista**. No hay
  * grupos plegables ni un color de acento por sección: hay un solo acento, el azul de la marca
- * del cliente, que acá es el turquesa de Rentora.
+ * del cliente, que acá es el turquesa de RentaGo.
  *
  * ── NOTA DE CAMBIO DE FORMA (para quien mantiene BarraLateral.tsx) ───────────────────────
  *

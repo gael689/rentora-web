@@ -1,6 +1,6 @@
 /* Los íconos de la réplica.
  *
- * El sistema usa `lucide-react`, y la web de Rentora tiene prohibido sumar una librería de
+ * El sistema usa `lucide-react`, y la web de RentaGo tiene prohibido sumar una librería de
  * íconos: cada KB pesa en un celular del interior y el repo ya decidió dibujar hasta el +/− de
  * la FAQ a mano. Pero la barra lateral sin íconos no sería la barra lateral del sistema.
  *

@@ -1,11 +1,11 @@
-/* Toda la copy de Rentora vive acá.
+/* Toda la copy de RentaGo vive acá.
  *
  * La regla del repo es que el copy lo decide Gael. Si está en un solo archivo tipado, lo
  * edita sin tocar una línea de JSX y sin riesgo de romper el marcado. Los componentes no
  * llevan texto literal: si aparece uno, es un bug.
  *
  * Las cifras están contadas sobre el código del sistema (recontado el 17/10/2026 sobre
- * `rentora-system`, método junto a `CIFRAS`), no estimadas. Si alguien las cuestiona en una reunión, se abre el sistema y se cuentan.
+ * `rentago-system`, método junto a `CIFRAS`), no estimadas. Si alguien las cuestiona en una reunión, se abre el sistema y se cuentan.
  *
  * Qué NO se dice, porque ya no es verdad: mail de las 8 (el equipo no recibe mails, todo queda
  * en la campana), 42 reglas o 29 (son 31), 19 o 20 pantallas (el panel tiene 24; la réplica muestra 20), 8 reportes con CSV (son 4
@@ -25,7 +25,7 @@ import { DEMO_ACTIVA, FAQ_DEMO } from './demo';
 
 /* ── Las cifras ───────────────────────────────────────────────────────────────── */
 
-/** Contadas sobre `rentora-system` el 17/10/2026 (`main` en 591dbcf), no estimadas. Cómo se
+/** Contadas sobre `rentago-system` el 17/10/2026 (`main` en 591dbcf), no estimadas. Cómo se
  *  cuenta cada una, para recontarlas igual la próxima vez:
  *
  *  - `pantallas`: rutas de `panel/src/App.tsx` que renderizan `<AppLayout>`, sin las de detalle
@@ -853,7 +853,7 @@ export const HOME = {
     bajada: 'Reservas, tarifas, contratos y cobros conectados en un solo sistema, con tu propia web de reservas online.',
     ctaPrincipal: 'Ver el sistema',
     ctaSecundario: 'Pedir una demo por WhatsApp',
-    mensajeDemo: 'Hola Gael, tengo una rentadora y quiero ver una demo de Rentora.',
+    mensajeDemo: 'Hola Gael, tengo una rentadora y quiero ver una demo de RentaGo.',
     /** Chips flotantes sobre la captura del hero. Estados que existen en el sistema. */
     chips: [
       { icono: 'calendario', texto: 'Cupo real', tono: 'turq' as TonoMarca },
@@ -870,7 +870,7 @@ export const HOME = {
   capturaRealAlt: 'Pantalla real del sistema, con datos de ejemplo:',
   /** La fila de confianza bajo el hero. Cifras de `CIFRAS`, como chips cortos. */
   confianza: {
-    etiqueta: 'Rentora en números',
+    etiqueta: 'RentaGo en números',
     items: [
       { cifra: String(CIFRAS.pantallas), texto: 'pantallas en el panel', icono: 'panel', tono: 'turq' as TonoMarca },
       { cifra: String(CIFRAS.reglas), texto: 'avisos automáticos', icono: 'campana', tono: 'petro' as TonoMarca },
@@ -1017,7 +1017,7 @@ export const HOME = {
       titulo: 'Tu propia web, que reserva y cobra',
       frase: 'El cliente elige fechas, ve el precio final y paga, sobre el mismo cupo que ve tu mostrador.',
       // v4c: "Cupo retenido 20 minutos" ya está en el chip de la captura; su lugar lo toma el
-      // seguimiento (rentora-system 0010). Alternativas en COPY-V4.md.
+      // seguimiento (rentago-system 0010). Alternativas en COPY-V4.md.
       puntos: ['Con tu marca y tus colores', 'Mercado Pago o transferencia', 'Entra directo al calendario', 'Quien no paga, al seguimiento'],
       link: { texto: 'Ver Tu web', href: '/modulos/tu-web' },
       pantalla: '',
@@ -1030,15 +1030,15 @@ export const HOME = {
   ],
   /** "A medida de tu rentadora" (v4c, 16/10): la misma web de reservas con dos marcas inventadas
    *  (`MARCAS_DEMO`). Rótulo + H2 ≤ 8 + una oración ≤ 25 + cuatro viñetas ≤ 6. El detalle vive
-   *  en /web-a-medida. Lo que se afirma sale de rentora-system/web-reservas: marca, tipografía,
-   *  logo y "Hecho con Rentora" son configuración por tenant. */
+   *  en /web-a-medida. Lo que se afirma sale de rentago-system/web-reservas: marca, tipografía,
+   *  logo y "Hecho con RentaGo" son configuración por tenant. */
   aMedida: {
     rotulo: 'A medida',
     icono: 'chispa',
     tono: 'azul' as TonoMarca,
     titulo: 'La misma web, con tu marca',
     frase: 'Tu web de reservas lleva tu logo, tus colores, tu tipografía y tu dominio. Partimos de un diseño probado y lo adaptamos.',
-    puntos: ['Tu logo y tus colores', 'Tu tipografía', 'Tu dominio, a tu nombre', 'Rentora no aparece'],
+    puntos: ['Tu logo y tus colores', 'Tu tipografía', 'Tu dominio, a tu nombre', 'RentaGo no aparece'],
     link: { texto: 'Ver cómo se adapta', href: '/web-a-medida' },
   },
   /** La sección de confianza: cómo se arranca y quién responde. Sin testimonios ni logos: no hay
@@ -1082,7 +1082,7 @@ export const HOME = {
     cantidad: 6,
   },
   cierre: {
-    titular: { antes: 'Veamos si Rentora encaja ', clave: 'con tu rentadora', despues: '' } as Titular,
+    titular: { antes: 'Veamos si RentaGo encaja ', clave: 'con tu rentadora', despues: '' } as Titular,
     bajada: 'Contame cuántos autos tenés y cómo trabajás hoy. Te respondo yo.',
     ctaPrincipal: 'Completar el formulario',
     ctaSecundario: 'Escribime por WhatsApp',
@@ -1114,9 +1114,9 @@ export const HOME = {
 /* ── Dos marcas de ejemplo ────────────────────────────────────────────────────
  *
  * La misma web de reservas con dos rentadoras INVENTADAS: son los dos fixtures de
- * rentora-system/web-reservas (`lib/tenant-fixtures.ts`), con sus colores, su ciudad, su flota y
+ * rentago-system/web-reservas (`lib/tenant-fixtures.ts`), con sus colores, su ciudad, su flota y
  * su dominio. Ninguna es un cliente. La réplica es CSS (components/home/DosMarcas.tsx): cambia
- * solo lo que en el producto es configuración del tenant. Una con logo y "Hecho con Rentora",
+ * solo lo que en el producto es configuración del tenant. Una con logo y "Hecho con RentaGo",
  * la otra sin ninguno de los dos, igual que en los fixtures. */
 export type MarcaDemo = {
   clave: 'valle' | 'combis';
@@ -1133,7 +1133,7 @@ export type MarcaDemo = {
   boton: string;
   flotaTitulo: string;
   flota: string[];
-  /** Vacío: la marca no muestra "Hecho con Rentora". */
+  /** Vacío: la marca no muestra "Hecho con RentaGo". */
   firma: string;
   /** Lo que se lee debajo de la réplica: qué cambió en esta marca. */
   pie: string;
@@ -1155,8 +1155,8 @@ export const MARCAS_DEMO: MarcaDemo[] = [
     boton: 'Ver autos',
     flotaTitulo: 'Elegí tu vehículo',
     flota: ['Compacto', 'Sedán', 'Pick-up 4x4'],
-    firma: 'Hecho con Rentora',
-    pie: 'Turquesa, logo propio y "Hecho con Rentora" al pie',
+    firma: 'Hecho con RentaGo',
+    pie: 'Turquesa, logo propio y "Hecho con RentaGo" al pie',
   },
   {
     clave: 'combis',
@@ -1174,7 +1174,7 @@ export const MARCAS_DEMO: MarcaDemo[] = [
     flotaTitulo: 'Elegí tu vehículo',
     flota: ['Combi 15 asientos', 'Combi 19 asientos', 'Utilitario'],
     firma: '',
-    pie: 'Verde y ámbar, otra tipografía y sin mención de Rentora',
+    pie: 'Verde y ámbar, otra tipografía y sin mención de RentaGo',
   },
 ];
 
@@ -1200,9 +1200,9 @@ export const CASO = {
   rotulo: 'En producción',
   titulo: 'Nació en una rentadora *real*',
   texto:
-    'Rentora no se diseñó en una pizarra: se construyó para una rentadora argentina, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.',
+    'RentaGo no se diseñó en una pizarra: se construyó para una rentadora argentina, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.',
   textoConNombre: (nombre: string, ciudad: string) =>
-    `Rentora no se diseñó en una pizarra: se construyó para ${nombre}, en ${ciudad}, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.`,
+    `RentaGo no se diseñó en una pizarra: se construyó para ${nombre}, en ${ciudad}, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.`,
   cifras: [
     { cifra: String(CIFRAS.pantallas), texto: 'pantallas en el panel' },
     { cifra: String(MODULOS.length), texto: 'módulos que comparten los datos' },
@@ -1220,7 +1220,7 @@ export function textoCaso(): string {
 /* ── Textos sueltos ─────────────────────────────────────────────────────────── */
 
 export const T = {
-  marca: 'RENTORA',
+  marca: 'RENTAGO',
   descriptor: 'Software para rent a car',
 
   heroEyebrow: 'En producción desde 2026 en una rentadora de la Patagonia',
@@ -1233,7 +1233,7 @@ export const T = {
   ctaSecundario: 'o escribime por WhatsApp',
 
   ganchoEyebrow: 'Empecemos por un auto de tu flota',
-  ganchoTitulo: 'Preguntale a Rentora ¿dónde está este auto?',
+  ganchoTitulo: 'Preguntale a RentaGo ¿dónde está este auto?',
   ganchoBajada:
     'Hoy la respuesta está en un cuaderno, en un WhatsApp o en la cabeza de alguien que hoy no vino. Tocá un estado y mirá lo que contesta el sistema.',
   ganchoFicha: 'Lo que sabe del auto',
@@ -1309,7 +1309,7 @@ export const T = {
     'Los que cobran en dólares y están en inglés resuelven muy bien el alquiler. Lo que no resuelven es todo lo que pasa alrededor en una rentadora argentina. Nada de esta lista es una promesa de traducción: son tablas y estados que existen en el sistema.',
 
   whatsapp: 'Escribime por WhatsApp',
-  whatsappMensaje: 'Hola Gael, tengo una rentadora y quiero ver Rentora.',
+  whatsappMensaje: 'Hola Gael, tengo una rentadora y quiero ver RentaGo.',
   barraMovilSub: 'Te contesto yo, no un formulario',
 
   firmaPie: 'Desarrollado por',

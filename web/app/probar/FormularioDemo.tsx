@@ -8,7 +8,7 @@ import { medir } from '@/lib/medicion';
 import c from '../contacto/contacto.module.css';
 import s from './probar.module.css';
 
-/* El pedido de la demo: `POST {API}/api/v1/public/demos` (rentora-system, `docs/DEMOS.md`).
+/* El pedido de la demo: `POST {API}/api/v1/public/demos` (rentago-system, `docs/DEMOS.md`).
  *
  * La API no crea nada acá: guarda el pedido y manda el mail de confirmación. Por eso el éxito es
  * "revisá tu mail". Contesta 202 también al bot que llenó el campo trampa (`sitio_web`), así que el

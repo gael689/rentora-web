@@ -15,7 +15,7 @@ import { alternos } from './_pagina/meta';
 /* La home trabaja el término cabeza. Es el único H1 del sitio que lo usa: cada módulo
  * trabaja un long-tail funcional distinto y nunca lo repite. */
 export const metadata: Metadata = {
-  title: { absolute: 'Software para rent a car y rentadoras de autos · Rentora' },
+  title: { absolute: 'Software para rent a car y rentadoras de autos · RentaGo' },
   description:
     'Sistema de gestión para rentadoras de autos en Argentina: flota, reservas, contratos y caja, con tu propia web que reserva y cobra.',
   alternates: alternos('/'),
@@ -33,7 +33,7 @@ export default function Home() {
       {
         '@type': 'SoftwareApplication',
         '@id': `${SITIO}/#software`,
-        name: 'Rentora',
+        name: 'RentaGo',
         applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web',
         description:

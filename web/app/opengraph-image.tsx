@@ -54,7 +54,7 @@ export default async function OG() {
             <div style={{ display: 'flex', height: 7, width: 18, borderRadius: 4, background: 'rgba(255,255,255,0.75)' }} />
           </div>
           <span style={{ display: 'flex', fontSize: 40, fontWeight: 700, letterSpacing: -1 }}>
-            Rent<span style={{ color: '#0E7F85' }}>ora</span>
+            Renta<span style={{ color: '#0E7F85' }}>Go</span>
           </span>
           <span style={{ fontSize: 24, color: '#4A6766', marginLeft: 8 }}>{T.descriptor}</span>
         </div>

@@ -3,8 +3,8 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "rentora.com.ar" }],
-      "destination": "https://www.rentora.com.ar/:path*",
+      "has": [{ "type": "host", "value": "rentago.com.ar" }],
+      "destination": "https://www.rentago.com.ar/:path*",
       "permanent": true
     }
   ],

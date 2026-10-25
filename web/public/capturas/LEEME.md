@@ -9,7 +9,7 @@ mientras no existieran. Ese camino se descartó el 11/09/2026.
 Las pantallas del sistema están **replicadas** dentro de la web, en
 `web/components/sistema/pantallas/`, con los datos de la Rentadora del Valle
 (`web/lib/sistema/valle.ts`). No son imágenes: son la pantalla, en HTML, con la marca de
-Rentora. Eso trae tres cosas que una captura no tiene:
+RentaGo. Eso trae tres cosas que una captura no tiene:
 
 - **Se regeneran solas.** Si cambia la paleta o un rótulo, cambian las 19 pantallas a la vez.
 - **No se pixelan.** El texto es texto y se achica con `transform: scale()`, no con un `resize`.

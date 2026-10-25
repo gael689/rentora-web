@@ -3,7 +3,7 @@
  * BORRADOR. El copy lo decide Gael: esto es una propuesta para que la edite, no texto final.
  *
  * Cinco guías prácticas que sirven aunque el que lee no compre nada. Primero enseñan; el sistema
- * aparece solo en `enRentora`, rotulado aparte, para que no se lea como publicidad encubierta.
+ * aparece solo en `enRentaGo`, rotulado aparte, para que no se lea como publicidad encubierta.
  *
  * Todo lo que se afirma del producto sale de `contenido.ts` (CIFRAS, MODULOS, FAQS, IMPLEMENTACION)
  * y del glosario. Lo demás es consejo de oficio: qué conviene definir, revisar o evitar. Los
@@ -63,7 +63,7 @@ export const GUIAS: Guia[] = [
       'Definí tres tramos de duración como mucho, con su descuento.',
       'Cada promo, con fecha de fin escrita antes de publicarla.',
           ],
-    enRentora:
+    enRentaGo:
       'El motor de precios tiene tres capas de calendario: temporadas, feriados y descuentos por duración. Se cargan una vez y el precio sale solo, todos los días del año. Hay un solo precio para la web y el mostrador, y si das de baja una promo el precio anterior vuelve solo, porque la promo nunca reemplazó al de abajo.',
     terminos: ['temporada'],
     preguntas: [
@@ -133,7 +133,7 @@ export const GUIAS: Guia[] = [
       'Decidí quién firma como deudor cuando alquila una empresa.',
       'Registrá la garantía en el alquiler, con su medio y su monto, antes de entregar el auto.',
     ],
-    enRentora:
+    enRentaGo:
       'Cada categoría tiene su franquicia base y cada cobertura dice a cuánto la baja; los extras llevan su tope de cantidad. Al armar el contrato, con una casilla se genera también el documento de la franquicia, que firma el deudor que elijas: la empresa, su representante o un conductor. La garantía queda registrada en el alquiler, con su medio y su monto, y antes de la entrega un semáforo revisa licencia, garantía y documentación.',
     terminos: ['franquicia', 'garantia', 'check-out'],
     preguntas: [
@@ -203,7 +203,7 @@ export const GUIAS: Guia[] = [
       'Verificá que la web y el mostrador vendan sobre el mismo cupo.',
       'Probá una reserva de punta a punta antes de anunciar la web.',
     ],
-    enRentora:
+    enRentaGo:
       'La web de cada rentadora tiene motor de reservas y un checkout de 4 pasos. Mientras el cliente paga por Mercado Pago o transferencia, el cupo le queda retenido 20 minutos y nadie más puede vender esa unidad en esa fecha. La web trabaja sobre el mismo cupo que el mostrador, nunca vende un auto ocupado, y la reserva confirmada entra al calendario de ocupación.',
     terminos: ['cupo'],
     preguntas: [
@@ -268,7 +268,7 @@ export const GUIAS: Guia[] = [
       'Elegí una fecha de corte en temporada baja.',
       'Revisá las primeras reservas de cada categoría contra la planilla.',
     ],
-    enRentora:
+    enRentaGo:
       'La implementación tiene cuatro etapas. En el relevamiento ponés tu flota, tus categorías, tus sucursales y tu clausulado tal como los usás hoy. La carga de autos, documentos con vigencia, temporadas, feriados y el contrato la hago yo. Después se arma tu web con el motor de reservas, y en la marcha blanca el mostrador opera en el sistema acompañado, con los avisos ya corriendo. Cuánto tarda depende de cuánto haya que cargar.',
     terminos: ['cupo', 'temporada', 'clausulado-versionado', 'cuenta-corriente'],
     preguntas: [
@@ -336,7 +336,7 @@ export const GUIAS: Guia[] = [
       'Controlá la licencia de cada conductor en cada entrega.',
       'Cuando renovás un documento, cargá la nueva fecha el mismo día.',
     ],
-    enRentora:
+    enRentaGo:
       'Cada auto tiene su ficha con la VTV y la póliza con fecha, y los kilómetros que faltan para el service. Los documentos se cargan con vigencia y 31 reglas de aviso corren cada 30 minutos, con un aviso por asunto en la campana del panel. Antes de cada entrega, un semáforo revisa licencia, garantía y documentación.',
     terminos: ['check-out', 'conductor-adicional'],
     preguntas: [

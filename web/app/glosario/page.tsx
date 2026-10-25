@@ -58,9 +58,9 @@ export default function Glosario() {
             >
               <h2 className={s.palabra}>{t.palabra}</h2>
               <p className={s.definicion}>{t.definicion}</p>
-              {t.enRentora && (
-                <p className={s.enRentora}>
-                  <b>{GLOSARIO_PAG.enRentora}:</b> {t.enRentora}
+              {t.enRentaGo && (
+                <p className={s.enRentaGo}>
+                  <b>{GLOSARIO_PAG.enRentaGo}:</b> {t.enRentaGo}
                 </p>
               )}
               <Link href={`/glosario/${t.slug}`} className={s.ver}>

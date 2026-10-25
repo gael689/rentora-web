@@ -3,7 +3,7 @@ import Icono from '@/components/sistema/Icono';
 import s from './DosMarcas.module.css';
 
 /* La misma web de reservas con dos marcas inventadas (los dos fixtures de
- * rentora-system/web-reservas). Es una réplica en CSS, estática y sin JS: la estructura es una
+ * rentago-system/web-reservas). Es una réplica en CSS, estática y sin JS: la estructura es una
  * sola y cada marca cambia solo variables (paleta, fondo, radio, tratamiento de la letra), que es
  * exactamente lo que en el producto es configuración del tenant. El dibujo es decorativo
  * (`aria-hidden`); lo que se lee es el pie de cada una y el figcaption. Los textos salen de

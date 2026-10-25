@@ -135,8 +135,8 @@
   margin: 0;
   color: var(--suave);
 }
-.itemRentora,
-.enRentora {
+.itemRentaGo,
+.enRentaGo {
   margin: 4px 0 0;
   padding: 14px 18px;
   border-radius: 16px;
@@ -144,18 +144,18 @@
   font-size: 0.975rem;
   max-width: 72ch;
 }
-.itemRentoraRotulo {
+.itemRentaGoRotulo {
   display: block;
   margin-bottom: 4px;
   font-size: 0.8125rem;
   font-weight: 700;
   color: var(--turq-strong);
 }
-.itemRentoraTexto {
+.itemRentaGoTexto {
   margin: 0;
   font-weight: 500;
 }
-.enRentora b {
+.enRentaGo b {
   font-weight: 700;
   color: var(--turq-strong);
 }

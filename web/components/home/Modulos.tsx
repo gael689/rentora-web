@@ -5,7 +5,7 @@ import Titular from './Titular';
 import { Rotulo } from './Piezas';
 import s from './home.module.css';
 
-/* "Todo lo que podés hacer con Rentora": cuatro grupos de módulos en tarjetas teñidas, dos por
+/* "Todo lo que podés hacer con RentaGo": cuatro grupos de módulos en tarjetas teñidas, dos por
  * fila en escritorio. Cada tarjeta lleva su lista de funciones con ícono, y cada función lleva a
  * su módulo. */
 export default function Modulos() {

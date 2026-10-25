@@ -21,7 +21,7 @@ import s from './consentimiento.module.css';
  *   El HTML del servidor no lo trae, así que tampoco puede tapar contenido en un crawler.
  * - **Fijo abajo, encima del contenido**: aparecer no empuja nada, no hay salto de layout.
  * - Aceptar y Rechazar pesan lo mismo a la vista. Configurar abre las casillas en el mismo lugar.
- * - Se vuelve a abrir desde "Cookies", en el pie (evento `rentora:cookies`).
+ * - Se vuelve a abrir desde "Cookies", en el pie (evento `rentago:cookies`).
  * - Si no hay GA ni Pixel configurados, no hay nada que preguntar y no se muestra. */
 export default function Consentimiento() {
   const [abierto, setAbierto] = useState(false);

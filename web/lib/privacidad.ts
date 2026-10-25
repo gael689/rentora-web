@@ -23,7 +23,7 @@ export const PRIVACIDAD = {
     {
       titulo: 'Para qué los usamos',
       texto:
-        'Para contestarte y armar la propuesta. No los vendemos ni los cedemos a nadie. El mensaje llega a mi casilla a través de Resend, el servicio que envía el mail, y queda guardado en el sistema de seguimiento de Rentora para no perder la conversación. Esos servicios tienen sus servidores fuera de Argentina. Para frenar a los robots, el formulario usa Cloudflare Turnstile, que revisa el navegador sin pedirte nada.',
+        'Para contestarte y armar la propuesta. No los vendemos ni los cedemos a nadie. El mensaje llega a mi casilla a través de Resend, el servicio que envía el mail, y queda guardado en el sistema de seguimiento de RentaGo para no perder la conversación. Esos servicios tienen sus servidores fuera de Argentina. Para frenar a los robots, el formulario usa Cloudflare Turnstile, que revisa el navegador sin pedirte nada.',
     },
     {
       titulo: 'Cookies y seguimiento',
@@ -93,7 +93,7 @@ export const COOKIES = {
       'Una cookie es un archivo chico que el sitio guarda en tu navegador. Este sitio usa una propia, para recordar tu elección, y otras de terceros solo si las aceptás.',
     columnas: ['Cookie', 'De quién', 'Para qué', 'Dura'],
     filas: [
-      ['rentora_consentimiento', 'Rentora', 'Recordar si aceptaste, rechazaste o configuraste las cookies.', '6 meses'],
+      ['rentago_consentimiento', 'RentaGo', 'Recordar si aceptaste, rechazaste o configuraste las cookies.', '6 meses'],
       ['_ga y _ga_<ID>', 'Google Analytics', 'Contar visitas y páginas vistas sin identificarte. Solo con analítica aceptada.', '6 meses'],
       ['_fbp', 'Meta', 'Saber si una visita que llegó por un anuncio después escribió. Solo con marketing aceptado.', '90 días'],
     ],

@@ -13,18 +13,18 @@
  * @id del JSON-LD apuntan todos a una URL que devuelve 308 — señal cruzada para Google.
  *
  * Antes de dar el deploy por cerrado:
- *   curl -sI https://rentora.com.ar/ | grep -i location        # -> https://www.rentora.com.ar/
- *   curl -s https://www.rentora.com.ar/ | grep -o 'rel="canonical" href="[^"]*"'
+ *   curl -sI https://rentago.com.ar/ | grep -i location        # -> https://www.rentago.com.ar/
+ *   curl -s https://www.rentago.com.ar/ | grep -o 'rel="canonical" href="[^"]*"'
  */
-export const SITIO = process.env.NEXT_PUBLIC_SITIO ?? 'https://www.rentora.com.ar';
+export const SITIO = process.env.NEXT_PUBLIC_SITIO ?? 'https://www.rentago.com.ar';
 
 /** Indexable solo con el dominio definitivo andando. En el provisorio de Vercel queda en noindex. */
 export const INDEXAR = process.env.NEXT_PUBLIC_INDEXAR === '1';
 
 /** Lockup fijo. Idéntico en logo, <title>, firma de mail y portada del PDF. */
-export const LOCKUP = 'RENTORA · Software para rent a car';
+export const LOCKUP = 'RENTAGO · Software para rent a car';
 
-/** Confirmada el 11/09/2026. Es el único lugar donde Rentora enlaza a Gael. */
+/** Confirmada el 11/09/2026. Es el único lugar donde RentaGo enlaza a Gael. */
 export const PORTFOLIO = 'https://gaelgonzalez.com.ar';
 
 /* WhatsApp.
@@ -37,20 +37,20 @@ export const PORTFOLIO = 'https://gaelgonzalez.com.ar';
  * Sigue siendo canal asistido: esto abre la conversación, no la automatiza. */
 export const WHATSAPP = '5492914193031';
 
-export function linkWhatsapp(mensaje = 'Hola Gael, tengo una rentadora y quiero ver Rentora.') {
+export function linkWhatsapp(mensaje = 'Hola Gael, tengo una rentadora y quiero ver RentaGo.') {
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
 }
 export const AUTOR = 'Gael González';
 
-/* Perfiles de Rentora en otros sitios, para el `sameAs` del JSON-LD.
+/* Perfiles de RentaGo en otros sitios, para el `sameAs` del JSON-LD.
  *
  * Vacíos a propósito: un `sameAs` que apunta a un perfil que no existe (o a uno de Gael en vez
- * del de Rentora) le dice a Google y a los motores generativos que la entidad es otra. Se
+ * del de RentaGo) le dice a Google y a los motores generativos que la entidad es otra. Se
  * completan el día que cada perfil existe y dice lo mismo que la web — ver marketing/copy-y-seo/SEO-GEO.md, "Entidad".
  * Los vacíos se omiten solos. */
 export const PERFILES: Record<'linkedin' | 'instagram' | 'facebook' | 'youtube' | 'googleBusiness' | 'capterra', string> = {
-  linkedin: '', // https://www.linkedin.com/company/rentora-…
-  instagram: '', // https://www.instagram.com/rentora…
+  linkedin: '', // https://www.linkedin.com/company/rentago-…
+  instagram: '', // https://www.instagram.com/rentago…
   facebook: '',
   youtube: '',
   googleBusiness: '', // el link "maps.app.goo.gl/…" del perfil de empresa
@@ -59,9 +59,9 @@ export const PERFILES: Record<'linkedin' | 'instagram' | 'facebook' | 'youtube' 
 
 export const SAME_AS: string[] = Object.values(PERFILES).filter((x) => x !== '');
 
-/** La frase que define a Rentora como entidad. **La misma** en el JSON-LD, en llms.txt, en
+/** La frase que define a RentaGo como entidad. **La misma** en el JSON-LD, en llms.txt, en
  *  llms-full.txt y en cada perfil de terceros (LinkedIn, Google, directorios): los motores
  *  generativos arman la entidad por consenso, y tres descripciones distintas son tres entidades.
  *  BORRADOR: la decide Gael. */
 export const DESCRIPCION_ENTIDAD =
-  'Rentora es un software para rent a car hecho en Argentina: el sistema de gestión con el que una rentadora maneja flota, reservas, contratos y caja, más la web propia de la rentadora, que reserva y cobra online.';
+  'RentaGo es un software para rent a car hecho en Argentina: el sistema de gestión con el que una rentadora maneja flota, reservas, contratos y caja, más la web propia de la rentadora, que reserva y cobra online.';

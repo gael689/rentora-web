@@ -104,10 +104,10 @@ export default function Encabezado() {
       <header className={`${e.encabezado} ${estado}`}>
         <div className={e.marco}>
           <div className={e.barra}>
-            <Link href="/" className={e.lockup} aria-label="Rentora, inicio">
+            <Link href="/" className={e.lockup} aria-label="RentaGo, inicio">
               <span className={e.logo} aria-hidden="true" />
               <span className={e.marca}>
-                Rent<span className={e.marcaAcento}>ora</span>
+                Renta<span className={e.marcaAcento}>Go</span>
               </span>
             </Link>
 

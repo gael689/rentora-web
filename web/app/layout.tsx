@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_AR',
     url: SITIO,
-    siteName: 'Rentora',
+    siteName: 'RentaGo',
     title: LOCKUP,
     description:
       'Ocupación, precios por temporada, contratos y caja del día. Más tu propia web con reservas y cobro online.',
@@ -70,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {
                   '@type': 'Organization',
                   '@id': `${SITIO}/#organizacion`,
-                  name: 'Rentora',
+                  name: 'RentaGo',
                   alternateName: LOCKUP,
                   description: DESCRIPCION_ENTIDAD,
                   url: SITIO,
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {
                   '@type': 'WebSite',
                   '@id': `${SITIO}/#sitio`,
-                  name: 'Rentora',
+                  name: 'RentaGo',
                   url: SITIO,
                   inLanguage: 'es-AR',
                   publisher: { '@id': `${SITIO}/#organizacion` },

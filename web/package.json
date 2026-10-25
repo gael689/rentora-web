@@ -1,8 +1,8 @@
 {
-  "name": "@rentora/web",
+  "name": "@rentago/web",
   "version": "1.0.0",
   "private": true,
-  "description": "La web de venta de Rentora. Next.js App Router.",
+  "description": "La web de venta de RentaGo. Next.js App Router.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -8,7 +8,7 @@ import { alternos } from '../_pagina/meta';
  * era la única página indexable del dominio provisorio. */
 export const metadata: Metadata = {
   title: 'Política de privacidad y cookies',
-  description: 'Qué datos pedimos en el formulario de Rentora, qué cookies usa el sitio y para qué, cuánto duran y cómo cambiar tu elección o pedir que borremos tus datos.',
+  description: 'Qué datos pedimos en el formulario de RentaGo, qué cookies usa el sitio y para qué, cuánto duran y cómo cambiar tu elección o pedir que borremos tus datos.',
   alternates: alternos('/privacidad'),
 };
 

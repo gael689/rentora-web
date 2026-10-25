@@ -14,7 +14,7 @@ import { alternos } from '../_pagina/meta';
 export const metadata: Metadata = {
   title: 'Sistema de gestión para alquiler de autos',
   description:
-    'Los módulos de Rentora: ocupación, flota, clientes, reservas, contratos, precios, cotizador, caja, prospectos, multas y daños, tu web y avisos.',
+    'Los módulos de RentaGo: ocupación, flota, clientes, reservas, contratos, precios, cotizador, caja, prospectos, multas y daños, tu web y avisos.',
   alternates: alternos('/modulos'),
 };
 

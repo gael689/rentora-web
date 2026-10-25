@@ -5,14 +5,14 @@
  *
  * Sin un solo número de precio (decisión cerrada). Se dice el MODELO: un pago único y un
  * mantenimiento mensual. Lo que se afirma de la web de reservas sale de
- * rentora-system/web-reservas: marca, tipografía, logo, secciones propias y "Hecho con Rentora"
+ * rentago-system/web-reservas: marca, tipografía, logo, secciones propias y "Hecho con RentaGo"
  * son configuración por rentadora; sitemap, robots y llms.txt existen en el motor.
  *
  * Tiene que decir lo mismo que /planes: el plan Gestión no lleva web, así que la web a medida y
  * su dominio van "si elegiste la web". La exportación de datos se describe igual que en la FAQ
  * de /planes (lo que el sistema exporta hoy, y el resto por escrito).
  *
- * "Conectada a tu panel" (16/10, rama crm-rentadora de rentora-system): la reserva pagada entra
+ * "Conectada a tu panel" (16/10, rama crm-rentadora de rentago-system): la reserva pagada entra
  * confirmada al panel y se le asigna el auto (recién ahí se dibuja en el calendario); Mercado
  * Pago cobra con el access token de cada rentadora y el cobro queda en Caja con medio Mercado
  * Pago; el pedido de llamado, la reserva iniciada sin pagar y el pago rechazado caen en
@@ -25,11 +25,11 @@ export const QUE_INCLUYE_PAG: PaginaIncluye = {
   nombre: 'Qué incluye',
   title: 'Qué incluye el software para rent a car',
   description:
-    'Qué incluye Rentora: un pago único por tu web a medida, la implementación, la capacitación y el dominio, y un mantenimiento mensual con hosting y soporte.',
-  h1: 'Qué incluye *contratar Rentora*',
+    'Qué incluye RentaGo: un pago único por tu web a medida, la implementación, la capacitación y el dominio, y un mantenimiento mensual con hosting y soporte.',
+  h1: 'Qué incluye *contratar RentaGo*',
   bajada: 'Un pago único para dejar todo andando y un mantenimiento mensual para que siga andando.',
   citable:
-    'Contratar Rentora tiene dos partes. Un pago único cubre el desarrollo de la web de reservas a medida, la implementación del sistema, la capacitación del equipo y la puesta en marcha del dominio y el hosting. Después, un mantenimiento mensual cubre el hosting, las actualizaciones, el soporte y el uso del sistema.',
+    'Contratar RentaGo tiene dos partes. Un pago único cubre el desarrollo de la web de reservas a medida, la implementación del sistema, la capacitación del equipo y la puesta en marcha del dominio y el hosting. Después, un mantenimiento mensual cubre el hosting, las actualizaciones, el soporte y el uso del sistema.',
   pagoUnico: {
     nombre: 'Pago único',
     para: 'Lo que se hace una vez, para que arranques con todo cargado y andando.',
@@ -87,7 +87,7 @@ export const QUE_INCLUYE_PAG: PaginaIncluye = {
     {
       icono: 'globo',
       titulo: 'El dominio, a tu nombre',
-      texto: 'Se registra a nombre de tu rentadora. Si un día dejás Rentora, el dominio se queda con vos.',
+      texto: 'Se registra a nombre de tu rentadora. Si un día dejás RentaGo, el dominio se queda con vos.',
     },
     {
       icono: 'bajar',
@@ -97,7 +97,7 @@ export const QUE_INCLUYE_PAG: PaginaIncluye = {
     {
       icono: 'chispa',
       titulo: 'Tu marca y tu contenido',
-      texto: 'El logo, las fotos y los textos de tu web son de tu rentadora, no de Rentora.',
+      texto: 'El logo, las fotos y los textos de tu web son de tu rentadora, no de RentaGo.',
     },
   ],
   secciones: [
@@ -126,7 +126,7 @@ export const QUE_INCLUYE_PAG: PaginaIncluye = {
     },
     {
       p: '¿El dominio queda a mi nombre?',
-      r: 'Sí. Se registra a nombre de tu rentadora, o se conecta el que ya tenés. Si un día dejás de usar Rentora, el dominio sigue siendo tuyo.',
+      r: 'Sí. Se registra a nombre de tu rentadora, o se conecta el que ya tenés. Si un día dejás de usar RentaGo, el dominio sigue siendo tuyo.',
     },
     {
       p: 'Si ya tengo web, ¿igual pago una web nueva?',
@@ -148,11 +148,11 @@ export const WEB_A_MEDIDA_PAG: PaginaAMedida = {
   nombre: 'Web a medida',
   title: 'Web de reservas a medida para tu rentadora',
   description:
-    'La web de reservas de Rentora lleva el logo, la paleta, la tipografía y el dominio de tu rentadora. Partimos de un diseño probado y lo adaptamos a tu marca.',
+    'La web de reservas de RentaGo lleva el logo, la paleta, la tipografía y el dominio de tu rentadora. Partimos de un diseño probado y lo adaptamos a tu marca.',
   h1: 'Una web de reservas *a medida de tu rentadora*',
   bajada: 'Tu logo, tus colores, tu tipografía y tu dominio, sobre un diseño ya probado.',
   citable:
-    'La web de reservas que entrega Rentora sale con la marca de cada rentadora: su logo, su paleta, su tipografía, sus fotos y su dominio. El punto de partida es un diseño ya resuelto, rápido, con SEO y accesible, que se adapta a la marca. Rentora no aparece, salvo un "Hecho con Rentora" opcional al pie.',
+    'La web de reservas que entrega RentaGo sale con la marca de cada rentadora: su logo, su paleta, su tipografía, sus fotos y su dominio. El punto de partida es un diseño ya resuelto, rápido, con SEO y accesible, que se adapta a la marca. RentaGo no aparece, salvo un "Hecho con RentaGo" opcional al pie.',
   cambiaTitulo: 'Lo que se adapta a tu rentadora',
   cambia: [
     { icono: 'chispa', titulo: 'Tu logo', texto: 'En el encabezado, en el pie, en la pestaña del navegador y cuando alguien comparte el link.' },
@@ -213,8 +213,8 @@ export const WEB_A_MEDIDA_PAG: PaginaAMedida = {
       r: 'Sí. La web y el panel comparten los datos: la reserva pagada entra confirmada al panel, el cobro por Mercado Pago queda en tu Caja y quien consulta o no termina de pagar aparece en el Seguimiento para que lo llames.',
     },
     {
-      p: '¿Se nota que la web es de Rentora?',
-      r: 'No. La web lleva tu marca y tu dominio. Rentora solo aparece si querés, con un "Hecho con Rentora" chico al pie.',
+      p: '¿Se nota que la web es de RentaGo?',
+      r: 'No. La web lleva tu marca y tu dominio. RentaGo solo aparece si querés, con un "Hecho con RentaGo" chico al pie.',
     },
     {
       p: '¿Puedo usar el dominio que ya tengo?',

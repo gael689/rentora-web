@@ -24,7 +24,7 @@ export const PARA: PaginaPara[] = [
     bajada:
       'El cliente reserva antes de subirse al avión y llega cuando llega el vuelo.',
     citable:
-      'Una rentadora que entrega en el aeropuerto vende casi todo antes de que el cliente aterrice, así que su web tiene que reservar y cobrar sola. Rentora retiene el auto 20 minutos mientras el cliente paga por Mercado Pago o transferencia, y la reserva entra al mismo calendario que ve el mostrador. En la devolución hay 40 minutos de gracia y, pasado eso, cargo por hora.',
+      'Una rentadora que entrega en el aeropuerto vende casi todo antes de que el cliente aterrice, así que su web tiene que reservar y cobrar sola. RentaGo retiene el auto 20 minutos mientras el cliente paga por Mercado Pago o transferencia, y la reserva entra al mismo calendario que ve el mostrador. En la devolución hay 40 minutos de gracia y, pasado eso, cargo por hora.',
     necesidades: [
       {
         titulo: 'Reservas desde la web, antes de viajar',
@@ -97,7 +97,7 @@ export const PARA: PaginaPara[] = [
     bajada:
       'Tres meses que pagan el año y nueve donde hay que vender igual. El precio acompaña sin cargarlo a mano.',
     citable:
-      'En una rentadora de zona turística, el error más caro es vender una fecha de temporada alta al precio de temporada baja. Rentora calcula el precio con tres capas de calendario: temporada, feriados y descuento por duración, que se cargan una vez y valen para la web y el mostrador por igual. Una extensión de alquiler se cobra como un tramo nuevo, con su propio precio.',
+      'En una rentadora de zona turística, el error más caro es vender una fecha de temporada alta al precio de temporada baja. RentaGo calcula el precio con tres capas de calendario: temporada, feriados y descuento por duración, que se cargan una vez y valen para la web y el mostrador por igual. Una extensión de alquiler se cobra como un tramo nuevo, con su propio precio.',
     necesidades: [
       {
         titulo: 'Que enero no salga a precio de mayo',
@@ -170,7 +170,7 @@ export const PARA: PaginaPara[] = [
     bajada:
       'Una pick-up que vuelve de un camino de ripio no se revisa igual que un compacto que hizo ciudad.',
     citable:
-      'En Rentora cada unidad tiene su tipo —auto, camioneta, combi, utilitario, moto o motorhome—, y las categorías incluyen compacto, sedán, sedán superior, SUV, pick-up y furgón. La franquicia y la tarifa base se definen por categoría, así que una pick-up no se cotiza como un compacto. Los daños se cargan con fotos desde el celular y quedan atados al alquiler y al conductor.',
+      'En RentaGo cada unidad tiene su tipo —auto, camioneta, combi, utilitario, moto o motorhome—, y las categorías incluyen compacto, sedán, sedán superior, SUV, pick-up y furgón. La franquicia y la tarifa base se definen por categoría, así que una pick-up no se cotiza como un compacto. Los daños se cargan con fotos desde el celular y quedan atados al alquiler y al conductor.',
     necesidades: [
       {
         titulo: 'Cada tipo de unidad con su precio',
@@ -243,7 +243,7 @@ export const PARA: PaginaPara[] = [
     bajada:
       'La empresa alquila seguido, paga a plazo y cambia de conductor. El sistema le sigue el ritmo.',
     citable:
-      'Para alquilar a empresas, Rentora maneja cuenta corriente a 15, 30, 60 o 90 días y reparte la deuda en cuatro tramos de antigüedad, para saber desde cuándo te deben. La ficha de una empresa lleva a su representante, y cada contrato admite hasta tres conductores. Cuando llega una multa, con la fecha del hecho el sistema encuentra el alquiler vigente y quién manejaba.',
+      'Para alquilar a empresas, RentaGo maneja cuenta corriente a 15, 30, 60 o 90 días y reparte la deuda en cuatro tramos de antigüedad, para saber desde cuándo te deben. La ficha de una empresa lleva a su representante, y cada contrato admite hasta tres conductores. Cuando llega una multa, con la fecha del hecho el sistema encuentra el alquiler vigente y quién manejaba.',
     necesidades: [
       {
         titulo: 'Saber desde cuándo te deben',
@@ -315,7 +315,7 @@ export const PARA: PaginaPara[] = [
     bajada:
       'Un auto que sale a trabajar todos los días se alquila y se cobra por semana.',
     citable:
-      'Rentora tiene un Contrato Uber: el contrato semanal pensado para alquilar autos a choferes de Uber, DiDi o Cabify. Se carga el valor de la semana y salen el total, una fecha de pago por cada semana, que se puede editar, los kilómetros permitidos por semana y el precio del kilómetro extra. Se arranca desde el mismo botón de Nueva operación que una reserva común.',
+      'RentaGo tiene un Contrato Uber: el contrato semanal pensado para alquilar autos a choferes de Uber, DiDi o Cabify. Se carga el valor de la semana y salen el total, una fecha de pago por cada semana, que se puede editar, los kilómetros permitidos por semana y el precio del kilómetro extra. Se arranca desde el mismo botón de Nueva operación que una reserva común.',
     necesidades: [
       {
         titulo: 'Un precio por semana',
@@ -387,7 +387,7 @@ export const PARA: PaginaPara[] = [
     h1: 'Sistema para rentadoras *con varias sucursales*',
     bajada: 'Cada sucursal ve su mostrador; vos ves todas juntas.',
     citable:
-      'Rentora maneja varias sucursales en un mismo sistema. Cada sucursal tiene sus puntos de retiro y devolución y su caja, con apertura y cierre, y cada auto tiene su sucursal base y la ubicación donde está ahora. Un cliente puede retirar en una sucursal y devolver en otra, y los reportes se ven por sucursal o consolidados.',
+      'RentaGo maneja varias sucursales en un mismo sistema. Cada sucursal tiene sus puntos de retiro y devolución y su caja, con apertura y cierre, y cada auto tiene su sucursal base y la ubicación donde está ahora. Un cliente puede retirar en una sucursal y devolver en otra, y los reportes se ven por sucursal o consolidados.',
     necesidades: [
       {
         titulo: 'Retirar en una, devolver en otra',
@@ -415,7 +415,7 @@ export const PARA: PaginaPara[] = [
         titulo: 'Dos mostradores, una sola flota',
         parrafos: [
           'Cuando una rentadora abre una segunda sucursal, casi siempre en el aeropuerto o en otra ciudad, el problema deja de ser cuántos autos hay y pasa a ser dónde están. El auto que figura libre en la planilla de la casa central puede estar estacionado en la terminal, y el que se prometió para las nueve de la mañana está a cuarenta kilómetros. Con una planilla por sucursal, tarde o temprano se vende el mismo auto dos veces.',
-          'En Rentora todas las sucursales trabajan sobre el mismo sistema. Cada auto tiene su sucursal base y dónde está ahora, y el calendario de ocupación se filtra por sucursal: cada mostrador mira lo suyo y, cuando hace falta, ve el resto.',
+          'En RentaGo todas las sucursales trabajan sobre el mismo sistema. Cada auto tiene su sucursal base y dónde está ahora, y el calendario de ocupación se filtra por sucursal: cada mostrador mira lo suyo y, cuando hace falta, ve el resto.',
         ],
       },
       {

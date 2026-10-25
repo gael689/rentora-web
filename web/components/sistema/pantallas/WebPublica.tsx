@@ -1,11 +1,11 @@
 /* La web pública de la rentadora — el checkout de 4 pasos.
  *
- * Réplica de `rentora-system/web-reservas/`, que es la otra mitad de lo que se entrega y la que ningún
+ * Réplica de `rentago-system/web-reservas/`, que es la otra mitad de lo que se entrega y la que ningún
  * competidor incluye: venden el software y te dejan el sitio por tu cuenta.
  *
  * No lleva el marco de la aplicación: esto no es el panel, es el sitio que ve el cliente de la
  * rentadora. Por eso tiene su propio encabezado, con el nombre de la rentadora y no el de
- * Rentora — cada instancia va con la marca de su dueño.
+ * RentaGo — cada instancia va con la marca de su dueño.
  *
  * Los cuatro pasos y los rótulos son los del sitio real: `Paso2Adicionales`, `Paso3Datos`,
  * `Paso4Pago` y `ResumenReserva`. */

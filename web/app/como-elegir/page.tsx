@@ -26,7 +26,7 @@ export default function ComoElegir() {
     mainEntity: CHECKLIST.map((p) => ({
       '@type': 'Question',
       name: p.q,
-      acceptedAnswer: { '@type': 'Answer', text: `${p.porque} En Rentora: ${p.rentora}` },
+      acceptedAnswer: { '@type': 'Answer', text: `${p.porque} En RentaGo: ${p.rentago}` },
     })),
   };
 
@@ -50,9 +50,9 @@ export default function ComoElegir() {
               <div className={s.itemCuerpo}>
                 <h2 className={s.itemQ}>{p.q}</h2>
                 <p className={s.itemPorque}>{p.porque}</p>
-                <div className={s.itemRentora}>
-                  <span className={s.itemRentoraRotulo}>{COMO_ELEGIR_PAG.rentora}</span>
-                  <p className={s.itemRentoraTexto}>{p.rentora}</p>
+                <div className={s.itemRentaGo}>
+                  <span className={s.itemRentaGoRotulo}>{COMO_ELEGIR_PAG.rentago}</span>
+                  <p className={s.itemRentaGoTexto}>{p.rentago}</p>
                 </div>
               </div>
             </li>

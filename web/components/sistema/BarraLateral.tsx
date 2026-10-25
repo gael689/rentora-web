@@ -35,7 +35,7 @@ export default function BarraLateral({ activa }: { activa: string }) {
     <aside className={s.lateral}>
       <div className={s.marca}>
         <span className={s.marcaPunto} />
-        <span className={s.marcaNombre}>RENTORA</span>
+        <span className={s.marcaNombre}>RENTAGO</span>
       </div>
 
       <nav className={s.nav} aria-label="Módulos del sistema">

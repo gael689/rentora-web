@@ -89,8 +89,8 @@ export default function PaginaContrato() {
               {P.modelo.cta} <span aria-hidden="true">→</span>
             </Link>
           </p>
-          <p className={s.enRentora}>
-            <b>{CONTRATO_PAG_UI.enRentora}:</b> {P.enRentora}
+          <p className={s.enRentaGo}>
+            <b>{CONTRATO_PAG_UI.enRentaGo}:</b> {P.enRentaGo}
           </p>
         </section>
 

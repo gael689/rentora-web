@@ -4,7 +4,7 @@ import Titular from './Titular';
 import { Rotulo } from './Piezas';
 import s from './home.module.css';
 
-/* Seguridad y datos. Cada punto está verificado contra rentora-system (aislamiento por empresa con
+/* Seguridad y datos. Cada punto está verificado contra rentago-system (aislamiento por empresa con
  * RLS, roles admin / operador / caja / lectura, auditoría de solo agregar, snapshot del contrato,
  * exportación a CSV y Excel). Backups no se afirman. Si algo de esta lista deja de ser cierto en el
  * producto, es un bug. */

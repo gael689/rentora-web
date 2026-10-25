@@ -19,7 +19,7 @@ import { alternos } from '../_pagina/meta';
 export const metadata: Metadata = {
   title: 'Las pantallas del software de alquiler de autos',
   description:
-    'Las pantallas del panel de Rentora, una por una: ocupación, reservas, contratos, caja, precios, prospectos y más. El sistema como es, sobre una rentadora de ejemplo.',
+    'Las pantallas del panel de RentaGo, una por una: ocupación, reservas, contratos, caja, precios, prospectos y más. El sistema como es, sobre una rentadora de ejemplo.',
   alternates: alternos('/sistema'),
 };
 
@@ -35,7 +35,7 @@ export default function Sistema() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     '@id': `${SITIO}/sistema#pantallas`,
-    name: `Las ${PANTALLAS.length} pantallas del panel de Rentora`,
+    name: `Las ${PANTALLAS.length} pantallas del panel de RentaGo`,
     numberOfItems: PANTALLAS.length,
     itemListElement: PANTALLAS.map((p, i) => ({
       '@type': 'ListItem',

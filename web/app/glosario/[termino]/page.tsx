@@ -76,10 +76,10 @@ export default async function PaginaTermino({ params }: { params: Promise<{ term
           </div>
         </section>
 
-        {t.enRentora && (
+        {t.enRentaGo && (
           <section className={s.bloque} data-tono="turq">
-            <p className={s.enRentora}>
-              <b>{TERMINO_PAG.enRentora}:</b> {t.enRentora}
+            <p className={s.enRentaGo}>
+              <b>{TERMINO_PAG.enRentaGo}:</b> {t.enRentaGo}
             </p>
             {operacion && (
               <p>

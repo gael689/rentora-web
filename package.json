@@ -2,6 +2,6 @@
   "name": "rentora-web",
   "version": "1.0.0",
   "private": true,
-  "description": "La web de Rentora, software de gestión para rent a car. Espejo publicado automáticamente; se edita en el repo privado.",
+  "description": "La web de RentaGo, software de gestión para rent a car. Espejo publicado automáticamente; se edita en el repo privado.",
   "workspaces": ["web"]
 }

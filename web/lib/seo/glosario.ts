@@ -21,8 +21,8 @@ export type Termino = {
   palabra: string;
   /** La definición, autónoma. Entre 40 y 60 palabras. */
   definicion: string;
-  /** Cómo lo resuelve Rentora. Opcional: no todo término tiene que vender. */
-  enRentora?: string;
+  /** Cómo lo resuelve RentaGo. Opcional: no todo término tiene que vender. */
+  enRentaGo?: string;
   /** La operación donde se ve funcionando. */
   operacion?: string;
   /** Para la página propia del término: 80–140 palabras más allá de la definición, con un
@@ -44,7 +44,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Franquicia',
     definicion:
       'La franquicia es el monto máximo que el cliente paga de su bolsillo si daña el auto alquilado. Por encima de ese monto responde el seguro. En un alquiler de autos se define por categoría —una pick-up tiene franquicia más alta que un compacto— y las coberturas adicionales la bajan a cambio de un cargo por día.',
-    enRentora:
+    enRentaGo:
       'Cada categoría trae su franquicia base y cada cobertura dice a cuánto la baja. Al generar el contrato se puede generar también el documento de la franquicia, que firma el deudor que elijas.',
     operacion: 'tomar-una-reserva',
     title: 'Qué es la franquicia en un alquiler de autos',
@@ -73,7 +73,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Garantía',
     definicion:
       'La garantía es el monto que la rentadora retiene —normalmente sobre una tarjeta de crédito— para cubrir daños, multas o cargos que aparezcan al devolver el auto. No es un cobro: es una retención que se libera cuando el alquiler cierra sin novedades.',
-    enRentora:
+    enRentaGo:
       'La garantía queda registrada en el alquiler: el medio y el monto. Es otra cosa que la franquicia, que es un documento firmado.',
     operacion: 'recibir-el-auto',
     title: 'Qué es la garantía en un alquiler de autos',
@@ -102,7 +102,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Cupo',
     definicion:
       'El cupo es cuántas unidades de una categoría quedan realmente disponibles para un rango de fechas. No es la cantidad de autos que tiene la flota: es esa cantidad menos lo que ya está reservado, alquilado o bloqueado por taller en esos mismos días.',
-    enRentora:
+    enRentaGo:
       'Se calcula por fecha sobre la flota real, y el alta de reserva lo muestra antes de dejarte confirmar. Es lo que evita vender dos veces el mismo auto.',
     operacion: 'tomar-una-reserva',
     title: 'Qué es el cupo en un rent a car',
@@ -117,7 +117,7 @@ export const GLOSARIO: Termino[] = [
       },
       {
         p: '¿Qué pasa con el cupo mientras un cliente paga en la web?',
-        r: 'En Rentora queda retenido 20 minutos. Mientras dura esa retención, nadie más puede tomar esa unidad desde la web.',
+        r: 'En RentaGo queda retenido 20 minutos. Mientras dura esa retención, nadie más puede tomar esa unidad desde la web.',
       },
       {
         p: '¿Un auto en el taller descuenta cupo?',
@@ -131,7 +131,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Late check-in',
     definicion:
       'El late check-in es la devolución tardía: el cliente entrega el auto después de la hora pactada. La práctica habitual es dar un período de gracia y, pasado ese margen, cobrar por hora o por día según cuánto se pasó.',
-    enRentora:
+    enRentaGo:
       'Al recibir el auto hay 40 minutos de gracia y, pasado eso, cargo por hora. Al cotizar, una devolución una hora o más después del retiro suma un día solo.',
     operacion: 'recibir-el-auto',
     title: 'Qué es el late check-in en un alquiler de autos',
@@ -142,11 +142,11 @@ export const GLOSARIO: Termino[] = [
     preguntas: [
       {
         p: '¿Cuánto suele durar el período de gracia?',
-        r: 'Depende de la rentadora, y lo habitual es entre media hora y una hora. En Rentora son 40 minutos, y pasado ese margen corre un cargo por hora.',
+        r: 'Depende de la rentadora, y lo habitual es entre media hora y una hora. En RentaGo son 40 minutos, y pasado ese margen corre un cargo por hora.',
       },
       {
         p: '¿Cuándo una devolución tardía se cobra como un día más?',
-        r: 'Cuando el atraso es largo, muchas rentadoras pasan del cargo por hora a cobrar el día. Al cotizar en Rentora, una devolución una hora o más después de la hora de retiro ya suma un día.',
+        r: 'Cuando el atraso es largo, muchas rentadoras pasan del cargo por hora a cobrar el día. Al cotizar en RentaGo, una devolución una hora o más después de la hora de retiro ya suma un día.',
       },
       {
         p: '¿El late check-in es lo mismo que una extensión?',
@@ -160,7 +160,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Clausulado versionado',
     definicion:
       'Un clausulado versionado es el texto del contrato guardado por versiones, con fecha. Cada contrato emitido queda atado a la versión vigente ese día, así que años después se puede reimprimir el texto exacto que esa persona firmó y no el que rige hoy.',
-    enRentora:
+    enRentaGo:
       'Cada contrato guarda un snapshot congelado. Es la diferencia entre tener un contrato y tener una prueba: si el sistema reimprimiera el clausulado actual, el papel diría cosas que el cliente nunca firmó.',
     operacion: 'firmar-el-contrato',
     title: 'Qué es un clausulado versionado en un contrato',
@@ -171,7 +171,7 @@ export const GLOSARIO: Termino[] = [
     preguntas: [
       {
         p: '¿Puedo cambiar una cláusula para un solo cliente?',
-        r: 'Sí. En Rentora, antes de generar el contrato se editan las cláusulas que hagan falta. Quedan marcadas como modificadas, se puede volver al original, y el cambio vale solo para ese contrato.',
+        r: 'Sí. En RentaGo, antes de generar el contrato se editan las cláusulas que hagan falta. Quedan marcadas como modificadas, se puede volver al original, y el cambio vale solo para ese contrato.',
       },
       {
         p: '¿Qué pasa con los contratos viejos cuando cambio el clausulado?',
@@ -189,7 +189,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Cuenta corriente',
     definicion:
       'La cuenta corriente es el saldo que una empresa cliente mantiene con la rentadora cuando no paga al contado. Se factura el alquiler y se cobra a 15, 30, 60 o 90 días. El dato que importa no es sólo cuánto deben, sino desde cuándo.',
-    enRentora:
+    enRentaGo:
       'Es una pestaña de Caja. Y la pestaña A cobrar lista cada alquiler con saldo y los días desde la devolución.',
     title: 'Qué es la cuenta corriente en un rent a car',
     description:
@@ -207,7 +207,7 @@ export const GLOSARIO: Termino[] = [
       },
       {
         p: '¿La cuenta corriente reemplaza a la factura?',
-        r: 'No. La factura se sigue emitiendo donde se emite hoy, y la cuenta corriente registra lo facturado y lo cobrado. En Rentora las facturas, notas de crédito y remitos se cargan con su PDF y quedan atados al alquiler.',
+        r: 'No. La factura se sigue emitiendo donde se emite hoy, y la cuenta corriente registra lo facturado y lo cobrado. En RentaGo las facturas, notas de crédito y remitos se cargan con su PDF y quedan atados al alquiler.',
       },
     ],
     relacionados: ['a-cobrar', 'echeq', 'reparto-entre-socios'],
@@ -217,7 +217,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Echeq',
     definicion:
       'Un echeq es un cheque electrónico: se emite y se endosa de forma digital, con la misma lógica de pago diferido que el cheque en papel. Mientras está en cartera no es dinero cobrado —puede rechazarse— y por eso no debería contarse como ingreso hasta que se acredite.',
-    enRentora:
+    enRentaGo:
       'Los echeqs tienen su pestaña en Caja, con estados (en cartera, depositado, endosado, rechazado, cobrado). Uno en cartera no es plata cobrada.',
     title: 'Qué es un echeq y cómo se registra en un rent a car',
     description:
@@ -227,7 +227,7 @@ export const GLOSARIO: Termino[] = [
     preguntas: [
       {
         p: '¿Un echeq en cartera cuenta como ingreso?',
-        r: 'No. Mientras está en cartera puede rechazarse, así que se lo cuenta aparte del cobro hasta que se acredita. En Rentora los echeqs tienen su pestaña en Caja, separados de lo cobrado.',
+        r: 'No. Mientras está en cartera puede rechazarse, así que se lo cuenta aparte del cobro hasta que se acredita. En RentaGo los echeqs tienen su pestaña en Caja, separados de lo cobrado.',
       },
       {
         p: '¿Qué pasa si se rechaza un echeq que endosé?',
@@ -235,7 +235,7 @@ export const GLOSARIO: Termino[] = [
       },
       {
         p: '¿Cómo sé qué echeqs vencen esta semana?',
-        r: 'En Rentora se ordenan en secciones: vencidos, próximos 7 días y en cartera. Así se ve de un vistazo qué hay que depositar.',
+        r: 'En RentaGo se ordenan en secciones: vencidos, próximos 7 días y en cartera. Así se ve de un vistazo qué hay que depositar.',
       },
     ],
     relacionados: ['cuenta-corriente', 'a-cobrar', 'reparto-entre-socios'],
@@ -245,7 +245,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Temporada',
     definicion:
       'La temporada es el período del año que modifica la tarifa: alta, media o baja. En el alquiler de autos en Argentina suele combinarse con feriados y fines de semana largos, que se cobran por encima de la temporada que estén atravesando.',
-    enRentora:
+    enRentaGo:
       'Es la primera de las tres capas del motor de precios. Se carga una vez y el precio sale solo todos los días del año. El precio es único: el mismo en la web y en el mostrador.',
     operacion: 'cargar-una-promo',
     title: 'Qué es la temporada en el precio de un alquiler de autos',
@@ -260,11 +260,11 @@ export const GLOSARIO: Termino[] = [
       },
       {
         p: '¿El feriado se cobra encima de la temporada?',
-        r: 'Sí, en la mayoría de las rentadoras. En Rentora los feriados y fines de semana largos son la segunda capa del motor de precios y se aplican sobre la temporada que estén atravesando.',
+        r: 'Sí, en la mayoría de las rentadoras. En RentaGo los feriados y fines de semana largos son la segunda capa del motor de precios y se aplican sobre la temporada que estén atravesando.',
       },
       {
         p: '¿El precio por temporada es el mismo en la web y en el mostrador?',
-        r: 'En Rentora sí. Hay un solo precio, y sale del mismo motor para los dos canales.',
+        r: 'En RentaGo sí. Hay un solo precio, y sale del mismo motor para los dos canales.',
       },
     ],
     relacionados: ['cupo', 'late-check-in'],
@@ -274,7 +274,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Conductor adicional',
     definicion:
       'Un conductor adicional es otra persona autorizada a manejar el auto alquilado, además de quien firma el contrato. Queda declarada en el contrato, y si hay una multa o un daño sirve para saber quién manejaba.',
-    enRentora:
+    enRentaGo:
       'Cada contrato admite hasta tres conductores, que se eligen de la ficha del cliente o se dan de alta en el momento.',
     operacion: 'firmar-el-contrato',
     title: 'Qué es un conductor adicional en un alquiler de autos',
@@ -285,7 +285,7 @@ export const GLOSARIO: Termino[] = [
     preguntas: [
       {
         p: '¿Cuántos conductores adicionales puede tener un contrato?',
-        r: 'Depende de la rentadora. En Rentora cada contrato admite hasta tres conductores, que se eligen de la ficha del cliente o se dan de alta en el momento.',
+        r: 'Depende de la rentadora. En RentaGo cada contrato admite hasta tres conductores, que se eligen de la ficha del cliente o se dan de alta en el momento.',
       },
       {
         p: '¿Qué pasa si maneja alguien que no está declarado?',
@@ -293,7 +293,7 @@ export const GLOSARIO: Termino[] = [
       },
       {
         p: '¿Un conductor puede figurar en dos contratos a la vez?',
-        r: 'Puede pasar. En Rentora, si un conductor ya tiene otro auto en esas fechas, el sistema avisa y te deja seguir.',
+        r: 'Puede pasar. En RentaGo, si un conductor ya tiene otro auto en esas fechas, el sistema avisa y te deja seguir.',
       },
     ],
     relacionados: ['franquicia', 'clausulado-versionado', 'garantia'],
@@ -303,7 +303,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'A cobrar',
     definicion:
       'Lo que ya se alquiló y todavía no se cobró entero. Importa menos cuánto es en total que desde hace cuántos días espera: un saldo de ayer y uno de hace un mes no se tratan igual.',
-    enRentora:
+    enRentaGo:
       'Es una pestaña de Caja: cada alquiler con saldo, con los días desde la devolución, en rojo pasada la semana.',
     title: 'Qué es A cobrar en la caja de un rent a car',
     description:
@@ -317,7 +317,7 @@ export const GLOSARIO: Termino[] = [
       },
       {
         p: '¿Desde cuándo se cuentan los días de un saldo?',
-        r: 'Desde la devolución del auto. En Rentora la pestaña A cobrar muestra los días desde la devolución y pinta en rojo los saldos que pasaron la semana.',
+        r: 'Desde la devolución del auto. En RentaGo la pestaña A cobrar muestra los días desde la devolución y pinta en rojo los saldos que pasaron la semana.',
       },
     ],
     relacionados: ['cuenta-corriente', 'echeq', 'reparto-entre-socios'],
@@ -327,7 +327,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Reparto entre socios',
     definicion:
       'Cuando la rentadora tiene más de un dueño, el reparto es dividir lo cobrado del mes según el porcentaje de cada socio y compensar lo que alguno cobró de más. Los gastos se ven aparte.',
-    enRentora:
+    enRentaGo:
       'Es un adicional: se definen los socios y sus porcentajes, y el mes muestra quién le pasa cuánto a quién. El reparto se registra y se puede anular.',
     title: 'Cómo se hace el reparto entre socios de una rentadora',
     description:
@@ -337,7 +337,7 @@ export const GLOSARIO: Termino[] = [
     preguntas: [
       {
         p: '¿Los gastos se descuentan antes de repartir?',
-        r: 'En Rentora los gastos se ven aparte del reparto. El reparto trabaja sobre lo cobrado del mes, y cada rentadora decide cómo tratan los socios los gastos.',
+        r: 'En RentaGo los gastos se ven aparte del reparto. El reparto trabaja sobre lo cobrado del mes, y cada rentadora decide cómo tratan los socios los gastos.',
       },
       {
         p: '¿Qué pasa si los porcentajes no son iguales?',
@@ -351,7 +351,7 @@ export const GLOSARIO: Termino[] = [
     palabra: 'Check-out',
     definicion:
       'En el alquiler de autos, el check-out es la entrega: el momento en que el vehículo sale con el cliente. Se registran kilómetros, combustible, estado y fotos, que son la referencia contra la que se compara cuando el auto vuelve.',
-    enRentora:
+    enRentaGo:
       'Antes de la entrega corre un semáforo: licencia, garantía y documentación. Es la misma lista que ya se vio al cargar la reserva.',
     operacion: 'entregar-el-auto',
     title: 'Qué es el check-out en un alquiler de autos',
@@ -366,7 +366,7 @@ export const GLOSARIO: Termino[] = [
       },
       {
         p: '¿Qué se revisa antes de entregar el auto?',
-        r: 'La licencia del conductor, la garantía y la documentación. En Rentora corre un semáforo con esos tres puntos antes de la entrega, el mismo que ya se vio al cargar la reserva.',
+        r: 'La licencia del conductor, la garantía y la documentación. En RentaGo corre un semáforo con esos tres puntos antes de la entrega, el mismo que ya se vio al cargar la reserva.',
       },
       {
         p: '¿Hace falta sacar fotos en la entrega?',

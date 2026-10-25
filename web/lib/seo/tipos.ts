@@ -22,7 +22,7 @@ export type PaginaSeo = {
   slug: string;
   /** El nombre corto, para el pie, las migas y los enlaces cruzados. */
   nombre: string;
-  /** ≤ 60 caracteres. Sin " · RENTORA": lo agrega el layout. */
+  /** ≤ 60 caracteres. Sin " · RENTAGO": lo agrega el layout. */
   title: string;
   /** Entre 140 y 160 caracteres. */
   description: string;
@@ -58,7 +58,7 @@ export type Guia = PaginaSeo & {
   pasos: string[];
   /** Cómo lo resuelve el sistema. Un párrafo, rotulado aparte para que no se lea como publicidad
    *  encubierta. */
-  enRentora: string;
+  enRentaGo: string;
   /** Slug del módulo relacionado. */
   modulo: string;
   /** Slugs del glosario que se mencionan. */
@@ -73,7 +73,7 @@ export type PaginaContrato = PaginaSeo & {
   secciones: Seccion[];
   /** Cómo funciona el modelo de ejemplo: se arranca de ahí y se adapta a la operación. */
   modelo: { titulo: string; texto: string; cta: string };
-  enRentora: string;
+  enRentaGo: string;
 };
 
 /** `/planes`: sin un solo número de precio. */

@@ -8,8 +8,8 @@ export const VIDEO = {
   src: null as string | null,
   poster: null as string | null,
   subtitulos: null as string | null,
-  titulo: 'Rentora en 75 segundos',
-  descripcion: 'Una reserva, su contrato y su cobro, de punta a punta, en el sistema de Rentora.',
+  titulo: 'RentaGo en 75 segundos',
+  descripcion: 'Una reserva, su contrato y su cobro, de punta a punta, en el sistema de RentaGo.',
   /** ISO 8601. */
   duracion: 'PT75S',
   /** ISO 8601, la fecha en que se publica. */

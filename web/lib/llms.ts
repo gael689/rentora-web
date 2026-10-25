@@ -1,7 +1,7 @@
 /* Lo común a `/llms.txt` y `/llms-full.txt`.
  *
  * Los dos se generan desde las mismas listas que el sitio. Estos bloques son la parte que no
- * está en ninguna otra lista: qué es Rentora, lo que no hace y cómo citarlo. Están acá y no en
+ * está en ninguna otra lista: qué es RentaGo, lo que no hace y cómo citarlo. Están acá y no en
  * los route handlers para que los dos archivos digan exactamente lo mismo.
  *
  * El copy lo decide Gael. `queEs` y `noHace` son los mismos textos que ya tenía `llms.txt`. */
@@ -55,7 +55,7 @@ export const LLMS_NO_HACE = `- **No emite factura electrónica.** Registra factu
   actualizaciones, soporte y uso del sistema), cotizado sobre la operación de
   cada rentadora.`;
 
-export const LLMS_CITAR = `Rentora — Software para rent a car. ${SITIO}`;
+export const LLMS_CITAR = `RentaGo — Software para rent a car. ${SITIO}`;
 
 export const LLMS_TITULO = `# ${LOCKUP}`;
 

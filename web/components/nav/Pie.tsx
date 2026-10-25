@@ -11,7 +11,7 @@ import Icono from '@/components/sistema/Icono';
 import estilos from './Pie.module.css';
 
 /* Pie v4b: fondo gris claro, marca y contacto a la izquierda, las familias de links en columnas.
- * Rentora es el producto; Gael es quien lo hace. La firma va al pie, chica.
+ * RentaGo es el producto; Gael es quien lo hace. La firma va al pie, chica.
  *
  * Todas las familias de páginas tienen su columna y todas salen de los datos: así Google llega a
  * cada página desde todas las demás, y una página nueva aparece en el pie sin tocar este archivo. */
@@ -25,7 +25,7 @@ export default function Pie() {
           <Link href="/" className={estilos.lockup}>
             <span className={estilos.logo} aria-hidden="true" />
             <span className={estilos.marca}>
-              Rent<span className={estilos.marcaAcento}>ora</span>
+              Renta<span className={estilos.marcaAcento}>Go</span>
             </span>
           </Link>
           <p className={estilos.descripcion}>{P.descripcion}</p>
@@ -135,7 +135,7 @@ export default function Pie() {
 
       <div className={estilos.firmaBanda}>
         <div className={`envoltorio ${estilos.firma}`}>
-          <p>© {new Date().getFullYear()} Rentora · {T.descriptor}</p>
+          <p>© {new Date().getFullYear()} RentaGo · {T.descriptor}</p>
           <p>
             {T.firmaPie}{' '}
             <a href={PORTFOLIO} target="_blank" rel="noopener noreferrer">

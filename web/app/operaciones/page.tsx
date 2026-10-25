@@ -11,7 +11,7 @@ import { alternos } from '../_pagina/meta';
  * beneficios. Estas son las preguntas que el dueño se hace mientras tiene el problema delante,
  * que es justo cuando compra. */
 export const metadata: Metadata = {
-  title: 'Cómo se opera una rentadora con Rentora',
+  title: 'Cómo se opera una rentadora con RentaGo',
   description:
     'Las operaciones del mostrador, paso a paso: tomar una reserva, entregar el auto, recibirlo con devolución tardía, firmar el contrato, extender un alquiler y cargar una promo.',
   alternates: alternos('/operaciones'),

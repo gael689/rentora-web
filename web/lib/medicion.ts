@@ -20,12 +20,12 @@ export const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? '';
 /** Si no hay ninguna herramienta que pida permiso, el aviso no tiene nada que preguntar. */
 export const HAY_TERCEROS = Boolean(GA_ID || PIXEL_ID);
 
-export const COOKIE_CONSENTIMIENTO = 'rentora_consentimiento';
+export const COOKIE_CONSENTIMIENTO = 'rentago_consentimiento';
 /** 6 meses, en segundos. La elección y las cookies de GA4 duran lo mismo. */
 export const SEIS_MESES = 60 * 60 * 24 * 182;
 
 /** Evento del DOM que abre el aviso desde cualquier lado (el link "Cookies" del pie). */
-export const EVENTO_ABRIR = 'rentora:cookies';
+export const EVENTO_ABRIR = 'rentago:cookies';
 
 export type Eleccion = { analitica: boolean; marketing: boolean };
 
@@ -52,7 +52,7 @@ export function guardarEleccion(e: Eleccion) {
   document.cookie = `${COOKIE_CONSENTIMIENTO}=v1.a${e.analitica ? 1 : 0}.m${e.marketing ? 1 : 0}; Max-Age=${SEIS_MESES}; Path=/; SameSite=Lax${seguro}`;
 }
 
-/** Borra una cookie de tercero en el host y en el dominio padre (`.rentora.com.ar`), que es
+/** Borra una cookie de tercero en el host y en el dominio padre (`.rentago.com.ar`), que es
  *  donde la dejan GA y Meta. */
 function borrarCookies(prueba: (nombre: string) => boolean) {
   const nombres = document.cookie

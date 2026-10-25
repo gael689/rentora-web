@@ -17,12 +17,12 @@ export const PLANES_PAG: PaginaPlanes = {
   nombre: 'Planes',
   title: 'Planes del software para rent a car',
   description:
-    'Tres maneras de contratar Rentora: el sistema solo, el sistema con tu web de reservas conectada o una versión a medida. El precio depende de tu operación.',
+    'Tres maneras de contratar RentaGo: el sistema solo, el sistema con tu web de reservas conectada o una versión a medida. El precio depende de tu operación.',
   h1: 'Planes del *software para rent a car*',
   bajada:
     'Elegís qué necesitás. El precio depende de tu operación y lo hablamos antes de empezar.',
   citable:
-    'Rentora es un sistema de gestión para rentadoras, con una web de reservas conectada si la querés. El precio depende de la operación de cada rentadora: cuántos autos tiene, cuántas sucursales y si quiere la web. Se habla antes de empezar.',
+    'RentaGo es un sistema de gestión para rentadoras, con una web de reservas conectada si la querés. El precio depende de la operación de cada rentadora: cuántos autos tiene, cuántas sucursales y si quiere la web. Se habla antes de empezar.',
   planes: [
     {
       slug: 'gestion',

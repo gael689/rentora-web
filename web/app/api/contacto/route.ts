@@ -11,9 +11,9 @@ import { CAMPOS } from '@/lib/contenido';
  * `RESEND_API_KEY` sin definir, el endpoint contesta 503 y el formulario muestra el WhatsApp:
  * es preferible a tragarse el mensaje y decir que salió.
  *
- * **Además, el prospecto en el CRM de la plataforma** (consola de `rentora-system`, `docs/BACKOFFICE.md`).
- * Sólo si `RENTORA_API_URL` está definida: el servidor (nunca el navegador) hace
- * `POST {RENTORA_API_URL}/api/v1/public/prospectos`. Si la API no está, contesta 503 (sin
+ * **Además, el prospecto en el CRM de la plataforma** (consola de `rentago-system`, `docs/BACKOFFICE.md`).
+ * Sólo si `RENTAGO_API_URL` está definida: el servidor (nunca el navegador) hace
+ * `POST {RENTAGO_API_URL}/api/v1/public/prospectos`. Si la API no está, contesta 503 (sin
  * `TURNSTILE_SECRET` en producción), 429, 400 o se cae, **el formulario sigue como siempre** y queda
  * una línea en el log. Con el CRM conectado y Resend apagado, el envío cuenta como recibido: el
  * prospecto ya está en la consola, que es donde se lo mira.
@@ -48,7 +48,7 @@ type ResultadoCrm = 'apagado' | 'creado' | 'salteado' | 'fallo';
 
 /** La API de la plataforma, sin barra final y sin `/api/v1` (si alguien lo pegó con el sufijo). */
 function apiPlataforma(): string {
-  return (process.env.RENTORA_API_URL ?? '').trim().replace(/\/+$/, '').replace(/\/api\/v1$/, '');
+  return (process.env.RENTAGO_API_URL ?? '').trim().replace(/\/+$/, '').replace(/\/api\/v1$/, '');
 }
 
 /** Crea el prospecto en la consola. Nunca tira: devuelve qué pasó y lo deja en el log. */
@@ -189,7 +189,7 @@ export async function POST(pedido: Request) {
 
   const clave = process.env.RESEND_API_KEY;
   const destino = process.env.CONTACTO_DESTINO;
-  const remitente = process.env.CONTACTO_REMITENTE ?? 'Rentora <hola@rentora.com.ar>';
+  const remitente = process.env.CONTACTO_REMITENTE ?? 'RentaGo <hola@rentago.com.ar>';
 
   if (!clave || !destino) {
     if (crm === 'creado') return NextResponse.json({ ok: true });
@@ -215,9 +215,9 @@ export async function POST(pedido: Request) {
       from: remitente,
       to: [destino],
       subject: corto
-        ? `Rentora (home) · ${datos.autos} autos`
-        : `Rentora · ${datos.empresa} (${datos.ciudad}, ${datos.autos} autos)`,
-      html: `<p>Consulta desde rentora.com.ar</p><table cellpadding="6">${filas}</table>`,
+        ? `RentaGo (home) · ${datos.autos} autos`
+        : `RentaGo · ${datos.empresa} (${datos.ciudad}, ${datos.autos} autos)`,
+      html: `<p>Consulta desde rentago.com.ar</p><table cellpadding="6">${filas}</table>`,
     }),
   });
 

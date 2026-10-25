@@ -1,7 +1,7 @@
 /* El vocabulario del sistema, traído tal cual.
  *
  * Todo lo de este archivo está copiado de
- * `rentora-system/panel/src/lib/constants.ts` y de `tailwind.config.ts`. Las etiquetas son
+ * `rentago-system/panel/src/lib/constants.ts` y de `tailwind.config.ts`. Las etiquetas son
  * las que el operador lee en la pantalla y los colores son los que el sistema pinta.
  *
  * **Si algo de acá no existe en el sistema, es un bug.** Misma regla que la de la copy: la
@@ -9,7 +9,7 @@
  *
  * ── Lo único que cambia respecto del original ────────────────────────────────────────────
  *
- * El azul `#407EC9` de la marca del cliente pasa a ser el turquesa de Rentora. Nada más.
+ * El azul `#407EC9` de la marca del cliente pasa a ser el turquesa de RentaGo. Nada más.
  *
  * **La escala de urgencia no se toca.** Gris, azul, verde, ámbar y rojo no son decoración:
  * son los significados que la gente ya trae aprendidos (gris = no arrancó, azul = dato,

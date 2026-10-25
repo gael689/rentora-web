@@ -15,9 +15,9 @@ import { grafo, migasLd } from '../_pagina/schema';
 import s from '../seo.module.css';
 
 /* La web de reservas a medida: la misma web con dos marcas inventadas, qué se adapta y qué ya
- * viene resuelto. Lo que se afirma sale de rentora-system/web-reservas (configuración por
- * tenant: marca, tipografía, logo, secciones propias, "Hecho con Rentora"). "Conectada a tu panel"
- * sale de rentora-system: la reserva pagada entra confirmada, el cobro de Mercado Pago va con el
+ * viene resuelto. Lo que se afirma sale de rentago-system/web-reservas (configuración por
+ * tenant: marca, tipografía, logo, secciones propias, "Hecho con RentaGo"). "Conectada a tu panel"
+ * sale de rentago-system: la reserva pagada entra confirmada, el cobro de Mercado Pago va con el
  * token de la rentadora y queda en Caja, y lo que no se paga cae en Seguimiento (0010). */
 
 const P = WEB_A_MEDIDA_PAG;

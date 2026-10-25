@@ -85,8 +85,8 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
         </section>
 
         <section className={s.bloque} data-tono="turq">
-          <p className={s.enRentora}>
-            <b>{GUIAS_PAG.enRentora}:</b> {g.enRentora}
+          <p className={s.enRentaGo}>
+            <b>{GUIAS_PAG.enRentaGo}:</b> {g.enRentaGo}
           </p>
           {modulo && (
             <p>

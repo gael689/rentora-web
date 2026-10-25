@@ -103,7 +103,7 @@ export const CONTRATO_PAG: PaginaContrato = {
       'Hay un contrato modelo de ejemplo con estas partes ya redactadas. Se adapta a tu operación: tus categorías, tus coberturas, tus sucursales y lo que tu abogado quiera agregar o sacar.',
     cta: 'Pedime el modelo',
   },
-  enRentora:
+  enRentaGo:
     'El clausulado está versionado y cada contrato guarda un snapshot congelado del texto del día de la firma, así que se reimprime idéntico años después. Las cláusulas se pueden editar para un contrato puntual: la editada queda marcada como modificada y se puede volver al original. Se firma en pantalla, por un link al teléfono que podés dar de baja, o en papel subiendo el firmado. Con una casilla sale también el documento de la franquicia, y cada contrato admite hasta 3 conductores.',
   preguntas: [
     {

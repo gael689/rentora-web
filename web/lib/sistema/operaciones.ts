@@ -32,7 +32,7 @@ export type Operacion = {
   pregunta: string;
   bajada: string;
   pasos: Paso[];
-  /** Qué hace distinto a Rentora en esta operación. */
+  /** Qué hace distinto a RentaGo en esta operación. */
   diferencial: string;
   /** De dónde salió, en el repo del sistema. */
   fuente: string;
@@ -49,7 +49,7 @@ export const OPERACIONES: Operacion[] = [
     termino: 'cómo cobrar una devolución tardía de un auto alquilado',
     pregunta: 'Devolvió el auto una hora y veinte tarde. ¿Le cobrás?',
     bajada:
-      'Es la discusión más común del mostrador y la que más plata deja en el camino, porque se resuelve a ojo y siempre a favor del que reclama más fuerte. Rentora ya la tiene decidida: cuarenta minutos de gracia, y de ahí en más cargo por hora. No lo discutís vos con el cliente delante: lo dice el sistema.',
+      'Es la discusión más común del mostrador y la que más plata deja en el camino, porque se resuelve a ojo y siempre a favor del que reclama más fuerte. RentaGo ya la tiene decidida: cuarenta minutos de gracia, y de ahí en más cargo por hora. No lo discutís vos con el cliente delante: lo dice el sistema.',
     pasos: [
       {
         n: 1,
