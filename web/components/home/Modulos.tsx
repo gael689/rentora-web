@@ -14,7 +14,7 @@ import s from './home.module.css';
 export default function Modulos() {
   const h = HOME.todo;
   return (
-    <section className="seccion" aria-labelledby="t-modulos">
+    <section className="seccion banda-suave" aria-labelledby="t-modulos">
       <div className="envoltorio">
         <Reveal as="header" className={s.cabezaCentro}>
           <h2 id="t-modulos" className="titular-seccion">

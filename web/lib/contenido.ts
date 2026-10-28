@@ -879,6 +879,20 @@ export const HOME = {
     texto: 'Las pantallas del panel de una rentadora de ejemplo, una por una.',
     cta: { texto: 'Ver el sistema', href: '/sistema' },
   },
+  /** v6 (28/10): la franja de clientes al pie del hero. Ubicar Rent se muestra como cliente
+   *  (decisión de Gael del 28/10/2026). El logo va en blanco sobre la malla oscura.
+   *  REVISAR GAEL: textos propuestos. */
+  clientes: {
+    etiqueta: 'Lo usa todos los días',
+    items: [
+      { nombre: 'Ubicar Rent', ciudad: 'Bahía Blanca', logo: '/clientes/ubicar-rent.png', ancho: 311, alto: 140 },
+    ],
+  },
+  /** v6: cabeza de la sección de funciones, que pasó de cuatro bloques con captura a un mosaico.
+   *  REVISAR GAEL: texto propuesto. */
+  funcionesCabeza: {
+    titular: { antes: 'Lo que vas a usar ', clave: 'todos los días', despues: '' } as Titular,
+  },
   /** La fila de confianza bajo el hero. Cifras de `CIFRAS`, como chips cortos. */
   confianza: {
     etiqueta: 'RentaGo en números',

@@ -49,7 +49,7 @@ export default function Sistema() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <Portada titulo={SISTEMA.titulo} bajada={SISTEMA.bajada} imagen={{ src: '/heros/sistema.webp', alt: 'Tres pantallas del sistema, inclinadas, sobre un fondo verde petróleo', pos: '60% 35%', lado: 'derecha' }}>
+      <Portada titulo={SISTEMA.titulo} bajada={SISTEMA.bajada} imagen={{ src: '/v4/ocupacion.webp', alt: 'Ocupación en el sistema real: la flota de una rentadora de ejemplo, auto por auto y día por día', pos: '0% 30%', lado: 'derecha' }}>
         <nav className={s.indice} aria-label={SISTEMA.indice}>
           {secciones.map((sec) => (
             <a key={sec.titulo} href={`#${sec.titulo.toLowerCase()}`} className="etiqueta" data-tono={sec.tono}>

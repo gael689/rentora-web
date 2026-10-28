@@ -37,7 +37,7 @@
   position: relative;
   width: 30px;
   height: 30px;
-  border-radius: 2px;
+  border-radius: var(--radio-chico);
   background: linear-gradient(140deg, #19a9b0 0%, #0b5d62 100%);
 }
 .logo::before,
@@ -47,7 +47,7 @@
   left: 8px;
   right: 8px;
   height: 4px;
-  border-radius: 2px;
+  border-radius: var(--radio-chico);
   background: #fff;
 }
 .logo::before {

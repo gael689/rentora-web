@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { HOME } from '@/lib/contenido';
 import Icono from '@/components/sistema/Icono';
 import Reveal from '@/components/animacion/Reveal';
+import Ruta from '@/components/marca/Ruta';
 import s from './home.module.css';
 
 /* Franja de CTA a mitad de la home: parte la página en dos con un fondo distinto y ofrece el paso
@@ -9,7 +10,8 @@ import s from './home.module.css';
 export default function Franja() {
   const f = HOME.franja;
   return (
-    <section className={`banda-oscura ${s.franja}`} aria-label={f.titulo}>
+    <section className={`malla-turquesa ${s.franja}`} aria-label={f.titulo}>
+      <Ruta />
       <Reveal className={`envoltorio ${s.franjaCuerpo}`}>
         <div>
           <p className={s.franjaTitulo}>{f.titulo}</p>

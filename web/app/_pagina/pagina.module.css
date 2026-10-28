@@ -266,3 +266,17 @@
   mask-image: linear-gradient(90deg, transparent 8%, #000 75%);
   pointer-events: none;
 }
+
+/* v6: la ruta de la marca en las portadas sin foto, por la mitad derecha (por la izquierda
+ * cruzaba el titular). En móvil va entera y más tenue, detrás del texto. */
+.portadaMarca .portadaRuta {
+  left: 42%;
+  width: 58%;
+}
+@media (max-width: 719.98px) {
+  .portadaMarca .portadaRuta {
+    left: 0;
+    width: 100%;
+    opacity: 0.45;
+  }
+}

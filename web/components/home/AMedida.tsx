@@ -11,7 +11,7 @@ import s from './home.module.css';
 export default function AMedida() {
   const h = HOME.aMedida;
   return (
-    <section className={`banda-suave ${s.aMedida}`} aria-labelledby="t-a-medida">
+    <section className={s.aMedida} aria-labelledby="t-a-medida">
       <div className="envoltorio">
         <div className={s.funcion} data-tono={h.tono}>
           <div className={s.funcionTexto}>

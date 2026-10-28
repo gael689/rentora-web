@@ -1,7 +1,6 @@
 import { HOME } from '@/lib/contenido';
 import Icono from '@/components/sistema/Icono';
 import Reveal, { rv } from '@/components/animacion/Reveal';
-import Linea from '@/components/animacion/Linea';
 import Titular from './Titular';
 import s from './home.module.css';
 
@@ -12,7 +11,7 @@ import s from './home.module.css';
 export default function Seguridad() {
   const h = HOME.seguridad;
   return (
-    <section className={`seccion banda-suave ${s.seguridad}`} aria-labelledby="t-seguridad">
+    <section className={`seccion banda-oscura ${s.seguridad}`} aria-labelledby="t-seguridad">
       <div className={`envoltorio ${s.seguridadGrilla}`}>
         <Reveal as="header" className={s.cabezaLateral} dir="izquierda">
           <h2 id="t-seguridad" className="titular-seccion">
@@ -22,8 +21,7 @@ export default function Seguridad() {
         </Reveal>
         <ul className={s.garantias}>
           {h.items.map((x, i) => (
-            <li key={x.titulo} className={s.garantia} data-tono={x.tono} {...rv(i)}>
-              <Linea className={s.garantiaLinea} i={i} />
+            <li key={x.titulo} className={`vidrio ${s.garantia}`} data-tono={x.tono} {...rv(i)}>
               <span className="orbe" aria-hidden="true">
                 <Icono nombre={x.icono} tam={20} dibuja />
               </span>

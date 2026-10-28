@@ -22,12 +22,6 @@ export default function Indice() {
       <Portada
         titulo={MODULOS_PAG.titulo}
         bajada={MODULOS_PAG.bajada}
-        imagen={{
-          src: '/modulos/sistema-notebook.webp',
-          alt: 'Una persona usa el calendario de ocupación de RentaGo en una notebook',
-          pos: '50% 45%',
-          lado: 'derecha',
-        }}
       />
 
       <div className={`envoltorio ${s.pagina}`}>

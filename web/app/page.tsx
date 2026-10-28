@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import { SITIO } from '@/lib/sitio';
 import Hero from '@/components/home/Hero';
-import Confianza from '@/components/home/Confianza';
 import Problemas from '@/components/home/Problemas';
 import Modulos from '@/components/home/Modulos';
 import Funciones from '@/components/home/Funciones';
 import Video from '@/components/home/Video';
 import AMedida from '@/components/home/AMedida';
-import Tipos from '@/components/home/Tipos';
 import Franja from '@/components/home/Franja';
 import Seguridad from '@/components/home/Seguridad';
 import Faq from '@/components/home/Faq';
@@ -63,7 +61,6 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <Hero />
-      <Confianza />
       <Problemas />
       <Video />
       <Funciones />
@@ -71,7 +68,6 @@ export default function Home() {
       <Modulos />
       <Franja />
       <Seguridad />
-      <Tipos />
       <Faq />
       <Cierre />
     </>

@@ -1,74 +1,59 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { HOME } from '@/lib/contenido';
-import { pantalla } from '@/lib/sistema/pantallas';
 import Icono from '@/components/sistema/Icono';
-import { rv } from '@/components/animacion/Reveal';
+import Reveal, { rv } from '@/components/animacion/Reveal';
 import { Flotante, Telefono } from './Piezas';
+import Titular from './Titular';
 import s from './home.module.css';
 
-/* Secciones alternadas imagen / texto. Cada una: rótulo, H2 corto, una oración, hasta cuatro
- * viñetas con tilde y un link. La imagen es la captura del sistema real (web-capturas-reales.mjs), recortada sobre un panel teñido del
- * tono de la sección, con un chip apoyado en el borde; la de la web va en dos celulares. */
+/* Funciones en mosaico (v6). Antes eran cuatro bloques alternados con la captura recortada al
+ * 150 %, donde el texto de la pantalla quedaba en 9 px; ahora cada función es una tarjeta con su
+ * tinte, el ícono grande de fondo y el chip de estado apoyado, y la de la web lleva el celular.
+ * Las capturas viven en /sistema. Las viñetas (`puntos`) siguen en los datos pero no se muestran. */
 export default function Funciones() {
+  const cabeza = HOME.funcionesCabeza;
   return (
-    <div className={s.funciones}>
+    <section className="seccion banda-suave" aria-labelledby="t-funciones">
       <div className="envoltorio">
-        {HOME.funciones.map((f, i) => {
-          const meta = f.pantalla ? pantalla(f.pantalla) : undefined;
-          const id = `t-funcion-${i}`;
-          return (
-            <article key={f.rotulo} className={`${s.funcion} ${i % 2 ? s.funcionInvertida : ''}`} aria-labelledby={id} data-tono={f.tono}>
-              <div className={s.funcionTexto}>
-                <h2 id={id} className="titular-seccion" {...rv(0)}>
+        <Reveal as="header" className={s.cabezaCentro}>
+          <h2 id="t-funciones" className="titular-seccion">
+            <Titular t={cabeza.titular} />
+          </h2>
+        </Reveal>
+        <div className={s.mosaico}>
+          {HOME.funciones.map((f, i) => {
+            const conTelefono = f.telefonos.length > 0;
+            return (
+              <article
+                key={f.rotulo}
+                className={`${s.funcionTarjeta} ${conTelefono ? s.funcionConTelefono : ''}`}
+                data-tono={f.tono}
+                aria-labelledby={`t-funcion-${i}`}
+                {...rv(i % 2)}
+              >
+                <span className={s.funcionFondo} aria-hidden="true">
+                  <Icono nombre={f.icono} tam={180} />
+                </span>
+                <span className={s.funcionRotulo}>{f.rotulo}</span>
+                <h3 id={`t-funcion-${i}`} className={s.funcionTitulo}>
                   {f.titulo}
-                </h2>
-                <p className="bajada" {...rv(1)}>{f.frase}</p>
-                <ul className={s.tildes}>
-                  {f.puntos.map((p, k) => (
-                    <li key={p} {...rv(k + 2)}>
-                      <span className={s.tilde} aria-hidden="true">
-                        <Icono nombre="tilde" tam={14} dibuja />
-                      </span>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <Link href={f.link.href} className="cta-sec" {...rv(6)}>
+                </h3>
+                <p className={s.funcionFrase}>{f.frase}</p>
+                <Link href={f.link.href} className={`cta-sec ${s.funcionLink}`}>
                   {f.link.texto}
                   <Icono nombre="flecha" tam={16} />
                 </Link>
-              </div>
-
-              <div className={s.funcionVisual} {...rv(1, "escala")}>
-                {meta ? (
-                  <div className={s.recorte}>
-                    <div className={s.recorteInterior}>
-                      <Image
-                        src={`/sistema-real/${meta.slug}.webp`}
-                        alt={`${HOME.capturaRealAlt} ${f.rotulo}`}
-                        width={1400}
-                        height={881}
-                        sizes="(min-width: 980px) 760px, 140vw"
-                        className={s.recorteImagen}
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <div className={s.telefonos}>
-                    {f.telefonos.map((t, j) => (
-                      <Telefono key={t.src} src={t.src} alt={t.alt} className={j ? s.telefonoAtras : s.telefonoFrente} />
-                    ))}
-                  </div>
-                )}
                 {f.chips.map((c) => (
                   <Flotante key={c.texto} icono={c.icono} texto={c.texto} tono={f.tono} className={s.funcionChip} />
                 ))}
-              </div>
-            </article>
-          );
-        })}
+                {conTelefono && (
+                  <Telefono src={f.telefonos[0].src} alt={f.telefonos[0].alt} className={s.funcionTelefono} />
+                )}
+              </article>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

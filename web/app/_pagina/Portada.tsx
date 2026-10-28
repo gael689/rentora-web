@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Acento from './Titulo';
 import { rv } from '@/components/animacion/Reveal';
+import Ruta from '@/components/marca/Ruta';
 import s from './pagina.module.css';
 
 export type ImagenPortada = {
@@ -86,6 +87,9 @@ export default function Portada({
           {pantalla}
         </div>
       ) : (
+        <Ruta className={s.portadaRuta} />
+      )}
+      {!pantalla && (
         <span className={s.marcaFondo} aria-hidden="true" {...rv(0, 'derecha')}>
           Renta<b>Go</b>
         </span>

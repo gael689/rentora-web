@@ -5,6 +5,7 @@ import { DEMO_ACTIVA, DEMO_CTA, RUTA_PROBAR } from '@/lib/demo';
 import Icono from '@/components/sistema/Icono';
 import { rv } from '@/components/animacion/Reveal';
 import Titular from './Titular';
+import Ruta from '@/components/marca/Ruta';
 import CierreForm from './CierreForm';
 
 /* El cierre de la home: banda con el degradé de marca, WhatsApp como salida directa y, al lado, un
@@ -16,7 +17,8 @@ export default function Cierre() {
   return (
     <section className="cierre-comun banda-cierre" id="contacto" aria-labelledby="t-cierre">
       <div className="envoltorio">
-        <div className="banda-cierre-cuerpo" {...rv(0, "escala")}>
+        <div className="banda-cierre-cuerpo grano" {...rv(0, "escala")}>
+          <Ruta />
           <div className="banda-cierre-texto">
             <h2 id="t-cierre" className="titular-seccion">
               <Titular t={h.titular} />
