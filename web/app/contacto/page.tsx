@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function Contacto() {
   return (
     <>
-      <Portada tag={CONTACTO.tag} titulo={CONTACTO.titulo} bajada={CONTACTO.bajada} />
+      <Portada titulo={CONTACTO.titulo} bajada={CONTACTO.bajada} />
 
       <div className={`envoltorio ${s.pagina}`}>
         <div className={s.cuerpo}>

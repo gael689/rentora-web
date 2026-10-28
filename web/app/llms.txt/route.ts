@@ -1,7 +1,7 @@
 import { MODULOS, NOVEDADES } from '@/lib/contenido';
 import { OPERACIONES } from '@/lib/sistema/operaciones';
 import { PANTALLAS } from '@/lib/sistema/pantallas';
-import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG, QUE_INCLUYE_PAG, WEB_A_MEDIDA_PAG } from '@/lib/seo';
+import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG, WEB_A_MEDIDA_PAG } from '@/lib/seo';
 import { SITIO } from '@/lib/sitio';
 import { LLMS_TITULO, LLMS_RESUMEN, LLMS_QUE_ES, LLMS_NO_HACE, LLMS_CITAR, llmsCifras } from '@/lib/llms';
 
@@ -60,11 +60,9 @@ ${MODULOS.map((m) => `- [${m.nombre}](${SITIO}/modulos/${m.slug}): ${m.texto}`).
 
 ${PLANES_PAG.planes.map((p) => `- **${p.nombre}**: ${p.para}`).join('\n')}
 
-${PLANES_PAG.comoSeCotiza}
+${PLANES_PAG.citable}
 
-## Qué incluye
-
-[${QUE_INCLUYE_PAG.nombre}](${SITIO}/${QUE_INCLUYE_PAG.slug}): ${QUE_INCLUYE_PAG.citable}
+Qué incluye (pago único, mantenimiento mensual y lo que es tuyo): ${SITIO}/planes#que-incluye
 
 ## Web a medida
 
@@ -93,14 +91,13 @@ ${PLAZAS.map((p) => `- [${p.ciudad}, ${p.provincia}](${SITIO}/software-rent-a-ca
 ## Páginas
 
 - [Inicio](${SITIO}/)
-- [Las pantallas del sistema](${SITIO}/sistema)
+- [Pantallas del sistema](${SITIO}/sistema)
 - [Cómo se hace cada cosa](${SITIO}/operaciones)
-- [Los módulos](${SITIO}/modulos)
+- [Módulos](${SITIO}/modulos)
 - [Planes](${SITIO}/planes)
-- [Qué incluye](${SITIO}/que-incluye)
 - [Web de reservas a medida](${SITIO}/web-a-medida)
-- [Para cada tipo de operación](${SITIO}/para)
-- [Guías](${SITIO}/guias)
+- [Tipos de rentadora](${SITIO}/para)
+- [Soluciones: problemas de todos los días](${SITIO}/guias)
 - [Software para rent a car por ciudad](${SITIO}/software-rent-a-car)
 - [Cómo elegir un software para rent a car](${SITIO}/como-elegir)
 - [Glosario](${SITIO}/glosario)

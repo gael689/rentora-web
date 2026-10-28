@@ -1,20 +1,25 @@
 import type { Metadata } from 'next';
-import { CHECKLIST } from '@/lib/seo';
+import Link from 'next/link';
+import { SENALES } from '@/lib/seo';
 import { COMO_ELEGIR_PAG, TONOS } from '@/lib/paginas';
 import { SITIO } from '@/lib/sitio';
+import Icono from '@/components/sistema/Icono';
+import Reveal from '@/components/animacion/Reveal';
+import Linea from '@/components/animacion/Linea';
 import Portada from '../_pagina/Portada';
 import Cierre from '../_pagina/Cierre';
+import Respuesta from '../_pagina/Respuesta';
 import s from '../seo.module.css';
 import { alternos } from '../_pagina/meta';
 
-/* Cómo elegir un software para rent a car.
- *
- * Ataca la búsqueda de evaluación, la más cercana a la compra. **No se nombra a ningún
- * competidor**: la comparación la hace el que lee, con el proveedor que tenga enfrente. */
+/* Cómo elegir un software para rent a car, en formato autodiagnóstico: diez señales que llevan a la
+ * compra, cada una con la respuesta de RentaGo en un callout. Ataca la búsqueda de evaluación. El
+ * `FAQPage` sale de las mismas señales que se ven (título = pregunta, respuesta = situación + lo que
+ * resuelve RentaGo), así el marcado no puede decir otra cosa. **No se nombra a ningún competidor.** */
 export const metadata: Metadata = {
   title: 'Cómo elegir un software para rent a car',
   description:
-    'Doce preguntas para hacerle a cualquier proveedor de software de alquiler de autos antes de firmar: cupo real, precios por temporada, contratos, avisos y quién carga tus datos.',
+    'Las señales de que tu rentadora ya necesita un software de alquiler de autos: reservas pisadas, deudas sin control, vencimientos, señas a mano, contratos, Excel y más.',
   alternates: alternos('/como-elegir'),
 };
 
@@ -23,41 +28,58 @@ export default function ComoElegir() {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     '@id': `${SITIO}/como-elegir#faq`,
-    mainEntity: CHECKLIST.map((p) => ({
+    inLanguage: 'es-AR',
+    mainEntity: SENALES.map((p) => ({
       '@type': 'Question',
-      name: p.q,
-      acceptedAnswer: { '@type': 'Answer', text: `${p.porque} En RentaGo: ${p.rentago}` },
+      name: p.titulo,
+      acceptedAnswer: { '@type': 'Answer', text: `${p.situacion} ${COMO_ELEGIR_PAG.rentago}: ${p.rentago}` },
     })),
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
-      <Portada
-        tag={COMO_ELEGIR_PAG.tag}
-        titulo={COMO_ELEGIR_PAG.titulo}
-        bajada={COMO_ELEGIR_PAG.bajada}
-      />
+      <Portada titulo={COMO_ELEGIR_PAG.titulo} bajada={COMO_ELEGIR_PAG.bajada} />
 
       <div className={`envoltorio ${s.pagina}`}>
-        <ol className={s.lista}>
-          {CHECKLIST.map((p, i) => (
-            <li key={p.q} id={`p${i + 1}`} className={s.item} data-tono={TONOS[i % TONOS.length]}>
-              <span className="orbe" aria-hidden="true">
-                {i + 1}
-              </span>
-              <div className={s.itemCuerpo}>
-                <h2 className={s.itemQ}>{p.q}</h2>
-                <p className={s.itemPorque}>{p.porque}</p>
-                <div className={s.itemRentaGo}>
-                  <span className={s.itemRentaGoRotulo}>{COMO_ELEGIR_PAG.rentago}</span>
-                  <p className={s.itemRentaGoTexto}>{p.rentago}</p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <section className={s.bloque}>
+          <Reveal as="h2" className={s.rotulo}>
+            {COMO_ELEGIR_PAG.senalesTitulo}
+          </Reveal>
+          <ul className={s.senales}>
+            {SENALES.map((p, i) => (
+              <li key={p.titulo} id={`senal-${i + 1}`} className={s.senal} data-tono={TONOS[i % TONOS.length]}>
+                <Linea className={s.senalLinea} />
+                <Reveal className={s.senalCabeza}>
+                  <span className="orbe" aria-hidden="true">
+                    <Icono nombre={p.icono} tam={22} dibuja />
+                  </span>
+                  <div className={s.itemCuerpo}>
+                    <h3 className={s.itemQ}>{p.titulo}</h3>
+                    <p className={s.itemPorque}>{p.situacion}</p>
+                  </div>
+                </Reveal>
+                <Reveal i={2} className={s.senalRespuesta}>
+                  <Respuesta rotulo={COMO_ELEGIR_PAG.rentago} texto={p.rentago} />
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <Reveal as="section" className={s.resumen}>
+          <h2 className={s.resumenTitulo}>{COMO_ELEGIR_PAG.resumenTitulo}</h2>
+          <div className={s.resumenAcciones}>
+            <Link href="/contacto" className="cta">
+              {COMO_ELEGIR_PAG.resumenContacto}
+              <Icono nombre="flecha" tam={18} />
+            </Link>
+            <Link href="/planes" className="cta-sec">
+              {COMO_ELEGIR_PAG.resumenPlanes}
+              <Icono nombre="flecha" tam={16} />
+            </Link>
+          </div>
+        </Reveal>
       </div>
 
       <Cierre

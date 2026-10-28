@@ -1,0 +1,182 @@
+/* Grilla compacta de celdas separadas por líneas finas (índices de módulos y soluciones).
+ * 4 columnas en escritorio, 2 en tablet, 1 en móvil. */
+.compacta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  border-top: 1px solid var(--borde);
+}
+@media (min-width: 600px) {
+  .compacta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .compacta {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+/* El borde izquierdo de cada celda se corre 1 px afuera: la primera columna lo pierde por el overflow. */
+.item {
+  margin-left: -1px;
+  border-left: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+}
+.celda {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: clamp(18px, 2.2vw, 24px);
+  color: var(--texto);
+  transition: background var(--rapido);
+}
+.celda:hover,
+.celda:focus-visible {
+  background: color-mix(in srgb, var(--tf, var(--turq-soft)) 40%, #fff);
+  color: var(--texto);
+}
+.celda :global(.orbe) {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+}
+.titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+.texto {
+  color: var(--suave);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+/* El CTA ocupa su lugar siempre (sin saltos) y se muestra al hover/foco. */
+.cta {
+  margin-top: auto;
+  padding-top: 4px;
+  color: var(--primario);
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(2px);
+  transition:
+    opacity var(--rapido),
+    transform var(--rapido);
+}
+.celda:hover .cta,
+.celda:focus-visible .cta {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: none) {
+  .cta {
+    opacity: 0.75;
+    transform: none;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+}
+
+/* ── Variantes de la estética "foto y aire" (/para) ───────────────────────────
+ * Sólo se activan con los atributos `data-columnas`, `data-completa` y `data-plano`; sin ellos la
+ * grilla es la de siempre (4 columnas, sin reparto de la última fila). */
+
+/* Celdas de texto (sin link): sin hover ni cursor. */
+div.celda {
+  cursor: default;
+}
+div.celda:hover {
+  background: none;
+}
+
+/* Plano: el ícono suelto, sin baldosa. */
+.compacta[data-plano] .celda :global(.orbe) {
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  justify-content: start;
+}
+.compacta[data-plano] .celda :global(.orbe) svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* 2 columnas en escritorio. */
+@media (min-width: 1000px) {
+  .compacta[data-columnas='2'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .compacta[data-columnas='3'] {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .compacta[data-columnas='3'] > .item {
+    grid-column: span 4;
+  }
+}
+
+/* La última fila se reparte el ancho (12 columnas de base: sirve para 2, 3 y 4). */
+@media (min-width: 1000px) {
+  /* 3 columnas: sobran 1 o 2 */
+  .compacta[data-columnas='3'][data-completa] > .item:last-child:nth-child(3n + 1) {
+    grid-column: span 12;
+  }
+  .compacta[data-columnas='3'][data-completa] > .item:nth-last-child(2):nth-child(3n + 1),
+  .compacta[data-columnas='3'][data-completa] > .item:last-child:nth-child(3n + 2) {
+    grid-column: span 6;
+  }
+  /* 4 columnas: sobran 1, 2 o 3 */
+  .compacta[data-columnas='4'][data-completa] {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .compacta[data-columnas='4'][data-completa] > .item {
+    grid-column: span 3;
+  }
+  .compacta[data-columnas='4'][data-completa] > .item:last-child:nth-child(4n + 1) {
+    grid-column: span 12;
+  }
+  .compacta[data-columnas='4'][data-completa] > .item:nth-last-child(2):nth-child(4n + 1),
+  .compacta[data-columnas='4'][data-completa] > .item:last-child:nth-child(4n + 2) {
+    grid-column: span 6;
+  }
+  .compacta[data-columnas='4'][data-completa] > .item:nth-last-child(3):nth-child(4n + 1),
+  .compacta[data-columnas='4'][data-completa] > .item:nth-last-child(2):nth-child(4n + 2),
+  .compacta[data-columnas='4'][data-completa] > .item:last-child:nth-child(4n + 3) {
+    grid-column: span 4;
+  }
+}
+/* Tablet (2 columnas): si la cantidad es impar, la última ocupa todo el ancho. */
+@media (min-width: 600px) and (max-width: 999.98px) {
+  .compacta[data-completa] > .item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* En una sola fila (/guias): todas las celdas lado a lado en escritorio, con más aire y letra algo
+ * más grande. En tablet y móvil siguen las columnas de siempre. */
+@media (min-width: 1000px) {
+  .compacta[data-fila] {
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  }
+  .compacta[data-fila] .celda {
+    gap: 12px;
+    padding: clamp(26px, 2.6vw, 36px) clamp(20px, 2vw, 28px) clamp(30px, 3vw, 40px);
+  }
+  .compacta[data-fila] .celda :global(.orbe) {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+  }
+  .compacta[data-fila] .titulo {
+    font-size: 1.25rem;
+  }
+  .compacta[data-fila] .texto {
+    font-size: 1rem;
+  }
+}

@@ -4,7 +4,6 @@ import { MODULOS, T } from '@/lib/contenido';
 import { NAV } from '@/lib/nav';
 import { PIE } from '@/lib/paginas';
 import { PARA, PLAZAS } from '@/lib/seo';
-import { PANTALLAS } from '@/lib/sistema/pantallas';
 import { AUTOR, PORTFOLIO, linkWhatsapp } from '@/lib/sitio';
 import AbrirCookies from '@/components/consentimiento/AbrirCookies';
 import Icono from '@/components/sistema/Icono';
@@ -51,7 +50,7 @@ export default function Pie() {
             <p className={estilos.rotulo}>{P.producto}</p>
             <ul className={estilos.lista}>
               <li>
-                <Link href="/sistema">{N.pantallas.replace('{n}', String(PANTALLAS.length))}</Link>
+                <Link href="/sistema">{N.pantallas}</Link>
               </li>
               <li>
                 <Link href="/operaciones">{N.comoSeHace}</Link>
@@ -63,15 +62,12 @@ export default function Pie() {
                 <Link href="/planes">{P.planes}</Link>
               </li>
               <li>
-                <Link href="/que-incluye">{P.queIncluye}</Link>
-              </li>
-              <li>
                 <Link href="/web-a-medida">{P.webAMedida}</Link>
               </li>
             </ul>
           </div>
           <div>
-            <p className={estilos.rotulo}>{N.modulos.replace('{n}', String(MODULOS.length))}</p>
+            <p className={estilos.rotulo}>{N.modulos}</p>
             <ul className={estilos.lista}>
               {MODULOS.map((m) => (
                 <li key={m.slug}>
@@ -105,7 +101,7 @@ export default function Pie() {
             </ul>
           </div>
           <div>
-            <p className={estilos.rotulo}>{P.recursos}</p>
+            <p className={estilos.rotulo}>{P.ayuda}</p>
             <ul className={estilos.lista}>
               <li>
                 <Link href="/guias">{P.guias}</Link>
@@ -121,6 +117,9 @@ export default function Pie() {
               </li>
               <li>
                 <Link href="/preguntas">{N.preguntas}</Link>
+              </li>
+              <li>
+                <Link href="/software-rent-a-car">{P.ciudades}</Link>
               </li>
               <li>
                 <Link href="/privacidad">{PRIVACIDAD.enlace}</Link>

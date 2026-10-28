@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { CONTRATO_PAG, GUIAS, GLOSARIO } from '@/lib/seo';
 import { OPERACIONES } from '@/lib/sistema/operaciones';
-import { CONTRATO_PAG_UI } from '@/lib/paginas';
+import { CONTRATO_PAG_UI, PARA_PAG } from '@/lib/paginas';
 import { SITIO } from '@/lib/sitio';
 import Portada from '../_pagina/Portada';
 import Migas from '../_pagina/Migas';
 import Cierre from '../_pagina/Cierre';
 import Citable from '../_pagina/Citable';
 import Prosa from '../_pagina/Prosa';
+import EnRentaGo from '../_pagina/EnRentaGo';
 import FaqLista from '../_pagina/FaqLista';
 import Enlaces from '../_pagina/Enlaces';
 import { meta } from '../_pagina/meta';
@@ -38,6 +39,7 @@ export default function PaginaContrato() {
     },
     migasLd([...migas, { href: RUTA, texto: P.nombre }]),
   );
+  const firmar = OPERACIONES.find((o) => o.slug === 'firmar-el-contrato');
   const relacionados = [
     ...GLOSARIO.filter((t) => ['clausulado-versionado', 'franquicia', 'conductor-adicional'].includes(t.slug)).map(
       (t) => ({ href: `/glosario/${t.slug}`, texto: t.palabra }),
@@ -54,7 +56,6 @@ export default function PaginaContrato() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
 
       <Portada
-        tag={CONTRATO_PAG_UI.tag}
         titulo={P.h1}
         bajada={P.bajada}
         tono="petro"
@@ -89,10 +90,15 @@ export default function PaginaContrato() {
               {P.modelo.cta} <span aria-hidden="true">→</span>
             </Link>
           </p>
-          <p className={s.enRentaGo}>
-            <b>{CONTRATO_PAG_UI.enRentaGo}:</b> {P.enRentaGo}
-          </p>
         </section>
+
+        <EnRentaGo
+          rotulo={CONTRATO_PAG_UI.enRentaGo}
+          texto={P.enRentaGo}
+          verModulo={PARA_PAG.verComo}
+          href={firmar ? `/operaciones/${firmar.slug}` : undefined}
+          moduloNombre={firmar?.nombre}
+        />
 
         <FaqLista titulo={CONTRATO_PAG_UI.preguntas} preguntas={P.preguntas} id={`${SITIO}${RUTA}`} />
 

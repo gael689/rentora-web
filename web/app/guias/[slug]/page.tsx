@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { GUIAS, GLOSARIO, guia } from '@/lib/seo';
 import { MODULOS } from '@/lib/contenido';
@@ -7,8 +6,10 @@ import { SITIO, AUTOR } from '@/lib/sitio';
 import Portada from '../../_pagina/Portada';
 import Migas from '../../_pagina/Migas';
 import Cierre from '../../_pagina/Cierre';
-import Citable from '../../_pagina/Citable';
 import Prosa from '../../_pagina/Prosa';
+import Checklist from '../../_pagina/Checklist';
+import EnRentaGo from '../../_pagina/EnRentaGo';
+import { vistaModulo } from '../../_pagina/modulo';
 import FaqLista from '../../_pagina/FaqLista';
 import Enlaces from '../../_pagina/Enlaces';
 import { meta } from '../../_pagina/meta';
@@ -42,7 +43,7 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
   ];
   const modulo = MODULOS.find((m) => m.slug === g.modulo);
   const terminos = g.terminos.map((t) => GLOSARIO.find((x) => x.slug === t)).filter((t) => t !== undefined);
-  const otras = GUIAS.filter((x) => x.slug !== g.slug);
+  const siguiente = GUIAS[(GUIAS.findIndex((x) => x.slug === g.slug) + 1) % GUIAS.length];
 
   const ld = grafo(
     {
@@ -63,7 +64,6 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
 
       <Portada
-        tag={`${GUIAS_PAG.tag} · ${g.nombre}`}
         titulo={g.h1}
         bajada={g.bajada}
         tono="menta"
@@ -71,31 +71,18 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
       />
 
       <article className={`envoltorio ${s.pagina}`}>
-        <Citable texto={g.citable} tono="menta" />
-
         <Prosa secciones={g.secciones} />
 
-        <section className={s.bloque} data-tono="menta">
-          <h2 className={s.rotulo}>{GUIAS_PAG.pasos}</h2>
-          <ul className={s.pasos}>
-            {g.pasos.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
-        </section>
+        <Checklist titulo={GUIAS_PAG.pasos} pasos={g.pasos} tono="menta" />
 
-        <section className={s.bloque} data-tono="turq">
-          <p className={s.enRentaGo}>
-            <b>{GUIAS_PAG.enRentaGo}:</b> {g.enRentaGo}
-          </p>
-          {modulo && (
-            <p>
-              <Link href={`/modulos/${modulo.slug}`} className={s.ver}>
-                {GUIAS_PAG.modulo}: {modulo.nombre} <span aria-hidden="true">→</span>
-              </Link>
-            </p>
-          )}
-        </section>
+        <EnRentaGo
+          rotulo={GUIAS_PAG.enRentaGo}
+          texto={g.enRentaGo}
+          verModulo={GUIAS_PAG.verModulo}
+          href={modulo ? `/modulos/${modulo.slug}` : undefined}
+          moduloNombre={modulo?.nombre}
+          icono={modulo ? vistaModulo(modulo).icono : undefined}
+        />
 
         <FaqLista titulo={GUIAS_PAG.preguntas} preguntas={g.preguntas} id={`${SITIO}${ruta}`} />
 
@@ -104,7 +91,7 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
           tono="petro"
           items={terminos.map((t) => ({ href: `/glosario/${t.slug}`, texto: t.palabra }))}
         />
-        <Enlaces titulo={GUIAS_PAG.otras} items={otras.map((x) => ({ href: `/guias/${x.slug}`, texto: x.nombre }))} />
+        <Enlaces titulo={GUIAS_PAG.siguiente} items={[{ href: `/guias/${siguiente.slug}`, texto: siguiente.tarjeta }]} />
       </article>
 
       <Cierre titulo={GUIAS_PAG.cierreTitulo} bajada={GUIAS_PAG.cierreBajada} />

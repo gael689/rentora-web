@@ -31,7 +31,7 @@ export default async function Confirmar({
 
   return (
     <>
-      <Portada tag={CONFIRMAR.tag} titulo={CONFIRMAR.titulo} bajada={t ? CONFIRMAR.bajada : CONFIRMAR.sinToken} />
+      <Portada titulo={CONFIRMAR.titulo} bajada={t ? CONFIRMAR.bajada : CONFIRMAR.sinToken} />
 
       <div className={`envoltorio ${c.pagina} ${s.estado}`}>
         {t ? (

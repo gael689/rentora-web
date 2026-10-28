@@ -9,19 +9,16 @@
   padding: 0;
   list-style: none;
 }
-@media (min-width: 720px) {
-  .items[data-columnas='2'] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 .item {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: clamp(18px, 2.4vw, 24px);
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--tf) 45%, #fff);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 10%, transparent);
+  padding: clamp(14px, 2vw, 20px) 0 0;
+  border-top: var(--hilo);
+}
+/* Cada fila entra desde la izquierda cuando aparece en pantalla, y queda el listado normal. */
+:global(.rv-on) .desliza > li[data-reveal]:not([data-rv]) {
+  transform: translate3d(-72px, 0, 0);
 }
 .itemTitulo {
   margin: 0 0 4px;
@@ -38,43 +35,72 @@
   line-height: 1.6;
 }
 
-/* Las dos partes de /que-incluye: dos tarjetas grandes lado a lado. */
+/* Ancla #que-incluye (antes /que-incluye): que el salto no quede tapado por la barra. */
+.ancla {
+  scroll-margin-top: calc(var(--alto-barra) + 16px);
+}
+
+/* Las partes de qué incluye (pago único, mantenimiento mensual) y "Lo que es tuyo": tarjetas con
+ * titular grande, ícono de trazo y un color propio por columna (--t, --ts, --tf del tono). */
 .partes {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 18px;
+  gap: 20px;
   align-items: stretch;
 }
 @media (min-width: 960px) {
   .partes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
   }
 }
 .parte {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: clamp(22px, 3vw, 34px);
-  border-radius: 24px;
+  gap: 18px;
+  padding: clamp(26px, 3.2vw, 38px) clamp(22px, 3vw, 34px) clamp(22px, 3vw, 34px);
   background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde), var(--sombra-suave);
-}
-.parte[data-destacada='true'] {
-  background:
-    radial-gradient(70% 50% at 100% 0%, rgb(59 130 196 / 0.12), transparent 70%),
-    linear-gradient(160deg, var(--turq-soft) 0%, #fff 60%);
-  box-shadow: inset 0 0 0 2px var(--acento), var(--sombra-suave);
+  box-shadow: var(--sombra-foto);
 }
 .parteCabeza {
   display: grid;
-  gap: 6px;
+  gap: 12px;
 }
-.parte h2 {
+.parteTitular {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.parteIcono {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+  background: var(--tf);
+  color: var(--ts);
+}
+.parteTitulos {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.parteEtiqueta {
+  color: var(--ts);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.parteTitulos h3 {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 1.6rem;
+  font-size: clamp(1.85rem, 1.4rem + 1.4vw, 2.4rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 .parteCuando {
   margin: 0;
@@ -84,22 +110,30 @@
   gap: 10px;
 }
 .parte .item {
-  padding: 14px 16px;
-  border-radius: 16px;
+  padding: 14px 0 0;
+}
+.itemsAncho {
+  display: grid;
+  gap: 4px 40px;
+}
+@media (min-width: 760px) {
+  .itemsAncho {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-/* El caso. */
+/* El caso: card verde menta con esquinas redondeadas (la excepción a las esquinas rectas), borde fino
+ * verde claro, sombra suave y las tres frases en mini-cards blancas. */
 .caso {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: clamp(24px, 4vw, 48px);
   align-items: center;
   padding: clamp(24px, 4vw, 48px);
+  border: 1px solid #cfe8d9;
   border-radius: 24px;
-  background:
-    radial-gradient(60% 70% at 100% 0%, rgb(255 255 255 / 0.7), transparent 70%),
-    linear-gradient(150deg, var(--tf) 0%, color-mix(in srgb, var(--tf) 50%, #fff) 100%);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 12%, transparent);
+  background: linear-gradient(135deg, #e0f3e8 0%, #ecf7f0 55%, #f3faf6 100%);
+  box-shadow: var(--sombra-suave);
 }
 @media (min-width: 960px) {
   .caso {
@@ -117,42 +151,86 @@
 .casoBajada {
   margin: 0;
   max-width: 52ch;
-  color: var(--suave);
+  color: #35524f;
   font-size: 1.0625rem;
   line-height: 1.65;
 }
 .casoCifras ul {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .casoCifras li {
-  display: grid;
-  gap: 2px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   padding: 16px 18px;
-  border-radius: 18px;
+  border-radius: 14px;
   background: #fff;
-  box-shadow: var(--sombra-suave);
+  box-shadow: 0 1px 2px rgb(15 46 49 / 0.04), 0 10px 24px -14px rgb(23 115 74 / 0.35);
 }
-.casoCifras b {
-  color: var(--ts);
-  font-family: var(--fuente-titulo);
-  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
+.casoMarca {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--menta-soft);
+  color: var(--menta-strong);
 }
-.casoCifras span {
-  color: var(--suave);
-  font-size: 0.9rem;
+.casoCifras span:not(.casoMarca) {
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 1rem;
   line-height: 1.4;
 }
 .casoNota {
   margin: 12px 0 0;
   color: var(--suave);
   font-size: 0.8125rem;
+}
+
+/* Callout "Cómo lo resuelve RentaGo": tinte teal, borde izquierdo grueso, sombra suave. */
+.respuesta {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 6px;
+  padding: clamp(16px, 2.2vw, 22px) clamp(16px, 2.4vw, 24px);
+  border-left: 5px solid var(--primario);
+  background: linear-gradient(100deg, #dcefef 0%, #eaf5f5 100%);
+  box-shadow: var(--sombra-suave);
+}
+.respuestaIcono {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  color: var(--acento-osc);
+  box-shadow: 0 0 0 1px rgb(14 127 133 / 0.25);
+}
+.respuestaCuerpo {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.respuestaRotulo {
+  color: var(--acento-osc);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.respuestaTexto {
+  margin: 0;
+  color: var(--texto);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
 }

@@ -38,11 +38,9 @@ export type PaginaSeo = {
 
 /** `/para/[slug]`: un tipo de operación (aeropuerto, turismo, empresas, camionetas…). */
 export type PaginaPara = PaginaSeo & {
-  /** Cuatro necesidades de ese tipo de rentadora, cada una con lo que la resuelve. */
-  necesidades: { titulo: string; texto: string }[];
-  /** Prosa: cómo es ese negocio por dentro. Dos o tres secciones. */
-  secciones: Seccion[];
-  /** Slugs de `MODULOS` que más pesan acá, en orden. */
+  /** Tres soluciones: titular de beneficio + una oración (≤ 20 palabras). El problema va en `bajada`. */
+  soluciones: { titulo: string; texto: string }[];
+  /** Slugs de `MODULOS` que más pesan acá, en orden (máx. 3). */
   modulos: string[];
   /** Slug de `OPERACIONES` para "Ver cómo se hace". */
   operacion?: string;
@@ -52,7 +50,9 @@ export type PaginaPara = PaginaSeo & {
 
 /** `/guias/[slug]`: una guía práctica que sirve aunque no compres nada. */
 export type Guia = PaginaSeo & {
-  /** Tres a cinco secciones de prosa. */
+  /** Título de la tarjeta del índice, formulado como el problema. */
+  tarjeta: string;
+  /** Dos secciones de prosa como máximo. */
   secciones: Seccion[];
   /** Lista de control al final: cosas concretas para hacer o revisar. */
   pasos: string[];
@@ -92,21 +92,20 @@ export type PaginaPlanes = PaginaSeo & {
   planes: Plan[];
   /** Lo que se suma a cualquier plan. */
   adicionales: { nombre: string; texto: string }[];
-  /** Cómo se calcula el precio (sin números): pago único + mantenimiento mensual, sobre qué datos. */
-  comoSeCotiza: string;
-};
-
-/** Un ítem con ícono (de `components/sistema/Icono.tsx`), título y una línea. */
-export type ItemConIcono = { icono: string; titulo: string; texto: string };
-
-/** `/que-incluye`: qué se paga una vez, qué se paga por mes y qué es del cliente. Sin números. */
-export type PaginaIncluye = PaginaSeo & {
+  /** "Qué incluye" (ancla #que-incluye, antes /que-incluye): pago único, mantenimiento mensual, lo que es tuyo. */
+  incluyeTitulo: string;
+  /** Párrafo citable de la sección "Qué incluye". */
+  incluyeCitable: string;
   pagoUnico: { nombre: string; para: string; items: ItemConIcono[] };
   mensual: { nombre: string; para: string; items: ItemConIcono[] };
   tuyoTitulo: string;
   tuyo: ItemConIcono[];
+  /** Prosa de "Qué incluye": por qué en dos partes y cómo se calcula. */
   secciones: Seccion[];
 };
+
+/** Un ítem con ícono (de `components/sistema/Icono.tsx`), título y una línea. */
+export type ItemConIcono = { icono: string; titulo: string; texto: string };
 
 /** `/web-a-medida`: la web de reservas con la marca de cada rentadora. */
 export type PaginaAMedida = PaginaSeo & {

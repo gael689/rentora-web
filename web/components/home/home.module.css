@@ -4,11 +4,10 @@
 /* ── Cabezas de sección ── */
 .cabezaCentro {
   display: grid;
-  justify-items: center;
+  justify-items: start;
   gap: 16px;
   max-width: 760px;
-  margin: 0 auto clamp(36px, 5vw, 56px);
-  text-align: center;
+  margin: 0 0 clamp(36px, 5vw, 56px);
 }
 .cabezaCentro :global(.bajada) {
   max-width: 54ch;
@@ -23,7 +22,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   gap: 16px 24px;
   margin-top: clamp(28px, 4vw, 44px);
 }
@@ -83,19 +81,13 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 16px;
+  border-radius: 2px;
   border: 1px solid var(--borde);
-  box-shadow: var(--sombra-alta);
+  box-shadow: var(--sombra-foto-alta);
 }
 .heroCaptura::before {
-  /* Un halo del color de marca detrás de la captura, para que no flote sobre blanco plano. */
-  content: '';
-  position: absolute;
-  inset: 8% 0 -6% 6%;
-  z-index: -1;
-  border-radius: 40px;
-  background: linear-gradient(135deg, rgb(18 149 155 / 0.28), rgb(59 130 196 / 0.22));
-  filter: blur(40px);
+  /* Sin halo difuso: la sombra de la captura alcanza. */
+  display: none;
 }
 .f1,
 .f2,
@@ -158,7 +150,7 @@
   align-items: center;
   gap: 9px;
   padding: 6px 14px 6px 6px;
-  border-radius: 999px;
+  border-radius: 2px;
   background: #fff;
   box-shadow:
     0 0 0 1px rgb(15 46 49 / 0.06),
@@ -174,7 +166,7 @@
   place-items: center;
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: 2px;
   background: var(--tf);
   color: var(--ts);
 }
@@ -217,16 +209,27 @@
 
 /* ── Confianza ── */
 .confianza {
-  padding-block: 8px clamp(24px, 4vw, 40px);
+  padding-block: clamp(22px, 3vw, 32px);
 }
+/* La lista comparte el contenedor de la home (`envoltorio`: ancho máximo y gutter). Antes un
+ * `margin: 0; padding: 0` pisaba el `margin-inline: auto` y el gutter y la fila quedaba corrida a la
+ * izquierda y fuera del contenedor. Ahora se reparte pareja de borde a borde del contenedor. */
 .confianzaLista {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 0;
+  margin-block: 0;
   padding-block: 0;
   list-style: none;
+}
+.confianzaLista > :first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+.confianzaLista > :last-child {
+  padding-right: 0;
 }
 @media (max-width: 599px) {
   .confianzaLista {
@@ -234,9 +237,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
-  .cifraChip {
+  .confianzaLista > .cifraChip {
     padding: 8px 10px;
-    border-radius: 16px;
+    border-left: 0;
+    border-radius: 2px;
     font-size: 0.8rem;
     line-height: 1.25;
   }
@@ -248,21 +252,17 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px 7px 7px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde), var(--sombra-suave);
-  font-size: 0.9rem;
-  color: var(--suave);
+  padding: 6px 22px 6px 18px;
+  border-left: 1px solid rgb(255 255 255 / 0.18);
+  font-size: 0.9375rem;
+  color: #d6eeee;
 }
 .cifraIcono {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--tf);
-  color: var(--ts);
+  width: 24px;
+  height: 24px;
+  color: var(--claro);
 }
 .cifra {
   font-family: var(--fuente-titulo);
@@ -272,7 +272,7 @@
   color: var(--texto);
 }
 
-/* ── Módulos: cuatro grupos, dos por fila ── */
+/* ── Módulos: cuatro áreas, paneles delimitados y seleccionables ── */
 .grupos {
   display: grid;
   gap: 18px;
@@ -287,19 +287,33 @@
   }
 }
 .grupo {
-  padding: clamp(20px, 2.6vw, 30px);
-  border-radius: 24px;
-  background: color-mix(in srgb, var(--tf) 72%, #fff);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 10%, transparent);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(18px, 2.2vw, 26px);
+  border: 1px solid color-mix(in srgb, var(--t) 38%, #fff);
+  border-radius: 8px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--tf) 70%, #fff) 0%, color-mix(in srgb, var(--tf) 28%, #fff) 100%);
+  box-shadow: var(--sombra-suave);
+}
+.grupo .grupoFilete {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: auto;
+  height: 4px;
+  background: var(--t);
 }
 .grupoCabeza {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 .grupoCabeza :global(.orbe) {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
   background: #fff;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--t) 30%, #fff);
 }
 .grupoTitulo {
   margin: 0;
@@ -307,6 +321,25 @@
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+.grupoTituloLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--texto);
+}
+.grupoFlecha {
+  color: var(--ts);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity var(--rapido),
+    transform var(--rapido);
+}
+.grupoTituloLink:hover .grupoFlecha,
+.grupoTituloLink:focus-visible .grupoFlecha {
+  opacity: 1;
+  transform: none;
 }
 .grupoLista {
   display: grid;
@@ -325,35 +358,64 @@
   align-items: center;
   gap: 10px;
   height: 100%;
-  min-height: 50px;
-  padding: 7px 12px 7px 7px;
-  border-radius: 14px;
+  min-height: 48px;
+  padding: 6px 10px 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--t) 24%, #fff);
+  border-radius: 6px;
   background: #fff;
   color: var(--texto);
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.25;
-  box-shadow: 0 1px 2px rgb(15 46 49 / 0.04);
-  transition: box-shadow var(--rapido);
+  cursor: pointer;
+  transition:
+    background var(--rapido),
+    border-color var(--rapido),
+    color var(--rapido);
 }
-.grupoItem:hover {
+.grupoItem:hover,
+.grupoItem:focus-visible {
+  background: var(--tf);
+  border-color: var(--t);
   color: var(--texto);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ts) 35%, transparent), 0 10px 20px -14px rgb(15 46 49 / 0.4);
+}
+.grupoItemTexto {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 .grupoItemIcono {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: var(--tf);
+  width: 28px;
+  height: 28px;
   color: var(--ts);
+}
+.grupoItemFlecha {
+  flex: 0 0 auto;
+  color: var(--ts);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity var(--rapido),
+    transform var(--rapido);
+}
+.grupoItem:hover .grupoItemFlecha,
+.grupoItem:focus-visible .grupoItemFlecha {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: none) {
+  .grupoItemFlecha,
+  .grupoFlecha {
+    opacity: 0.55;
+    transform: none;
+  }
 }
 
 /* ── Funciones alternadas ── */
 .funciones {
-  padding-block: clamp(24px, 4vw, 48px);
+  padding-block: clamp(8px, 2vw, 24px);
 }
 .funcion {
   display: grid;
@@ -400,8 +462,6 @@
   flex: 0 0 auto;
   width: 22px;
   height: 22px;
-  border-radius: 50%;
-  background: var(--tf);
   color: var(--ts);
 }
 .funcionVisual {
@@ -413,11 +473,8 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 6 / 5;
-  border-radius: 28px;
-  background:
-    radial-gradient(70% 60% at 100% 0%, rgb(255 255 255 / 0.7), transparent 70%),
-    linear-gradient(150deg, var(--tf) 0%, color-mix(in srgb, var(--tf) 55%, #fff) 100%);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 10%, transparent);
+  border-radius: 2px;
+  background: var(--superficie);
 }
 .recorte {
   padding: clamp(24px, 4vw, 44px) 0 0 clamp(24px, 4vw, 44px);
@@ -429,7 +486,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 14px 0 0 0;
+  border-radius: 0;
   border: 1px solid var(--borde);
   border-width: 1px 0 0 1px;
   box-shadow: var(--sombra-alta);
@@ -468,14 +525,16 @@
 }
 
 /* ── A medida (v4c) ── */
-.aMedida {
-  padding-block: 0 clamp(24px, 4vw, 48px);
-}
 
-/* ── Seguridad ── */
-.seguridad {
-  background: linear-gradient(180deg, #fff 0%, var(--superficie) 40%, var(--superficie) 70%, #fff 100%);
+
+/* ── Tipos de rentadora (¿Cómo alquilás vos?) ── */
+.tipos {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
 }
+/* ── Seguridad ── */
+
 .seguridadGrilla {
   display: grid;
   gap: clamp(32px, 5vw, 64px);
@@ -505,13 +564,18 @@
   }
 }
 .garantia {
+  position: relative;
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  padding: 22px;
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--tf) 55%, #fff);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 10%, transparent);
+  padding: 18px 0 0;
+}
+.garantia .garantiaLinea {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: auto;
+  height: 1px;
+  background: var(--borde-fuerte);
 }
 .garantia :global(.orbe) {
   background: #fff;
@@ -548,20 +612,19 @@
   gap: 12px;
 }
 .pregunta {
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde), 0 1px 2px rgb(15 46 49 / 0.04);
-  transition: box-shadow var(--rapido);
+  border-bottom: var(--hilo);
+  transition: border-color var(--rapido);
 }
 .pregunta[open] {
-  box-shadow: inset 0 0 0 1px var(--borde-fuerte), var(--sombra-suave);
+  border-bottom-color: var(--acento);
 }
 .pregunta summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 18px 18px 18px 22px;
+  min-height: 56px;
+  padding: 14px 4px 14px 0;
   font-weight: 600;
   line-height: 1.4;
   list-style: none;
@@ -572,7 +635,7 @@
 }
 .pregunta p {
   margin: 0;
-  padding: 0 22px 20px;
+  padding: 0 0 20px;
   color: var(--suave);
   line-height: 1.6;
 }
@@ -581,9 +644,7 @@
   flex: 0 0 auto;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  background: var(--acento-sup);
-  transition: transform var(--rapido), background var(--rapido);
+  transition: transform var(--rapido);
 }
 .mas::before,
 .mas::after {
@@ -591,10 +652,9 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 12px;
+  width: 14px;
   height: 2px;
-  margin: -1px 0 0 -6px;
-  border-radius: 1px;
+  margin: -1px 0 0 -7px;
   background: var(--turq-strong);
 }
 .mas::after {
@@ -613,8 +673,8 @@
 .video video {
   display: block;
   width: 100%;
-  border-radius: 24px;
-  box-shadow: var(--sombra-alta);
+  border-radius: 2px;
+  box-shadow: var(--sombra-foto);
 }
 .video figcaption {
   margin-top: 10px;
@@ -643,14 +703,12 @@
   }
 }
 .problema {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  padding: clamp(20px, 2.4vw, 28px);
-  border-radius: 24px;
-  background: color-mix(in srgb, var(--tf) 72%, #fff);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 10%, transparent);
+  padding: clamp(16px, 2vw, 22px) 0 0;
 }
 .problema :global(.orbe) {
   background: #fff;
@@ -690,7 +748,7 @@
   display: grid;
   gap: 14px;
   padding: clamp(20px, 2.6vw, 28px);
-  border-radius: 24px;
+  border-radius: 2px;
   background: #fff;
   color: var(--texto);
 }
@@ -724,7 +782,7 @@
   color: var(--texto);
   background: var(--fondo);
   border: 1px solid var(--borde-fuerte);
-  border-radius: 14px;
+  border-radius: 2px;
 }
 .cierreCampo input:focus-visible {
   border-color: var(--acento-osc);
@@ -758,7 +816,7 @@
   align-items: center;
   min-height: 2.75rem;
   padding: 0 16px;
-  border-radius: 999px;
+  border-radius: var(--radio-boton);
   background: var(--superficie);
   box-shadow: inset 0 0 0 1px var(--borde-fuerte);
   font-size: 0.95rem;
@@ -813,4 +871,36 @@
   min-height: 65px;
   max-width: 100%;
   overflow: hidden;
+}
+
+/* ── Franja de CTA a mitad de la home: un renglón y un botón, sobre petróleo ── */
+.franja {
+  padding-block: clamp(28px, 4vw, 44px);
+}
+.franjaCuerpo {
+  display: grid;
+  gap: 18px 32px;
+  align-items: center;
+}
+@media (min-width: 760px) {
+  .franjaCuerpo {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+.franjaTitulo {
+  margin: 0 0 4px;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+.franjaTexto {
+  margin: 0;
+  color: #d6eeee;
+}
+
+/* La banda de "A medida" ya trae el aire de su `.funcion`: sólo un borde de respiro. */
+.aMedida {
+  padding-block: clamp(8px, 2vw, 24px);
 }

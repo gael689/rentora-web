@@ -3,6 +3,7 @@ import { T } from '@/lib/contenido';
 import { linkWhatsapp } from '@/lib/sitio';
 import { DEMO_ACTIVA, DEMO_CTA, RUTA_PROBAR } from '@/lib/demo';
 import Icono from '@/components/sistema/Icono';
+import { rv } from '@/components/animacion/Reveal';
 import Acento from './Titulo';
 
 /* El cierre de toda página interna (v4b): la misma banda con degradé de marca que la home, el
@@ -26,7 +27,7 @@ export default function Cierre({
   return (
     <section className="cierre-comun banda-cierre">
       <div className="envoltorio">
-        <div className="banda-cierre-cuerpo">
+        <div className="banda-cierre-cuerpo" {...rv(0, "escala")}>
           <div className="banda-cierre-texto">
             <h2 className="titular-bloque">
               <Acento texto={titulo} />

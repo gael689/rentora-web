@@ -35,7 +35,7 @@ export default function Sistema() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     '@id': `${SITIO}/sistema#pantallas`,
-    name: `Las ${PANTALLAS.length} pantallas del panel de RentaGo`,
+    name: 'Pantallas del panel de RentaGo',
     numberOfItems: PANTALLAS.length,
     itemListElement: PANTALLAS.map((p, i) => ({
       '@type': 'ListItem',
@@ -49,7 +49,7 @@ export default function Sistema() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <Portada tag={`${PANTALLAS.length} pantallas`} titulo={SISTEMA.titulo} bajada={SISTEMA.bajada}>
+      <Portada titulo={SISTEMA.titulo} bajada={SISTEMA.bajada} imagen={{ src: '/heros/sistema.webp', alt: 'Tres pantallas del sistema, inclinadas, sobre un fondo verde petróleo', pos: '60% 35%', lado: 'derecha' }}>
         <nav className={s.indice} aria-label={SISTEMA.indice}>
           {secciones.map((sec) => (
             <a key={sec.titulo} href={`#${sec.titulo.toLowerCase()}`} className="etiqueta" data-tono={sec.tono}>
@@ -106,7 +106,7 @@ export default function Sistema() {
           </section>
         )}
 
-        <Caso link={{ href: '/que-incluye', texto: CASO_UI.verIncluye }} />
+        <Caso link={{ href: '/planes#que-incluye', texto: CASO_UI.verIncluye }} />
       </div>
 
       <Cierre

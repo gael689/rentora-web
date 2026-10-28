@@ -16,7 +16,7 @@ export default function Privacidad() {
   const K = COOKIES.politica;
   return (
     <>
-      <Portada tag={P.tag} titulo={P.titulo} bajada={P.bajada} />
+      <Portada titulo={P.titulo} bajada={P.bajada} />
       <div className="envoltorio" style={{ paddingBlock: 'clamp(32px, 6vw, 72px)', maxWidth: 760 }}>
         <p className="nota">{P.actualizada}</p>
         {P.bloques.map((b) => (

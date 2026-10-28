@@ -1,0 +1,26 @@
+.caja {
+  --escala: 0.3;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #fff;
+}
+.marco {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 864px;
+  transform: translateX(var(--dx, 0px)) scale(var(--escala));
+  transform-origin: top left;
+}
+/* Con JavaScript se espera a medir para no mostrar el salto de escala. */
+@media (scripting: enabled) {
+  .caja:not([data-listo]) .marco {
+    opacity: 0;
+  }
+  .marco {
+    transition: opacity 200ms ease;
+  }
+}

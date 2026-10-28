@@ -1,17 +1,16 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PARA, PLAZAS, GUIAS, para } from '@/lib/seo';
 import { MODULOS } from '@/lib/contenido';
 import { OPERACIONES } from '@/lib/sistema/operaciones';
 import { PARA_PAG } from '@/lib/paginas';
+import { VISUAL_PARA } from '@/lib/para-visual';
 import { SITIO } from '@/lib/sitio';
 import Portada from '../../_pagina/Portada';
 import Migas from '../../_pagina/Migas';
 import Cierre from '../../_pagina/Cierre';
 import Citable from '../../_pagina/Citable';
-import Prosa from '../../_pagina/Prosa';
+import Compacta, { type CeldaCompacta } from '../../_pagina/Compacta';
 import FaqLista from '../../_pagina/FaqLista';
-import Enlaces from '../../_pagina/Enlaces';
 import { meta } from '../../_pagina/meta';
 import { grafo, migasLd } from '../../_pagina/schema';
 import { vistaModulo } from '../../_pagina/modulo';
@@ -33,6 +32,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return p ? meta(`/para/${p.slug}`, p.title, p.description) : {};
 }
 
+/* Un bloque de enlaces como celdas rectangulares de /modulos: la última fila se reparte el ancho. */
+function enlaces(titulo: string, celdas: CeldaCompacta[]) {
+  if (celdas.length === 0) return null;
+  return (
+    <section className={s.bloque}>
+      <h2 className={s.rotulo}>{titulo}</h2>
+      <Compacta etiqueta={titulo} cta={PARA_PAG.ver} columnas={3} completa plano celdas={celdas} />
+    </section>
+  );
+}
+
 export default async function PaginaPara({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = para(slug);
@@ -41,7 +51,7 @@ export default async function PaginaPara({ params }: { params: Promise<{ slug: s
   const ruta = `/para/${p.slug}`;
   const migas = [
     { href: '/', texto: 'Inicio' },
-    { href: '/para', texto: PARA_PAG.tag },
+    { href: '/para', texto: PARA_PAG.nombre },
   ];
   const modulos = p.modulos
     .map((m) => MODULOS.find((x) => x.slug === m))
@@ -50,6 +60,7 @@ export default async function PaginaPara({ params }: { params: Promise<{ slug: s
   const operacion = OPERACIONES.find((o) => o.slug === p.operacion);
   const guia = GUIAS.find((g) => g.slug === p.guia);
   const ciudades = PLAZAS.filter((c) => c.para === p.slug);
+  const visual = VISUAL_PARA[p.slug];
   const otras = PARA.filter((x) => x.slug !== p.slug);
 
   const ld = grafo(
@@ -71,68 +82,69 @@ export default async function PaginaPara({ params }: { params: Promise<{ slug: s
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
 
       <Portada
-        tag={`${PARA_PAG.tag} · ${p.nombre}`}
         titulo={p.h1}
         bajada={p.bajada}
         migas={<Migas items={migas} actual={p.nombre} />}
+        imagen={visual && { src: visual.src, alt: visual.alt, pos: visual.pos }}
       />
 
       <article className={`envoltorio ${s.pagina}`}>
-        <Citable texto={p.citable} />
-
         <section className={s.bloque} data-tono="azul">
-          <h2 className={s.rotulo}>{PARA_PAG.necesidades}</h2>
-          <ol className={s.necesidades}>
-            {p.necesidades.map((n) => (
-              <li key={n.titulo} className={s.necesidad}>
-                <h3>{n.titulo}</h3>
-                <p>{n.texto}</p>
-              </li>
-            ))}
-          </ol>
+          <h2 className={s.rotulo}>{PARA_PAG.soluciones}</h2>
+          <Compacta
+            etiqueta={PARA_PAG.soluciones}
+            columnas={3}
+            completa
+            plano
+            celdas={p.soluciones.map((x) => ({ icono: 'tilde', tono: 'turq', titulo: x.titulo, texto: x.texto }))}
+          />
         </section>
 
-        <Prosa secciones={p.secciones} />
+        <Citable texto={p.citable} aire />
 
         {modulos.length > 0 && (
           <section className={s.bloque}>
             <h2 className={s.rotulo}>{PARA_PAG.modulos}</h2>
-            <div className={s.indiceFamilia}>
-              {modulos.map((v) => (
-                <Link key={v.m.slug} href={`/modulos/${v.m.slug}`} className="beneficio" data-tono={v.tono}>
-                  <span className="etiqueta">{v.m.nombre}</span>
-                  <p className="dolor">{v.dolor}</p>
-                  <p className="gana">{v.gana}</p>
-                  <span className="ver">
-                    {PARA_PAG.ver} <span aria-hidden="true">→</span>
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <Compacta
+              etiqueta={PARA_PAG.modulos}
+              cta={PARA_PAG.ver}
+              columnas={3}
+              completa
+              plano
+              celdas={modulos.map((v) => ({
+                href: `/modulos/${v.m.slug}`,
+                icono: v.icono,
+                tono: v.tono,
+                titulo: v.m.nombre,
+                texto: v.gana,
+              }))}
+            />
           </section>
         )}
 
-        <FaqLista titulo={PARA_PAG.preguntas} preguntas={p.preguntas} id={`${SITIO}${ruta}`} />
+        <FaqLista titulo={PARA_PAG.preguntas} preguntas={p.preguntas} id={`${SITIO}${ruta}`} plano />
 
-        <Enlaces
-          titulo={PARA_PAG.guia}
-          tono="menta"
-          items={[
-            ...(operacion
-              ? [{ href: `/operaciones/${operacion.slug}`, texto: `${PARA_PAG.verComo}: ${operacion.nombre}` }]
-              : []),
-            ...(guia ? [{ href: `/guias/${guia.slug}`, texto: guia.nombre }] : []),
-          ]}
-        />
-        <Enlaces
-          titulo={PARA_PAG.ciudades}
-          tono="petro"
-          items={ciudades.map((c) => ({ href: `/software-rent-a-car/${c.slug}`, texto: c.ciudad }))}
-        />
-        <Enlaces titulo={PARA_PAG.otras} items={otras.map((x) => ({ href: `/para/${x.slug}`, texto: x.nombre }))} />
+        {enlaces(PARA_PAG.guia, [
+          ...(operacion
+            ? [{ href: `/operaciones/${operacion.slug}`, titulo: operacion.nombre, texto: PARA_PAG.verComo }]
+            : []),
+          ...(guia ? [{ href: `/guias/${guia.slug}`, titulo: guia.nombre, texto: PARA_PAG.guia }] : []),
+        ])}
+        {enlaces(
+          PARA_PAG.ciudades,
+          ciudades.map((c) => ({ href: `/software-rent-a-car/${c.slug}`, titulo: c.ciudad })),
+        )}
+        {enlaces(
+          PARA_PAG.otras,
+          otras.map((x) => ({ href: `/para/${x.slug}`, titulo: x.nombre, texto: VISUAL_PARA[x.slug]?.frase })),
+        )}
       </article>
 
-      <Cierre titulo={PARA_PAG.cierreTitulo} bajada={PARA_PAG.cierreBajada} />
+      <Cierre
+        titulo={PARA_PAG.cierreTitulo}
+        bajada={PARA_PAG.cierreBajada}
+        secundario={{ href: '/sistema', texto: PARA_PAG.verSistema }}
+      />
     </>
   );
 }

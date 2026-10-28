@@ -14,18 +14,9 @@ export default function DosMarcas({ className }: { className?: string }) {
       <div className={s.par}>
         {MARCAS_DEMO.map((m) => (
           <div key={m.clave} className={s.marca} data-marca={m.clave}>
-            <div className={s.navegador} aria-hidden="true">
-              <div className={s.barra}>
-                <span className={s.puntos}>
-                  <i />
-                  <i />
-                  <i />
-                </span>
-                <span className={s.url}>
-                  <Icono nombre="candado" tam={9} />
-                  {m.dominio}
-                </span>
-              </div>
+            <div className={s.telefono} aria-hidden="true">
+              <div className={s.pantalla}>
+                <span className={s.isla} />
               <div className={s.sitio}>
                 <div className={s.cabeza}>
                   {m.clave === 'valle' && (
@@ -73,6 +64,11 @@ export default function DosMarcas({ className }: { className?: string }) {
                   </ul>
                 </div>
                 {m.firma && <p className={s.firma}>{m.firma}</p>}
+                <span className={s.url}>
+                  <Icono nombre="candado" tam={9} />
+                  {m.dominio}
+                </span>
+              </div>
               </div>
             </div>
             <p className={s.pie}>

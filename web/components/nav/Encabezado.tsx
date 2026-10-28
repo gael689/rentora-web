@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { MODULOS, T } from '@/lib/contenido';
+import { T } from '@/lib/contenido';
 import { NAV, MEGA, MENU_MOVIL, type VisualMega } from '@/lib/nav';
 import { DEMO_ACTIVA, DEMO_CTA, RUTA_PROBAR } from '@/lib/demo';
-import { PANTALLAS } from '@/lib/sistema/pantallas';
 import { linkWhatsapp } from '@/lib/sitio';
 import Icono from '@/components/sistema/Icono';
 import e from './Encabezado.module.css';
@@ -21,8 +20,6 @@ import e from './Encabezado.module.css';
  * grandes y los botones abajo; la hamburguesa se vuelve X, el fondo no scrollea, y se cierra al
  * navegar y con Escape. La barra va por encima del menú (z-index), así la X siempre se puede tocar. */
 
-const texto = (t: string) => t.replace('{p}', String(PANTALLAS.length)).replace('{m}', String(MODULOS.length));
-
 function bloquearScroll(bloquear: boolean) {
   document.documentElement.classList.toggle('scroll-bloqueado', bloquear);
 }
@@ -31,6 +28,8 @@ export default function Encabezado() {
   const ruta = usePathname();
   const [arriba, setArriba] = useState(true);
   const [menu, setMenu] = useState(false);
+  /** La página abre con un hero de foto (`data-hero-foto`): arriba de todo el encabezado se acopla a él. */
+  const [sobreFoto, setSobreFoto] = useState(false);
   const [mega, setMega] = useState(false);
   /** Qué ítem del mega-menú está en foco o con el mouse encima: decide la captura de la derecha. */
   const [previa, setPrevia] = useState<number | null>(null);
@@ -49,6 +48,10 @@ export default function Encabezado() {
       cancelAnimationFrame(raf);
     };
   }, []);
+
+  useEffect(() => {
+    setSobreFoto(document.querySelector('[data-hero-foto]') !== null);
+  }, [ruta]);
 
   // Al navegar se cierran los menús: ajuste de estado al cambiar la ruta, sin efecto.
   const [rutaPrevia, setRutaPrevia] = useState(ruta);
@@ -97,7 +100,7 @@ export default function Encabezado() {
   const activo = (href: string) => ruta === href || ruta.startsWith(href + '/');
   const enProducto = MEGA.items.some((i) => activo(i.href));
   const visual: VisualMega = previa === null ? MEGA.visual : MEGA.items[previa].visual;
-  const estado = menu ? e.conMenu : arriba ? e.arriba : e.flotando;
+  const estado = menu ? e.conMenu : arriba ? (sobreFoto ? `${e.arriba} ${e.sobreFoto}` : e.arriba) : e.flotando;
 
   return (
     <>
@@ -143,7 +146,7 @@ export default function Encabezado() {
                                 <Icono nombre={i.icono} tam={20} />
                               </span>
                               <span>
-                                <span className={e.megaTitulo}>{texto(i.titulo)}</span>
+                                <span className={e.megaTitulo}>{i.titulo}</span>
                                 <span className={e.megaDetalle}>{i.detalle}</span>
                               </span>
                             </Link>

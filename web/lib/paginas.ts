@@ -169,10 +169,16 @@ export const NO_ENCONTRADA = {
 /* ── SEO: cómo elegir, glosario, preguntas, plazas ────────────────────────── */
 
 export const COMO_ELEGIR_PAG = {
-  tag: 'Antes de firmar',
+  // REVISAR GAEL: el H1 vuelve al de siempre; la bajada es el H1 de la versión corta (autodiagnóstico
+  // en vez de 12 preguntas) y la cantidad de señales pasó de cinco a diez.
   titulo: '¿Cómo elegir un software *para rent a car*?',
-  bajada: 'Doce preguntas para hacerle a cualquier proveedor, incluido este.',
-  rentago: 'En RentaGo',
+  bajada: '¿Tu rentadora ya necesita un sistema? Las señales de que ya es hora.',
+  senalesTitulo: 'Si te pasa esto…',
+  // REVISAR GAEL: rótulo del callout de respuesta.
+  rentago: 'Cómo lo resuelve RentaGo',
+  resumenTitulo: 'Si te pasan 3 o más, hablemos',
+  resumenContacto: 'Contame cómo trabajás',
+  resumenPlanes: 'Ver los planes',
   cierreTitulo: 'Las respuestas se *pueden verificar*',
   cierreBajada: 'Las pantallas del sistema están a la vista, una por una.',
   cierreCta: 'Ver el sistema por dentro',
@@ -192,8 +198,10 @@ export const GLOSARIO_PAG = {
 export const PREGUNTAS_PAG = {
   tag: 'Preguntas',
   titulo: 'Lo que se pregunta *en la primera llamada*',
-  bajada: 'Contestadas antes de la llamada. Incluida la que no me conviene.',
-  operacionesTitulo: '¿Y si la duda es cómo se hace algo?',
+  // REVISAR GAEL: subtítulo propuesto (sin "la que no me conviene").
+  bajada: 'Las dudas que más escuchamos antes de empezar.',
+  listaTitulo: 'Preguntas frecuentes',
+  operacionesTitulo: '¿Y si la duda es cómo se hace algo? Mirá cómo se hace cada cosa.',
   cierreTitulo: '¿Falta *la tuya*?',
   cierreBajada: 'Escribime y la contesto.',
 };
@@ -202,10 +210,6 @@ export const PLAZA_PAG = {
   cuando: 'Cuándo se llena',
   flota: 'Qué flota pesa',
   demanda: 'Dónde llega la demanda',
-  aeropuertoNota: 'La entrega en el aeropuerto se carga como adicional con su precio.',
-  entregaTitulo: 'Qué se entrega',
-  entregaTexto:
-    'El sistema con el que se maneja la rentadora y, en el plan Gestión + Web, la web propia donde el cliente reserva y paga.',
   masUsadoTitulo: 'Lo que más se usa acá',
   otras: 'Otras plazas',
 };
@@ -215,13 +219,15 @@ export const PLAZA_PAG = {
  * BORRADOR: los rótulos y los cierres los decide Gael. */
 
 export const PARA_PAG = {
-  tag: 'Para tu operación',
-  indiceTitulo: '¿Qué tipo de *rentadora* tenés?',
+  nombre: 'Tipos de rentadora',
+  // REVISAR GAEL: índice propuesto "¿Cómo alquilás vos?", tarjetas por situación.
+  indiceTitulo: '¿Cómo *alquilás vos*?',
   indiceBajada: 'Cada operación pierde plata en un lugar distinto. Elegí la tuya.',
+  soluciones: 'Cómo lo resuelve RentaGo',
+  verSistema: 'Ver el sistema',
   indiceTitle: 'Software para cada tipo de rentadora',
   indiceDescription:
     'Rent a car de aeropuerto, alquiler turístico, camionetas y utilitarios, empresas, choferes de aplicaciones y varias sucursales: qué necesita cada operación.',
-  necesidades: 'Lo que necesita esta operación',
   modulos: 'Los módulos que más se usan',
   verComo: 'Ver cómo se hace',
   guia: 'La guía que va con esto',
@@ -236,8 +242,9 @@ export const PARA_PAG = {
 };
 
 export const GUIAS_PAG = {
-  tag: 'Guías',
-  indiceTitulo: 'Guías para *el mostrador*',
+  // REVISAR GAEL: reencuadre como "problemas de todos los días"; nombre "Soluciones" a confirmar.
+  tag: 'Soluciones',
+  indiceTitulo: 'Problemas de todos los días *en el mostrador*',
   indiceBajada: 'Sirven aunque no compres nada. Cada una termina en una lista para revisar.',
   indiceTitle: 'Guías para rentadoras de autos',
   indiceDescription:
@@ -245,10 +252,13 @@ export const GUIAS_PAG = {
   pasos: 'Para revisar',
   enRentaGo: 'En RentaGo',
   modulo: 'El módulo',
+  // REVISAR GAEL: texto del botón hacia el módulo (antes: link "El módulo: X →").
+  verModulo: 'Ver el módulo',
   terminos: 'Términos de esta guía',
   preguntas: 'Preguntas',
   otras: 'Otras guías',
-  leer: 'Leer la guía',
+  leer: 'Revisá tu lista',
+  siguiente: 'La siguiente',
   cierreTitulo: '¿Lo querés *resuelto* en tu rentadora?',
   cierreBajada: 'Contame cómo lo hacés hoy y te muestro cómo queda en el sistema.',
 };
@@ -266,10 +276,21 @@ export const CONTRATO_PAG_UI = {
 
 export const PLANES_PAG_UI = {
   tag: 'Planes',
+  anchaIncluye: 'que-incluye',
   recomendado: 'El recomendado',
   adicionales: 'Se suma a cualquier plan',
+  // REVISAR GAEL: etiquetas nuevas sobre los titulares de "Qué incluye" y "Lo que es tuyo".
+  etiquetaPagoUnico: 'Una sola vez',
+  etiquetaMensual: 'Todos los meses',
+  etiquetaTuyo: 'Siempre tuyo',
   comoSeCotiza: 'Cómo se cotiza',
   preguntas: 'Preguntas sobre los planes',
+  enlaces: 'Seguí por acá',
+  enlacesItems: [
+    { href: '/web-a-medida', texto: 'Tu web a medida' },
+    { href: '/sistema', texto: 'Las pantallas del sistema' },
+    { href: '/preguntas', texto: 'Todas las preguntas' },
+  ],
   cierreTitulo: '¿Cuál es *el tuyo*?',
   cierreBajada: 'Contame cuántos autos tenés y si querés la web, y lo armamos sobre tu operación.',
   verIncluye: 'Ver qué incluye cada parte',
@@ -294,14 +315,14 @@ export const TERMINO_PAG = {
 };
 
 export const CIUDADES_PAG = {
-  tag: 'Dónde opera',
+  nombre: 'Dónde opera',
   titulo: 'Software para rent a car *en tu ciudad*',
   bajada: 'Cada plaza tiene su temporada, su flota y su cliente. Esto es lo que cambia en cada una.',
   title: 'Software para rent a car por ciudad',
   description:
     'Bariloche, Neuquén, Mendoza, Salta, Córdoba, Ushuaia, Rosario, El Calafate y Tucumán: cuándo se llena cada plaza, qué flota pesa y cómo se opera.',
-  operacion: 'Cómo se opera acá',
-  preguntas: 'Preguntas de esta plaza',
+  operacion: 'Un dato de la plaza',
+  preguntas: 'Una pregunta de esta plaza',
   tipo: 'El tipo de operación que más se parece',
   ver: 'Ver la plaza',
   cierreTitulo: '¿Tu ciudad *no está*?',
@@ -313,11 +334,10 @@ export const PIE = {
   producto: 'Producto',
   modulosTodos: 'Todos los módulos',
   planes: 'Planes',
-  queIncluye: 'Qué incluye',
   webAMedida: 'Tu web a medida',
-  para: 'Para tu operación',
+  para: 'Tipos de rentadora',
   ciudades: 'Ciudades',
-  recursos: 'Recursos',
+  ayuda: 'Ayuda',
   guias: 'Guías',
   contrato: 'Contrato de alquiler',
   descripcion:
@@ -332,22 +352,7 @@ export function partirAcento(texto: string): { t: string; acento: boolean }[] {
     .filter((p) => p.t !== '');
 }
 
-/* ── /que-incluye y /web-a-medida (v4c, 16/10) ────────────────────────────── */
-
-export const QUE_INCLUYE_UI = {
-  tag: 'Qué incluye',
-  preguntas: 'Preguntas sobre qué incluye',
-  enlaces: 'Seguí por acá',
-  enlacesItems: [
-    { href: '/planes', texto: 'Los planes' },
-    { href: '/web-a-medida', texto: 'Tu web a medida' },
-    { href: '/sistema', texto: 'Las pantallas del sistema' },
-    { href: '/preguntas', texto: 'Todas las preguntas' },
-  ],
-  cierreTitulo: 'Armemos *lo tuyo*',
-  cierreBajada: 'Contame cuántos autos tenés y si querés la web, y te digo qué lleva cada parte.',
-  verPlanes: 'Ver los planes',
-};
+/* ── /web-a-medida (v4c, 16/10) ────────────────────────────── */
 
 export const WEB_A_MEDIDA_UI = {
   tag: 'Web a medida',
@@ -355,7 +360,7 @@ export const WEB_A_MEDIDA_UI = {
   enlaces: 'Seguí por acá',
   enlacesItems: [
     { href: '/modulos/tu-web', texto: 'Cómo reserva y cobra' },
-    { href: '/que-incluye', texto: 'Qué incluye' },
+    { href: '/planes#que-incluye', texto: 'Qué incluye' },
     { href: '/planes', texto: 'Los planes' },
     { href: '/operaciones', texto: 'Cómo se hace cada cosa' },
   ],
@@ -364,7 +369,7 @@ export const WEB_A_MEDIDA_UI = {
   verIncluye: 'Ver qué incluye',
 };
 
-/** El link que acompaña al caso en /sistema y /que-incluye. */
+/** El link que acompaña al caso en /sistema y /planes. */
 export const CASO_UI = {
   verIncluye: 'Ver qué incluye',
   verSistema: 'Ver las pantallas',

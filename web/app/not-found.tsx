@@ -4,7 +4,7 @@ import Portada from './_pagina/Portada';
 
 export default function NoEncontrada() {
   return (
-    <Portada tag={NO_ENCONTRADA.tag} titulo={NO_ENCONTRADA.titulo} bajada={NO_ENCONTRADA.bajada}>
+    <Portada titulo={NO_ENCONTRADA.titulo} bajada={NO_ENCONTRADA.bajada}>
       <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginTop: 28, flexWrap: 'wrap' }}>
         <Link href="/" className="cta">
           {NO_ENCONTRADA.inicio}

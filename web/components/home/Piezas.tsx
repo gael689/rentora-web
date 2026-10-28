@@ -2,19 +2,7 @@ import Image from 'next/image';
 import Icono from '@/components/sistema/Icono';
 import s from './home.module.css';
 
-/* Piezas chicas de la v4b, compartidas por la home y las páginas internas. */
-
-/** Rótulo píldora sobre un titular de sección: baldosa de ícono + texto corto. */
-export function Rotulo({ texto, icono = 'chispa', tono }: { texto: string; icono?: string; tono?: string }) {
-  return (
-    <span className="eyebrow" data-tono={tono}>
-      <span className="eyebrow-icono" aria-hidden="true">
-        <Icono nombre={icono} tam={13} />
-      </span>
-      {texto}
-    </span>
-  );
-}
+/* Piezas chicas de la v4b de la home. */
 
 /** Chip blanco flotante sobre una captura: ícono en baldosa teñida + rótulo. Estático. */
 export function Flotante({

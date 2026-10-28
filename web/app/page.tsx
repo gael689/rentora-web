@@ -7,6 +7,8 @@ import Modulos from '@/components/home/Modulos';
 import Funciones from '@/components/home/Funciones';
 import Video from '@/components/home/Video';
 import AMedida from '@/components/home/AMedida';
+import Tipos from '@/components/home/Tipos';
+import Franja from '@/components/home/Franja';
 import Seguridad from '@/components/home/Seguridad';
 import Faq from '@/components/home/Faq';
 import Cierre from '@/components/home/Cierre';
@@ -67,7 +69,9 @@ export default function Home() {
       <Funciones />
       <AMedida />
       <Modulos />
+      <Franja />
       <Seguridad />
+      <Tipos />
       <Faq />
       <Cierre />
     </>

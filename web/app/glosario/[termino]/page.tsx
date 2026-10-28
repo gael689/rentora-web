@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { GLOSARIO } from '@/lib/seo';
 import { OPERACIONES } from '@/lib/sistema/operaciones';
@@ -10,6 +9,7 @@ import Cierre from '../../_pagina/Cierre';
 import Citable from '../../_pagina/Citable';
 import FaqLista from '../../_pagina/FaqLista';
 import Enlaces from '../../_pagina/Enlaces';
+import EnRentaGo from '../../_pagina/EnRentaGo';
 import { meta } from '../../_pagina/meta';
 import { grafo, migasLd } from '../../_pagina/schema';
 import s from '../../seo.module.css';
@@ -61,7 +61,6 @@ export default async function PaginaTermino({ params }: { params: Promise<{ term
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
 
       <Portada
-        tag={GLOSARIO_PAG.tag}
         titulo={`*${t.palabra}*`}
         tono="petro"
         migas={<Migas items={migas} actual={t.palabra} />}
@@ -77,18 +76,14 @@ export default async function PaginaTermino({ params }: { params: Promise<{ term
         </section>
 
         {t.enRentaGo && (
-          <section className={s.bloque} data-tono="turq">
-            <p className={s.enRentaGo}>
-              <b>{TERMINO_PAG.enRentaGo}:</b> {t.enRentaGo}
-            </p>
-            {operacion && (
-              <p>
-                <Link href={`/operaciones/${operacion.slug}`} className={s.ver}>
-                  {TERMINO_PAG.verComo}: {operacion.nombre} <span aria-hidden="true">→</span>
-                </Link>
-              </p>
-            )}
-          </section>
+          <EnRentaGo
+            rotulo={TERMINO_PAG.enRentaGo}
+            texto={t.enRentaGo}
+            verModulo={TERMINO_PAG.verComo}
+            href={operacion ? `/operaciones/${operacion.slug}` : undefined}
+            moduloNombre={operacion?.nombre}
+            icono="lista"
+          />
         )}
 
         <FaqLista titulo={TERMINO_PAG.preguntas} preguntas={t.preguntas} id={`${SITIO}${ruta}`} />

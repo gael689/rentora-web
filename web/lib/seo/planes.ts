@@ -1,7 +1,8 @@
-/* ── Planes ───────────────────────────────────────────────────────────────────
+/* ── Planes (+ Qué incluye, ancla #que-incluye) ───────────────────────────────
  *
  * BORRADOR. El copy lo decide Gael, y los nombres de los planes también: estos son una
- * propuesta para discutir.
+ * propuesta para discutir. Esta página absorbió lo que era /que-incluye (redirect en
+ * next.config.ts): su contenido original vive en la sección con ancla #que-incluye.
  *
  * Sin un solo número de precio y sin prometer cómo llega: el precio depende de la operación y se
  * habla antes de empezar. Se vende el sistema; la web de reservas conectada es una opción. Si en esta página aparece
@@ -9,7 +10,11 @@
  *
  * Todo lo que se afirma del sistema sale de `contenido.ts`, verificado contra el código. No se
  * ofrece lo que todavía no está construido: factura electrónica, prueba gratis ni instancia
- * dedicada. Las sucursales ya están en el producto: se suman como adicional. */
+ * dedicada. Las sucursales ya están en el producto: se suman como adicional.
+ *
+ * Las preguntas son las 4 de /planes más las de /que-incluye, sin duplicar: "¿Qué se paga una sola
+ * vez?" ya la cubre "¿Qué incluye la implementación?" y "¿Puedo llevarme mis datos?" ya la cubre
+ * "¿Qué pasa con mis datos si dejo de usarlo?". */
 import type { PaginaPlanes } from './tipos';
 
 export const PLANES_PAG: PaginaPlanes = {
@@ -92,8 +97,94 @@ export const PLANES_PAG: PaginaPlanes = {
         'Más horas con el equipo, o cargar datos más allá de la flota, las tarifas y el clausulado.',
     },
   ],
-  comoSeCotiza:
-    'Se paga en dos partes: un pago único por la web a medida, la implementación, la capacitación y la puesta en marcha del dominio y el hosting, y después un mantenimiento mensual. Cuánto es cada parte depende de cuántos autos tenés, cuántas sucursales y si querés la web de reservas. No hay un precio de lista: lo hablamos antes de empezar, con una demo del sistema si querés verlo, y queda por escrito antes de arrancar.',
+  incluyeTitulo: 'Qué incluye contratar RentaGo',
+  incluyeCitable:
+    'Contratar RentaGo tiene dos partes. Un pago único cubre el desarrollo de la web de reservas a medida, la implementación del sistema, la capacitación del equipo y la puesta en marcha del dominio y el hosting. Después, un mantenimiento mensual cubre el hosting, las actualizaciones, el soporte y el uso del sistema.',
+  pagoUnico: {
+    nombre: 'Pago único',
+    para: 'Lo que se hace una vez, para que arranques con todo cargado y andando.',
+    items: [
+      {
+        icono: 'globo',
+        titulo: 'Tu web de reservas a medida',
+        texto: 'Con tu logo, tu paleta, tu tipografía y tus fotos, conectada a tu panel. Si elegiste el plan sin web, esta parte no va.',
+      },
+      {
+        icono: 'auto',
+        titulo: 'Implementación del sistema',
+        texto: 'Cargamos tu flota con sus papeles, las categorías, los precios por temporada y tu contrato, tal como trabajás hoy.',
+      },
+      {
+        icono: 'personas',
+        titulo: 'Capacitación del equipo',
+        texto: 'Mostrador, caja y administración, cada uno con su rol. Al arrancar, operás acompañado.',
+      },
+      {
+        icono: 'candado',
+        titulo: 'Dominio y hosting en marcha',
+        texto: 'Registramos tu dominio a tu nombre, o conectamos el que ya tenés, y dejamos la web y el sistema publicados.',
+      },
+    ],
+  },
+  mensual: {
+    nombre: 'Mantenimiento mensual',
+    para: 'Lo que hace falta todos los meses para que el sistema y la web sigan andando.',
+    items: [
+      {
+        icono: 'panel',
+        titulo: 'Hosting',
+        texto: 'La web y el sistema publicados y andando, sin que tengas que contratar servidores.',
+      },
+      {
+        icono: 'girar',
+        titulo: 'Actualizaciones',
+        texto: 'Las mejoras del sistema te llegan a medida que salen, sin instalar nada.',
+      },
+      {
+        icono: 'whatsapp',
+        titulo: 'Soporte directo',
+        texto: 'Hablás por WhatsApp con quien desarrolla y mantiene el sistema.',
+      },
+      {
+        icono: 'usuario',
+        titulo: 'Uso del sistema',
+        texto: 'El panel para tu equipo, cada uno con su rol, y tu web mandándole las reservas, los cobros y las consultas.',
+      },
+    ],
+  },
+  tuyoTitulo: 'Lo que es tuyo',
+  tuyo: [
+    {
+      icono: 'globo',
+      titulo: 'El dominio, a tu nombre',
+      texto: 'Se registra a nombre de tu rentadora. Si un día dejás RentaGo, el dominio se queda con vos.',
+    },
+    {
+      icono: 'bajar',
+      titulo: 'Tus datos, exportables',
+      texto: 'Los reportes de Ingresos y Flota salen a CSV y la planilla de alquileres del mes, a Excel. Cómo se entrega el resto queda por escrito antes de empezar.',
+    },
+    {
+      icono: 'chispa',
+      titulo: 'Tu marca y tu contenido',
+      texto: 'El logo, las fotos y los textos de tu web son de tu rentadora, no de RentaGo.',
+    },
+  ],
+  secciones: [
+    {
+      titulo: 'Por qué en dos partes',
+      parrafos: [
+        'Poner en marcha un sistema de gestión es trabajo de una sola vez: relevar cómo trabajás, cargar la flota y las tarifas, adaptar el contrato, armar la web con tu marca y enseñarle al equipo a usarlo. Eso es el pago único, y cuando termina tenés el mostrador operando en el sistema y la web vendiendo.',
+        'Mantenerlo andando es trabajo de todos los meses: los servidores, las mejoras que se suman y alguien que conteste cuando algo no sale. Eso es el mantenimiento mensual. Separarlo así hace que pagues cada cosa una vez y sepas qué estás pagando.',
+      ],
+    },
+    {
+      titulo: 'Cómo se calcula',
+      parrafos: [
+        'No hay un precio de lista. Cada parte depende de tu operación: cuántos autos tenés, cuántas sucursales y si querés la web de reservas. Lo hablamos antes de empezar, con una demo del sistema si querés verlo, y queda por escrito antes de arrancar.',
+      ],
+    },
+  ],
   preguntas: [
     {
       p: '¿Por qué no está el precio en la web?',
@@ -110,6 +201,22 @@ export const PLANES_PAG: PaginaPlanes = {
     {
       p: '¿Qué pasa con mis datos si dejo de usarlo?',
       r: 'Los datos son de tu rentadora. Desde el sistema ya podés exportar los reportes de Ingresos y Flota a CSV y la planilla de alquileres del mes a Excel. Cómo se entrega el resto lo dejamos por escrito antes de empezar.',
+    },
+    {
+      p: '¿Qué cubre el mantenimiento mensual?',
+      r: 'El hosting de la web y del sistema, las actualizaciones, el soporte por WhatsApp y el uso del sistema para tu equipo.',
+    },
+    {
+      p: '¿El dominio queda a mi nombre?',
+      r: 'Sí. Se registra a nombre de tu rentadora, o se conecta el que ya tenés. Si un día dejás de usar RentaGo, el dominio sigue siendo tuyo.',
+    },
+    {
+      p: 'Si ya tengo web, ¿igual pago una web nueva?',
+      r: 'No. El plan Gestión es el sistema solo, para la rentadora que ya tiene su web. La web de reservas se puede sumar después, sobre la flota y las tarifas que ya cargaste.',
+    },
+    {
+      p: '¿Lo que entra por la web llega al sistema?',
+      r: 'Sí, la web y el panel son el mismo sistema. Las reservas pagadas entran confirmadas al panel, los cobros por Mercado Pago se acreditan en tu cuenta y quedan en la Caja, y quien pide que lo llames o no termina de pagar cae en el Seguimiento.',
     },
   ],
 };

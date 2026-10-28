@@ -8,6 +8,8 @@ import { SITIO } from '@/lib/sitio';
 import Momento, { hayMomento } from '@/components/sistema/Momento';
 import Pantalla, { hayReplica } from '@/components/sistema/Pantalla';
 import Portada from '../../_pagina/Portada';
+import Cubre from '@/components/sistema/Cubre';
+import Vista from '../Vista';
 import Migas from '../../_pagina/Migas';
 import Cierre from '../../_pagina/Cierre';
 import { mayuscula } from '../../_pagina/modulo';
@@ -94,7 +96,11 @@ export default async function PaginaOperacion({ params }: { params: Promise<{ sl
 
       <Portada
         tono={tono}
-        tag={o.nombre}
+        pantalla={
+          <Cubre>
+            <Vista o={o} />
+          </Cubre>
+        }
         titulo={o.pregunta}
         bajada={o.bajada}
         migas={
@@ -119,12 +125,10 @@ export default async function PaginaOperacion({ params }: { params: Promise<{ sl
 
         <section className={s.bloque}>
           <h2 className={s.rotulo}>{OPERACIONES_PAG.pasoAPaso}</h2>
-          <ol className={s.pasos}>
+          <ul className={s.pasos}>
             {o.pasos.map((p) => (
               <li key={p.n} className={s.paso}>
-                <span className="orbe" aria-hidden="true">
-                  {p.n}
-                </span>
+                <span className={s.punto} aria-hidden="true" />
                 <div className={s.pasoCuerpo}>
                   <h3 className={s.pasoTitulo}>{p.titulo}</h3>
                   <p className={s.pasoDetalle}>{p.detalle}</p>
@@ -132,7 +136,7 @@ export default async function PaginaOperacion({ params }: { params: Promise<{ sl
                 </div>
               </li>
             ))}
-          </ol>
+          </ul>
         </section>
 
         <section className={s.bloque}>

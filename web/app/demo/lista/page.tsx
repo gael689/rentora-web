@@ -32,7 +32,7 @@ export default async function Lista({
 
   return (
     <>
-      <Portada tag={LISTA.tag} titulo={v.titulo} bajada={v.bajada} tono={e === 'creada' ? 'menta' : 'turq'} />
+      <Portada titulo={v.titulo} bajada={v.bajada} tono={e === 'creada' ? 'menta' : 'turq'} />
 
       <div className={`envoltorio ${c.pagina} ${s.estado}`}>
         <div className={s.acciones}>

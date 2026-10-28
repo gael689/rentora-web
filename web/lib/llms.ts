@@ -6,9 +6,7 @@
  *
  * El copy lo decide Gael. `queEs` y `noHace` son los mismos textos que ya tenía `llms.txt`. */
 
-import { CIFRAS, MODULOS } from './contenido';
-import { PANTALLAS } from './sistema/pantallas';
-import { SECCIONES, ITEMS_NAV } from './sistema/navegacion';
+import { CIFRAS } from './contenido';
 import { DESCRIPCION_ENTIDAD, LOCKUP, SITIO, AUTOR } from './sitio';
 import { DEMO_ACTIVA, LLMS_DEMO } from './demo';
 
@@ -29,26 +27,20 @@ y devolución y su caja, y los reportes se ven por sucursal o consolidados.${
 }`;
 
 export function llmsCifras() {
-  return `Contadas sobre el código, no estimadas:
+  return `Lo que trae, verificado sobre el código :
 
-- ${CIFRAS.pantallas} pantallas en el panel de administración. La web muestra ${PANTALLAS.length}, con la misma barra lateral (${SECCIONES.length} secciones de menú, ${ITEMS_NAV.length} ítems).
-- ${CIFRAS.paginasWeb} páginas en la web pública de la rentadora.
-- ${MODULOS.length} módulos comerciales.
-- ${CIFRAS.tablas} tablas, ${CIFRAS.endpoints} endpoints y ${CIFRAS.migraciones} migraciones en el backend, y ${CIFRAS.tests} tests automáticos que corren en cada cambio.
-- ${CIFRAS.reglas} reglas de aviso que corren cada 30 minutos. Los avisos quedan en la campana del panel: el equipo no recibe mails.
-- ${CIFRAS.reportes} reportes en pantalla: Resumen, Ingresos, Flota y Demanda no atendida. Ingresos y Flota se exportan a CSV.
-- ${CIFRAS.capas} capas en el motor de precios: temporada, feriado y duración. Un solo precio para web y mostrador.
-- ${CIFRAS.pasosAlta} pasos en el alta de reserva, y hasta ${CIFRAS.conductores} conductores por contrato.
+- Un panel de administración con pantallas para ocupación, reservas, contratos, clientes, flota, caja, precios, cotizador, multas, avisos y reportes.
+- Una web pública de reservas para cada rentadora, con su marca.
+- Reglas de aviso que corren cada 30 minutos. Los avisos quedan en la campana del panel: el equipo no recibe mails.
+- Reportes en pantalla: Resumen, Ingresos, Flota y Demanda no atendida. Ingresos y Flota se exportan a CSV.
+- Un motor de precios de ${CIFRAS.capas} capas: temporada, feriado y duración. Un solo precio para web y mostrador.
+- Alta de reserva en ${CIFRAS.pasosAlta} pasos, y hasta ${CIFRAS.conductores} conductores por contrato.
 - ${CIFRAS.minutosCupo} minutos de cupo retenido mientras el cliente paga en la web.
 - ${CIFRAS.minutosGracia} minutos de gracia antes de cobrar una devolución tardía.
 - 4 tramos de antigüedad de deuda en la cuenta corriente del cliente: 1-30, 31-60, 61-90 y más de 90 días.`;
 }
 
-export const LLMS_NO_HACE = `- **No emite factura electrónica.** Registra facturas, notas de crédito, notas de débito y
-  remitos con su PDF adjunto y los ata al alquiler y a la cuenta corriente. La factura
-  electrónica se sigue emitiendo donde ya se emite. Los recibos de cobro sí los emite el sistema,
-  numerados.
-- Prospectos es un módulo opcional: la campaña se arma y queda lista, pero el envío automático todavía no está activado.
+export const LLMS_NO_HACE = `- Prospectos es un módulo opcional: la campaña se arma y queda lista, pero el envío automático todavía no está activado.
 - El reparto entre socios no viene de serie: es un adicional.
 - No tiene precio público. El modelo es un pago único (web a medida, implementación,
   capacitación, dominio y hosting en marcha) más un mantenimiento mensual (hosting,

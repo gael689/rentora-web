@@ -5,6 +5,7 @@ import { SITIO, INDEXAR, LOCKUP, PORTFOLIO, AUTOR, WHATSAPP, SAME_AS, DESCRIPCIO
 import { alternos, SUFIJO_TITLE } from './_pagina/meta';
 import Consentimiento from '@/components/consentimiento/Consentimiento';
 import Medicion from '@/components/consentimiento/Medicion';
+import RevealRuntime from '@/components/animacion/RevealRuntime';
 import Encabezado from '@/components/nav/Encabezado';
 import Pie from '@/components/nav/Pie';
 import BarraMovil from '@/components/nav/BarraMovil';
@@ -109,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BarraMovil />
         <Consentimiento />
         <Medicion />
+        <RevealRuntime />
         {/* Sin cookies y sin identificar a nadie: no pide consentimiento. */}
         <Analytics />
       </body>

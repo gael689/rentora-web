@@ -41,7 +41,16 @@ export function hayMomento(slug: string | undefined): boolean {
   return Boolean(slug && slug in MOMENTOS);
 }
 
-export default function Momento({ slug, pie }: { slug: string; pie?: string }) {
+export default function Momento({
+  slug,
+  pie,
+  conVisor = true,
+}: {
+  slug: string;
+  pie?: string;
+  /** Sin visor devuelve sólo el marco de la aplicación (1280 × 864), para usarlo de fondo. */
+  conVisor?: boolean;
+}) {
   const m = MOMENTOS[slug];
   if (!m) return null;
 
@@ -51,11 +60,16 @@ export default function Momento({ slug, pie }: { slug: string; pie?: string }) {
 
   const Modal = m.modal;
 
+  const marco = (
+    <Marco ruta={meta.ruta} titulo={meta.titulo} completa={meta.completa} encima={Modal ? <Modal /> : undefined}>
+      <Fondo />
+    </Marco>
+  );
+  if (!conVisor) return marco;
+
   return (
     <Ajustado ruta={meta.ruta} pie={pie} inicial={0.86} minimo={0.45}>
-      <Marco ruta={meta.ruta} titulo={meta.titulo} completa={meta.completa} encima={Modal ? <Modal /> : undefined}>
-        <Fondo />
-      </Marco>
+      {marco}
     </Ajustado>
   );
 }

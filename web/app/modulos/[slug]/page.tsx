@@ -74,7 +74,6 @@ export default async function PaginaModulo({ params }: { params: Promise<{ slug:
 
       <Portada
         tono={v.tono}
-        tag={`${m.n} · ${m.nombre}`}
         titulo={mayuscula(m.termino)}
         bajada={v.gana}
         migas={

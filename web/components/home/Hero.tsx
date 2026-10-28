@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { HOME } from '@/lib/contenido';
 import { linkWhatsapp } from '@/lib/sitio';
 import Icono from '@/components/sistema/Icono';
-import { Rotulo, Flotante, Telefono } from './Piezas';
+import { Flotante, Telefono } from './Piezas';
 import s from './home.module.css';
 
-/* Hero v4b: a la izquierda, rótulo + H1 corto + una bajada + dos acciones. A la derecha, el
+/* Hero v4b: a la izquierda, H1 corto + una bajada + dos acciones. A la derecha, el
  * producto real al frente (la ocupación), con chips flotantes en los bordes y la web de reservas
  * en un celular. Todo estático: los chips no flotan, se apoyan. */
 export default function Hero() {
@@ -16,14 +16,13 @@ export default function Hero() {
     <section className={s.hero} aria-labelledby="t-hero">
       <div className={`envoltorio ${s.heroGrilla}`}>
         <div className={s.heroTexto}>
-          <Rotulo texto={h.tag} icono="chispa" tono="petro" />
-          <h1 id="t-hero" className={`titular-hero ${s.h1}`}>
+          <h1 id="t-hero" className={`titular-hero entrada ${s.h1}`}>
             {/* Una oración por renglón lógico: juntas, la segunda quedaba colgando a 1440 px. */}
             <span className={s.h1Frase}>{h.titular.antes.trim()}</span>{' '}
             <span className={s.h1Frase}>{h.titular.clave}</span>
           </h1>
-          <p className={`bajada ${s.heroBajada}`}>{h.bajada}</p>
-          <div className={s.acciones}>
+          <p className={`bajada entrada ${s.heroBajada}`} style={{ ['--rv-i' as string]: 1 }}>{h.bajada}</p>
+          <div className={`entrada ${s.acciones}`} style={{ ['--rv-i' as string]: 2 }}>
             <Link href="/sistema" className="cta" data-evento="ver_sistema" data-cta="hero">
               {h.ctaPrincipal}
               <Icono nombre="flecha" tam={18} />
@@ -41,7 +40,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className={s.heroVisual}>
+        <div className={`entrada ${s.heroVisual}`} style={{ ['--rv-i' as string]: 2 }}>
           {/* La captura del sistema real (capturas-reales.mjs), con su marco de navegador. */}
           <div className={s.heroCaptura}>
             <Image

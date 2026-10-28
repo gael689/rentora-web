@@ -7,9 +7,9 @@ import { SITIO } from '@/lib/sitio';
 import Portada from '../../_pagina/Portada';
 import Migas from '../../_pagina/Migas';
 import Cierre from '../../_pagina/Cierre';
-import Citable from '../../_pagina/Citable';
 import FaqLista from '../../_pagina/FaqLista';
 import Enlaces from '../../_pagina/Enlaces';
+import Prosa from '../../_pagina/Prosa';
 import { meta } from '../../_pagina/meta';
 import { grafo, migasLd } from '../../_pagina/schema';
 import { vistaModulo } from '../../_pagina/modulo';
@@ -41,7 +41,7 @@ export default async function PaginaPlaza({ params }: { params: Promise<{ ciudad
   const ruta = `/software-rent-a-car/${p.slug}`;
   const migas = [
     { href: '/', texto: 'Inicio' },
-    { href: '/software-rent-a-car', texto: CIUDADES_PAG.tag },
+    { href: '/software-rent-a-car', texto: CIUDADES_PAG.nombre },
   ];
   const modulo = MODULOS.find((m) => m.slug === p.modulo);
   const vista = modulo ? vistaModulo(modulo) : undefined;
@@ -71,15 +71,12 @@ export default async function PaginaPlaza({ params }: { params: Promise<{ ciudad
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
 
       <Portada
-        tag={`${p.ciudad} · ${p.provincia}`}
         titulo={`Software para rent a car en *${p.ciudad}*`}
-        bajada={p.mercado}
+        bajada={p.citable}
         migas={<Migas items={migas} actual={p.ciudad} />}
       />
 
       <article className={`envoltorio ${s.pagina}`}>
-        <Citable texto={p.citable} />
-
         <div className={s.datos}>
           <div className={s.dato} data-tono="turq">
             <p className={s.datoRotulo}>{PLAZA_PAG.cuando}</p>
@@ -91,30 +88,17 @@ export default async function PaginaPlaza({ params }: { params: Promise<{ ciudad
           </div>
           <div className={s.dato} data-tono="menta">
             <p className={s.datoRotulo}>{PLAZA_PAG.demanda}</p>
-            <p className={s.datoTexto}>
-              {p.aeropuerto}. {PLAZA_PAG.aeropuertoNota}
-            </p>
+            <p className={s.datoTexto}>{p.aeropuerto}</p>
           </div>
         </div>
 
-        <section className={s.bloque}>
-          <h2 className={`titular-fila ${s.subtitulo}`}>{CIUDADES_PAG.operacion}</h2>
-          <div className={s.prosa}>
-            <p>{p.operacion}</p>
-          </div>
-        </section>
-
-        <section className={s.bloque} data-tono="petro">
-          <h2 className={s.rotulo}>{PLAZA_PAG.entregaTitulo}</h2>
-          <p className={s.prosa}>{PLAZA_PAG.entregaTexto}</p>
-        </section>
+        <Prosa secciones={[{ titulo: CIUDADES_PAG.operacion, parrafos: [p.dato] }]} />
 
         {modulo && vista && (
           <section className={s.bloque}>
             <h2 className={s.rotulo}>{PLAZA_PAG.masUsadoTitulo}</h2>
             <Link href={`/modulos/${modulo.slug}`} className="beneficio" data-tono={vista.tono}>
               <span className="etiqueta">{modulo.nombre}</span>
-              <p className="dolor">{vista.dolor}</p>
               <p className="gana">{vista.gana}</p>
               <span className="ver">
                 Ver cómo <span aria-hidden="true">→</span>

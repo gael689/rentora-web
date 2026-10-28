@@ -2,19 +2,256 @@
 .pagina {
   padding-block: clamp(16px, 3vw, 32px) 0;
 }
-.grilla {
+/* ── Índice: la escena de operaciones ────────────────────────────────────────
+   Base (móvil, sin JS, o sin sticky): lista vertical de tarjetas claras, todas en el HTML; el panel
+   de la pantalla no se muestra. Desde 900 px con JS: un contenedor alto con un hijo `sticky` que se
+   queda pegado mientras se scrollea. Adentro, a la izquierda, un arco vertical (una rueda vista de
+   costado: el centro del círculo queda a la izquierda, así la activa sobresale hacia la derecha) y,
+   a la derecha, la pantalla de la operación activa. `Escena.tsx` marca `data-d` (distancia circular
+   a la activa) y `data-on`; acá cada `data-d` fija un ángulo `--k` × `--paso` y la tarjeta se coloca
+   con x = R·(cos θ − 1), y = R·sin θ. */
+.escena {
+  padding-block: clamp(8px, 2vw, 24px) clamp(32px, 5vw, 64px);
+}
+.fijo {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
-  gap: 16px;
+  gap: 18px;
 }
-.fila {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+.arco {
+  display: grid;
+  gap: 0;
 }
-.numero {
-  font-size: 1rem;
+.vista {
+  display: none;
+}
+/* Móvil: pila de carpetas. Cada tarjeta se queda pegada arriba un poco más abajo que la anterior
+   (queda a la vista su solapa) y la siguiente la tapa al scrollear: se van "descartando". */
+.item {
+  display: block;
+  position: sticky;
+  top: calc(var(--alto-barra) + 10px + var(--i, 0) * 14px);
+  margin-bottom: 36px;
+  scroll-margin-top: calc(var(--alto-barra) + 16px);
+}
+.item:last-child {
+  margin-bottom: 0;
+}
+
+/* Tarjeta (móvil / sin sticky): opaca, con la pantalla del sistema de cabecera (16:10) y el título
+   en blanco encima sobre degradé; debajo, la pregunta y "Ver cómo". Todo el bloque es un link. */
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radio-recto, 2px);
+  border-top: 4px solid var(--primario);
+  background: #fff;
+  box-shadow:
+    0 0 0 1px var(--borde),
+    0 -10px 22px -12px rgb(15 46 49 / 0.35),
+    0 18px 34px -18px rgb(15 46 49 / 0.4);
+  color: var(--texto);
+}
+.card:hover,
+.card:focus-visible {
+  color: var(--texto);
+}
+.card:focus-visible {
+  outline-offset: 4px;
+}
+.cardMedia {
+  position: relative;
+  grid-area: 1 / 1;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--texto);
+}
+.cardMedia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgb(15 46 49 / 0) 35%, rgb(15 46 49 / 0.88) 100%);
+}
+.cardTitulo {
+  position: relative;
+  z-index: 2;
+  grid-area: 1 / 1;
+  align-self: end;
+  margin: 0;
+  padding: 16px 18px;
+  color: #fff;
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-bloque);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.cardPregunta {
+  grid-row: 2;
+  margin: 0;
+  padding: 16px 18px 0;
+  color: var(--suave);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.cardVer {
+  grid-row: 3;
+  padding: 10px 18px 18px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--primario);
+}
+
+/* Escena pegajosa: sólo con pantalla ancha y JavaScript. `Escena.tsx` posiciona cada tarjeta por
+   JS (transform, opacity, z-index, --elev) según el progreso del scroll; acá sólo va la base. */
+@media (min-width: 900px) and (scripting: enabled) {
+  .escena {
+    height: calc(100vh + (var(--n) - 1) * 27vh);
+    padding-block: 0;
+    /* Pegada al hero (el fondo sigue desde ahí) y separada del Cierre, que va sobre blanco. */
+    margin-block: 0 clamp(32px, 5vw, 64px);
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+  }
+  /* El fondo de la escena: arranca igual que el hero y se va aclarando a medida que se baja, hasta
+     quedar blanco al final, a todo el ancho. Termina con la escena; el cierre sigue sobre blanco. */
+  .escena::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background:
+      radial-gradient(50% 40% at 18% 12%, rgb(18 149 155 / 0.22), transparent 70%),
+      linear-gradient(180deg, #0f2e31 0%, #11383b 14%, #1d5a5e 34%, #7fb0b3 58%, #cfe3e4 80%, #fff 100%);
+  }
+  .fijo {
+    --cw: clamp(320px, 29.5vw, 440px);
+    position: sticky;
+    top: calc(var(--alto-barra) + 12px);
+    height: calc(100vh - var(--alto-barra) - 28px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 24px;
+    align-items: stretch;
+    padding-block: 12px;
+  }
+  /* El arco se recorta a su caja y las tarjetas lejanas se desvanecen antes de llegar al borde
+     superior e inferior: nunca invaden el hero ni el cierre. */
+  .arco {
+    position: relative;
+    display: block;
+    overflow: clip;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 84%, transparent 100%);
+  }
+  /* Apaisada (2,2 : 1). Antes de que corra el JS, sólo se ve la primera. */
+  .item {
+    position: absolute;
+    left: 56px;
+    top: calc(50% - var(--cw) / 4.4);
+    width: var(--cw);
+    aspect-ratio: 2.2 / 1;
+    transform-origin: center;
+    opacity: 0;
+    will-change: transform, opacity;
+    /* Sin la aparición de Reveal: acá mueve el carrusel por JS. */
+    transition: none;
+  }
+  .item[data-on] {
+    opacity: 1;
+  }
+  .card {
+    position: relative;
+    height: 100%;
+    align-content: center;
+    gap: 6px;
+    padding: 16px 22px;
+    overflow: hidden;
+    border-radius: var(--radio-recto);
+    background: linear-gradient(150deg, var(--turq-soft) 0%, #fff 70%);
+    box-shadow: 0 1px 3px rgb(15 46 49 / 0.08);
+  }
+  .cardMedia {
+    display: none;
+  }
+  .cardTitulo {
+    grid-area: auto;
+    padding: 0;
+    color: var(--texto);
+  }
+  .cardPregunta,
+  .cardVer {
+    grid-row: auto;
+    padding: 0;
+  }
+  /* Sombra marcada y suave de la central: una capa aparte cuya opacidad la gobierna --elev. */
+  .item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    box-shadow:
+      0 30px 60px -18px rgb(15 46 49 / 0.32),
+      0 10px 24px -8px rgb(15 46 49 / 0.18);
+    opacity: var(--elev, 0);
+  }
+  .cardPregunta {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .item:not([data-on]) .cardVer {
+    visibility: hidden;
+  }
+  .item:not([data-on]) .card {
+    cursor: pointer;
+  }
+  /* Hover: sólo feedback leve (no cambia la activa ni mueve el arco). */
+  .item:not([data-on]) .card:hover {
+    box-shadow: inset 0 0 0 1px var(--primario), 0 1px 3px rgb(15 46 49 / 0.08);
+  }
+
+  /* El panel de la derecha: la pantalla activa, una sobre otra. */
+  .vista {
+    position: relative;
+    display: block;
+  }
+  .panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 420ms ease;
+  }
+  .panel[data-on] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .panelLink {
+    height: 100%;
+    box-shadow: var(--sombra-foto-alta);
+  }
+  .panelTitulo {
+    font-size: var(--t-seccion);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .cardVer {
+    transition: none;
+  }
 }
 
 /* Detalle de una operación */
@@ -47,14 +284,23 @@
 .paso::before {
   content: '';
   position: absolute;
-  left: 19.5px;
-  top: 44px;
+  left: 21px;
+  top: 34px;
   bottom: 4px;
   width: 2px;
   background: linear-gradient(var(--turq-soft), var(--azul-soft));
 }
 .paso:last-child::before {
   display: none;
+}
+.punto {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin: 12px 14px 0 15px;
+  border-radius: 2px;
+  background: var(--acento);
+  box-shadow: 0 0 0 5px var(--turq-soft);
 }
 .pasoCuerpo {
   min-width: 0;
@@ -63,9 +309,9 @@
 .pasoTitulo {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 1.125rem;
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.3;
 }
 .pasoDetalle {
@@ -76,7 +322,7 @@
   display: inline-block;
   margin: 12px 0 0;
   padding: 6px 14px;
-  border-radius: 999px;
+  border-radius: 2px;
   background: var(--azul-soft);
   color: var(--azul-strong);
   font-size: 0.9rem;
@@ -84,7 +330,7 @@
 }
 .porque {
   padding: clamp(24px, 3.4vw, 40px);
-  border-radius: 24px;
+  border-radius: 2px;
   background: linear-gradient(150deg, var(--menta-soft) 0%, color-mix(in srgb, var(--menta-soft) 40%, #fff) 100%);
 }
 .porque p {
@@ -106,7 +352,7 @@
   align-items: center;
   min-height: 44px;
   padding: 0 18px;
-  border-radius: 999px;
+  border-radius: var(--radio-boton);
   background: #fff;
   box-shadow: inset 0 0 0 1px var(--borde);
   color: var(--texto);

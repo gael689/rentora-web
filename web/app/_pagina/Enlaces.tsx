@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { rv } from '@/components/animacion/Reveal';
 import s from '../seo.module.css';
 
 /* Los enlaces cruzados entre familias (otras ciudades, otras guías, términos relacionados). Es
@@ -14,7 +15,7 @@ export default function Enlaces({
 }) {
   if (items.length === 0) return null;
   return (
-    <section className={`${s.bloque} ${s.bloqueEnlaces}`} data-tono={tono}>
+    <section className={`${s.bloque} ${s.bloqueEnlaces}`} data-tono={tono} {...rv(0)}>
       <h2 className={s.rotulo}>{titulo}</h2>
       <nav className={s.otras} aria-label={titulo}>
         {items.map((x) => (

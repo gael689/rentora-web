@@ -1,93 +1,105 @@
-/* ── Cómo elegir ──────────────────────────────────────────────────────────────
+/* ── ¿Tu rentadora ya necesita un sistema? ────────────────────────────────────
  *
- * Doce preguntas. La mitad las contesta bien cualquier proveedor serio; la otra mitad es donde
- * se separan, y son justamente las que a RentaGo le conviene que se hagan. Eso no se disimula:
- * la página lo dice.
+ * Autodiagnóstico para /como-elegir: diez señales ("si te pasa esto…"), cada una con una oración
+ * o dos de la situación y cómo lo resuelve RentaGo, y un cierre que lleva a la compra. Se eligieron
+ * las que responden búsquedas reales de quien evalúa un software de alquiler de autos: doble venta,
+ * cobro de seña online, vencimientos, contratos y firma, cuenta corriente, pasar del Excel,
+ * temporadas, web propia, varias sucursales y qué incluye y cómo se paga.
  *
- * Sin nombrar competidores. La comparación la hace el que lee, con el proveedor que tenga
- * enfrente. */
-export type Pregunta = {
-  q: string;
-  porque: string;
-  /** Qué contesta RentaGo. Va aparte y rotulado, para que no se lea como si la pregunta
-   *  estuviera escrita a medida — aunque en parte lo esté. */
+ * REVISAR GAEL: todo el copy de esta página es propuesta (la ampliación de cinco a diez señales es
+ * nueva). Sin nombrar competidores. Sin precios y sin facturación electrónica. Todo lo que se
+ * afirma sale de `contenido.ts` y de los datos de /planes.
+ *
+ * Cada `titulo` está formulado como pregunta: es el texto visible y también el `name` de la
+ * `Question` del `FAQPage` de la página, así el marcado dice lo mismo que se ve. */
+export type Senal = {
+  /** La señal, formulada como pregunta. */
+  titulo: string;
+  /** La situación, una o dos oraciones. */
+  situacion: string;
+  /** Cómo lo resuelve RentaGo, una o dos oraciones. */
   rentago: string;
+  icono: string;
 };
 
-export const CHECKLIST: Pregunta[] = [
+export const SENALES: Senal[] = [
   {
-    q: '¿El cupo se calcula sobre la flota real o sobre un número que cargo yo?',
-    porque:
-      'Es la diferencia entre que el sistema te frene una sobreventa y que te deje hacerla. Si el cupo es un número escrito a mano, se desactualiza el primer día.',
-    rentago: 'Sobre la flota real y por fecha. El calendario muestra una fila por unidad.',
-  },
-  {
-    q: '¿El precio de un feriado sale solo o hay que acordarse de cargarlo?',
-    porque:
-      'Un tarifario plano obliga a que alguien se acuerde, todos los años, de subir el fin de semana largo. El día que nadie se acuerda, se vende a precio de martes.',
-    rentago: 'Tres capas de calendario: temporada, feriado y duración. Se cargan una vez.',
-  },
-  {
-    q: 'Si doy de baja una promoción, ¿vuelve solo el precio anterior?',
-    porque:
-      'Si la promo pisó el precio, terminarla significa volver a cargar el viejo, y el día que alguien se olvida se vende a precio de promoción fuera de fecha.',
-    rentago: 'Las capas se superponen: la promo nunca reemplazó al precio de abajo.',
-  },
-  {
-    q: '¿La web y el mostrador venden sobre el mismo cupo y el mismo precio?',
-    porque:
-      'Si cada canal tiene su propio stock o su propia tarifa, tarde o temprano se vende dos veces el mismo auto, o el mismo auto a dos precios.',
+    titulo: '¿Vendiste dos veces el mismo auto?',
+    situacion:
+      'Cargaste dos reservas para la misma unidad y te enterás cuando el cliente ya está en el mostrador. La web y el mostrador llevan cuentas distintas.',
     rentago:
-      'Un solo precio y un solo cupo. Cada reserva conserva su origen, web o mostrador, para poder filtrarlas.',
+      'El cupo se calcula sobre la flota real y por fecha, con un solo precio y un solo cupo para la web y el mostrador. Tu web nunca vende un auto ocupado.',
+    icono: 'calendario',
   },
   {
-    q: 'Un contrato firmado hace dos años, ¿se reimprime con el texto de entonces?',
-    porque:
-      'Si el sistema reimprime el clausulado vigente, el papel dice cosas que el cliente nunca firmó. Delante de un abogado eso es peor que no tener nada.',
-    rentago: 'Cada contrato guarda un snapshot congelado del texto del día de la firma.',
-  },
-  {
-    q: '¿Qué pasa si mi cliente firma en papel?',
-    porque:
-      'Media Argentina firma en papel. Un sistema que sólo contempla la firma digital te obliga a mantener dos archivos en paralelo, que en la práctica significa dejar de usar el sistema.',
-    rentago: 'En pantalla, por link remoto revocable, o adjuntando el escaneo del papel.',
-  },
-  {
-    q: '¿Me avisa antes de que venza la VTV o la póliza, o tengo que mirarlo yo?',
-    porque:
-      'Un listado de vencimientos que hay que ir a mirar es un listado que nadie mira. El aviso tiene que llegar solo, a un lugar donde ya estés.',
-    rentago: '31 reglas que corren cada 30 minutos y dejan el aviso en la campana del sistema.',
-  },
-  {
-    q: 'Cuando llega un acta de hace tres meses, ¿el sistema sabe quién manejaba?',
-    porque:
-      'Sin eso, la multa se paga sola o se pierde una tarde cruzando fechas contra contratos en papel.',
-    rentago: 'Con la fecha del hecho encuentra el alquiler vigente y el conductor responsable.',
-  },
-  {
-    q: '¿Sé cuánto me deben mis clientes y desde cuándo?',
-    porque:
-      '"Me debe un millón" y "me debe un millón desde hace tres meses" no son la misma frase, y sólo una de las dos sirve para decidir si le seguís alquilando.',
-    rentago: 'La pestaña A cobrar lista cada alquiler con saldo y los días desde la devolución.',
-  },
-  {
-    q: '¿La web con motor de reservas está incluida o se cotiza aparte?',
-    porque:
-      'Es la pregunta que más plata mueve y casi nadie la hace a tiempo. Un motor de reservas hecho después, por otro proveedor, cuesta más que el sistema.',
-    rentago: 'Incluida en el plan Gestión + Web: el panel más el sitio propio con checkout y cobro online. Si ya tenés web, el plan Gestión va sin ella.',
-  },
-  {
-    q: '¿Emite factura electrónica?',
-    porque:
-      'Si la emitís desde otro lado, no es un problema: es un paso más. Pero conviene saberlo antes y no en la segunda semana de uso.',
+    titulo: '¿Sabés quién te debe y desde cuándo?',
+    situacion:
+      'Para saber cuánto te falta cobrar hay que revisar cuadernos, planillas y mensajes. “Me debe plata” y “me debe desde hace tres meses” no son lo mismo.',
     rentago:
-      'No. Registra comprobantes con su PDF y los ata al alquiler; la factura electrónica se emite donde la emitís hoy. Los recibos de cobro sí salen numerados del sistema.',
+      'La Caja lista cada alquiler con saldo y los días que pasaron desde la devolución, con cuenta corriente por cliente.',
+    icono: 'billetera',
   },
   {
-    q: '¿Quién carga mi flota, mis tarifas y mi clausulado?',
-    porque:
-      'Un sistema excelente con la base vacía no sirve para nada, y la carga inicial es donde mueren la mitad de las implementaciones.',
-    rentago: 'La carga es parte de la implementación. Vos ponés la información.',
+    titulo: '¿Se te vencen la VTV o el seguro sin darte cuenta?',
+    situacion: 'Te enterás de que el papel venció cuando el auto ya salió, o cuando llega la multa.',
+    rentago:
+      'Cargás cada vencimiento una vez y el sistema te avisa solo, con 31 reglas de aviso que corren cada 30 minutos y dejan el aviso en la campana del panel.',
+    icono: 'campana',
+  },
+  {
+    titulo: '¿Cobrás la seña a mano?',
+    situacion:
+      'Cada reserva es una cadena de mensajes y comprobantes, y mientras tanto el auto queda sin confirmar o se lo lleva otro.',
+    rentago:
+      'En tu web el cliente paga la seña online, solo, y el auto queda retenido mientras paga. La reserva te llega confirmada.',
+    icono: 'globo',
+  },
+  {
+    titulo: '¿Sabés qué firmó tu cliente?',
+    situacion:
+      'Contratos en papel, en el celular o en un documento que se fue reescribiendo: cuando hay un reclamo, nadie sabe cuál era el texto del día de la firma.',
+    rentago:
+      'El contrato se firma en pantalla, por un link remoto o adjuntando el escaneo del papel, y guarda una copia congelada del texto del día de la firma.',
+    icono: 'firma',
+  },
+  {
+    titulo: '¿Tu Excel depende de una sola persona?',
+    situacion:
+      'Si esa persona no viene, nadie sabe cómo están las reservas, los precios ni los contratos. Y a medida que crece la flota, la planilla se rompe.',
+    rentago:
+      'Partimos de tu planilla o tu cuaderno: cargamos tu flota, tus tarifas y tu contrato tal como los tenés hoy. Todo queda en un sistema, con un rol para cada integrante del equipo.',
+    icono: 'planilla',
+  },
+  {
+    titulo: '¿Los feriados y las temporadas dependen de que alguien se acuerde?',
+    situacion:
+      'Un tarifario plano obliga a subir el fin de semana largo a mano todos los años. El día que nadie se acuerda, se alquila a precio de martes.',
+    rentago:
+      'El precio se arma en capas de calendario: temporada, feriados y descuentos por duración. Se cargan una vez y el sistema calcula cada día.',
+    icono: 'etiquetas',
+  },
+  {
+    titulo: '¿Tus clientes pueden reservar a cualquier hora?',
+    situacion:
+      'Si reservar depende de que alguien conteste el WhatsApp, las consultas de la noche y del fin de semana se van con otro.',
+    rentago:
+      'Tu propia web de reservas, con tu marca, muestra la disponibilidad real, calcula el precio final y toma el pago. La hacemos a medida, conectada a tu panel.',
+    icono: 'globo',
+  },
+  {
+    titulo: '¿Tenés más de una sucursal?',
+    situacion:
+      'Cuando el cliente retira en un lado y devuelve en otro, la flota, la caja y los avisos se desordenan entre sucursales.',
+    rentago:
+      'Cada sucursal tiene sus puntos de retiro y devolución y su caja, y el cliente puede retirar en una y devolver en otra.',
+    icono: 'edificio',
+  },
+  {
+    titulo: '¿Sabés qué incluye el sistema y cómo se paga?',
+    situacion:
+      'Muchos sistemas muestran un precio de entrada y después suman la implementación, la capacitación y el soporte por separado.',
+    rentago:
+      'Un pago único cubre la implementación, la web a medida y la capacitación; después, un mantenimiento mensual cubre el hosting, las actualizaciones y el soporte. El detalle está en Planes, y lo hablamos antes de empezar.',
+    icono: 'documento',
   },
 ];
-

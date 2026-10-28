@@ -188,14 +188,14 @@ export const GLOSARIO: Termino[] = [
     slug: 'cuenta-corriente',
     palabra: 'Cuenta corriente',
     definicion:
-      'La cuenta corriente es el saldo que una empresa cliente mantiene con la rentadora cuando no paga al contado. Se factura el alquiler y se cobra a 15, 30, 60 o 90 días. El dato que importa no es sólo cuánto deben, sino desde cuándo.',
+      'La cuenta corriente es el saldo que una empresa cliente mantiene con la rentadora cuando no paga al contado. Se alquila hoy y se cobra a 15, 30, 60 o 90 días. El dato que importa no es sólo cuánto deben, sino desde cuándo.',
     enRentaGo:
       'Es una pestaña de Caja. Y la pestaña A cobrar lista cada alquiler con saldo y los días desde la devolución.',
     title: 'Qué es la cuenta corriente en un rent a car',
     description:
-      'La cuenta corriente es el saldo de una empresa que alquila y paga a plazo. Cómo se factura a 15, 30, 60 o 90 días y por qué importa desde cuándo te deben.',
+      'La cuenta corriente es el saldo de una empresa que alquila y paga a plazo. Cómo se cobra a 15, 30, 60 o 90 días y por qué importa desde cuándo te deben.',
     ampliacion:
-      'Una cuenta corriente sana y una peligrosa pueden tener el mismo saldo. Un ejemplo: dos empresas deben lo mismo. La primera alquila todos los meses y lo que debe son los alquileres de las últimas dos semanas. La segunda dejó de pagar hace tres meses y sigue alquilando. Mirando solo el total, son iguales. Mirando la antigüedad, a la segunda hay que llamarla hoy y quizás dejar de entregarle autos. Por eso la deuda se separa en tramos de antigüedad. También conviene que cada factura y cada remito queden atados al alquiler que los originó, porque la empresa siempre pregunta a qué corresponde cada importe.',
+      'Una cuenta corriente sana y una peligrosa pueden tener el mismo saldo. Un ejemplo: dos empresas deben lo mismo. La primera alquila todos los meses y lo que debe son los alquileres de las últimas dos semanas. La segunda dejó de pagar hace tres meses y sigue alquilando. Mirando solo el total, son iguales. Mirando la antigüedad, a la segunda hay que llamarla hoy y quizás dejar de entregarle autos. Por eso la deuda se separa en tramos de antigüedad. También conviene que cada importe quede atado al alquiler que lo originó, porque la empresa siempre pregunta a qué corresponde.',
     preguntas: [
       {
         p: '¿Qué diferencia hay entre cuenta corriente y A cobrar?',
@@ -204,10 +204,6 @@ export const GLOSARIO: Termino[] = [
       {
         p: '¿Le puedo seguir alquilando a una empresa que me debe?',
         r: 'Es una decisión comercial de cada rentadora. Lo importante es tomarla mirando desde cuándo debe y no solo cuánto, con el saldo a la vista antes de entregar el auto.',
-      },
-      {
-        p: '¿La cuenta corriente reemplaza a la factura?',
-        r: 'No. La factura se sigue emitiendo donde se emite hoy, y la cuenta corriente registra lo facturado y lo cobrado. En RentaGo las facturas, notas de crédito y remitos se cargan con su PDF y quedan atados al alquiler.',
       },
     ],
     relacionados: ['a-cobrar', 'echeq', 'reparto-entre-socios'],

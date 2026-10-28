@@ -1,0 +1,125 @@
+/* Carrusel de tipos de rentadora: fila con scroll horizontal y snap, a todo el ancho de la ventana.
+ * Visibles a la vez: ~1,5 en móvil, ~2,5 en tablet, ~3,5 en escritorio. Las flechas van a los lados. */
+.marco {
+  --ancho-tarjeta: 62vw;
+  --hueco: 16px;
+  position: relative;
+  margin-inline: calc(50% - 50vw);
+}
+@media (min-width: 600px) {
+  .marco {
+    --ancho-tarjeta: 40vw;
+    --hueco: 20px;
+  }
+}
+@media (min-width: 1000px) {
+  .marco {
+    --ancho-tarjeta: min(28vw, 360px);
+    --hueco: 24px;
+  }
+}
+
+.ventana {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  padding: 28px var(--gutter) 44px;
+  scrollbar-width: none;
+  cursor: grab;
+}
+/* Con el avance continuo no hay snap: lo deshace en cada cuadro. */
+.bucle {
+  scroll-snap-type: none;
+}
+.ventana::-webkit-scrollbar {
+  display: none;
+}
+/* Mientras se arrastra con el mouse el snap se suelta, para que siga al puntero. */
+.ventana[data-arrastrando] {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.pista {
+  display: flex;
+  gap: var(--hueco);
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item {
+  flex: 0 0 var(--ancho-tarjeta);
+  scroll-snap-align: start;
+}
+
+.tarjeta {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  -webkit-user-drag: none;
+  transition:
+    transform 260ms cubic-bezier(0.22, 0.8, 0.3, 1),
+    box-shadow 260ms ease;
+}
+.tarjeta:hover,
+.tarjeta:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-foto-alta);
+}
+.foto {
+  object-fit: cover;
+  transition: transform 600ms ease;
+}
+.tarjeta:hover .foto,
+.tarjeta:focus-visible .foto {
+  transform: scale(1.05);
+}
+
+/* Flechas: cuadradas, 44 px, a cada lado, a media altura de la tarjeta. */
+.flecha {
+  position: absolute;
+  top: calc(28px + (var(--ancho-tarjeta) * 4 / 3) / 2 - 22px);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-recto);
+  background: #fff;
+  color: var(--texto);
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: var(--sombra-foto);
+  cursor: pointer;
+  transition:
+    background var(--rapido),
+    opacity var(--rapido);
+}
+.flecha:hover:not(:disabled) {
+  background: var(--acento-sup);
+}
+.flecha:focus-visible {
+  outline: 3px solid var(--primario);
+  outline-offset: 2px;
+  border-radius: var(--radio-recto);
+}
+.flecha:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.izq {
+  left: max(var(--gutter), 8px);
+}
+.der {
+  right: max(var(--gutter), 8px);
+}
+/* Sin JavaScript los botones no hacen nada: queda el scroll manual. */
+@media (scripting: none) {
+  .flecha {
+    display: none;
+  }
+}

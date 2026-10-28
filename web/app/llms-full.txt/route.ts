@@ -1,7 +1,7 @@
 import { MODULOS, FAQS, ARGENTINA, IMPLEMENTACION, ETAPAS, PROBLEMAS } from '@/lib/contenido';
 import { OPERACIONES } from '@/lib/sistema/operaciones';
 import { PANTALLAS } from '@/lib/sistema/pantallas';
-import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG, CHECKLIST, QUE_INCLUYE_PAG, WEB_A_MEDIDA_PAG, type PreguntaFaq, type Seccion, type ItemConIcono } from '@/lib/seo';
+import { GLOSARIO, PLAZAS, PARA, GUIAS, CONTRATO_PAG, PLANES_PAG, SENALES, WEB_A_MEDIDA_PAG, type PreguntaFaq, type Seccion, type ItemConIcono } from '@/lib/seo';
 import { SITIO } from '@/lib/sitio';
 import { LLMS_TITULO, LLMS_RESUMEN, LLMS_QUE_ES, LLMS_NO_HACE, LLMS_CITAR, llmsCifras, plano } from '@/lib/llms';
 
@@ -21,6 +21,7 @@ const faq = (ps: PreguntaFaq[]) => ps.map((f) => `**${f.p}**\n${f.r}`).join('\n\
 const prosa = (ss: Seccion[], nivel = '###') =>
   ss.map((x) => `${nivel} ${x.titulo}\n\n${x.parrafos.join('\n\n')}`).join('\n\n');
 const cita = (t: string) => `> ${t}`;
+const items = (xs: ItemConIcono[]) => xs.map((x) => `- **${x.titulo}**: ${x.texto}`).join('\n');
 
 export function GET() {
   const partes: string[] = [];
@@ -74,7 +75,7 @@ ${m.problema}
 ${cita(`${m.dolor} — ${m.gana}`)}`,
 ).join('\n\n')}`);
 
-  h(`## Las ${PANTALLAS.length} pantallas del sistema
+  h(`## Pantallas del sistema
 
 Catálogo con las pantallas replicadas: ${SITIO}/sistema
 
@@ -106,47 +107,33 @@ ${PLANES_PAG.planes
   .map((p) => `### ${p.nombre}${p.recomendado ? ' (recomendado)' : ''}\n\n${p.para}\n\n${p.incluye.map((i) => `- ${i}`).join('\n')}`)
   .join('\n\n')}
 
-### Adicionales
+### Se suma a cualquier plan
 
 ${PLANES_PAG.adicionales.map((a) => `- **${a.nombre}**: ${a.texto}`).join('\n')}
 
-### Cómo se cotiza
+### ${PLANES_PAG.incluyeTitulo} (${SITIO}/planes#que-incluye)
 
-${PLANES_PAG.comoSeCotiza}
+#### ${PLANES_PAG.pagoUnico.nombre}
+
+${PLANES_PAG.pagoUnico.para}
+
+${items(PLANES_PAG.pagoUnico.items)}
+
+#### ${PLANES_PAG.mensual.nombre}
+
+${PLANES_PAG.mensual.para}
+
+${items(PLANES_PAG.mensual.items)}
+
+#### ${PLANES_PAG.tuyoTitulo}
+
+${items(PLANES_PAG.tuyo)}
+
+${prosa(PLANES_PAG.secciones, '####')}
 
 ### Preguntas
 
 ${faq(PLANES_PAG.preguntas)}`);
-
-  const items = (xs: ItemConIcono[]) => xs.map((x) => `- **${x.titulo}**: ${x.texto}`).join('\n');
-  const QI = QUE_INCLUYE_PAG;
-  h(`## ${plano(QI.h1)}
-
-URL: ${SITIO}/${QI.slug}
-
-${cita(QI.citable)}
-
-### ${QI.pagoUnico.nombre}
-
-${QI.pagoUnico.para}
-
-${items(QI.pagoUnico.items)}
-
-### ${QI.mensual.nombre}
-
-${QI.mensual.para}
-
-${items(QI.mensual.items)}
-
-### ${QI.tuyoTitulo}
-
-${items(QI.tuyo)}
-
-${prosa(QI.secciones)}
-
-### Preguntas
-
-${faq(QI.preguntas)}`);
 
   const WM = WEB_A_MEDIDA_PAG;
   h(`## ${plano(WM.h1)}
@@ -169,7 +156,7 @@ ${prosa(WM.secciones)}
 
 ${faq(WM.preguntas)}`);
 
-  h(`## Para cada tipo de operación
+  h(`## Tipos de rentadora
 
 ${PARA.map(
   (p) => `### ${plano(p.h1)}
@@ -178,9 +165,9 @@ URL: ${SITIO}/para/${p.slug}
 
 ${cita(p.citable)}
 
-${p.necesidades.map((n) => `- **${n.titulo}**: ${n.texto}`).join('\n')}
+${p.bajada}
 
-${prosa(p.secciones, '####')}
+${p.soluciones.map((n) => `- **${n.titulo}**: ${n.texto}`).join('\n')}
 
 #### Preguntas
 
@@ -215,29 +202,17 @@ ${faq(g.preguntas)}`,
 
 URL: ${SITIO}/${CONTRATO_PAG.slug}
 
-${cita(CONTRATO_PAG.citable)}
-
 ${CONTRATO_PAG.partes.map((p, i) => `${i + 1}. **${p.titulo}**: ${p.texto}`).join('\n')}
-
-${prosa(CONTRATO_PAG.secciones)}
-
-### ${CONTRATO_PAG.modelo.titulo}
-
-${CONTRATO_PAG.modelo.texto}
-
-### En RentaGo
-
-${CONTRATO_PAG.enRentaGo}
 
 ### Preguntas
 
 ${faq(CONTRATO_PAG.preguntas)}`);
 
-  h(`## Cómo elegir un software para rent a car
+  h(`## ¿Tu rentadora ya necesita un sistema?
 
 URL: ${SITIO}/como-elegir
 
-${CHECKLIST.map((c, i) => `${i + 1}. **${c.q}** ${c.porque} En RentaGo: ${c.rentago}`).join('\n')}`);
+${SENALES.map((c) => `- **${c.titulo}**: ${c.situacion} En RentaGo: ${c.rentago}`).join('\n')}`);
 
   h(`## Software para rent a car por ciudad
 
@@ -248,12 +223,11 @@ URL: ${SITIO}/software-rent-a-car/${p.slug}
 
 ${cita(p.citable)}
 
-- **Mercado**: ${p.mercado}
 - **Temporada**: ${p.temporada}
 - **Flota**: ${p.flota}
 - **Aeropuerto**: ${p.aeropuerto}
 
-${p.operacion}
+${p.dato}
 
 ${faq(p.preguntas)}`,
 ).join('\n\n')}`);

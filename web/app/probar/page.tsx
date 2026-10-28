@@ -24,7 +24,7 @@ export default function Probar() {
 
   return (
     <>
-      <Portada tag={PROBAR.tag} titulo={PROBAR.titulo} bajada={PROBAR.bajada} />
+      <Portada titulo={PROBAR.titulo} bajada={PROBAR.bajada} />
 
       <div className={`envoltorio ${c.pagina}`}>
         <div className={c.cuerpo}>

@@ -7,7 +7,17 @@
   padding-block: 0 clamp(8px, 2vw, 24px);
 }
 .bloque {
-  padding-block: clamp(28px, 4vw, 52px);
+  padding-block: clamp(36px, 4vw, 52px);
+}
+/* Dos bloques seguidos se separan con una línea fina: se nota dónde termina uno y empieza otro. */
+.bloque + .bloque {
+  border-top: 1px solid var(--borde);
+}
+/* Banda teñida de borde a borde de la pantalla, aunque el bloque viva dentro del contenedor. */
+.bandaSuave {
+  background: #eef6f6;
+  box-shadow: 0 0 0 100vmax #eef6f6;
+  clip-path: inset(0 -100vmax);
 }
 .rotulo {
   margin: 0 0 clamp(18px, 2.5vw, 28px);
@@ -58,17 +68,15 @@
 /* El párrafo citable: va solo, en un recuadro teñido con una baldosa de ícono. */
 .citable {
   position: relative;
-  margin: clamp(8px, 2vw, 16px) 0 clamp(8px, 2vw, 16px);
-  padding: clamp(24px, 3.4vw, 40px) clamp(24px, 3.4vw, 40px) clamp(24px, 3.4vw, 40px) clamp(24px, 3.4vw, 40px);
-  max-width: 880px;
-  border-radius: 24px;
-  background:
-    radial-gradient(60% 80% at 100% 0%, rgb(255 255 255 / 0.75), transparent 70%),
-    linear-gradient(150deg, var(--tf, var(--turq-soft)) 0%, color-mix(in srgb, var(--tf, var(--turq-soft)) 45%, #fff) 100%);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts, var(--turq-strong)) 12%, transparent);
+  margin: clamp(8px, 2vw, 16px) 0;
+  padding: 2px 0 2px clamp(16px, 2.4vw, 24px);
+  max-width: 62ch;
+  border-left: 3px solid var(--ts, var(--acento));
+  font-family: var(--fuente-titulo);
   font-size: clamp(1.08rem, 1rem + 0.35vw, 1.22rem);
   font-weight: 500;
   line-height: 1.6;
+  letter-spacing: -0.01em;
   color: var(--texto);
 }
 
@@ -82,26 +90,23 @@
 .indice a {
   display: inline-flex;
   align-items: center;
-  min-height: 38px;
-  padding: 0 14px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde);
+  min-height: 44px;
+  padding: 0 4px;
+  border-bottom: var(--hilo);
   color: var(--texto);
   font-size: 0.9rem;
   font-weight: 500;
-  transition: box-shadow var(--rapido), background var(--rapido);
+  transition: border-color var(--rapido), color var(--rapido);
 }
 .indice a:hover {
-  background: var(--acento-sup);
-  box-shadow: inset 0 0 0 1px transparent;
-  color: var(--texto);
+  border-bottom-color: var(--primario);
+  color: var(--primario);
 }
 
 /* Lista de criterios (cómo elegir): tarjetas apiladas con su número en una baldosa. */
 .lista {
   display: grid;
-  gap: 14px;
+  gap: clamp(20px, 3vw, 32px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -110,10 +115,8 @@
   display: flex;
   gap: 18px;
   align-items: flex-start;
-  padding: clamp(20px, 3vw, 30px);
-  border-radius: 22px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde), 0 1px 2px rgb(15 46 49 / 0.04);
+  padding: clamp(20px, 3vw, 30px) 0 0;
+  border-top: var(--hilo);
   scroll-margin-top: calc(var(--alto-barra) + 24px);
 }
 .itemCuerpo {
@@ -135,14 +138,32 @@
   margin: 0;
   color: var(--suave);
 }
-.itemRentaGo,
-.enRentaGo {
+.itemRentaGo {
   margin: 4px 0 0;
-  padding: 14px 18px;
-  border-radius: 16px;
-  background: var(--acento-sup);
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--acento);
   font-size: 0.975rem;
   max-width: 72ch;
+}
+/* "En RentaGo" dentro de una tarjeta: recuadro teñido de teal con barra a la izquierda. */
+.enRentaGo {
+  margin: 6px 0 4px;
+  padding: 14px 16px 14px 18px;
+  border-left: 4px solid var(--primario);
+  border-radius: var(--radio);
+  background: rgb(14 127 133 / 0.09);
+  font-size: 0.975rem;
+  line-height: 1.6;
+  color: var(--texto);
+}
+.enRentaGo b {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--fuente-titulo);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--turq-strong);
 }
 .itemRentaGoRotulo {
   display: block;
@@ -155,10 +176,6 @@
   margin: 0;
   font-weight: 500;
 }
-.enRentaGo b {
-  font-weight: 700;
-  color: var(--turq-strong);
-}
 
 /* Grilla de entradas (glosario, adicionales): tarjetas blancas de radio 20 en dos columnas. */
 .grilla {
@@ -170,21 +187,35 @@
 .tarjeta {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: clamp(20px, 2.6vw, 28px);
-  border-radius: 20px;
+  gap: 12px;
+  padding: clamp(20px, 2.4vw, 28px);
+  border: 1px solid rgb(14 127 133 / 0.16);
+  border-top: 4px solid var(--t, var(--primario));
+  border-radius: var(--radio);
   background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde), 0 1px 2px rgb(15 46 49 / 0.04);
+  box-shadow: 0 14px 30px -26px rgb(11 93 98 / 0.5);
   scroll-margin-top: calc(var(--alto-barra) + 24px);
 }
 .tarjeta[data-tono] {
-  background: color-mix(in srgb, var(--tf) 45%, #fff);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts) 10%, transparent);
+  border-top-color: var(--t);
+}
+/* Glosario: dos columnas parejas, cada término en su recuadro. */
+.glosario {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  align-items: stretch;
+  padding-block: clamp(28px, 4vw, 48px);
+}
+@media (min-width: 820px) {
+  .glosario {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 .palabra {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 1.125rem;
+  font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: -0.015em;
   line-height: 1.35;
@@ -217,15 +248,14 @@
   display: grid;
   align-content: start;
   gap: 8px;
-  padding: 22px;
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--azul-soft) 70%, #fff);
+  padding: 18px 0 0;
+  border-top: var(--hilo);
 }
 .dato:nth-child(2) {
-  background: color-mix(in srgb, var(--menta-soft) 70%, #fff);
+
 }
 .dato:nth-child(3) {
-  background: color-mix(in srgb, var(--arena-soft) 70%, #fff);
+
 }
 .datoRotulo {
   margin: 0;
@@ -255,55 +285,51 @@
 .otra {
   display: inline-flex;
   align-items: center;
-  min-height: 42px;
-  padding: 0 18px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde);
+  min-height: 44px;
+  padding: 0 4px;
+  border-bottom: var(--hilo);
   color: var(--texto);
   font-size: 0.9375rem;
   font-weight: 500;
-  transition: box-shadow var(--rapido), background var(--rapido);
+  transition: border-color var(--rapido), color var(--rapido);
 }
 .otra:hover {
-  background: var(--acento-sup);
-  box-shadow: inset 0 0 0 1px transparent;
-  color: var(--texto);
+  border-bottom-color: var(--primario);
+  color: var(--primario);
 }
 
 /* Necesidades y partes del contrato: tarjetas teñidas en dos columnas con el número en baldosa. */
 .necesidades {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 32px) clamp(32px, 5vw, 64px);
   margin: 0;
   padding: 0;
   list-style: none;
   counter-reset: necesidad;
 }
+@media (min-width: 760px) {
+  .necesidades {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 .necesidad {
   counter-increment: necesidad;
   position: relative;
-  padding: 22px 22px 22px 74px;
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--tf, var(--turq-soft)) 50%, #fff);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ts, var(--turq-strong)) 10%, transparent);
+  padding: 16px 0 0 56px;
+  border-top: var(--hilo);
 }
 .necesidad::before {
-  content: counter(necesidad);
+  content: counter(necesidad, decimal-leading-zero);
   position: absolute;
-  left: 22px;
-  top: 20px;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: #fff;
+  left: 0;
+  top: 14px;
   color: var(--ts, var(--turq-strong));
   font-family: var(--fuente-titulo);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 .necesidad h3 {
@@ -329,23 +355,19 @@
 }
 .pasos li {
   position: relative;
-  padding: 14px 18px 14px 54px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde);
+  padding: 14px 0 14px 40px;
+  border-bottom: var(--hilo);
 }
 .pasos li::before {
   content: '';
   position: absolute;
-  left: 18px;
-  top: 15px;
+  left: 0;
+  top: 17px;
   width: 22px;
   height: 22px;
-  border-radius: 7px;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317734a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
-      center / 13px no-repeat,
-    var(--menta-soft);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317734a' stroke-width='3' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 15px no-repeat;
 }
 
 /* Índices de familia: tarjetas de enlace en dos columnas. */
@@ -372,20 +394,28 @@
   display: grid;
   gap: 12px;
 }
+/* Una pregunta por fila, en una columna de ancho cómodo. */
+.faqUna {
+  display: grid;
+  gap: 12px;
+  max-width: 820px;
+}
+.faqUna .faqColumna {
+  gap: 12px;
+}
 .pregunta {
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde), 0 1px 2px rgb(15 46 49 / 0.04);
+  border-bottom: var(--hilo);
 }
 .pregunta[open] {
-  box-shadow: inset 0 0 0 1px var(--borde-fuerte), var(--sombra-suave);
+  border-bottom-color: var(--acento);
 }
 .pregunta summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 18px 18px 18px 22px;
+  min-height: 56px;
+  padding: 14px 4px 14px 0;
   list-style: none;
   cursor: pointer;
 }
@@ -402,7 +432,7 @@
 }
 .pregunta p {
   margin: 0;
-  padding: 0 22px 20px;
+  padding: 0 0 20px;
   color: var(--suave);
   line-height: 1.65;
 }
@@ -411,8 +441,6 @@
   flex: 0 0 auto;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  background: var(--acento-sup);
   transition: transform var(--rapido);
 }
 .mas::before,
@@ -421,10 +449,9 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 12px;
+  width: 14px;
   height: 2px;
-  margin: -1px 0 0 -6px;
-  border-radius: 1px;
+  margin: -1px 0 0 -7px;
   background: var(--turq-strong);
 }
 .mas::after {
@@ -451,15 +478,24 @@
   flex-direction: column;
   gap: 12px;
   padding: clamp(24px, 3vw, 34px);
-  border-radius: 24px;
+  border: 1px solid var(--borde);
+  border-top: 3px solid var(--borde-fuerte);
   background: #fff;
-  box-shadow: inset 0 0 0 1px var(--borde), var(--sombra-suave);
+  box-shadow: 0 14px 30px -26px rgb(15 46 49 / 0.45);
 }
 .plan[data-recomendado='true'] {
-  background:
-    radial-gradient(70% 50% at 100% 0%, rgb(59 130 196 / 0.14), transparent 70%),
-    linear-gradient(160deg, var(--turq-soft) 0%, #fff 60%);
-  box-shadow: inset 0 0 0 2px var(--acento), 0 30px 60px -36px rgb(14 127 133 / 0.55);
+  border-color: rgb(14 127 133 / 0.35);
+  border-top: 4px solid var(--acento);
+  box-shadow: var(--sombra-foto);
+}
+/* Móvil: el recomendado va primero y las tarjetas se separan bien una de otra. */
+@media (max-width: 859.98px) {
+  .planes {
+    gap: 28px;
+  }
+  .plan[data-recomendado='true'] {
+    order: -1;
+  }
 }
 .planAcciones {
   display: flex;
@@ -471,12 +507,11 @@
 }
 .planMarca {
   align-self: flex-start;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: var(--arena-soft);
   color: var(--arena-strong);
   font-size: 0.8125rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .plan h2 {
   margin: 0;
@@ -505,9 +540,393 @@
   top: 0.05em;
   width: 22px;
   height: 22px;
-  border-radius: 50%;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6e73' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
-      center / 12px no-repeat,
-    var(--turq-soft);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6e73' stroke-width='3' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 14px no-repeat;
+}
+
+/* Una línea suelta al pie de una página (link a otra sección). */
+.cierreLinea {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Cierre de /como-elegir: "si te pasan 3 o más, hablemos". */
+.resumen {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  padding: 4px 0 4px clamp(18px, 2.6vw, 28px);
+  border-left: 3px solid var(--acento);
+}
+.resumenTitulo {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.resumenAcciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+}
+
+/* Índice de ciudades: lista de una línea por ciudad, no tarjetas largas. */
+.mapa {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 720px) {
+  .mapa {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.mapaLink {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 12px 4px;
+  border-bottom: var(--hilo);
+  color: var(--texto);
+}
+.mapaLink:hover {
+  color: var(--primario);
+  border-bottom-color: var(--primario);
+}
+.mapaLink span {
+  color: var(--suave);
+}
+
+/* ── Estética "foto y aire" (/para) ───────────────────────────────────────────
+ * Texto en el aire: sin caja ni fondo, un hilo fino y la jerarquía hace el resto. */
+.citableAire {
+  position: relative;
+  margin: clamp(8px, 2vw, 16px) 0;
+  padding-left: clamp(16px, 2.4vw, 24px);
+  max-width: 62ch;
+  border-left: 3px solid var(--acento);
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.08rem, 1rem + 0.35vw, 1.22rem);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--texto);
+}
+.pregunta.preguntaPlana {
+  border-radius: var(--radio-recto);
+  background: none;
+  box-shadow: none;
+  border-bottom: var(--hilo);
+}
+.pregunta.preguntaPlana[open] {
+  box-shadow: none;
+  border-bottom-color: var(--acento);
+}
+.pregunta.preguntaPlana summary {
+  padding-inline: 0 4px;
+}
+.pregunta.preguntaPlana p {
+  padding-inline: 0;
+}
+.pregunta.preguntaPlana .mas {
+  border-radius: var(--radio-recto);
+  background: none;
+}
+
+/* ── /como-elegir: señales con mucho aire y la respuesta de RentaGo en un callout ── */
+.senales {
+  display: grid;
+  gap: clamp(44px, 6.5vw, 80px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.senal {
+  position: relative;
+  display: grid;
+  gap: clamp(16px, 2vw, 22px);
+  padding-top: clamp(24px, 3.2vw, 36px);
+  max-width: 860px;
+  scroll-margin-top: calc(var(--alto-barra) + 24px);
+}
+.senal .senalLinea {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: auto;
+  height: 1px;
+  background: linear-gradient(90deg, var(--borde-fuerte), rgb(195 210 210 / 0));
+}
+.senalCabeza {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.senalRespuesta {
+  padding-left: calc(44px + 18px);
+}
+@media (max-width: 599px) {
+  .senalRespuesta {
+    padding-left: 0;
+  }
+}
+
+/* ── Banda de prosa: degradé suave teal / gris azulado, columnas con hilo y barrita de acento ── */
+.prosaBanda {
+  margin-block: clamp(20px, 3vw, 40px);
+  padding-block: clamp(40px, 6vw, 72px);
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgb(255 255 255 / 0.7), transparent 70%),
+    linear-gradient(135deg, #dbe9ec 0%, #e6eff3 55%, #d7e5ea 100%);
+}
+.prosaGrilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 56px) clamp(40px, 6vw, 80px);
+}
+@media (min-width: 820px) {
+  .prosaGrilla {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  }
+}
+.prosaCol {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+.prosaCol .prosaBarra {
+  width: 64px;
+  height: 4px;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg, var(--acento-osc), #4f93a3);
+}
+.prosaBanda .subtitulo {
+  margin: 0;
+  max-width: none;
+  color: var(--acento-osc);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.prosaBanda .prosa {
+  max-width: 62ch;
+  color: #14302f;
+}
+@media (min-width: 820px) {
+  .prosaCol + .prosaCol::before {
+    content: '';
+    position: absolute;
+    left: calc(clamp(40px, 6vw, 80px) / -2);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, rgb(78 120 138 / 0), rgb(78 120 138 / 0.55) 50%, rgb(78 120 138 / 0));
+  }
+}
+@media (max-width: 819.98px) {
+  .prosaCol + .prosaCol {
+    padding-top: 36px;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, rgb(78 120 138 / 0.55), rgb(78 120 138 / 0)) 1;
+  }
+}
+
+/* ── Adicionales ("Se suma a cualquier plan"): grilla pareja de cards con filete de color ── */
+.adicionales {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) {
+  .adicionales {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .adicionales {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+.adicional {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(22px, 2.6vw, 30px) clamp(18px, 2.2vw, 26px) clamp(20px, 2.4vw, 26px);
+  background: #fff;
+  box-shadow: var(--sombra-suave);
+}
+
+/* ── Checklist de las guías: panel con tinte y cards de paso ── */
+.checkPanel {
+  margin-block: clamp(16px, 3vw, 32px);
+  padding: clamp(22px, 3.4vw, 40px);
+  border: 1px solid color-mix(in srgb, var(--t) 30%, #fff);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--tf) 85%, #fff) 0%, color-mix(in srgb, var(--tf) 35%, #fff) 100%);
+  box-shadow: var(--sombra-suave);
+}
+.checkTitulo {
+  margin: 0 0 clamp(18px, 2.4vw, 26px);
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-bloque);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--texto);
+}
+.checkGrilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 760px) {
+  .checkGrilla {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+  }
+}
+.checkPaso {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(15 46 49 / 0.04), 0 10px 24px -16px rgb(15 46 49 / 0.3);
+  border-left: 3px solid var(--t);
+}
+.checkMarca {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  background: var(--tf);
+  color: var(--ts);
+}
+.checkTexto {
+  margin: 0;
+  color: #2a4746;
+  line-height: 1.55;
+}
+.checkTexto b {
+  color: var(--texto);
+  font-weight: 700;
+}
+
+/* ── "En RentaGo": card verde teal suave; rótulo en blanquecino con el tipo del wordmark ── */
+.enRg {
+  display: grid;
+  gap: 18px clamp(24px, 4vw, 48px);
+  align-items: center;
+  margin-block: clamp(16px, 3vw, 32px);
+  padding: clamp(20px, 2.8vw, 30px) clamp(22px, 3vw, 34px);
+  border-radius: 20px;
+  color: #fff;
+  /* Teal de marca (blanco 4,78:1) hacia un tono apenas más hondo: verde, no petróleo. */
+  background: linear-gradient(135deg, #0e7f85 0%, #0c7076 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.18),
+    0 18px 36px -24px rgb(11 93 98 / 0.55);
+}
+@media (min-width: 800px) {
+  .enRg {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+.enRgTexto {
+  display: grid;
+  gap: 10px;
+}
+.enRgRotulo {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--fuente-titulo);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.enRgEn {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.enRgNombre {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.enRgGo {
+  color: #e6faf5;
+}
+.enRgLector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.enRgFrase {
+  margin: 0;
+  max-width: 60ch;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.enRgBoton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radio-boton);
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px #fff;
+  color: #0b5d62;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  transition:
+    background var(--rapido),
+    color var(--rapido),
+    box-shadow var(--rapido);
+}
+.enRgBoton svg {
+  transition: transform var(--rapido);
+}
+.enRgBoton:hover,
+.enRgBoton:focus-visible {
+  background: transparent;
+  color: #fff;
+}
+.enRgBoton:hover svg,
+.enRgBoton:focus-visible svg {
+  transform: translateX(3px);
+}
+
+.enRgBoton:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* El aviso legal del contrato, separado de la lista. */
+.necesidades + .itemPorque {
+  margin-top: clamp(24px, 3vw, 36px);
 }

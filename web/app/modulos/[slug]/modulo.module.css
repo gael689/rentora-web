@@ -2,8 +2,9 @@
 .dolor {
   margin: 20px 0 0;
   max-width: 56ch;
-  color: var(--suave);
-  font-size: 1rem;
+  color: rgb(226 245 245 / 0.95);
+  font-size: 1.0625rem;
+  font-style: italic;
 }
 .pagina {
   padding-block: clamp(16px, 3vw, 32px) 0;
@@ -46,7 +47,7 @@
 .chips li {
   position: relative;
   padding: 14px 16px 14px 52px;
-  border-radius: 16px;
+  border-radius: 2px;
   background: color-mix(in srgb, var(--turq-soft) 60%, #fff);
   font-size: 0.975rem;
   font-weight: 600;
@@ -60,7 +61,7 @@
   width: 26px;
   height: 26px;
   margin-top: -13px;
-  border-radius: 50%;
+  border-radius: 2px;
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6e73' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
       center / 13px no-repeat,
@@ -80,13 +81,13 @@
   align-items: baseline;
   gap: 4px 12px;
   padding: 14px 18px;
-  border-radius: 16px;
+  border-radius: 2px;
   background: #fff;
   box-shadow: inset 0 0 0 1px var(--borde);
 }
 .novedad {
   padding: 2px 10px;
-  border-radius: 999px;
+  border-radius: 2px;
   background: var(--arena-soft);
   color: var(--arena-strong);
   font-size: 0.8125rem;
@@ -103,7 +104,7 @@
   gap: 10px;
   min-height: 44px;
   padding: 0 18px;
-  border-radius: 999px;
+  border-radius: var(--radio-boton);
   background: #fff;
   box-shadow: inset 0 0 0 1px var(--borde);
   color: var(--texto);

@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['127.0.0.1'],
   poweredByHeader: false,
   images: { formats: ['image/avif', 'image/webp'] },
+  /* /que-incluye se fusionó con /planes (ancla #que-incluye). */
+  async redirects() {
+    return [{ source: '/que-incluye', destination: '/planes#que-incluye', permanent: true }];
+  },
 };
 
 export default nextConfig;

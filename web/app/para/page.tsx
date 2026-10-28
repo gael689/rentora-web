@@ -1,12 +1,11 @@
-import Link from 'next/link';
 import { PARA } from '@/lib/seo';
-import { PARA_PAG, TONOS } from '@/lib/paginas';
+import { PARA_PAG } from '@/lib/paginas';
 import { SITIO } from '@/lib/sitio';
+import CarruselPara from '@/components/para/CarruselPara';
 import Portada from '../_pagina/Portada';
 import Cierre from '../_pagina/Cierre';
 import { meta } from '../_pagina/meta';
 import { grafo, migasLd } from '../_pagina/schema';
-import s from '../seo.module.css';
 
 export const metadata = meta('/para', PARA_PAG.indiceTitle, PARA_PAG.indiceDescription);
 
@@ -24,26 +23,14 @@ export default function IndicePara() {
     },
     migasLd([
       { href: '/', texto: 'Inicio' },
-      { href: '/para', texto: PARA_PAG.tag },
+      { href: '/para', texto: PARA_PAG.nombre },
     ]),
   );
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
-      <Portada tag={PARA_PAG.tag} titulo={PARA_PAG.indiceTitulo} bajada={PARA_PAG.indiceBajada} tono="azul" />
-      <div className={`envoltorio ${s.pagina}`}>
-        <div className={s.indiceFamilia}>
-          {PARA.map((p, i) => (
-            <Link key={p.slug} href={`/para/${p.slug}`} className="beneficio" data-tono={TONOS[i % TONOS.length]}>
-              <span className="etiqueta">{p.nombre}</span>
-              <p className="gana">{p.bajada}</p>
-              <span className="ver">
-                {PARA_PAG.ver} <span aria-hidden="true">→</span>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
+      <Portada titulo={PARA_PAG.indiceTitulo} bajada={PARA_PAG.indiceBajada} tono="azul" imagen={{ src: '/heros/para.webp', alt: 'Autos estacionados frente a la oficina de una rentadora', pos: '60% 45%', tinte: true }} />
+      <CarruselPara prioridad etiqueta={PARA_PAG.nombre} />
       <Cierre titulo={PARA_PAG.indiceCierreTitulo} bajada={PARA_PAG.indiceCierreBajada} />
     </>
   );

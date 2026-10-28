@@ -34,11 +34,16 @@ export default function WebAMedida() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
 
       <Portada
-        tag={WEB_A_MEDIDA_UI.tag}
         titulo={P.h1}
         bajada={P.bajada}
         tono="azul"
         icono="chispa"
+        imagen={{
+          src: '/web-a-medida/reserva-movil.webp',
+          alt: 'Una persona reserva un auto desde el celular en la web de una rentadora',
+          pos: '40% 40%',
+          lado: 'derecha',
+        }}
         migas={<Migas items={migas} actual={P.nombre} />}
       />
 
@@ -49,17 +54,17 @@ export default function WebAMedida() {
 
         <section className={s.bloque}>
           <h2 className={s.rotulo}>{P.cambiaTitulo}</h2>
-          <Items items={P.cambia} tono="azul" />
+          <Items items={P.cambia} tono="azul" desliza />
         </section>
 
         <section className={s.bloque}>
           <h2 className={s.rotulo}>{P.vieneTitulo}</h2>
-          <Items items={P.viene} tono="turq" />
+          <Items items={P.viene} tono="turq" desliza />
         </section>
 
         <section className={s.bloque}>
           <h2 className={s.rotulo}>{P.conectaTitulo}</h2>
-          <Items items={P.conecta} tono="menta" />
+          <Items items={P.conecta} tono="menta" desliza />
         </section>
 
         <Prosa secciones={P.secciones} />
@@ -72,7 +77,7 @@ export default function WebAMedida() {
       <Cierre
         titulo={WEB_A_MEDIDA_UI.cierreTitulo}
         bajada={WEB_A_MEDIDA_UI.cierreBajada}
-        secundario={{ href: '/que-incluye', texto: WEB_A_MEDIDA_UI.verIncluye }}
+        secundario={{ href: '/planes#que-incluye', texto: WEB_A_MEDIDA_UI.verIncluye }}
       />
     </>
   );

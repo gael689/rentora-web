@@ -115,14 +115,27 @@ const TRAZOS: Record<string, string> = {
     '<path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/>',
 };
 
+/* Para dibujarse (stroke-dashoffset) cada forma lleva pathLength="1": el trazo mide 1 sin importar
+ * su largo real. Se calcula una vez por ícono. */
+const CON_LARGO: Record<string, string> = {};
+function conLargo(nombre: string): string {
+  return (CON_LARGO[nombre] ??= TRAZOS[nombre].replace(
+    /<(path|rect|circle|line|polyline|polygon)\b/g,
+    '<$1 pathLength="1"',
+  ));
+}
+
 export default function Icono({
   nombre,
   tam = 16,
   className,
+  dibuja = false,
 }: {
   nombre: string;
   tam?: number;
   className?: string;
+  /** Con `true` el trazo se dibuja al entrar al viewport (motor: components/animacion). */
+  dibuja?: boolean;
 }) {
   const trazo = TRAZOS[nombre];
   if (!trazo) return null;
@@ -138,7 +151,8 @@ export default function Icono({
       strokeLinejoin="round"
       aria-hidden="true"
       className={className}
-      dangerouslySetInnerHTML={{ __html: trazo }}
+      data-dibuja={dibuja ? '' : undefined}
+      dangerouslySetInnerHTML={{ __html: dibuja ? conLargo(nombre) : trazo }}
     />
   );
 }

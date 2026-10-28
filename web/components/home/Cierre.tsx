@@ -3,6 +3,7 @@ import { HOME, T } from '@/lib/contenido';
 import { linkWhatsapp } from '@/lib/sitio';
 import { DEMO_ACTIVA, DEMO_CTA, RUTA_PROBAR } from '@/lib/demo';
 import Icono from '@/components/sistema/Icono';
+import { rv } from '@/components/animacion/Reveal';
 import Titular from './Titular';
 import CierreForm from './CierreForm';
 
@@ -15,7 +16,7 @@ export default function Cierre() {
   return (
     <section className="cierre-comun banda-cierre" id="contacto" aria-labelledby="t-cierre">
       <div className="envoltorio">
-        <div className="banda-cierre-cuerpo">
+        <div className="banda-cierre-cuerpo" {...rv(0, "escala")}>
           <div className="banda-cierre-texto">
             <h2 id="t-cierre" className="titular-seccion">
               <Titular t={h.titular} />

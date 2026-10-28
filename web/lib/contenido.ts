@@ -8,7 +8,7 @@
  * `rentago-system`, método junto a `CIFRAS`), no estimadas. Si alguien las cuestiona en una reunión, se abre el sistema y se cuentan.
  *
  * Qué NO se dice, porque ya no es verdad: mail de las 8 (el equipo no recibe mails, todo queda
- * en la campana), 42 reglas o 29 (son 31), 19 o 20 pantallas (el panel tiene 24; la réplica muestra 20), 8 reportes con CSV (son 4
+ * en la campana), 42 reglas o 29 (son 31), cifras de pantallas, 8 reportes con CSV (son 4
  * pestañas y solo dos exportan), precios distintos para web y mostrador (hoy hay un solo
  * precio), extensión como "no es un alquiler nuevo" (hoy sí lo es), la campaña de Prospectos
  * como si enviara (el envío está apagado), medios de cobro que el producto base no trae, la tarjeta guardada en la ficha del cliente, la
@@ -331,7 +331,7 @@ export const PROBLEMAS: Problema[] = [
   {
     n: '05',
     dolor: '“Me enteré de la VTV cuando ya estaba vencida.”',
-    gana: '31 reglas miran los vencimientos cada 30 minutos y te avisan en la campana.',
+    gana: 'El sistema mira los vencimientos todo el tiempo y te avisa en la campana.',
     tono: 'petro',
     modulo: 'avisos-reportes',
     icono: 'campana',
@@ -635,84 +635,90 @@ export const ARGENTINA = [
 /* Construidas solo con funcionalidad verificada contra el código. A una empresa real solo
  * se le afirma lo que puede comprobar. */
 export const FAQS = [
+  /* REVISAR GAEL: toda la lista está reescrita (Fase 7): primero Sí/No/Depende en una frase, después
+   * la explicación en ≤ 2 oraciones (≤ 45 palabras). Orden: las más comunes arriba. */
+  {
+    q: '¿Cuánto sale y qué incluye?',
+    a: 'Depende de tu operación. Cuenta cuántos autos y sucursales tenés y si querés la web de reservas. No hay precio de lista: lo hablamos antes de empezar y queda por escrito.',
+  },
+  {
+    q: '¿Cuánto tarda en estar andando?',
+    a: 'Depende de cuánto haya que cargar. Se arranca con tu flota, tus tarifas y tus contratos, y operás acompañado desde el primer día.',
+  },
   {
     q: '¿Puede pasar que venda dos veces el mismo auto?',
-    a: 'El cupo se calcula por fecha sobre la flota real: cuando cargás una reserva, el sistema te muestra cuántas unidades quedan disponibles en esas fechas. En el mostrador, si el auto se pisa con otra reserva, te avisa y te deja cargarla igual si sabés algo que el sistema no. La web, en cambio, nunca vende un auto ocupado.',
+    a: 'El sistema te avisa si hay cruce de fechas. En el mostrador te deja cargar la reserva igual si sabés algo que el sistema no; en tu web, nunca vende un auto ocupado.',
   },
   {
-    q: '¿Cuánto sale?',
-    a: 'Depende de tu operación: cuántos autos, cuántas sucursales y si querés la web de reservas. No hay un precio de lista en la web porque no hay uno que sirva para todos. Lo hablamos antes de empezar y queda por escrito.',
+    q: '¿Puedo cargar mis datos actuales?',
+    a: 'Sí. Partimos de tu planilla o tu cuaderno: cargamos tu flota, tus tarifas y tu contrato tal como los tenés hoy.',
   },
   {
-    q: '¿Sirve si alquilo camionetas y no solo autos?',
-    a: 'Sí. Cada unidad tiene su tipo —auto, camioneta, combi, utilitario, moto o motorhome—, y las categorías incluyen compacto, sedán, sedán superior, SUV, pick-up y furgón. La franquicia y la tarifa base se definen por categoría, así que una pick-up no se cotiza como un compacto.',
+    q: '¿Funciona la web con Mercado Pago?',
+    a: 'Sí. El cliente paga por Mercado Pago o transferencia, y mientras paga el cupo le queda retenido 20 minutos. La reserva confirmada entra al calendario.',
   },
   {
     q: '¿Sirve si tengo varias sucursales?',
-    a: 'Sí. Cada sucursal tiene sus puntos de retiro y devolución y su caja, cada auto tiene su sucursal base, y el cliente puede retirar en una y devolver en otra. Los reportes se ven por sucursal o todos juntos.',
+    a: 'Sí. Cada sucursal tiene sus puntos de retiro y devolución y su caja, y el cliente puede retirar en una y devolver en otra.',
   },
   {
-    q: '¿Emite factura electrónica?',
-    a: 'No. El sistema registra facturas, notas de crédito, notas de débito y remitos con su PDF adjunto, y los ata al alquiler y a la cuenta corriente del cliente. La factura electrónica la seguís emitiendo donde la emitís hoy. Los recibos de cobro sí los emite el sistema, numerados.',
+    q: '¿Sirve si alquilo camionetas y no solo autos?',
+    a: 'Sí. Hay autos, camionetas, combis, utilitarios, motos y motorhomes, y la franquicia y la tarifa se definen por categoría.',
   },
   {
-    q: 'Hoy trabajo con Excel y un cuaderno. ¿Se puede pasar?',
-    a: 'La implementación arranca cargando tu flota, tus tarifas y tu clausulado tal como los tenés hoy. Después las tarifas viven en el motor de precios de 3 capas y el mostrador trabaja sobre el mismo cupo y el mismo precio que la web.',
+    q: '¿Emite facturas?',
+    a: 'No. Registrás tus facturas y notas en el sistema, con su PDF, y quedan atadas al alquiler y a la cuenta corriente. Los recibos de cobro sí salen numerados.',
   },
   {
-    q: 'Firmé contratos hace dos años. ¿Los puedo reimprimir igual?',
-    a: 'Sí. El clausulado está versionado en base y cada contrato guarda un snapshot congelado del texto vigente el día de la firma, así que la reimpresión sale idéntica años después aunque el clausulado haya cambiado seis veces.',
+    q: '¿Puedo reimprimir un contrato firmado hace años?',
+    a: 'Sí. Cada contrato guarda congelado el texto del día de la firma, así que sale idéntico aunque hayas cambiado las cláusulas.',
   },
   {
-    q: '¿Y si mi cliente firma en papel?',
-    a: 'Se contempla. El contrato se puede firmar en pantalla con el dedo o el mouse, por un link que se manda al teléfono —y que podés dar de baja cuando quieras— o en papel: marcás que firmó en papel y subís el firmado, que queda adjunto al mismo contrato.',
-  },
-  {
-    q: '¿Puedo cambiar una cláusula para un cliente?',
-    a: 'Sí. Antes de generar el contrato revisás las cláusulas y editás las que haga falta: queda marcada como modificada, se puede volver al original, y vale solo para ese contrato. El reverso lo aclara. Si después cambia algo, el contrato se regenera pidiendo un motivo, y el anterior queda anulado.',
-  },
-  {
-    q: '¿Y la franquicia?',
-    a: 'Cada categoría tiene su franquicia base, y cada cobertura dice a cuánto la baja. Al armar el contrato, con una casilla se genera también el documento de la franquicia, que firma el deudor que elijas: la empresa, su representante o un conductor. No es lo mismo que la garantía.',
-  },
-  {
-    q: '¿Cuántos conductores puedo cargar en un contrato?',
-    a: 'Hasta tres. Se eligen de la ficha del cliente o se dan de alta en el momento, y si un conductor ya tiene otro auto esas fechas, el sistema avisa pero te deja seguir. Si el cliente es una empresa, la ficha lleva al representante, y el contrato imprime quién firma.',
-  },
-  {
-    q: '¿Sirve para alquilar a choferes de aplicaciones?',
-    a: 'Sí: hay un Contrato Uber, que sirve para Uber, DiDi o Cabify. Es el mismo contrato de largo plazo / semanal que se usa con empresas. Cargás el valor de la semana y salen el total, una fecha de pago por semana (que podés editar), los kilómetros permitidos por semana y el precio del kilómetro extra. El auto pasa a figurar como “En Uber” en la flota.',
-  },
-  {
-    q: '¿Cómo cobro las reservas que entran por la web?',
-    a: 'Por Mercado Pago o por transferencia. Mientras el cliente paga, el cupo le queda retenido 20 minutos; el checkout tiene 4 pasos y la reserva confirmada entra al calendario de ocupación.',
+    q: '¿Se puede firmar en pantalla?',
+    a: 'Sí. El cliente firma con el dedo o el mouse, o por un link en su teléfono. Si prefiere papel, subís el firmado y queda adjunto.',
   },
   {
     q: '¿Me avisa antes de que se venza la VTV o la póliza?',
-    a: 'Los documentos de cada auto se cargan con vigencia, y hay 31 reglas de aviso que corren cada 30 minutos. Los avisos quedan en la campana del panel, uno por asunto, para que no te llene de ruido. Los mails a tus clientes siguen funcionando aparte.',
+    a: 'Sí. Cargás cada documento con su vigencia y el sistema te avisa en la campana del panel, un aviso por asunto.',
+  },
+  {
+    q: '¿Puedo cambiar una cláusula para un cliente?',
+    a: 'Sí. Editás la cláusula antes de generar el contrato, queda marcada como modificada y vale solo para ese contrato.',
+  },
+  {
+    q: '¿Y la franquicia?',
+    a: 'Cada categoría tiene su franquicia base y cada cobertura la baja. Con una casilla se genera el documento de la franquicia, que no es lo mismo que la garantía.',
+  },
+  {
+    q: '¿Cuántos conductores puedo cargar en un contrato?',
+    a: 'Hasta tres. Si un conductor ya tiene otro auto en esas fechas, el sistema avisa pero te deja seguir.',
+  },
+  {
+    q: '¿Sirve para alquilar a choferes de aplicaciones?',
+    a: 'Sí. Hay un Contrato Uber para Uber, DiDi o Cabify: cargás el valor de la semana y salen el total, las fechas de pago y los kilómetros permitidos.',
   },
   {
     q: '¿Sirve para repartir la plata entre socios?',
-    a: 'Sí, como adicional. Se suma a la Caja una vista del mes: definís los socios y sus porcentajes (tienen que sumar 100), ves quién le pasa cuánto a quién y registrás el reparto.',
+    a: 'Sí, como adicional. Definís los socios y sus porcentajes, ves quién le pasa cuánto a quién y registrás el reparto.',
   },
   {
     q: '¿Qué reportes tiene?',
-    a: 'Cuatro: un resumen del mes contra el anterior, ingresos, flota y demanda no atendida. Ingresos y Flota se exportan a CSV, y la planilla de alquileres del mes se exporta a Excel.',
+    a: 'Resumen del mes, ingresos, flota y demanda no atendida. Ingresos y Flota se exportan a CSV, y los alquileres del mes a Excel.',
   },
   {
     q: '¿Me ayuda a conseguir clientes?',
-    a: 'Hay un módulo opcional de Prospectos: una lista de empresas que podrían alquilar, cruzada con tus clientes para no escribirle a quien ya lo es ni a quien pidió que no lo contacten. Elegís un grupo, armás la campaña con su mensaje y queda lista. El envío automático todavía no está activado.',
+    a: 'Depende. Hay un módulo opcional de Prospectos que arma la lista y la campaña, pero el envío automático todavía no está activado.',
   },
   {
     q: '¿La web de la rentadora está incluida?',
-    a: 'La web de reservas es una opción conectada al sistema: la sumás si la querés y vende con el mismo cupo y el mismo precio que tu mostrador. Si ya tenés web y no la querés cambiar, usás solo el sistema.',
+    a: 'Es opcional. La sumás si la querés y vende con el mismo cupo y precio que tu mostrador; si ya tenés web, usás solo el sistema.',
   },
   {
     q: '¿Puedo verlo funcionando antes de decidir?',
     // Con la demo de 14 días prendida (`NEXT_PUBLIC_DEMO_ACTIVA=1`), la respuesta pasa a la de `demo.ts`.
     a: DEMO_ACTIVA
       ? FAQ_DEMO
-      : 'Sí. En una reunión te comparto pantalla y recorremos el sistema sobre datos ficticios: cargamos una reserva, entregamos un auto y cerramos una devolución tardía. Las pantallas también están acá, en la web, una por una.',
+      : 'Sí. En una reunión te comparto pantalla y recorremos el sistema sobre datos ficticios. Las pantallas también están acá, una por una.',
   },
 ];
 
@@ -848,8 +854,7 @@ export const HOME = {
    * H2 ≤ 8 palabras + una oración ≤ 25 + hasta 4 viñetas de ≤ 6 palabras. Lo largo vive en las
    * páginas internas. Antes → después y alternativas en marketing/copy-y-seo/COPY-V4.md. */
   hero: {
-    tag: 'Software para rent a car, hecho en Argentina',
-    titular: { antes: 'Tu flota bajo control. ', clave: 'Tu rentadora, mejor gestionada.', despues: '' } as Titular,
+    titular: { antes: 'Software para rent a car, ', clave: 'hecho en Argentina', despues: '' } as Titular,
     bajada: 'Reservas, tarifas, contratos y cobros conectados en un solo sistema, con tu propia web de reservas online.',
     ctaPrincipal: 'Ver el sistema',
     ctaSecundario: 'Pedir una demo por WhatsApp',
@@ -868,12 +873,18 @@ export const HOME = {
   },
   /** El alt de las capturas reales de las funciones: se le suma el nombre de la función. */
   capturaRealAlt: 'Pantalla real del sistema, con datos de ejemplo:',
+  /** La franja de CTA a mitad de la home. REVISAR GAEL: texto propuesto. */
+  franja: {
+    titulo: 'Mirá cómo se ve por dentro',
+    texto: 'Las pantallas del panel de una rentadora de ejemplo, una por una.',
+    cta: { texto: 'Ver el sistema', href: '/sistema' },
+  },
   /** La fila de confianza bajo el hero. Cifras de `CIFRAS`, como chips cortos. */
   confianza: {
     etiqueta: 'RentaGo en números',
     items: [
-      { cifra: String(CIFRAS.pantallas), texto: 'pantallas en el panel', icono: 'panel', tono: 'turq' as TonoMarca },
-      { cifra: String(CIFRAS.reglas), texto: 'avisos automáticos', icono: 'campana', tono: 'petro' as TonoMarca },
+      { cifra: '', texto: 'Panel con toda tu operación', icono: 'panel', tono: 'turq' as TonoMarca }, // REVISAR GAEL: sin cifras
+      { cifra: '', texto: 'Avisos automáticos', icono: 'campana', tono: 'petro' as TonoMarca },
       { cifra: '', texto: 'En producción desde 2026', icono: 'tildes', tono: 'menta' as TonoMarca },
       { cifra: '', texto: 'Hecho en Argentina', icono: 'globo', tono: 'azul' as TonoMarca },
     ],
@@ -882,7 +893,6 @@ export const HOME = {
    *  el 04 y el 05 (contrato y vencimientos) se juntan en un solo bloque. Cada bloque lleva al
    *  módulo que lo resuelve. */
   problemas: {
-    rotulo: 'Lo que pasa hoy',
     titular: { antes: 'Los problemas de todos los días, ', clave: 'resueltos', despues: '' } as Titular,
     bajada: 'Situaciones que cualquier rentadora reconoce. Cada una lleva al módulo que la resuelve.',
     items: [
@@ -905,7 +915,8 @@ export const HOME = {
       {
         titulo: 'Contratos y vencimientos',
         dolores: [PROBLEMAS[3].dolor, PROBLEMAS[4].dolor],
-        gana: `El contrato se firma en pantalla y se reimprime idéntico. ${CIFRAS.reglas} reglas miran la VTV y las pólizas cada 30 minutos.`,
+        // REVISAR GAEL: sin la cifra de reglas ("31 reglas ... cada 30 minutos").
+        gana: 'El contrato se firma en pantalla y se reimprime idéntico. El sistema mira la VTV y las pólizas todo el tiempo y te avisa.',
         icono: 'firma',
         tono: 'petro' as TonoMarca,
         link: { texto: 'Ver Contratos', href: '/modulos/contratos' },
@@ -920,11 +931,11 @@ export const HOME = {
       },
     ],
   },
-  /** Las funciones, agrupadas en cuatro áreas. Los 13 módulos, cada uno en un solo grupo. */
+  /** Los módulos, agrupados en cuatro áreas, cada uno en un solo grupo. */
   todo: {
-    rotulo: 'Qué trae',
     titular: { antes: 'Todo el sistema, ', clave: 'en cuatro áreas', despues: '' } as Titular,
-    bajada: `${MODULOS.length} módulos que comparten los mismos datos, de la reserva a la caja.`,
+    // REVISAR GAEL: bajada sin la cifra de módulos.
+    bajada: 'Los módulos comparten los mismos datos, de la reserva a la caja.',
     grupos: [
       {
         titulo: 'Operación',
@@ -968,8 +979,8 @@ export const HOME = {
         ],
       },
     ],
-    verTodo: `Ver los ${MODULOS.length} módulos`,
-    verPantallas: `Ver las ${PANTALLAS.length} pantallas`,
+    verTodo: 'Ver los módulos',
+    verPantallas: 'Ver las pantallas',
   },
   /** Las secciones alternadas imagen / texto. `pantalla` es el slug de `PANTALLAS`; `telefonos`
    *  muestra la web de reservas en dos celulares. */
@@ -1033,7 +1044,6 @@ export const HOME = {
    *  en /web-a-medida. Lo que se afirma sale de rentago-system/web-reservas: marca, tipografía,
    *  logo y "Hecho con RentaGo" son configuración por tenant. */
   aMedida: {
-    rotulo: 'A medida',
     icono: 'chispa',
     tono: 'azul' as TonoMarca,
     titulo: 'La misma web, con tu marca',
@@ -1041,11 +1051,15 @@ export const HOME = {
     puntos: ['Tu logo y tus colores', 'Tu tipografía', 'Tu dominio, a tu nombre', 'RentaGo no aparece'],
     link: { texto: 'Ver cómo se adapta', href: '/web-a-medida' },
   },
+  /** Tira "Tu tipo de rentadora": links a /para (los textos salen de `PARA` en la página). */
+  tipos: {
+    titular: { antes: '', clave: '¿Cómo alquilás vos?', despues: '' } as Titular,
+    todos: 'Ver todos los tipos de rentadora',
+  },
   /** La sección de confianza: cómo se arranca y quién responde. Sin testimonios ni logos: no hay
    *  clientes citables. Cada punto sale de datos ya verificados (`IMPLEMENTACION`, la FAQ del
    *  Excel y el CLAUDE.md del sistema). Backups no se afirman. */
   seguridad: {
-    rotulo: 'Confianza',
     titular: { antes: 'Arrancás acompañado, ', clave: 'con tus datos en orden', despues: '' } as Titular,
     bajada: 'Lo que conviene preguntar antes de cargar tu operación en un sistema.',
     items: [
@@ -1076,7 +1090,6 @@ export const HOME = {
     ],
   },
   faq: {
-    rotulo: 'Preguntas',
     titular: { antes: 'Preguntas ', clave: 'frecuentes', despues: '' } as Titular,
     todas: 'Ver todas las preguntas',
     cantidad: 6,
@@ -1188,7 +1201,7 @@ export const DOS_MARCAS = {
  * El sistema nació en una rentadora real y corre ahí en producción. **No se la nombra** hasta que
  * autorice (regla del CLAUDE.md del repo privado), ni datos que la identifiquen: ni
  * ciudad, ni patentes, ni cifras de su negocio. Solo se cuenta lo verificable desde el código
- * (`CIFRAS`). Sin testimonio: no hay uno firmado.
+ * (sin cifras). Sin testimonio: no hay uno firmado.
  *
  * La versión con nombre está lista y apagada: cuando haya autorización por escrito se completan
  * `nombre` y `ciudad` y se prende `conNombre`. Con la bandera apagada, los campos vacíos no se
@@ -1197,19 +1210,17 @@ export const CASO = {
   conNombre: false,
   nombre: '',
   ciudad: '',
-  rotulo: 'En producción',
   titulo: 'Nació en una rentadora *real*',
   texto:
     'RentaGo no se diseñó en una pizarra: se construyó para una rentadora argentina, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.',
   textoConNombre: (nombre: string, ciudad: string) =>
     `RentaGo no se diseñó en una pizarra: se construyó para ${nombre}, en ${ciudad}, que lo usa en producción desde 2026 para su flota, sus reservas, sus contratos y su caja.`,
-  cifras: [
-    { cifra: String(CIFRAS.pantallas), texto: 'pantallas en el panel' },
-    { cifra: String(MODULOS.length), texto: 'módulos que comparten los datos' },
-    { cifra: String(CIFRAS.reglas), texto: 'reglas de aviso, cada 30 minutos' },
-    { cifra: String(CIFRAS.tablas), texto: 'tablas en la base de datos' },
+  // REVISAR GAEL: tres frases sin cifras (antes eran cuatro números).
+  frases: [
+    'Se usa todos los días en el mostrador.',
+    'Maneja flota, reservas, contratos y caja.',
+    'Se mejora con lo que pide la operación real.',
   ],
-  nota: 'Las cifras están contadas sobre el código del sistema, no estimadas.',
 } as const;
 
 /** El texto del caso según la bandera. */
@@ -1246,7 +1257,7 @@ export const T = {
   entregaEyebrow: 'Qué se entrega',
   entregaParte1: 'Parte 1',
   entregaTitulo1: 'El sistema de gestión',
-  entregaTexto1: `Las ${CIFRAS.pantallas} pantallas del panel: ocupación, reservas, contratos, clientes, flota, caja, precios, cotizador, prospectos, multas, avisos y reportes.`,
+  entregaTexto1: `Las pantallas del panel: ocupación, reservas, contratos, clientes, flota, caja, precios, cotizador, prospectos, multas, avisos y reportes.`,
   entregaParte2: 'Parte 2',
   entregaTitulo2: 'Tu web a medida',
   entregaTexto2:
@@ -1264,10 +1275,10 @@ export const T = {
   calendarioReset: 'Volver al estado inicial',
   calendarioUnidad: 'Unidad',
 
-  modulosEyebrow: `Los ${MODULOS.length} módulos`,
+  modulosEyebrow: 'Módulos',
   modulosTitulo: 'Todo en una sola pantalla',
-  modulosBajada: `${CIFRAS.pantallas} pantallas en el panel de administración y ${CIFRAS.paginasWeb} en la web pública. La barra lateral es la misma que usás todos los días: tocá un módulo.`,
-  modulosRespaldo: `${CIFRAS.pantallas} pantallas en el panel · ${CIFRAS.paginasWeb} pantallas en la web pública · ${CIFRAS.reglas} reglas de aviso que corren cada 30 minutos · ${CIFRAS.reportes} reportes.`,
+  modulosBajada: `Las pantallas del panel de administración y las de la web pública. La barra lateral es la misma que usás todos los días: tocá un módulo.`,
+  modulosRespaldo: 'Pantallas en el panel · pantallas en la web pública · avisos que corren cada 30 minutos · reportes.',
   modulosPanel: 'Panel · Rentadora del Valle',
   modulosHora: 'Vie 12 · 09:14',
   modulosLink: 'Ver la página del módulo',

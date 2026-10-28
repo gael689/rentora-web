@@ -37,7 +37,7 @@ export default function Glosario() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <Portada tag={GLOSARIO_PAG.tag} titulo={GLOSARIO_PAG.titulo} bajada={GLOSARIO_PAG.bajada}>
+      <Portada titulo={GLOSARIO_PAG.titulo} bajada={GLOSARIO_PAG.bajada}>
         <nav className={s.indice} aria-label={GLOSARIO_PAG.indice}>
           {GLOSARIO.map((t, i) => (
             <a key={t.slug} href={`#${t.slug}`} className="etiqueta" data-tono={TONOS[i % TONOS.length]}>
@@ -48,7 +48,7 @@ export default function Glosario() {
       </Portada>
 
       <div className={`envoltorio ${s.pagina}`}>
-        <div className={s.grilla}>
+        <div className={s.glosario}>
           {GLOSARIO.map((t, i) => (
             <section
               key={t.slug}
@@ -60,7 +60,8 @@ export default function Glosario() {
               <p className={s.definicion}>{t.definicion}</p>
               {t.enRentaGo && (
                 <p className={s.enRentaGo}>
-                  <b>{GLOSARIO_PAG.enRentaGo}:</b> {t.enRentaGo}
+                  <b>{GLOSARIO_PAG.enRentaGo}</b>
+                  {t.enRentaGo}
                 </p>
               )}
               <Link href={`/glosario/${t.slug}`} className={s.ver}>

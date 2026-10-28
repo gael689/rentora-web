@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { HOME } from '@/lib/contenido';
 import { pantalla } from '@/lib/sistema/pantallas';
 import Icono from '@/components/sistema/Icono';
-import { Rotulo, Flotante, Telefono } from './Piezas';
+import { rv } from '@/components/animacion/Reveal';
+import { Flotante, Telefono } from './Piezas';
 import s from './home.module.css';
 
 /* Secciones alternadas imagen / texto. Cada una: rótulo, H2 corto, una oración, hasta cuatro
@@ -19,28 +20,27 @@ export default function Funciones() {
           return (
             <article key={f.rotulo} className={`${s.funcion} ${i % 2 ? s.funcionInvertida : ''}`} aria-labelledby={id} data-tono={f.tono}>
               <div className={s.funcionTexto}>
-                <Rotulo texto={f.rotulo} icono={f.icono} tono={f.tono} />
-                <h2 id={id} className="titular-seccion">
+                <h2 id={id} className="titular-seccion" {...rv(0)}>
                   {f.titulo}
                 </h2>
-                <p className="bajada">{f.frase}</p>
+                <p className="bajada" {...rv(1)}>{f.frase}</p>
                 <ul className={s.tildes}>
-                  {f.puntos.map((p) => (
-                    <li key={p}>
+                  {f.puntos.map((p, k) => (
+                    <li key={p} {...rv(k + 2)}>
                       <span className={s.tilde} aria-hidden="true">
-                        <Icono nombre="tilde" tam={14} />
+                        <Icono nombre="tilde" tam={14} dibuja />
                       </span>
                       {p}
                     </li>
                   ))}
                 </ul>
-                <Link href={f.link.href} className="cta-sec">
+                <Link href={f.link.href} className="cta-sec" {...rv(6)}>
                   {f.link.texto}
                   <Icono nombre="flecha" tam={16} />
                 </Link>
               </div>
 
-              <div className={s.funcionVisual}>
+              <div className={s.funcionVisual} {...rv(1, "escala")}>
                 {meta ? (
                   <div className={s.recorte}>
                     <div className={s.recorteInterior}>

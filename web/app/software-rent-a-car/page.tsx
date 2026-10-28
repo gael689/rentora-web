@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { PLAZAS } from '@/lib/seo';
-import { CIUDADES_PAG, TONOS } from '@/lib/paginas';
+import { CIUDADES_PAG } from '@/lib/paginas';
 import { SITIO } from '@/lib/sitio';
 import Portada from '../_pagina/Portada';
 import Cierre from '../_pagina/Cierre';
@@ -27,32 +27,24 @@ export default function IndiceCiudades() {
     },
     migasLd([
       { href: '/', texto: 'Inicio' },
-      { href: '/software-rent-a-car', texto: CIUDADES_PAG.tag },
+      { href: '/software-rent-a-car', texto: CIUDADES_PAG.nombre },
     ]),
   );
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ld }} />
-      <Portada tag={CIUDADES_PAG.tag} titulo={CIUDADES_PAG.titulo} bajada={CIUDADES_PAG.bajada} />
+      <Portada titulo={CIUDADES_PAG.titulo} bajada={CIUDADES_PAG.bajada} />
       <div className={`envoltorio ${s.pagina}`}>
-        <div className={s.indiceFamilia}>
-          {PLAZAS.map((p, i) => (
-            <Link
-              key={p.slug}
-              href={`/software-rent-a-car/${p.slug}`}
-              className="beneficio"
-              data-tono={TONOS[i % TONOS.length]}
-            >
-              <span className="etiqueta">
-                {p.ciudad} · {p.provincia}
-              </span>
-              <p className="gana">{p.temporada}</p>
-              <span className="ver">
-                {CIUDADES_PAG.ver} <span aria-hidden="true">→</span>
-              </span>
-            </Link>
+        <ul className={s.mapa}>
+          {PLAZAS.map((p) => (
+            <li key={p.slug}>
+              <Link href={`/software-rent-a-car/${p.slug}`} className={s.mapaLink}>
+                <b>{p.ciudad}</b>
+                <span>{p.provincia}</span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
       <Cierre titulo={CIUDADES_PAG.cierreTitulo} bajada={CIUDADES_PAG.cierreBajada} />
     </>

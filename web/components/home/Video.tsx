@@ -1,5 +1,6 @@
 import { SITIO } from '@/lib/sitio';
 import { VIDEO } from '@/lib/video';
+import { rv } from '@/components/animacion/Reveal';
 import s from './home.module.css';
 
 /* El video: grabación de pantalla del sistema sobre datos ficticios, con narración y subtítulos.
@@ -19,7 +20,7 @@ export default function Video() {
     inLanguage: 'es-AR',
   };
   return (
-    <figure className={s.video}>
+    <figure className={s.video} {...rv(0, "escala")}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <video controls preload="none" playsInline poster={VIDEO.poster ?? undefined} aria-label={VIDEO.etiqueta}>
         <source src={VIDEO.src} type="video/mp4" />

@@ -1,18 +1,18 @@
 import Link from 'next/link';
 import { CASO, textoCaso } from '@/lib/contenido';
-import { Rotulo } from '@/components/home/Piezas';
 import Icono from '@/components/sistema/Icono';
+import Reveal, { rv } from '@/components/animacion/Reveal';
 import Acento from './Titulo';
 import s from './bloques.module.css';
 
-/* El caso, anonimizado: dónde corre hoy el sistema. Solo lo verificable (las cifras de `CIFRAS`,
- * contadas sobre el código); sin testimonio y sin el nombre de la rentadora hasta que autorice
- * (`CASO.conNombre`). Va en /sistema y en /que-incluye. */
+/* El caso, anonimizado: dónde corre hoy el sistema. Solo lo verificable (frases sin cifras);
+ * sin testimonio y sin el nombre de la rentadora hasta que autorice
+ * (`CASO.conNombre`). Va en /sistema y en /planes. Es una card verde menta de esquinas redondeadas
+ * (la excepción a las esquinas rectas del sitio) con las frases en mini-cards blancas. */
 export default function Caso({ link }: { link?: { href: string; texto: string } }) {
   return (
-    <section className={s.caso} data-tono="menta" aria-labelledby="t-caso">
+    <Reveal as="section" dir="escala" className={s.caso} data-tono="menta" aria-labelledby="t-caso">
       <div className={s.casoTexto}>
-        <Rotulo texto={CASO.rotulo} icono="tildes" tono="menta" />
         <h2 id="t-caso" className="titular-bloque">
           <Acento texto={CASO.titulo} />
         </h2>
@@ -26,15 +26,16 @@ export default function Caso({ link }: { link?: { href: string; texto: string } 
       </div>
       <div className={s.casoCifras}>
         <ul>
-          {CASO.cifras.map((c) => (
-            <li key={c.texto}>
-              <b>{c.cifra}</b>
-              <span>{c.texto}</span>
+          {CASO.frases.map((f, i) => (
+            <li key={f} {...rv(i + 1)}>
+              <span className={s.casoMarca} aria-hidden="true">
+                <Icono nombre="tilde" tam={16} dibuja />
+              </span>
+              <span>{f}</span>
             </li>
           ))}
         </ul>
-        <p className={s.casoNota}>{CASO.nota}</p>
       </div>
-    </section>
+    </Reveal>
   );
 }

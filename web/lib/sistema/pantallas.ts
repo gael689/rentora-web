@@ -1,4 +1,4 @@
-/* El catálogo de las 20 pantallas del panel.
+/* El catálogo de las pantallas del panel.
  *
  * Son exactamente las rutas que resuelve `rentago-system/panel/src/App.tsx` (recontado el
  * 06/10/2026), sin contar las de detalle (`/flota/:id`, `/clientes/:id`), los redirects

@@ -130,3 +130,139 @@
   }
 }
 
+
+/* Portada con foto (/para/[slug]): imagen a sangre, degradé oscuro y texto blanco. Esquinas rectas. */
+.portadaFoto {
+  display: grid;
+  align-items: end;
+  /* La foto sube por detrás del encabezado fijo: el encabezado se acopla a ella. */
+  margin-top: calc(var(--alto-barra) * -1);
+  min-height: calc(clamp(360px, 42vw, 470px) + var(--alto-barra));
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--texto);
+  box-shadow: var(--sombra-foto);
+}
+.portadaImg {
+  z-index: -2;
+  object-fit: cover;
+}
+/* Foto a la derecha: el texto queda sobre fondo liso y la foto se funde hacia él. */
+@media (min-width: 720px) {
+  .portadaImgDerecha {
+    left: auto !important;
+    width: 66% !important;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+  }
+}
+.portadaFoto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgb(8 30 33 / 0.86) 0%, rgb(8 30 33 / 0.62) 46%, rgb(8 30 33 / 0.18) 100%),
+    linear-gradient(to top, rgb(8 30 33 / 0.5) 0%, rgb(8 30 33 / 0) 60%),
+    linear-gradient(to bottom, rgb(8 30 33 / 0.6) 0%, rgb(8 30 33 / 0) 30%);
+}
+@media (max-width: 719.98px) {
+  .portadaFoto::after {
+    background: linear-gradient(to top, rgb(8 30 33 / 0.9) 0%, rgb(8 30 33 / 0.66) 100%);
+  }
+}
+.portadaFoto .portadaInterna {
+  width: 100%;
+  padding-block: calc(clamp(40px, 6vw, 80px) + var(--alto-barra)) clamp(32px, 5vw, 56px);
+}
+.sobreFoto .h1,
+.sobreFoto .bajada {
+  color: #fff;
+}
+.sobreFoto .migas,
+.sobreFoto .migas a {
+  color: rgb(255 255 255 / 0.88);
+}
+.sobreFoto .migas a:hover,
+.sobreFoto .migas [aria-current] {
+  color: #fff;
+}
+
+/* Portada con el nombre del producto de fondo (/operaciones): banda oscura con "RentaGo" enorme en
+ * los colores de marca, a la derecha y recortado por abajo, para que el hero quede delimitado y
+ * el nombre no choque con el titular. Usa también .portadaFoto (sube por detrás del encabezado). */
+.portadaMarca {
+  min-height: calc(clamp(300px, 30vw, 390px) + var(--alto-barra));
+  background:
+    radial-gradient(60% 90% at 85% 100%, rgb(18 149 155 / 0.28), transparent 70%),
+    linear-gradient(160deg, #0a2326 0%, #0f2e31 55%, #0b3d41 100%);
+}
+.portadaMarca::after {
+  background: linear-gradient(90deg, rgb(8 30 33 / 0.55) 0%, rgb(8 30 33 / 0) 55%);
+}
+.marcaFondo {
+  position: absolute;
+  z-index: -1;
+  right: 2%;
+  bottom: -3%;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(4.5rem, 12vw, 11.5rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+  color: rgb(25 169 176 / 0.55);
+  user-select: none;
+  pointer-events: none;
+}
+.marcaFondo b {
+  font-weight: 700;
+  color: rgb(236 250 248 / 0.78);
+}
+/* Móvil: el nombre entero, centrado y detrás del texto, con mucha menos opacidad. */
+@media (max-width: 719.98px) {
+  .marcaFondo {
+    left: 0;
+    right: 0;
+    bottom: 12%;
+    text-align: center;
+    font-size: clamp(3.5rem, 25vw, 7rem);
+    opacity: 0.4;
+  }
+}
+
+/* Chips de navegación (glosario, sistema) sobre el hero oscuro. */
+.sobreFoto :global(.etiqueta) {
+  color: #bfeff0;
+}
+.sobreFoto :global(.etiqueta):hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+/* Foto pasada a los colores de la web: escala de grises + duotono verde petróleo / turquesa. */
+.portadaImgTinte {
+  filter: grayscale(1) contrast(1.08) brightness(0.95);
+}
+.tinte {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(135deg, #1bb2b9 0%, #0e7f85 45%, #0a3c40 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Pantalla del sistema desenfocada de fondo (/operaciones/[slug]): en gris y fundida hacia el texto. */
+.fondoPantalla {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  opacity: 0.4;
+  filter: blur(7px) grayscale(1) contrast(0.9);
+  transform: scale(1.06);
+  -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 75%);
+  mask-image: linear-gradient(90deg, transparent 8%, #000 75%);
+  pointer-events: none;
+}
