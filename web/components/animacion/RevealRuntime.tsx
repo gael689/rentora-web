@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
  *
  * Contrato (todo el contenido está en el HTML servido; esto sólo lo "presenta"):
  *  - Mientras no corra este efecto, nada está oculto: sin JS, con `scripting: none`, con
- *    `prefers-reduced-motion` o sin IntersectionObserver el sitio se ve completo y quieto.
+ *    sin IntersectionObserver el sitio se ve completo y quieto.
  *  - Al montar marca como "ya visto" todo lo que está en el primer viewport o más arriba (sin
  *    animar, para que no parpadee) y recién después agrega `rv-on` a <html>, que es lo que oculta
  *    lo que todavía está abajo.
@@ -25,8 +25,8 @@ export default function RevealRuntime() {
 
   useEffect(() => {
     const raiz = document.documentElement;
-    const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (quieto || typeof IntersectionObserver === 'undefined') {
+    // Las animaciones no dependen de la configuración del sistema operativo (pedido de Gael, 28/10).
+    if (typeof IntersectionObserver === 'undefined') {
       raiz.classList.remove('rv-on');
       return;
     }

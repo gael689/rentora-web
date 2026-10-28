@@ -453,11 +453,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .late {
-    animation: none;
-  }
-}
 
 /* ── Tablas ──────────────────────────────────────────────────────────────── */
 

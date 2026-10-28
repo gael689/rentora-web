@@ -133,16 +133,10 @@ export default function Escena({
     [dibujar, decidir],
   );
 
-  // Mueve la meta; con prefers-reduced-motion salta directo.
+  // Mueve la meta (siempre interpolado: no depende de la configuración del sistema operativo).
   const irMeta = useCallback(
     (m: number) => {
       meta.current = m;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        actual.current = m;
-        dibujar();
-        decidir();
-        return;
-      }
       if (!cuadro.current) {
         ultimo.current = performance.now();
         cuadro.current = requestAnimationFrame(paso);
@@ -244,8 +238,7 @@ export default function Escena({
       finBloqueo.current = window.setTimeout(() => {
         bloqueo.current = false;
       }, 700);
-      const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: destino, behavior: quieto ? 'auto' : 'smooth' });
+      window.scrollTo({ top: destino, behavior: 'smooth' });
     },
     [cantidad, medir, irMeta, fijarActiva],
   );

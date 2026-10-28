@@ -247,12 +247,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .panel,
-  .cardVer {
-    transition: none;
-  }
-}
 
 /* Detalle de una operación */
 .bloque {

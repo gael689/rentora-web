@@ -1138,6 +1138,19 @@ export const HOME = {
   },
 } as const;
 
+/** v6b (28/10): el bloque "gancho" de las páginas internas. Reemplaza a la mayoría de las
+ *  capturas (pedido de Gael: "dejar las mínimas, que sea gancho e incentive a las consultas").
+ *  La demo es la del CLAUDE.md: Gael comparte pantalla con el sistema real y datos de ejemplo.
+ *  REVISAR GAEL: textos propuestos. */
+export const GANCHO = {
+  rotulo: 'El resto, andando',
+  titulo: 'Lo demás te lo muestro en vivo',
+  texto: 'Una videollamada con el sistema real, cargado con una rentadora de ejemplo. Me contás cómo trabajás y lo vemos sobre tu caso.',
+  cta: 'Escribime por WhatsApp',
+  mensaje: 'Hola Gael, vi la web de RentaGo y quiero ver el sistema andando.',
+  secundario: { texto: 'Contame cómo trabajás', href: '/contacto' },
+};
+
 /* ── Dos marcas de ejemplo ────────────────────────────────────────────────────
  *
  * La misma web de reservas con dos rentadoras INVENTADAS: son los dos fixtures de

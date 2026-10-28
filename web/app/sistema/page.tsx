@@ -8,6 +8,7 @@ import Pantalla, { hayReplica } from '@/components/sistema/Pantalla';
 import Portada from '../_pagina/Portada';
 import Cierre from '../_pagina/Cierre';
 import Caso from '../_pagina/Caso';
+import Gancho from '../_pagina/Gancho';
 import { CASO_UI } from '@/lib/paginas';
 import s from './sistema.module.css';
 import { alternos } from '../_pagina/meta';
@@ -22,6 +23,10 @@ export const metadata: Metadata = {
     'Las pantallas del panel de RentaGo, una por una: ocupación, reservas, contratos, caja, precios, prospectos y más. El sistema como es, sobre una rentadora de ejemplo.',
   alternates: alternos('/sistema'),
 };
+
+/* v6b (28/10): de las pantallas, sólo estas tres se muestran; el resto se nombra con lo que resuelve
+ * y el gancho invita a verlas andando (pedido de Gael: menos capturas, más consultas). */
+const DESTACADAS = ['ocupacion', 'contratos', 'caja'];
 
 export default function Sistema() {
   const secciones = SECCIONES_SISTEMA.map((sec) => ({
@@ -80,7 +85,7 @@ export default function Sistema() {
                     {SISTEMA.verModulo} <span aria-hidden="true">→</span>
                   </Link>
                 </div>
-                {hayReplica(p.slug) ? (
+                {DESTACADAS.includes(p.slug) && hayReplica(p.slug) ? (
                   <Pantalla slug={p.slug} />
                 ) : (
                   <p className={s.pendiente}>
@@ -105,6 +110,8 @@ export default function Sistema() {
             </ul>
           </section>
         )}
+
+        <Gancho cuantas={PANTALLAS.filter((p) => !DESTACADAS.includes(p.slug)).length} />
 
         <Caso link={{ href: '/planes#que-incluye', texto: CASO_UI.verIncluye }} />
       </div>

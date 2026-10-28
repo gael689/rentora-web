@@ -55,12 +55,3 @@
     opacity: 0;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .centro,
-  .destello {
-    animation: none;
-  }
-  .destello {
-    display: none;
-  }
-}

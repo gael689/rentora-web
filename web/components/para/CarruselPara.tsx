@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import Icono from '@/components/sistema/Icono';
+import Ruta from '@/components/marca/Ruta';
 import Link from 'next/link';
 import { PARA } from '@/lib/seo';
 import { VISUAL_PARA } from '@/lib/para-visual';
@@ -20,7 +21,8 @@ const PAUSA_TRAS_GESTO = 1500;
 /** Velocidad del avance continuo, en px por segundo. */
 const VELOCIDAD = 35;
 
-export default function CarruselPara({ prioridad = false, etiqueta }: { prioridad?: boolean; etiqueta: string }) {
+// `prioridad` quedó de cuando las tarjetas llevaban foto (v6b: escenas de marca, sin imágenes).
+export default function CarruselPara({ etiqueta }: { prioridad?: boolean; etiqueta: string }) {
   const ventana = useRef<HTMLDivElement>(null);
   const encima = useRef(false);
   const hastaCuando = useRef(0);
@@ -56,7 +58,6 @@ export default function CarruselPara({ prioridad = false, etiqueta }: { priorida
 
   // Con movimiento permitido, la cinta pasa a ser un bucle (se triplica la lista, después de montar).
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     setBucle(true);
   }, []);
 
@@ -192,7 +193,6 @@ export default function CarruselPara({ prioridad = false, etiqueta }: { priorida
         <ul className={s.pista}>
           {(bucle ? [0, 1, 2] : [1]).flatMap((copia) => PARA.map((p, i) => ({ p, i, copia }))).map(({ p, i, copia }) => {
             const v = VISUAL_PARA[p.slug];
-            const arriba = prioridad && i < 4 && copia === 1;
             // Las copias del bucle son sólo visuales: fuera del árbol de accesibilidad y de Tab.
             const oculta = bucle && copia !== 1;
             return (
@@ -204,17 +204,12 @@ export default function CarruselPara({ prioridad = false, etiqueta }: { priorida
                   tabIndex={oculta ? -1 : undefined}
                 >
                   {v && (
-                    <Image
-                      src={v.src}
-                      alt={v.alt}
-                      fill
-                      draggable={false}
-                      sizes="(min-width: 1000px) 360px, (min-width: 600px) 40vw, 62vw"
-                      className={s.foto}
-                      style={{ objectPosition: v.pos }}
-                      loading={arriba ? 'eager' : 'lazy'}
-                      fetchPriority={arriba ? 'high' : undefined}
-                    />
+                    <span className={s.escena} data-tono={v.tono} aria-hidden="true">
+                      <Ruta className={s.escenaRuta} />
+                      <span className={s.escenaIcono}>
+                        <Icono nombre={v.icono} tam={64} />
+                      </span>
+                    </span>
                   )}
                   <span className="tarjeta-foto__texto">
                     <span className="tarjeta-foto__titulo">{p.nombre}</span>

@@ -11,6 +11,7 @@ import { SITIO } from '@/lib/sitio';
 import Portada from '../../_pagina/Portada';
 import Migas from '../../_pagina/Migas';
 import Cierre from '../../_pagina/Cierre';
+import Gancho from '../../_pagina/Gancho';
 import { vistaModulo, mayuscula } from '../../_pagina/modulo';
 import s from './modulo.module.css';
 import { alternos, titulo as tituloMeta, SUFIJO_TITLE } from '../../_pagina/meta';
@@ -95,8 +96,9 @@ export default async function PaginaModulo({ params }: { params: Promise<{ slug:
             <h2 className={s.rotulo}>
               {pantallas.length === 1 ? MODULOS_PAG.pantalla : MODULOS_PAG.pantallas}
             </h2>
+            {/* v6b: una sola pantalla por módulo (la primera con réplica); las demás se nombran. */}
             {pantallas.map((p) =>
-              hayReplica(p.slug) ? (
+              p.slug === pantallas.find((x) => hayReplica(x.slug))?.slug ? (
                 <div key={p.slug} className={s.replica}>
                   <Pantalla slug={p.slug} />
                 </div>
@@ -108,6 +110,8 @@ export default async function PaginaModulo({ params }: { params: Promise<{ slug:
             )}
           </section>
         )}
+
+        <Gancho />
 
         <section className={s.bloque}>
           <h2 className={s.rotulo}>{MODULOS_PAG.incluye}</h2>

@@ -12,6 +12,7 @@ import Cubre from '@/components/sistema/Cubre';
 import Vista from '../Vista';
 import Migas from '../../_pagina/Migas';
 import Cierre from '../../_pagina/Cierre';
+import Gancho from '../../_pagina/Gancho';
 import { mayuscula } from '../../_pagina/modulo';
 import s from '../operaciones.module.css';
 import { alternos, titulo as tituloMeta, SUFIJO_TITLE } from '../../_pagina/meta';
@@ -152,6 +153,8 @@ export default async function PaginaOperacion({ params }: { params: Promise<{ sl
             <Pantalla slug={laPantalla.slug} />
           </section>
         )}
+
+        <Gancho />
 
         <section className={s.bloque}>
           <h2 className={s.rotulo}>{OPERACIONES_PAG.otras}</h2>

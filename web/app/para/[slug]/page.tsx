@@ -85,7 +85,6 @@ export default async function PaginaPara({ params }: { params: Promise<{ slug: s
         titulo={p.h1}
         bajada={p.bajada}
         migas={<Migas items={migas} actual={p.nombre} />}
-        imagen={visual && { src: visual.src, alt: visual.alt, pos: visual.pos }}
       />
 
       <article className={`envoltorio ${s.pagina}`}>

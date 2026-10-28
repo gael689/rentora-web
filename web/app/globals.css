@@ -304,8 +304,8 @@ button {
 .esquina-bd { border-radius: var(--radio) var(--radio) 48px var(--radio); }
 .esquina-bi { border-radius: var(--radio) var(--radio) var(--radio) 48px; }
 
-/* Cinta que se desplaza sola (clientes y módulos). Se detiene con el mouse y si se pide menos
- * movimiento. La lista va duplicada en el HTML; la segunda copia es `aria-hidden`. */
+/* Cinta que se desplaza sola y sin parar (bajo el hero). La lista va duplicada en el HTML; la
+ * segunda copia es `aria-hidden`. */
 .cinta {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -314,16 +314,10 @@ button {
 .cinta-pista {
   display: flex;
   width: max-content;
-  animation: cinta 46s linear infinite;
-}
-.cinta:hover .cinta-pista {
-  animation-play-state: paused;
+  animation: cinta 38s linear infinite;
 }
 @keyframes cinta {
   to { transform: translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cinta-pista { animation: none; }
 }
 
 
@@ -735,14 +729,6 @@ button {
 }
 
 /* Lo único que se mueve: hover y foco. Igual se apaga si el visitante lo pide. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-}
 
 /* ── Estética "foto y aire" (v5, 26/10/2026) ──────────────────────────────────
  * Reglas reutilizables que hoy sólo aplican /para y /operaciones; el resto del sitio las puede
@@ -750,7 +736,7 @@ button {
  * (nunca un negro macizo: arriba la foto se ve entera), título y frase en blanco encima y sombra
  * suave. Texto "en el aire": sin caja, con un hilo fino de color arriba. */
 :root {
-  --radio-recto: 0;
+  --radio-recto: 20px;
   --sombra-foto: 0 2px 6px rgb(15 46 49 / 0.08), 0 24px 48px -24px rgb(15 46 49 / 0.5);
   --sombra-foto-alta: 0 4px 10px rgb(15 46 49 / 0.1), 0 40px 70px -28px rgb(15 46 49 / 0.62);
   --velo-foto: linear-gradient(
@@ -823,7 +809,7 @@ button {
   --rv-dur: 640ms;
   --rv-paso: 70ms;
 }
-@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+@media (scripting: enabled) {
   [data-reveal] {
     transition:
       opacity var(--rv-dur) var(--rv-ease) calc(var(--rv-i, 0) * var(--rv-paso)),
@@ -886,7 +872,7 @@ button {
     transform: none;
   }
 }
-@media (prefers-reduced-motion: no-preference) {
+@media all {
   .entrada {
     animation: rv-entrada 640ms var(--rv-ease) both;
     animation-delay: calc(var(--rv-i, 0) * 90ms);
@@ -901,4 +887,45 @@ button {
   width: auto;
   height: 3px;
   background: var(--t, var(--acento));
+}
+
+/* ── v6b: detalles "tech" (registro Solven) ──
+ * Grilla técnica tenue sobre la malla noche, que se apaga hacia los bordes, y un borde de luz que
+ * gira (`.borde-vivo`). Se mueven siempre: no dependen de la configuración del sistema operativo. */
+.banda-oscura::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(127 212 216 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(127 212 216 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(65% 70% at 72% 38%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(65% 70% at 72% 38%, #000 0%, transparent 78%);
+}
+@property --giro {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.borde-vivo {
+  position: relative;
+  padding: 2px;
+  border-radius: 16px;
+  background: conic-gradient(
+    from var(--giro),
+    rgb(127 212 216 / 0.12) 0deg,
+    rgb(127 212 216 / 0.12) 250deg,
+    #7fd4d8 300deg,
+    #e6fffb 330deg,
+    rgb(127 212 216 / 0.12) 360deg
+  );
+  animation: giro 6s linear infinite;
+}
+@keyframes giro {
+  to {
+    --giro: 360deg;
+  }
 }

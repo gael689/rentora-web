@@ -5,19 +5,19 @@ import { linkWhatsapp } from '@/lib/sitio';
 import Icono from '@/components/sistema/Icono';
 import Ruta from '@/components/marca/Ruta';
 import { Flotante, Telefono } from './Piezas';
-import Clientes from './Clientes';
 import s from './home.module.css';
 
-/* Hero v6 (28/10): malla noche con grano y la ruta de la marca de fondo, que sube por detrás del
- * encabezado (`data-hero-foto`, igual que las portadas internas). A la izquierda el H1 grande con
+/* Hero v6b (28/10): claro, como el original (Gael no quiso el oscuro): malla hielo con grano, la
+ * grilla técnica y la ruta de la marca, que sube por detrás del encabezado. A la izquierda el H1 grande con
  * la frase clave en degradé; a la derecha el producto real en un marco oscuro con resplandor, los
- * chips apoyados en los bordes y la web de reservas en un celular. Al pie, la franja de clientes. */
+ * chips apoyados en los bordes y la web de reservas en un celular. En escritorio entra entero en la
+ * pantalla junto con la cinta de abajo (`Confianza`). */
 export default function Hero() {
   const h = HOME.hero;
   const [c1, c2, c3, c4] = h.chips;
   return (
-    <section className={`banda-oscura ${s.hero}`} aria-labelledby="t-hero" data-hero-foto>
-      <Ruta className={s.heroRuta} />
+    <section className={`banda-suave ${s.hero}`} aria-labelledby="t-hero">
+      <Ruta tono="claro" className={s.heroRuta} />
       <div className={`envoltorio ${s.heroGrilla}`}>
         <div className={s.heroTexto}>
           <h1 id="t-hero" className={`titular-hero entrada ${s.h1}`}>
@@ -33,7 +33,7 @@ export default function Hero() {
             </Link>
             <a
               href={linkWhatsapp(h.mensajeDemo)}
-              className="btn-vidrio"
+              className="btn-linea"
               target="_blank"
               rel="noopener"
               data-cta="hero"
@@ -46,7 +46,7 @@ export default function Hero() {
 
         <div className={`entrada ${s.heroVisual}`} style={{ ['--rv-i' as string]: 2 }}>
           {/* La captura del sistema real (capturas-reales.mjs), con su marco de navegador. */}
-          <div className={s.heroCaptura}>
+          <div className={`borde-vivo ${s.heroCaptura}`}>
             <Image
               src="/v4/ocupacion.webp"
               alt={h.capturaAlt}
@@ -64,7 +64,6 @@ export default function Hero() {
           <Telefono src="/v4/valle-movil.webp" alt={h.telefonoAlt} className={s.heroTelefono} prioridad />
         </div>
       </div>
-      <Clientes />
     </section>
   );
 }
