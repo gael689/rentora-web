@@ -461,15 +461,31 @@
   transform: rotate(45deg);
 }
 
-/* Planes: tarjetas lado a lado (son dos o tres, nunca tres iguales: la recomendada se distingue). */
+/* Planes: cuatro tarjetas en mosaico 2 × 2, de anchos desparejos (5/7 y 7/5), cada una con su fondo
+ * (hielo, noche, marca, blanco) y una esquina grande distinta. La recomendada es la de color de marca.
+ * El fondo viene de las utilidades `.banda-*` / `.malla-turquesa` de globals.css (malla + grano). */
 .planes {
+  --esq: 26px;
+  --esq-grande: 92px;
   display: grid;
-  gap: 18px;
-  align-items: stretch;
+  gap: 20px;
+  align-items: start;
+  margin-top: clamp(48px, 7vw, 96px);
 }
-@media (min-width: 860px) {
+@media (min-width: 900px) {
   .planes {
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .planesCol {
+    display: grid;
+    gap: 24px;
+    align-content: start;
+  }
+}
+@media (max-width: 899.98px) {
+  .planesCol {
+    display: contents;
   }
 }
 .plan {
@@ -477,21 +493,41 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: clamp(24px, 3vw, 34px);
-  border: 1px solid var(--borde);
-  border-top: 3px solid var(--borde-fuerte);
+  padding: clamp(28px, 3.4vw, 44px);
+  border-radius: var(--esq);
+  color: var(--texto);
+  overflow: hidden;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.plan:hover {
+  transform: translateY(-4px);
+}
+.plan[data-tema='hielo'] {
+  border-radius: var(--esq) var(--esq) var(--esq) var(--esq-grande);
+  box-shadow: inset 0 0 0 1px rgb(14 127 133 / 0.14), var(--sombra-suave);
+}
+.plan[data-tema='noche'] {
+  border-radius: var(--esq) var(--esq-grande) var(--esq) var(--esq);
+  box-shadow: 0 28px 50px -30px rgb(6 26 28 / 0.7);
+}
+.plan[data-tema='marca'] {
+  border-radius: var(--esq-grande) var(--esq) var(--esq) var(--esq);
+  box-shadow: 0 34px 60px -28px rgb(14 127 133 / 0.65);
+}
+.plan[data-tema='blanco'] {
+  border-radius: var(--esq) var(--esq) var(--esq-grande) var(--esq);
   background: #fff;
-  box-shadow: 0 14px 30px -26px rgb(15 46 49 / 0.45);
+  box-shadow: inset 0 0 0 1px var(--borde), var(--sombra-suave);
 }
-.plan[data-recomendado='true'] {
-  border-color: rgb(14 127 133 / 0.35);
-  border-top: 4px solid var(--acento);
-  box-shadow: var(--sombra-foto);
+.plan[data-tema='noche'],
+.plan[data-tema='marca'] {
+  color: #fff;
 }
-/* Móvil: el recomendado va primero y las tarjetas se separan bien una de otra. */
-@media (max-width: 859.98px) {
+/* Móvil: una columna, el recomendado primero, y las esquinas grandes un poco más chicas. */
+@media (max-width: 899.98px) {
   .planes {
-    gap: 28px;
+    --esq-grande: 64px;
+    gap: 24px;
   }
   .plan[data-recomendado='true'] {
     order: -1;
@@ -502,31 +538,57 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 18px;
-  margin-top: auto;
+  margin-top: 0;
   padding-top: 22px;
+}
+.plan[data-tema='noche'] .planAcciones :global(.cta-sec),
+.plan[data-tema='marca'] .planAcciones :global(.cta-sec) {
+  color: #fff;
 }
 .planMarca {
   align-self: flex-start;
-  color: var(--arena-strong);
-  font-size: 0.8125rem;
+  padding: 6px 14px;
+  border-radius: var(--radio-pildora);
+  background: rgb(14 127 133 / 0.12);
+  color: var(--turq-strong);
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+.plan[data-tema='noche'] .planMarca {
+  background: rgb(255 255 255 / 0.1);
+  color: var(--claro);
+}
+.plan[data-tema='marca'] .planMarca {
+  background: #fff;
+  color: var(--acento-osc);
 }
 .plan h2 {
   margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 1.6rem;
+  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
+}
+.plan .itemPorque {
+  max-width: 34ch;
+}
+.plan[data-tema='noche'] .itemPorque,
+.plan[data-tema='marca'] .itemPorque {
+  color: rgb(255 255 255 / 0.78);
 }
 .plan ul {
   display: grid;
-  gap: 10px;
-  margin: 8px 0 0;
-  padding: 18px 0 0;
-  border-top: 1px solid var(--borde);
+  gap: 12px;
+  margin: 10px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid rgb(15 46 49 / 0.12);
   list-style: none;
+}
+.plan[data-tema='noche'] ul,
+.plan[data-tema='marca'] ul {
+  border-top-color: rgb(255 255 255 / 0.2);
 }
 .plan li {
   position: relative;
@@ -541,7 +603,17 @@
   width: 22px;
   height: 22px;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6e73' stroke-width='3' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6e73' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 14px no-repeat;
+}
+.plan[data-tema='noche'] li::before {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237fd4d8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 14px no-repeat;
+}
+.plan[data-tema='marca'] li::before {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
       center / 14px no-repeat;
 }
 

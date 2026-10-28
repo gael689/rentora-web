@@ -52,6 +52,10 @@ export type PaginaPara = PaginaSeo & {
 export type Guia = PaginaSeo & {
   /** Título de la tarjeta del índice, formulado como el problema. */
   tarjeta: string;
+  /** "¿Te suena?": tres situaciones del mostrador, en la voz del que las vive. Es el gancho de la página. */
+  sintomas: string[];
+  /** Una línea: lo que cuesta no resolverlo. */
+  costo: string;
   /** Dos secciones de prosa como máximo. */
   secciones: Seccion[];
   /** Lista de control al final: cosas concretas para hacer o revisar. */
@@ -84,6 +88,8 @@ export type Plan = {
   para: string;
   /** Lo que incluye, en ítems cortos. */
   incluye: string[];
+  /** Una marca corta sobre el nombre ("Para arrancar"). */
+  etiqueta?: string;
   /** El recomendado lleva la marca. Uno solo. */
   recomendado?: boolean;
 };

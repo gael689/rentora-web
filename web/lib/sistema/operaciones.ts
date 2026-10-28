@@ -49,7 +49,7 @@ export const OPERACIONES: Operacion[] = [
     termino: 'cómo cobrar una devolución tardía de un auto alquilado',
     pregunta: 'Devolvió el auto una hora y veinte tarde. ¿Le cobrás?',
     bajada:
-      'Es la discusión más común del mostrador y la que más plata deja en el camino, porque se resuelve a ojo y siempre a favor del que reclama más fuerte. RentaGo ya la tiene decidida: cuarenta minutos de gracia, y de ahí en más cargo por hora. No lo discutís vos con el cliente delante: lo dice el sistema.',
+      'La discusión más común del mostrador, resuelta de antemano: cuarenta minutos de gracia y, de ahí en más, cargo por hora. Lo dice el sistema, no vos.',
     pasos: [
       {
         n: 1,
@@ -105,7 +105,7 @@ export const OPERACIONES: Operacion[] = [
     termino: 'cómo cargar una reserva de alquiler de autos sin sobrevender',
     pregunta: '¿Cómo sabés que ese auto está libre en esas fechas?',
     bajada:
-      'Un solo botón, Nueva operación, con tres puertas: contrato de largo plazo, alquiler rápido o reserva completa. La reserva completa son seis pasos y ninguno tiene nombre de sistema: son preguntas. ¿Quién? ¿Cuándo y dónde? ¿Qué? ¿Cuánto? ¿Cómo se paga? Y un resumen antes de guardar.',
+      'Un solo botón, tres puertas y seis preguntas simples: quién, cuándo y dónde, qué, cuánto y cómo se paga.',
     pasos: [
       {
         n: 1,
@@ -159,7 +159,7 @@ export const OPERACIONES: Operacion[] = [
     termino: 'cómo firmar un contrato de alquiler de autos a distancia',
     pregunta: 'El cliente retira a las siete de la mañana. ¿Cuándo firma?',
     bajada:
-      'El contrato se firma en pantalla con el dedo o el mouse, por un link que se manda al teléfono, o en papel —y en ese caso se sube el firmado y queda adjunto al mismo contrato. Todos los caminos terminan en el mismo lugar, así que el que trabaja con papel no queda afuera del sistema.',
+      'Se firma en pantalla, por un link al teléfono o en papel. Todos los caminos terminan en el mismo contrato.',
     pasos: [
       {
         n: 1,
@@ -216,7 +216,7 @@ export const OPERACIONES: Operacion[] = [
     termino: 'checklist de entrega de un auto de alquiler',
     pregunta: 'Vuelve con un rayón. ¿Cómo sabés que no estaba?',
     bajada:
-      'Entregar es un paso rápido, pensado para hacerse parado y con el cliente esperando: tres botones grandes de color para la limpieza, el combustible a un toque y los daños que ya tenía el auto a la vista. No pregunta si firmó ni cobra ahí: eso ya tiene su lugar.',
+      'Un paso rápido, pensado para hacerse parado y con el cliente esperando: limpieza, combustible y daños previos a la vista.',
     pasos: [
       {
         n: 1,
@@ -264,7 +264,7 @@ export const OPERACIONES: Operacion[] = [
     termino: 'cómo extender un alquiler de auto y cobrar la diferencia',
     pregunta: 'Llama y te pide el auto tres días más. ¿Cuánto le cobrás?',
     bajada:
-      'La extensión es un alquiler nuevo, con su propio precio. La pantalla muestra solo la extensión: de cuándo a cuándo, cuántos días, a cuánto el día y el total. Y el contrato se regenera con las fechas nuevas.',
+      'La extensión es un alquiler nuevo con su propio precio, y el contrato se regenera con las fechas nuevas.',
     pasos: [
       {
         n: 1,
@@ -309,7 +309,7 @@ export const OPERACIONES: Operacion[] = [
     termino: 'cómo cargar una promoción de temporada en un alquiler de autos',
     pregunta: '¿Qué pasa con el precio viejo cuando la promo se termina?',
     bajada:
-      'Se marcan los días arrastrando sobre la fila de una categoría y se les pone precio. Hay un solo precio, para la web y para el mostrador. Cuando la promo se da de baja, el precio anterior vuelve solo: no hay que acordarse de restaurarlo, porque nunca se pisó.',
+      'Marcás los días, ponés el precio y, al darla de baja, el precio anterior vuelve solo. Nunca se pisó.',
     pasos: [
       {
         n: 1,

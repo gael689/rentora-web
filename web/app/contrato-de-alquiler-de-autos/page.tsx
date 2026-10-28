@@ -44,7 +44,7 @@ export default function PaginaContrato() {
     ...GLOSARIO.filter((t) => ['clausulado-versionado', 'franquicia', 'conductor-adicional'].includes(t.slug)).map(
       (t) => ({ href: `/glosario/${t.slug}`, texto: t.palabra }),
     ),
-    ...GUIAS.filter((g) => g.slug === 'franquicia-y-garantia').map((g) => ({ href: `/guias/${g.slug}`, texto: g.nombre })),
+    ...GUIAS.filter((g) => g.slug === 'franquicia-y-garantia').map((g) => ({ href: `/soluciones/${g.slug}`, texto: g.nombre })),
     ...OPERACIONES.filter((o) => o.slug === 'firmar-el-contrato').map((o) => ({
       href: `/operaciones/${o.slug}`,
       texto: o.nombre,

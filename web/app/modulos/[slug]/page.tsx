@@ -10,7 +10,6 @@ import Icono from '@/components/sistema/Icono';
 import { SITIO } from '@/lib/sitio';
 import Portada from '../../_pagina/Portada';
 import Migas from '../../_pagina/Migas';
-import Cierre from '../../_pagina/Cierre';
 import Gancho from '../../_pagina/Gancho';
 import { vistaModulo, mayuscula } from '../../_pagina/modulo';
 import s from './modulo.module.css';
@@ -111,7 +110,18 @@ export default async function PaginaModulo({ params }: { params: Promise<{ slug:
           </section>
         )}
 
-        <Gancho />
+        {m.slug === 'tu-web' ? (
+          <Gancho
+            rotulo="Web a medida"
+            titulo="Mirá tu web con tu marca"
+            texto="Cómo queda la web de reservas con tu logo, tus colores y tu flota, y todo lo que ya viene resuelto."
+            cta="Consultar por WhatsApp"
+            mensaje="Hola Gael, vi el módulo de la web de reservas y quiero ver cómo quedaría la mía."
+            principal={{ texto: 'Ver la web a medida', href: '/web-a-medida' }}
+          />
+        ) : (
+          <Gancho />
+        )}
 
         <section className={s.bloque}>
           <h2 className={s.rotulo}>{MODULOS_PAG.incluye}</h2>
@@ -177,8 +187,6 @@ export default async function PaginaModulo({ params }: { params: Promise<{ slug:
           </p>
         </section>
       </article>
-
-      <Cierre titulo={MODULOS_PAG.cierreTitulo} bajada={MODULOS_PAG.cierreBajada} />
     </>
   );
 }

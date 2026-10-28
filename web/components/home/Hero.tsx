@@ -27,7 +27,7 @@ export default function Hero() {
           </h1>
           <p className={`bajada entrada ${s.heroBajada}`} style={{ ['--rv-i' as string]: 1 }}>{h.bajada}</p>
           <div className={`entrada ${s.acciones}`} style={{ ['--rv-i' as string]: 2 }}>
-            <Link href="/sistema" className="cta" data-evento="ver_sistema" data-cta="hero">
+            <Link href="/modulos" className="cta" data-evento="ver_sistema" data-cta="hero">
               {h.ctaPrincipal}
               <Icono nombre="flecha" tam={18} />
             </Link>

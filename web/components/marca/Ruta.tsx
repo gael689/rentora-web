@@ -7,13 +7,25 @@ import s from './ruta.module.css';
  *
  *   <Ruta />                 sobre una malla oscura o turquesa
  *   <Ruta tono="claro" />    sobre la malla hielo */
-export default function Ruta({ tono = 'oscuro', className }: { tono?: 'oscuro' | 'claro'; className?: string }) {
-  const d = 'M -80 640 C 220 600, 300 380, 560 360 S 880 250, 980 150 S 1180 -10, 1320 -40';
+export default function Ruta({
+  tono = 'oscuro',
+  className,
+  d = 'M -80 640 C 220 600, 300 380, 560 360 S 880 250, 980 150 S 1180 -10, 1320 -40',
+  vista = '0 0 1200 600',
+  aspecto = 'xMidYMid slice',
+}: {
+  tono?: 'oscuro' | 'claro';
+  className?: string;
+  /** El trazado (en coordenadas de `vista`) y su caja, para una ruta que no sea la de siempre. */
+  d?: string;
+  vista?: string;
+  aspecto?: string;
+}) {
   return (
     <svg
       className={`${s.ruta} ${tono === 'claro' ? s.claro : ''} ${className ?? ''}`}
-      viewBox="0 0 1200 600"
-      preserveAspectRatio="xMidYMid slice"
+      viewBox={vista}
+      preserveAspectRatio={aspecto}
       aria-hidden="true"
       focusable="false"
     >

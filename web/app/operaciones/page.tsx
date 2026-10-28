@@ -5,6 +5,7 @@ import { OPERACIONES_PAG } from '@/lib/paginas';
 import { distancia } from '@/lib/carrusel';
 import Cubre from '@/components/sistema/Cubre';
 import Portada from '../_pagina/Portada';
+import Ruta from '@/components/marca/Ruta';
 import Cierre from '../_pagina/Cierre';
 import Escena from './Escena';
 import Vista from './Vista';
@@ -25,7 +26,15 @@ export default function Operaciones() {
   const n = OPERACIONES.length;
   return (
     <>
+      <div className={s.fusion}>
+      <Ruta
+        className={s.fusionRuta}
+        vista="0 0 1200 1400"
+        aspecto="xMaxYMin slice"
+        d="M 1180 -60 C 1020 90 860 190 640 250 C 440 305 300 380 140 470 C 40 525 -40 600 -100 700"
+      />
       <Portada
+        fusion
         titulo={OPERACIONES_PAG.titulo}
         bajada={OPERACIONES_PAG.bajada}
       />
@@ -87,6 +96,7 @@ export default function Operaciones() {
             </div>
           ))}
         </Escena>
+      </div>
       </div>
 
       <Cierre titulo={OPERACIONES_PAG.cierreTitulo} bajada={OPERACIONES_PAG.cierreBajada} />

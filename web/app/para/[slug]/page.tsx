@@ -127,7 +127,7 @@ export default async function PaginaPara({ params }: { params: Promise<{ slug: s
           ...(operacion
             ? [{ href: `/operaciones/${operacion.slug}`, titulo: operacion.nombre, texto: PARA_PAG.verComo }]
             : []),
-          ...(guia ? [{ href: `/guias/${guia.slug}`, titulo: guia.nombre, texto: PARA_PAG.guia }] : []),
+          ...(guia ? [{ href: `/soluciones/${guia.slug}`, titulo: guia.nombre, texto: PARA_PAG.guia }] : []),
         ])}
         {enlaces(
           PARA_PAG.ciudades,
@@ -142,7 +142,7 @@ export default async function PaginaPara({ params }: { params: Promise<{ slug: s
       <Cierre
         titulo={PARA_PAG.cierreTitulo}
         bajada={PARA_PAG.cierreBajada}
-        secundario={{ href: '/sistema', texto: PARA_PAG.verSistema }}
+        secundario={{ href: '/modulos', texto: PARA_PAG.verSistema }}
       />
     </>
   );

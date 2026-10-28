@@ -23,7 +23,6 @@ const url = (ruta: string, priority: number, changeFrequency: Entrada['changeFre
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     url('', 1),
-    url('/sistema', 0.9),
     url('/operaciones', 0.9),
     url('/modulos', 0.8),
     url('/planes', 0.8),
@@ -33,8 +32,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...PARA.map((p) => url(`/para/${p.slug}`, 0.8)),
     url('/software-rent-a-car', 0.7),
     ...PLAZAS.map((p) => url(`/software-rent-a-car/${p.slug}`, 0.7)),
-    url('/guias', 0.7),
-    ...GUIAS.map((g) => url(`/guias/${g.slug}`, 0.7)),
+    url('/soluciones', 0.7),
+    ...GUIAS.map((g) => url(`/soluciones/${g.slug}`, 0.7)),
     url(`/${CONTRATO_PAG.slug}`, 0.7),
     url('/como-elegir', 0.8),
     url('/preguntas', 0.7),

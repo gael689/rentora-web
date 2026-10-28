@@ -73,14 +73,13 @@ export const WEB_A_MEDIDA_PAG: PaginaAMedida = {
     {
       titulo: 'Por qué no arrancamos de cero',
       parrafos: [
-        'Una web de reservas tiene muchas partes que no se ven y que cuestan meses: el cupo real de la flota, el precio final con el seguro, el pago, el aviso al mostrador, la página que aparece en Google. Esas partes ya están resueltas y andando. Lo que cambia de una rentadora a otra es cómo se ve y qué ofrece.',
-        'Por eso el diseño que ves en la web de ejemplo es un punto de partida y no una plantilla cerrada. Se adapta a tu marca, a tu flota y a tu ciudad, y lo que no se toca es lo que hace que el cliente llegue al final de la reserva sin trabarse.',
+        'El cupo real, el precio final, el pago, el aviso al mostrador y la página que aparece en Google ya están resueltos y andando. Lo único que cambia de una rentadora a otra es cómo se ve y qué ofrece.',
       ],
     },
     {
       titulo: 'Qué hace falta de tu lado',
       parrafos: [
-        'Tu logo, tus colores si ya los tenés definidos, fotos de tus vehículos y los textos que quieras decir de tu rentadora. Si algo falta, lo resolvemos juntos, por ejemplo armando la paleta a partir del logo. El dominio lo registramos a tu nombre o conectamos el que ya usás.',
+        'Tu logo, fotos de tus autos y los textos que quieras. Si falta algo, lo resolvemos juntos. El dominio queda a tu nombre.',
       ],
     },
   ],

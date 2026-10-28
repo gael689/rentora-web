@@ -1,4 +1,4 @@
-/* La copy de las páginas internas (sistema, módulos, operaciones, contacto, 404).
+/* La copy de las páginas internas (módulos, operaciones, contacto, 404).
  *
  * Misma regla que `contenido.ts`: ningún texto largo en JSX. Los titulares marcan la frase clave
  * con *asteriscos* y el componente la pinta en el acento del tono. Sin precios, sin 3D, sin
@@ -8,74 +8,6 @@ export type Tono = 'turq' | 'azul' | 'menta' | 'petro';
 
 /** Rotación de tonos para listas sin significado propio (pasos, operaciones). */
 export const TONOS: Tono[] = ['turq', 'azul', 'menta', 'petro'];
-
-/* ── /sistema ─────────────────────────────────────────────────────────────── */
-
-/** Las cinco secciones del menú real, con las pantallas (por slug) que cuelgan de cada una. */
-export const SECCIONES_SISTEMA: {
-  titulo: string;
-  tono: Tono;
-  icono: string;
-  frase: string;
-  pantallas: string[];
-}[] = [
-  {
-    titulo: 'Operación',
-    tono: 'turq',
-    icono: 'panel',
-    frase: 'Lo que pasa hoy en el mostrador.',
-    pantallas: ['ocupacion', 'reservas', 'contratos', 'clientes'],
-  },
-  {
-    titulo: 'Flota',
-    tono: 'petro',
-    icono: 'auto',
-    frase: 'Tus autos, en regla y con su historial.',
-    pantallas: ['flota', 'categorias', 'multas'],
-  },
-  {
-    titulo: 'Caja',
-    tono: 'menta',
-    icono: 'billetera',
-    frase: 'Cuánto entró, cuánto falta cobrar y quién te debe.',
-    pantallas: ['caja', 'reportes'],
-  },
-  {
-    titulo: 'Ventas',
-    tono: 'azul',
-    icono: 'calculadora',
-    frase: 'Precios, web y gente por convencer.',
-    pantallas: [
-      'cotizador',
-      'prospectos',
-      'precios',
-      'simulador',
-      'adicionales',
-      'fechas-especiales',
-      'canal-web',
-      'reservas-web',
-    ],
-  },
-  {
-    titulo: 'Sistema',
-    tono: 'turq',
-    icono: 'engranaje',
-    frase: 'Avisos, ajustes y la huella de cada cambio.',
-    pantallas: ['notificaciones', 'configuracion', 'auditoria'],
-  },
-];
-
-export const SISTEMA = {
-  titulo: 'Las pantallas del sistema, *por dentro*',
-  bajada:
-    'Es el panel de una rentadora de ejemplo, pantalla por pantalla. Cada una dice su dirección dentro del sistema.',
-  verModulo: 'Ver el módulo',
-  pendientesTitulo: 'También en el panel',
-  pendientesNota: 'Existen y se ven completas en la reunión, compartiendo pantalla.',
-  indice: 'Pantallas del sistema',
-  cierreTitulo: 'Llevalo a *tu rentadora*',
-  cierreBajada: 'Contame cómo trabajás y vemos cómo queda con tu flota.',
-};
 
 /* ── /modulos ─────────────────────────────────────────────────────────────── */
 
@@ -245,19 +177,33 @@ export const GUIAS_PAG = {
   // REVISAR GAEL: reencuadre como "problemas de todos los días"; nombre "Soluciones" a confirmar.
   tag: 'Soluciones',
   indiceTitulo: 'Problemas de todos los días *en el mostrador*',
-  indiceBajada: 'Sirven aunque no compres nada. Cada una termina en una lista para revisar.',
-  indiceTitle: 'Guías para rentadoras de autos',
+  indiceBajada: 'Si alguno te suena, hay una forma de dejar de resolverlo a mano.',
+  indiceTitle: 'Soluciones para rentadoras de autos',
   indiceDescription:
     'Cómo armar tarifas de temporada, explicar la franquicia, cobrar la seña online, pasar del Excel a un sistema y no perder un vencimiento de la flota.',
-  pasos: 'Para revisar',
-  enRentaGo: 'En RentaGo',
+  pasos: 'Si lo resolvés a mano',
+  suena: '¿Te suena?',
+  enRentaGo: 'Con RentaGo',
+  hazlo: 'Cómo se arregla',
+  arreglo: {
+    titulo: 'Esto tiene arreglo',
+    texto: 'Contame cómo lo hacés hoy y te muestro cómo queda en tu rentadora.',
+  },
+  gancho: {
+    rotulo: 'Tu caso',
+    titulo: '¿Querés esto resuelto en tu rentadora?',
+    texto: 'Contame cómo lo hacés hoy y te muestro cómo queda en el sistema, con tu flota.',
+    cta: 'Escribime por WhatsApp',
+    secundario: { texto: 'Dejame tus datos', href: '/contacto' },
+  },
+  mensaje: (nombre: string) => `Hola Gael, me pasa lo de "${nombre}" en mi rentadora y quiero ver cómo lo resuelve RentaGo.`,
   modulo: 'El módulo',
   // REVISAR GAEL: texto del botón hacia el módulo (antes: link "El módulo: X →").
   verModulo: 'Ver el módulo',
-  terminos: 'Términos de esta guía',
+  terminos: 'Términos de este problema',
   preguntas: 'Preguntas',
-  otras: 'Otras guías',
-  leer: 'Revisá tu lista',
+  otras: 'Otras soluciones',
+  leer: 'Ver la solución',
   siguiente: 'La siguiente',
   cierreTitulo: '¿Lo querés *resuelto* en tu rentadora?',
   cierreBajada: 'Contame cómo lo hacés hoy y te muestro cómo queda en el sistema.',
@@ -288,7 +234,6 @@ export const PLANES_PAG_UI = {
   enlaces: 'Seguí por acá',
   enlacesItems: [
     { href: '/web-a-medida', texto: 'Tu web a medida' },
-    { href: '/sistema', texto: 'Las pantallas del sistema' },
     { href: '/preguntas', texto: 'Todas las preguntas' },
   ],
   cierreTitulo: '¿Cuál es *el tuyo*?',
@@ -338,7 +283,7 @@ export const PIE = {
   para: 'Tipos de rentadora',
   ciudades: 'Ciudades',
   ayuda: 'Ayuda',
-  guias: 'Guías',
+  guias: 'Soluciones',
   contrato: 'Contrato de alquiler',
   descripcion:
     'El sistema de gestión para rent a car: flota, reservas, contratos y caja, con la web propia de cada rentadora.',
@@ -364,13 +309,22 @@ export const WEB_A_MEDIDA_UI = {
     { href: '/planes', texto: 'Los planes' },
     { href: '/operaciones', texto: 'Cómo se hace cada cosa' },
   ],
+  /** El CTA de contacto de esta página (el bloque `Gancho`), por encima de las preguntas. REVISAR GAEL. */
+  gancho: {
+    rotulo: 'Tu web, con tu marca',
+    titulo: 'Veamos cómo quedaría tu web',
+    texto: 'Mandame tu logo y contame cómo trabajás. Te muestro la web de reservas con tus colores y tu flota.',
+    cta: 'Escribime por WhatsApp',
+    mensaje: 'Hola Gael, vi la web a medida de RentaGo y quiero ver cómo quedaría la mía.',
+    secundario: { texto: 'Dejame tus datos', href: '/contacto' },
+  },
   cierreTitulo: 'Veamos tu web *con tu marca*',
   cierreBajada: 'Mandame tu logo y contame cómo trabajás, y lo vemos sobre tu marca.',
   verIncluye: 'Ver qué incluye',
 };
 
-/** El link que acompaña al caso en /sistema y /planes. */
+/** El link que acompaña al caso en /planes. */
 export const CASO_UI = {
   verIncluye: 'Ver qué incluye',
-  verSistema: 'Ver las pantallas',
+  verSistema: 'Ver los módulos',
 };

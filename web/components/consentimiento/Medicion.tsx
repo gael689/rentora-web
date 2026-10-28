@@ -13,7 +13,7 @@ import { medir, pageviewPixel } from '@/lib/medicion';
  *
  * - `click_whatsapp`: todo link a wa.me (y además cuenta como `click_saliente`).
  * - `click_ver_sistema`: los links con `data-evento="ver_sistema"` y, aunque no lo lleven, todo link
- *   interno a `/sistema` o a `/sistema/*` (los cierres, los mega-menús y las páginas de captación
+ *   interno a `/modulos` (el índice, no cada módulo) (los cierres, los mega-menús y las páginas de captación
  *   enlazan ahí sin marcar). El hero sigue marcado para tener su `data-cta`.
  * - `click_saliente`: cualquier link a otro dominio.
  * - `scroll_75`: una vez por visita a /planes y a cada /para/*.
@@ -56,7 +56,7 @@ export default function Medicion() {
         return;
       }
       const interno = destino.host === location.host;
-      const aSistema = interno && (destino.pathname === '/sistema' || destino.pathname.startsWith('/sistema/'));
+      const aSistema = interno && (destino.pathname === '/modulos');
       if (a.getAttribute('data-evento') === 'ver_sistema' || aSistema) medir('click_ver_sistema', datos);
 
       if (interno || !destino.protocol.startsWith('http')) return;

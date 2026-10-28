@@ -3,7 +3,7 @@ import { WEB_A_MEDIDA_UI } from '@/lib/paginas';
 import { SITIO } from '@/lib/sitio';
 import Portada from '../_pagina/Portada';
 import Migas from '../_pagina/Migas';
-import Cierre from '../_pagina/Cierre';
+import Gancho from '../_pagina/Gancho';
 import Citable from '../_pagina/Citable';
 import Prosa from '../_pagina/Prosa';
 import FaqLista from '../_pagina/FaqLista';
@@ -69,16 +69,12 @@ export default function WebAMedida() {
 
         <Prosa secciones={P.secciones} />
 
+        <Gancho {...WEB_A_MEDIDA_UI.gancho} />
+
         <FaqLista titulo={WEB_A_MEDIDA_UI.preguntas} preguntas={P.preguntas} id={`${SITIO}${RUTA}`} />
 
         <Enlaces titulo={WEB_A_MEDIDA_UI.enlaces} items={WEB_A_MEDIDA_UI.enlacesItems} tono="azul" />
-      </article>
-
-      <Cierre
-        titulo={WEB_A_MEDIDA_UI.cierreTitulo}
-        bajada={WEB_A_MEDIDA_UI.cierreBajada}
-        secundario={{ href: '/planes#que-incluye', texto: WEB_A_MEDIDA_UI.verIncluye }}
-      />
+      </article>
     </>
   );
 }

@@ -26,6 +26,14 @@ import b from '../_pagina/bloques.module.css';
 const P = PLANES_PAG;
 const RUTA = '/planes';
 
+/** Fondo de cada tarjeta (clase de globals.css) según el plan. El orden de los planes es el de la grilla. */
+const TEMA: Record<string, { tema: string; fondo: string; claro: boolean }> = {
+  'solo-web': { tema: 'hielo', fondo: 'banda-suave', claro: true },
+  'gestion-web': { tema: 'noche', fondo: 'banda-oscura', claro: false },
+  gestion: { tema: 'marca', fondo: 'malla-turquesa', claro: false },
+  'a-medida': { tema: 'blanco', fondo: '', claro: true },
+};
+
 export const metadata = meta(RUTA, P.title, P.description);
 
 /** Una de las partes grandes (pago único, mantenimiento, lo que es tuyo): titular grande con ícono
@@ -80,22 +88,26 @@ export default function Planes() {
       <Portada
         titulo={P.h1}
         bajada={P.bajada}
-        tono="azul"
-        imagen={{ src: '/heros/planes.webp', alt: 'Propuestas impresas, una calculadora y las llaves de un auto sobre un escritorio', pos: '55% 50%', lado: 'derecha', tinte: true }}
         migas={<Migas items={migas} actual={P.nombre} />}
       />
 
       <article className={`envoltorio ${s.pagina}`}>
         <div className={s.planes}>
-          {P.planes.map((p, pi) => (
+          {[['solo-web', 'gestion'], ['gestion-web', 'a-medida']].map((slugs) => (
+          <div key={slugs[0]} className={s.planesCol}>
+          {P.planes.filter((p) => slugs.includes(p.slug)).map((p) => {
+            const pi = P.planes.indexOf(p);
+            const t = TEMA[p.slug] ?? TEMA['a-medida'];
+            const marca = p.recomendado ? PLANES_PAG_UI.recomendado : p.etiqueta;
+            return (
             <section
               key={p.slug}
-              className={s.plan}
-              data-tono="azul"
+              className={`${s.plan} ${t.fondo}`}
+              data-tema={t.tema}
               data-recomendado={p.recomendado ? 'true' : 'false'}
               {...rv(pi)}
             >
-              {p.recomendado && <span className={s.planMarca}>{PLANES_PAG_UI.recomendado}</span>}
+              {marca && <span className={s.planMarca}>{marca}</span>}
               <h2>{p.nombre}</h2>
               <p className={s.itemPorque}>{p.para}</p>
               <ul>
@@ -106,7 +118,7 @@ export default function Planes() {
               <div className={s.planAcciones}>
                 <a
                   href={linkWhatsapp(PLANES_PAG_UI.planMensaje(p.nombre))}
-                  className="cta"
+                  className={t.claro ? 'cta' : 'btn-blanco'}
                   target="_blank"
                   rel="noopener"
                   data-cta={`plan-${p.slug}`}
@@ -120,6 +132,9 @@ export default function Planes() {
                 </Link>
               </div>
             </section>
+            );
+          })}
+          </div>
           ))}
         </div>
 
@@ -193,7 +208,7 @@ export default function Planes() {
           <Prosa secciones={P.secciones} />
         </div>
 
-        <Caso link={{ href: '/sistema', texto: CASO_UI.verSistema }} />
+        <Caso link={{ href: '/modulos', texto: CASO_UI.verSistema }} />
 
         <FaqLista titulo={PLANES_PAG_UI.preguntas} preguntas={P.preguntas} id={`${SITIO}${RUTA}`} />
 

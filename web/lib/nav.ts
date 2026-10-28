@@ -5,10 +5,11 @@ export const NAV = {
   principal: 'Principal',
   pie: 'Pie',
   producto: 'Producto',
+  modulosMenu: 'Módulos',
+  solucionesMenu: 'Soluciones',
   comoSeHace: 'Cómo se hace',
   preguntas: 'Preguntas',
   planes: 'Planes',
-  pantallas: 'Pantallas',
   modulos: 'Módulos',
   modulosDetalle: 'Ver los módulos en detalle',
   antes: 'Antes de decidir',
@@ -20,7 +21,7 @@ export const NAV = {
   whatsapp: 'Hablar por WhatsApp',
   abrir: 'Abrir menú',
   cerrar: 'Cerrar menú',
-  guias: 'Guías',
+  guias: 'Soluciones',
   ayuda: 'Ayuda',
   tiposRentadora: 'Tipos de rentadora',
   whatsappCorto: 'WhatsApp',
@@ -28,35 +29,46 @@ export const NAV = {
   formularioLargo: 'Completar el formulario',
 } as const;
 
-/** El mega-menú "Producto" (v4b, patrón del encabezado de ACA): ítems con baldosa de ícono,
- *  título y una línea; a la derecha, una captura del sistema con una frase corta. */
-/** Una captura del panel derecho del mega-menú. `movil` es una captura vertical de celular. */
-export type VisualMega = { src: string; texto: string; pie: string; movil?: boolean };
+/** Los mega-menús de escritorio (hover): "Módulos" muestra todos los módulos por área (sale de
+ *  `HOME.todo.grupos`) y "Soluciones" las subpáginas de /soluciones. Cada uno cierra con una franja
+ *  de accesos (estilo "¿No sabés por dónde empezar?"). */
+export const SOLUCIONES_NAV = [
+  { href: '/soluciones/como-armar-tarifas-de-temporada', icono: 'calendario', titulo: 'Tarifas de temporada', detalle: '¿Tus tarifas no cierran?' },
+  { href: '/soluciones/franquicia-y-garantia', icono: 'escudo', titulo: 'Franquicia y garantía', detalle: 'Cómo explicarlo en el mostrador' },
+  { href: '/soluciones/cobrar-la-sena-online', icono: 'billetera', titulo: 'Cobrar la seña online', detalle: '¿Cobrás la seña por WhatsApp?' },
+  { href: '/soluciones/pasar-del-excel-a-un-sistema', icono: 'planilla', titulo: 'Del Excel a un sistema', detalle: '¿Todavía en Excel?' },
+  { href: '/soluciones/vencimientos-de-la-flota', icono: 'campana', titulo: 'Vencimientos de la flota', detalle: '¿Se te vencen la VTV y el seguro?' },
+] as const;
 
-const PIE_EJEMPLO = 'Pantalla real, con datos de ejemplo';
-const V_OCUPACION: VisualMega = { src: '/v4/ocupacion.webp', texto: 'Toda la flota, en un calendario', pie: PIE_EJEMPLO };
-const V_WEB: VisualMega = { src: '/v4/valle-movil.webp', texto: 'Tu web, con tu marca', pie: 'La web de reservas de una rentadora de ejemplo', movil: true };
-
-/** Cada ítem lleva la captura que se ve a la derecha mientras está en foco o con el mouse encima. */
-export const MEGA = {
-  items: [
-    { href: '/sistema', icono: 'panel', titulo: 'Pantallas', detalle: 'El panel por dentro, una por una', tono: 'turq', visual: V_OCUPACION },
-    { href: '/modulos', icono: 'lista', titulo: 'Módulos', detalle: 'Qué resuelve cada parte del sistema', tono: 'azul', visual: V_OCUPACION },
-    { href: '/web-a-medida', icono: 'globo', titulo: 'Tu web de reservas', detalle: 'Reserva y cobra sola, con tu marca', tono: 'azul', visual: V_WEB },
-    { href: '/para', icono: 'auto', titulo: 'Tipos de rentadora', detalle: 'Turismo, empresas, aeropuerto, choferes', tono: 'petro', visual: V_OCUPACION },
-  ],
-  visual: V_OCUPACION,
+export const MEGA_PIE = {
+  modulos: {
+    titulo: '¿No sabés por dónde empezar?',
+    detalle: 'Mirá el sistema completo.',
+    links: [{ href: '/modulos', texto: 'Ver todos los módulos' }],
+    /** Las dos entradas que tienen que verse: tarjetas de color, no links sueltos. */
+    destacados: [
+      { href: '/web-a-medida', icono: 'globo', titulo: 'Tu web de reservas', detalle: 'Reserva y cobra sola, con tu marca', previa: { src: '/web-a-medida/reserva-movil.webp', pos: '40% 40%', titulo: 'Una web de reservas a medida de tu rentadora', bajada: 'Con tu logo, tus colores y tu dominio, conectada a tu panel.' } },
+      { href: '/para', icono: 'auto', titulo: 'Tipos de rentadora', detalle: 'Turismo, empresas, aeropuerto, choferes', previa: { src: '/heros/para.webp', pos: '60% 45%', titulo: '¿Cómo alquilás vos?', bajada: 'Cada operación pierde plata en un lugar distinto. Elegí la tuya.' } },
+    ],
+  },
+  soluciones: {
+    titulo: '¿Te pasa algo de esto?',
+    detalle: 'Cada problema del mostrador tiene una forma de resolverse sin hacerlo a mano.',
+    links: [
+      { href: '/soluciones', texto: 'Ver todas las soluciones' },
+      { href: '/como-elegir', texto: '¿Necesitás un sistema?' },
+    ],
+  },
 } as const;
 
 /** Los links del menú de mobile, en orden. */
 export const MENU_MOVIL = [
-  { href: '/sistema', texto: 'Pantallas' },
   { href: '/modulos', texto: 'Módulos' },
   { href: '/operaciones', texto: 'Cómo se hace' },
   { href: '/web-a-medida', texto: 'Tu web de reservas' },
   { href: '/para', texto: 'Tipos de rentadora' },
   { href: '/planes', texto: 'Planes' },
-  { href: '/guias', texto: 'Guías' },
+  { href: '/soluciones', texto: 'Soluciones' },
   { href: '/como-elegir', texto: '¿Necesitás un sistema?' },
   { href: '/preguntas', texto: 'Preguntas' },
 ] as const;

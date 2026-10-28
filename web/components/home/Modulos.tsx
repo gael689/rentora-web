@@ -59,10 +59,6 @@ export default function Modulos() {
           <Link href="/modulos" className="btn-linea">
             {h.verTodo}
           </Link>
-          <Link href="/sistema" className="cta-sec">
-            {h.verPantallas}
-            <Icono nombre="flecha" tam={16} />
-          </Link>
         </Reveal>
       </div>
     </section>

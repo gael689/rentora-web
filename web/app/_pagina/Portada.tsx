@@ -30,6 +30,7 @@ export default function Portada({
   migas,
   imagen,
   pantalla,
+  fusion = false,
   children,
 }: {
   /** Con la frase clave entre *asteriscos*. */
@@ -38,6 +39,8 @@ export default function Portada({
   migas?: React.ReactNode;
   imagen?: ImagenPortada;
   pantalla?: React.ReactNode;
+  /** Sin fondo propio: el hero se funde con el fondo de lo que sigue (lo pone la página). */
+  fusion?: boolean;
   children?: React.ReactNode;
   /** Se aceptan por compatibilidad con las páginas que todavía los pasan; no hacen nada. */
   tono?: string;
@@ -81,7 +84,7 @@ export default function Portada({
   }
 
   return (
-    <div className={`${s.portada} ${s.portadaFoto} ${s.portadaMarca}`} data-hero-foto>
+    <div className={`${s.portada} ${s.portadaFoto} ${s.portadaMarca}${fusion ? ` ${s.portadaFusion}` : ''}`} data-hero-foto>
       {pantalla ? (
         <div className={s.fondoPantalla} aria-hidden="true">
           {pantalla}

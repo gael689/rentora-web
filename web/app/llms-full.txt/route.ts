@@ -77,7 +77,6 @@ ${cita(`${m.dolor} — ${m.gana}`)}`,
 
   h(`## Pantallas del sistema
 
-Catálogo con las pantallas replicadas: ${SITIO}/sistema
 
 ${PANTALLAS.map((p) => `- **${p.titulo}** (${p.ruta}): ${p.resuelve}`).join('\n')}`);
 
@@ -179,7 +178,7 @@ ${faq(p.preguntas)}`,
 ${GUIAS.map(
   (g) => `### ${plano(g.h1)}
 
-URL: ${SITIO}/guias/${g.slug}
+URL: ${SITIO}/soluciones/${g.slug}
 
 ${cita(g.citable)}
 

@@ -5,7 +5,8 @@ import { GUIAS_PAG } from '@/lib/paginas';
 import { SITIO, AUTOR } from '@/lib/sitio';
 import Portada from '../../_pagina/Portada';
 import Migas from '../../_pagina/Migas';
-import Cierre from '../../_pagina/Cierre';
+import Gancho from '../../_pagina/Gancho';
+import Problema from '../../_pagina/Problema';
 import Prosa from '../../_pagina/Prosa';
 import Checklist from '../../_pagina/Checklist';
 import EnRentaGo from '../../_pagina/EnRentaGo';
@@ -28,7 +29,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const g = guia(slug);
-  return g ? meta(`/guias/${g.slug}`, g.title, g.description) : {};
+  return g ? meta(`/soluciones/${g.slug}`, g.title, g.description) : {};
 }
 
 export default async function PaginaGuia({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,10 +37,10 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
   const g = guia(slug);
   if (!g) notFound();
 
-  const ruta = `/guias/${g.slug}`;
+  const ruta = `/soluciones/${g.slug}`;
   const migas = [
     { href: '/', texto: 'Inicio' },
-    { href: '/guias', texto: GUIAS_PAG.tag },
+    { href: '/soluciones', texto: GUIAS_PAG.tag },
   ];
   const modulo = MODULOS.find((m) => m.slug === g.modulo);
   const terminos = g.terminos.map((t) => GLOSARIO.find((x) => x.slug === t)).filter((t) => t !== undefined);
@@ -71,9 +72,15 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
       />
 
       <article className={`envoltorio ${s.pagina}`}>
-        <Prosa secciones={g.secciones} />
-
-        <Checklist titulo={GUIAS_PAG.pasos} pasos={g.pasos} tono="menta" />
+        <Problema
+          rotulo={GUIAS_PAG.suena}
+          sintomas={g.sintomas}
+          costo={g.costo}
+          cta={GUIAS_PAG.gancho.cta}
+          mensaje={GUIAS_PAG.mensaje(g.nombre)}
+          secundario={GUIAS_PAG.gancho.secundario}
+          arreglo={GUIAS_PAG.arreglo}
+        />
 
         <EnRentaGo
           rotulo={GUIAS_PAG.enRentaGo}
@@ -84,6 +91,10 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
           icono={modulo ? vistaModulo(modulo).icono : undefined}
         />
 
+        <Checklist titulo={GUIAS_PAG.pasos} pasos={g.pasos} tono="menta" />
+
+        <Prosa secciones={g.secciones} />
+
         <FaqLista titulo={GUIAS_PAG.preguntas} preguntas={g.preguntas} id={`${SITIO}${ruta}`} />
 
         <Enlaces
@@ -91,10 +102,10 @@ export default async function PaginaGuia({ params }: { params: Promise<{ slug: s
           tono="petro"
           items={terminos.map((t) => ({ href: `/glosario/${t.slug}`, texto: t.palabra }))}
         />
-        <Enlaces titulo={GUIAS_PAG.siguiente} items={[{ href: `/guias/${siguiente.slug}`, texto: siguiente.tarjeta }]} />
-      </article>
+        <Enlaces titulo={GUIAS_PAG.siguiente} items={[{ href: `/soluciones/${siguiente.slug}`, texto: siguiente.tarjeta }]} />
 
-      <Cierre titulo={GUIAS_PAG.cierreTitulo} bajada={GUIAS_PAG.cierreBajada} />
+        <Gancho {...GUIAS_PAG.gancho} mensaje={GUIAS_PAG.mensaje(g.nombre)} />
+      </article>
     </>
   );
 }

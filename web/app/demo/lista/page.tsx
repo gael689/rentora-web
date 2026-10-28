@@ -45,7 +45,7 @@ export default async function Lista({
             </Link>
           ) : (
             e === 'en_cola' && (
-            <Link href="/sistema" className="cta">
+            <Link href="/modulos" className="cta">
               {LISTA.verSistema}
               <span className="flecha" aria-hidden="true">
                 →

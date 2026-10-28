@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { T } from '@/lib/contenido';
-import { NAV, MEGA, MENU_MOVIL, type VisualMega } from '@/lib/nav';
+import { T, HOME } from '@/lib/contenido';
+import { NAV, MEGA_PIE, SOLUCIONES_NAV, MENU_MOVIL } from '@/lib/nav';
 import { DEMO_ACTIVA, DEMO_CTA, RUTA_PROBAR } from '@/lib/demo';
 import { linkWhatsapp } from '@/lib/sitio';
 import Icono from '@/components/sistema/Icono';
@@ -24,15 +24,34 @@ function bloquearScroll(bloquear: boolean) {
   document.documentElement.classList.toggle('scroll-bloqueado', bloquear);
 }
 
+type MenuMega = 'modulos' | 'soluciones';
+const MENUS: { clave: MenuMega; etiqueta: string; ruta: string }[] = [
+  { clave: 'modulos', etiqueta: NAV.modulosMenu, ruta: '/modulos' },
+  { clave: 'soluciones', etiqueta: NAV.solucionesMenu, ruta: '/soluciones' },
+];
+
 export default function Encabezado() {
   const ruta = usePathname();
   const [arriba, setArriba] = useState(true);
   const [menu, setMenu] = useState(false);
   /** La página abre con un hero de foto (`data-hero-foto`): arriba de todo el encabezado se acopla a él. */
   const [sobreFoto, setSobreFoto] = useState(false);
-  const [mega, setMega] = useState(false);
-  /** Qué ítem del mega-menú está en foco o con el mouse encima: decide la captura de la derecha. */
+  /** Qué mega-menú está abierto (hover o foco en escritorio). */
+  const [mega, setMega] = useState<MenuMega | null>(null);
+  /** Móvil: qué grupo del menú está desplegado ("Módulos" o "Soluciones"). */
+  const [grupo, setGrupo] = useState<MenuMega | null>(null);
+  /** Qué tarjeta destacada del mega de Módulos tiene el mouse encima: despliega la vista previa de abajo. */
   const [previa, setPrevia] = useState<number | null>(null);
+  const cierrePrevia = useRef<number | undefined>(undefined);
+  const abrirPrevia = (n: number) => {
+    window.clearTimeout(cierrePrevia.current);
+    setPrevia(n);
+  };
+  /** Con un respiro: da tiempo a llevar el mouse de la tarjeta a la vista previa sin que se cierre. */
+  const cerrarPrevia = () => {
+    window.clearTimeout(cierrePrevia.current);
+    cierrePrevia.current = window.setTimeout(() => setPrevia(null), 320);
+  };
   const cierreMega = useRef<number | undefined>(undefined);
 
   useEffect(() => {
@@ -58,7 +77,7 @@ export default function Encabezado() {
   if (rutaPrevia !== ruta) {
     setRutaPrevia(ruta);
     setMenu(false);
-    setMega(false);
+    setMega(null);
   }
 
   useEffect(() => {
@@ -70,7 +89,7 @@ export default function Encabezado() {
     const tecla = (ev: KeyboardEvent) => {
       if (ev.key === 'Escape') {
         setMenu(false);
-        setMega(false);
+        setMega(null);
       }
     };
     window.addEventListener('keydown', tecla);
@@ -82,24 +101,22 @@ export default function Encabezado() {
   useEffect(() => {
     if (!mega) return;
     const afuera = (ev: MouseEvent) => {
-      if (!(ev.target as HTMLElement)?.closest?.('[data-megamenu]')) setMega(false);
+      if (!(ev.target as HTMLElement)?.closest?.('[data-megamenu]')) setMega(null);
     };
     document.addEventListener('click', afuera);
     return () => document.removeEventListener('click', afuera);
   }, [mega]);
 
-  const entrar = () => {
+  const entrar = (k: MenuMega) => {
     window.clearTimeout(cierreMega.current);
-    setMega(true);
+    setMega(k);
   };
   const salir = () => {
     window.clearTimeout(cierreMega.current);
-    cierreMega.current = window.setTimeout(() => setMega(false), 160);
+    cierreMega.current = window.setTimeout(() => setMega(null), 160);
   };
 
   const activo = (href: string) => ruta === href || ruta.startsWith(href + '/');
-  const enProducto = MEGA.items.some((i) => activo(i.href));
-  const visual: VisualMega = previa === null ? MEGA.visual : MEGA.items[previa].visual;
   const estado = menu ? e.conMenu : arriba ? (sobreFoto ? `${e.arriba} ${e.sobreFoto}` : e.arriba) : e.flotando;
 
   return (
@@ -115,79 +132,153 @@ export default function Encabezado() {
             </Link>
 
             <nav className={e.nav} aria-label={NAV.principal}>
-              <div className={e.conMega} data-megamenu="" onMouseEnter={entrar} onMouseLeave={salir}>
-                <button
-                  type="button"
-                  className={`${e.link} ${enProducto ? e.linkActivo : ''}`}
-                  aria-expanded={mega}
-                  aria-controls="mega-producto"
-                  onClick={() => setMega(true)}
+              {MENUS.map((m) => (
+                <div
+                  key={m.clave}
+                  className={e.conMegaAncho}
+                  data-megamenu=""
+                  onMouseEnter={() => entrar(m.clave)}
+                  onMouseLeave={salir}
                 >
-                  {NAV.producto}
-                  <span className={`${e.caret} ${mega ? e.caretAbierto : ''}`} aria-hidden="true">
-                    <Icono nombre="abajo" tam={14} />
-                  </span>
-                </button>
+                  <Link
+                    href={m.ruta}
+                    className={`${e.link} ${activo(m.ruta) ? e.linkActivo : ''}`}
+                    aria-expanded={mega === m.clave}
+                    aria-controls={`mega-${m.clave}`}
+                    onFocus={() => entrar(m.clave)}
+                    onClick={() => setMega(null)}
+                  >
+                    {m.etiqueta}
+                    <span className={`${e.caret} ${mega === m.clave ? e.caretAbierto : ''}`} aria-hidden="true">
+                      <Icono nombre="abajo" tam={14} />
+                    </span>
+                  </Link>
 
-                {mega && (
-                  <div className={e.mega} id="mega-producto">
-                    <div className={e.megaPanel}>
-                      <ul className={e.megaLista} onMouseLeave={() => setPrevia(null)}>
-                        {MEGA.items.map((i, n) => (
-                          <li key={i.href}>
-                            <Link
-                              href={i.href}
-                              className={e.megaItem}
-                              onClick={() => setMega(false)}
-                              onMouseEnter={() => setPrevia(n)}
-                              onFocus={() => setPrevia(n)}
-                            >
-                              <span className={`orbe ${e.megaOrbe}`} data-tono={i.tono} aria-hidden="true">
-                                <Icono nombre={i.icono} tam={20} />
-                              </span>
-                              <span>
-                                <span className={e.megaTitulo}>{i.titulo}</span>
-                                <span className={e.megaDetalle}>{i.detalle}</span>
-                              </span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                      <Link
-                        href={previa === null ? '/sistema' : MEGA.items[previa].href}
-                        className={e.megaVisual}
-                        onClick={() => setMega(false)}
-                        tabIndex={-1}
-                        aria-hidden="true"
-                      >
-                        <Image
-                          key={visual.src}
-                          src={visual.src}
-                          alt=""
-                          width={visual.movil ? 390 : 880}
-                          height={visual.movil ? 844 : 621}
-                          sizes="360px"
-                          className={visual.movil ? e.megaImagenMovil : e.megaImagen}
-                        />
-                        <span className={e.megaVelo} aria-hidden="true" />
-                        <span className={e.megaCaption}>
-                          <span className={e.megaCaptionTitulo}>{visual.texto}</span>
-                          <span className={e.megaCaptionPie}>{visual.pie}</span>
-                        </span>
-                      </Link>
+                  {mega === m.clave && (
+                    <div className={e.megaAncho} id={`mega-${m.clave}`}>
+                      <div className={e.megaCaja}>
+                        {m.clave === 'modulos' ? (
+                          <div className={e.megaCols} data-n={HOME.todo.grupos.length}>
+                            {HOME.todo.grupos.map((g) => (
+                              <div key={g.titulo} className={e.megaCol}>
+                                <p className={e.megaRotulo}>{g.titulo}</p>
+                                <ul className={e.megaFilas}>
+                                  {g.items.map((i) => (
+                                    <li key={i.href}>
+                                      <Link href={i.href} className={e.megaFila} onClick={() => setMega(null)}>
+                                        <span className={`orbe ${e.megaOrbe}`} data-tono={g.tono} aria-hidden="true">
+                                          <Icono nombre={i.icono} tam={18} />
+                                        </span>
+                                        <span className={e.megaTitulo}>{i.texto}</span>
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <ul className={`${e.megaFilas} ${e.megaGrilla}`}>
+                            {SOLUCIONES_NAV.map((i, n) => (
+                              <li key={i.href}>
+                                <Link href={i.href} className={e.megaFila} onClick={() => setMega(null)}>
+                                  <span className={`orbe ${e.megaOrbe}`} data-tono={n % 2 ? 'azul' : 'turq'} aria-hidden="true">
+                                    <Icono nombre={i.icono} tam={18} />
+                                  </span>
+                                  <span>
+                                    <span className={e.megaTitulo}>{i.titulo}</span>
+                                    <span className={e.megaDetalle}>{i.detalle}</span>
+                                  </span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {m.clave === 'modulos' && (
+                          <div className={e.megaDestacados}>
+                            {MEGA_PIE.modulos.destacados.map((d, n) => (
+                              <Link
+                                key={d.href}
+                                href={d.href}
+                                className={`${e.destacado} ${n === 0 ? e.destacadoMarca : e.destacadoNoche}`}
+                                onClick={() => setMega(null)}
+                                onMouseEnter={() => abrirPrevia(n)}
+                                onFocus={() => abrirPrevia(n)}
+                                onMouseLeave={cerrarPrevia}
+                                onBlur={cerrarPrevia}
+                              >
+                                <span className={e.destacadoIcono} aria-hidden="true">
+                                  <Icono nombre={d.icono} tam={24} />
+                                </span>
+                                <span className={e.destacadoTexto}>
+                                  <b>{d.titulo}</b>
+                                  <span>{d.detalle}</span>
+                                </span>
+                                <Icono nombre="flecha" tam={20} className={e.destacadoFlecha} />
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                        {m.clave === 'modulos' && (
+                          <div
+                            className={`${e.megaPrevia} ${previa !== null ? e.megaPreviaAbierta : ''}`}
+                            onMouseEnter={() => window.clearTimeout(cierrePrevia.current)}
+                            onMouseLeave={cerrarPrevia}
+                          >
+                            <div className={e.megaPreviaInterior}>
+                              {MEGA_PIE.modulos.destacados.map((d, n) => (
+                                <Link
+                                  key={d.href}
+                                  href={d.href}
+                                  className={`${e.previaHero} ${previa === n ? e.previaActiva : ''}`}
+                                  tabIndex={-1}
+                                  aria-label={d.titulo}
+                                  onClick={() => setMega(null)}
+                                >
+                                  <Image src={d.previa.src} alt="" fill sizes="900px" className={e.previaImg} style={{ objectPosition: d.previa.pos }} />
+                                  <span className={e.previaVelo} />
+                                  <span className={e.previaTexto}>
+                                    <b>{d.previa.titulo}</b>
+                                    <span>{d.previa.bajada}</span>
+                                  </span>
+                                  <span className={e.previaIr} aria-hidden="true">
+                                    <Icono nombre="flecha" tam={20} />
+                                  </span>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        <div className={e.megaPie}>
+                          <span className={e.megaPieTexto}>
+                            <b>{MEGA_PIE[m.clave].titulo}</b>
+                            <span>{MEGA_PIE[m.clave].detalle}</span>
+                          </span>
+                          <span className={e.megaPieLinks}>
+                            {MEGA_PIE[m.clave].links.map((l, n) => (
+                              <Link
+                                key={l.href}
+                                href={l.href}
+                                className={n === 0 ? e.megaPieBoton : e.megaPieLink}
+                                onClick={() => setMega(null)}
+                              >
+                                {l.texto}
+                                {n === 0 && <Icono nombre="flecha" tam={16} />}
+                              </Link>
+                            ))}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              ))}
 
               <Link href="/operaciones" className={`${e.link} ${activo('/operaciones') ? e.linkActivo : ''}`}>
                 {NAV.comoSeHace}
               </Link>
               <Link href="/planes" className={`${e.link} ${activo('/planes') ? e.linkActivo : ''}`}>
                 {NAV.planes}
-              </Link>
-              <Link href="/guias" className={`${e.link} ${activo('/guias') ? e.linkActivo : ''}`}>
-                {NAV.guias}
               </Link>
               <Link href="/preguntas" className={`${e.link} ${activo('/preguntas') ? e.linkActivo : ''}`}>
                 {NAV.preguntas}
@@ -211,7 +302,7 @@ export default function Encabezado() {
                 <Icono nombre="whatsapp" tam={20} />
               </a>
               <Link
-                href="/sistema"
+                href="/modulos"
                 className={`cta cta-chico ${e.ctaEscritorio}`}
                 data-evento="ver_sistema"
                 data-cta="encabezado"
@@ -241,6 +332,45 @@ export default function Encabezado() {
               <ul>
                 {[{ href: '/', texto: NAV.inicio }, ...MENU_MOVIL].map((m) => {
                   const esta = m.href === '/' ? ruta === '/' : activo(m.href);
+                  const clave: MenuMega | null = m.href === '/modulos' ? 'modulos' : m.href === '/soluciones' ? 'soluciones' : null;
+                  if (clave) {
+                    const abierto = grupo === clave;
+                    const hijos =
+                      clave === 'modulos'
+                        ? HOME.todo.grupos.flatMap((g) => g.items.map((i) => ({ href: i.href, texto: i.texto })))
+                        : SOLUCIONES_NAV.map((i) => ({ href: i.href, texto: i.titulo }));
+                    return (
+                      <li key={m.href}>
+                        <button
+                          type="button"
+                          className={`${e.menuLink} ${e.menuGrupo} ${esta ? e.menuActivo : ''}`}
+                          aria-expanded={abierto}
+                          onClick={() => setGrupo(abierto ? null : clave)}
+                        >
+                          {m.texto}
+                          <span className={`${e.menuCaret} ${abierto ? e.caretAbierto : ''}`} aria-hidden="true">
+                            <Icono nombre="abajo" tam={22} />
+                          </span>
+                        </button>
+                        {abierto && (
+                          <ul className={e.menuSub}>
+                            <li>
+                              <Link href={m.href} className={`${e.menuSubLink} ${e.menuSubTodos}`} onClick={() => setMenu(false)}>
+                                {clave === 'modulos' ? 'Ver todos los módulos' : 'Ver todas las soluciones'}
+                              </Link>
+                            </li>
+                            {hijos.map((h) => (
+                              <li key={h.href}>
+                                <Link href={h.href} className={e.menuSubLink} onClick={() => setMenu(false)}>
+                                  {h.texto}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  }
                   return (
                     <li key={m.href}>
                       <Link
@@ -259,7 +389,7 @@ export default function Encabezado() {
             </nav>
             <div className={e.menuAcciones}>
               <Link
-                href="/sistema"
+                href="/modulos"
                 className="btn-blanco"
                 onClick={() => setMenu(false)}
                 data-evento="ver_sistema"

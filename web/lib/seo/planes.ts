@@ -22,24 +22,26 @@ export const PLANES_PAG: PaginaPlanes = {
   nombre: 'Planes',
   title: 'Planes del software para rent a car',
   description:
-    'Tres maneras de contratar RentaGo: el sistema solo, el sistema con tu web de reservas conectada o una versión a medida. El precio depende de tu operación.',
+    'Cuatro maneras de contratar RentaGo: solo la web, el sistema, el sistema con tu web conectada o a medida. El precio depende de tu operación.',
   h1: 'Planes del *software para rent a car*',
   bajada:
     'Elegís qué necesitás. El precio depende de tu operación y lo hablamos antes de empezar.',
   citable:
     'RentaGo es un sistema de gestión para rentadoras, con una web de reservas conectada si la querés. El precio depende de la operación de cada rentadora: cuántos autos tiene, cuántas sucursales y si quiere la web. Se habla antes de empezar.',
   planes: [
+    /* REVISAR GAEL: plan nuevo pedido por el jefe (28/10): solo la web, una landing, versión económica
+     * "Para arrancar". Nombre, etiqueta y alcance son propuestos; confirmar qué incluye antes de publicar. */
     {
-      slug: 'gestion',
-      nombre: 'Gestión',
-      para: 'Para la rentadora que ya tiene su web y quiere ordenar el mostrador.',
+      slug: 'solo-web',
+      nombre: 'Solo web',
+      etiqueta: 'Para arrancar',
+      para: 'Para la rentadora que primero necesita que la encuentren y le escriban.',
       incluye: [
-        'El panel completo: ocupación, flota, reservas, contratos y caja',
-        'Motor de precios de 3 capas',
-        'Contratos con firma en pantalla',
-        'Avisos de vencimientos en la campana',
-        'Carga inicial de flota, tarifas y clausulado',
-        'Marcha blanca y capacitación',
+        'Una web de una sola página, con tu logo y tus colores',
+        'Tu flota y tus condiciones a la vista',
+        'Botón de WhatsApp y formulario de consulta',
+        'Pensada para aparecer en el buscador',
+        'Después podés sumar el sistema y la reserva online',
       ],
     },
     {
@@ -54,6 +56,19 @@ export const PLANES_PAG: PaginaPlanes = {
         'El mismo cupo y el mismo precio que el mostrador',
       ],
       recomendado: true,
+    },
+    {
+      slug: 'gestion',
+      nombre: 'Gestión',
+      para: 'Para la rentadora que ya tiene su web y quiere ordenar el mostrador.',
+      incluye: [
+        'El panel completo: ocupación, flota, reservas, contratos y caja',
+        'Motor de precios de 3 capas',
+        'Contratos con firma en pantalla',
+        'Avisos de vencimientos en la campana',
+        'Carga inicial de flota, tarifas y clausulado',
+        'Marcha blanca y capacitación',
+      ],
     },
     {
       slug: 'a-medida',
@@ -174,14 +189,13 @@ export const PLANES_PAG: PaginaPlanes = {
     {
       titulo: 'Por qué en dos partes',
       parrafos: [
-        'Poner en marcha un sistema de gestión es trabajo de una sola vez: relevar cómo trabajás, cargar la flota y las tarifas, adaptar el contrato, armar la web con tu marca y enseñarle al equipo a usarlo. Eso es el pago único, y cuando termina tenés el mostrador operando en el sistema y la web vendiendo.',
-        'Mantenerlo andando es trabajo de todos los meses: los servidores, las mejoras que se suman y alguien que conteste cuando algo no sale. Eso es el mantenimiento mensual. Separarlo así hace que pagues cada cosa una vez y sepas qué estás pagando.',
+        'Una vez: relevar cómo trabajás, cargar la flota y las tarifas, armar la web y capacitar al equipo. Todos los meses: hosting, mejoras y soporte. Así pagás cada cosa una vez y sabés qué estás pagando.',
       ],
     },
     {
       titulo: 'Cómo se calcula',
       parrafos: [
-        'No hay un precio de lista. Cada parte depende de tu operación: cuántos autos tenés, cuántas sucursales y si querés la web de reservas. Lo hablamos antes de empezar, con una demo del sistema si querés verlo, y queda por escrito antes de arrancar.',
+        'No hay precio de lista: depende de cuántos autos tenés, cuántas sucursales y si querés la web. Lo hablamos antes de empezar y queda por escrito.',
       ],
     },
   ],

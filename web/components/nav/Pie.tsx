@@ -50,9 +50,6 @@ export default function Pie() {
             <p className={estilos.rotulo}>{P.producto}</p>
             <ul className={estilos.lista}>
               <li>
-                <Link href="/sistema">{N.pantallas}</Link>
-              </li>
-              <li>
                 <Link href="/operaciones">{N.comoSeHace}</Link>
               </li>
               <li>
@@ -104,7 +101,7 @@ export default function Pie() {
             <p className={estilos.rotulo}>{P.ayuda}</p>
             <ul className={estilos.lista}>
               <li>
-                <Link href="/guias">{P.guias}</Link>
+                <Link href="/soluciones">{P.guias}</Link>
               </li>
               <li>
                 <Link href="/contrato-de-alquiler-de-autos">{P.contrato}</Link>

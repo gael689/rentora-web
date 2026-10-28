@@ -11,7 +11,15 @@ const nextConfig: NextConfig = {
   images: { formats: ['image/avif', 'image/webp'] },
   /* /que-incluye se fusionó con /planes (ancla #que-incluye). */
   async redirects() {
-    return [{ source: '/que-incluye', destination: '/planes#que-incluye', permanent: true }];
+    return [
+      { source: '/que-incluye', destination: '/planes#que-incluye', permanent: true },
+      /* La sección de pantallas (/sistema) se sacó: todo lo que apuntaba ahí va a /modulos. */
+      { source: '/sistema', destination: '/modulos', permanent: true },
+      { source: '/sistema/:path*', destination: '/modulos', permanent: true },
+      /* Las guías pasaron a llamarse Soluciones. */
+      { source: '/guias', destination: '/soluciones', permanent: true },
+      { source: '/guias/:slug', destination: '/soluciones/:slug', permanent: true },
+    ];
   },
 };
 

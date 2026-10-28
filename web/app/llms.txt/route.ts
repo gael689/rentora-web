@@ -42,7 +42,6 @@ ${LLMS_NO_HACE}
 
 ${PANTALLAS.map((p) => `- ${p.titulo} (${p.ruta}): ${p.resuelve}`).join('\n')}
 
-Catálogo con las pantallas replicadas: ${SITIO}/sistema
 
 ## Cómo se opera
 
@@ -74,7 +73,7 @@ ${PARA.map((p) => `- [${p.nombre}](${SITIO}/para/${p.slug}): ${p.citable}`).join
 
 ## Guías
 
-${GUIAS.map((g) => `- [${g.nombre}](${SITIO}/guias/${g.slug}): ${g.citable}`).join('\n')}
+${GUIAS.map((g) => `- [${g.nombre}](${SITIO}/soluciones/${g.slug}): ${g.citable}`).join('\n')}
 
 ## Contrato de alquiler de autos
 
@@ -91,13 +90,12 @@ ${PLAZAS.map((p) => `- [${p.ciudad}, ${p.provincia}](${SITIO}/software-rent-a-ca
 ## Páginas
 
 - [Inicio](${SITIO}/)
-- [Pantallas del sistema](${SITIO}/sistema)
 - [Cómo se hace cada cosa](${SITIO}/operaciones)
 - [Módulos](${SITIO}/modulos)
 - [Planes](${SITIO}/planes)
 - [Web de reservas a medida](${SITIO}/web-a-medida)
 - [Tipos de rentadora](${SITIO}/para)
-- [Soluciones: problemas de todos los días](${SITIO}/guias)
+- [Soluciones: problemas de todos los días](${SITIO}/soluciones)
 - [Software para rent a car por ciudad](${SITIO}/software-rent-a-car)
 - [Cómo elegir un software para rent a car](${SITIO}/como-elegir)
 - [Glosario](${SITIO}/glosario)

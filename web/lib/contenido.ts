@@ -877,7 +877,7 @@ export const HOME = {
   franja: {
     titulo: 'Mirá cómo se ve por dentro',
     texto: 'Las pantallas del panel de una rentadora de ejemplo, una por una.',
-    cta: { texto: 'Ver el sistema', href: '/sistema' },
+    cta: { texto: 'Ver el sistema', href: '/modulos' },
   },
   /** v6 (28/10): la franja de clientes al pie del hero. Ubicar Rent se muestra como cliente
    *  (decisión de Gael del 28/10/2026). El logo va en blanco sobre la malla oscura.
@@ -994,7 +994,6 @@ export const HOME = {
       },
     ],
     verTodo: 'Ver los módulos',
-    verPantallas: 'Ver las pantallas',
   },
   /** Las secciones alternadas imagen / texto. `pantalla` es el slug de `PANTALLAS`; `telefonos`
    *  muestra la web de reservas en dos celulares. */

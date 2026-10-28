@@ -29,6 +29,12 @@ export const GUIAS: Guia[] = [
     bajada: 'Un tarifario que se carga una vez al año y no depende de que alguien se acuerde.',
     citable:
       'Un tarifario de rent a car en Argentina se arma en tres capas: la temporada (alta, media o baja), los feriados y fines de semana largos, y los descuentos por duración. Cada capa se define por fecha y se carga una vez al año. Las promociones van por encima del precio y, al terminar, el precio anterior tiene que volver solo.',
+    sintomas: [
+      'Cada temporada rehacés los precios a mano en una planilla.',
+      'Un fin de semana largo te agarra con el precio de un día común.',
+      'Terminó la promo y nadie se acordó de sacarla.',
+    ],
+    costo: 'Cada error de precio es plata que dejás en el mostrador sin enterarte.',
     secciones: [
       {
         titulo: 'Temporadas y feriados, por fecha',
@@ -80,6 +86,12 @@ export const GUIAS: Guia[] = [
     bajada: 'Las dos palabras que más se confunden, y cómo explicarlas en un minuto.',
     citable:
       'La franquicia es el monto máximo que el cliente paga de su bolsillo si daña el auto alquilado; por encima de ese monto responde el seguro. La garantía es una retención sobre la tarjeta de crédito que cubre daños, multas o cargos y se libera cuando el alquiler cierra sin novedades. Una fija cuánto puede costarle un daño al cliente; la otra asegura que la rentadora lo pueda cobrar.',
+    sintomas: [
+      'El cliente se entera del monto recién cuando va a firmar.',
+      'Cada empleado explica la franquicia a su manera.',
+      'Si hay un daño, no queda claro cuánto le toca pagar a quién.',
+    ],
+    costo: 'Una explicación confusa termina en una discusión, o en un daño que no podés cobrar.',
     secciones: [
       {
         titulo: 'Qué es cada una',
@@ -131,6 +143,12 @@ export const GUIAS: Guia[] = [
     bajada: 'La reserva que entra a las once de la noche, cobrada y en el calendario a la mañana.',
     citable:
       'Para cobrar la seña de un alquiler de autos por internet, la rentadora necesita un medio de pago, una política de seña y cancelación escrita antes de cobrar, y un cupo que se retenga mientras el cliente paga. Si la web y el mostrador no venden sobre el mismo cupo, tarde o temprano se cobra dos veces el mismo auto.',
+    sintomas: [
+      'La reserva queda "a confirmar" hasta que alguien mira el comprobante.',
+      'Buscás en el banco qué transferencia es de qué cliente.',
+      'Alguien quiere reservar de noche, no le contestás a tiempo y se va con otra rentadora.',
+    ],
+    costo: 'Cada reserva que espera una respuesta tuya es una reserva que se puede perder.',
     secciones: [
       {
         titulo: 'Por qué cobrar antes, y cómo',
@@ -182,6 +200,12 @@ export const GUIAS: Guia[] = [
     bajada: 'Qué juntar, qué dejar afuera y cómo arrancar sin cerrar un solo día.',
     citable:
       'Para pasar una rentadora de la planilla y el cuaderno a un sistema hay que juntar cinco cosas: la flota con sus patentes, los documentos de cada auto con su vigencia, las tarifas, el clausulado del contrato y los clientes empresa con sus condiciones. Las reservas futuras se cargan antes de la fecha de corte. Conviene arrancar en temporada baja, con una marcha blanca acompañada.',
+    sintomas: [
+      'La planilla de reservas la entiende una sola persona.',
+      'Dos personas cargaron el mismo auto para las mismas fechas.',
+      'Para saber cuánto cobraste en el mes, armás todo a mano.',
+    ],
+    costo: 'El Excel no avisa cuando algo falla: te enterás cuando ya hay un cliente en el mostrador.',
     secciones: [
       {
         titulo: 'Los errores que más se repiten',
@@ -233,6 +257,12 @@ export const GUIAS: Guia[] = [
     bajada: 'VTV, póliza, service y licencias: enterarte antes, y no cuando te para la policía.',
     citable:
       'En una flota de alquiler vencen la VTV y la póliza de cada auto, el service por kilómetro o por fecha, y la licencia de cada conductor. Cada vencimiento se registra con su fecha y un aviso con anticipación. La licencia del conductor se controla en cada entrega, porque puede vencerse entre un alquiler y el siguiente.',
+    sintomas: [
+      'Te enterás de que se venció el seguro o la VTV cuando ya pasó.',
+      'El service se hace cuando alguien se acuerda.',
+      'Los papeles de cada auto están repartidos entre carpetas y chats.',
+    ],
+    costo: 'Un auto en la calle con la documentación vencida es una multa, o algo peor.',
     secciones: [
       {
         titulo: 'Qué vence y por qué falla la planilla',

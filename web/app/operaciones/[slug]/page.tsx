@@ -11,7 +11,6 @@ import Portada from '../../_pagina/Portada';
 import Cubre from '@/components/sistema/Cubre';
 import Vista from '../Vista';
 import Migas from '../../_pagina/Migas';
-import Cierre from '../../_pagina/Cierre';
 import Gancho from '../../_pagina/Gancho';
 import { mayuscula } from '../../_pagina/modulo';
 import s from '../operaciones.module.css';
@@ -167,8 +166,6 @@ export default async function PaginaOperacion({ params }: { params: Promise<{ sl
           </nav>
         </section>
       </article>
-
-      <Cierre titulo={OPERACIONES_PAG.cierreTitulo} bajada={OPERACIONES_PAG.cierreBajada} />
     </>
   );
 }
